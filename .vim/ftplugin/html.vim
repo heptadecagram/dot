@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.23 14:26:13
+" Last Modified: 2005.04.04 15:47:34
 
 if exists('b:loaded_html')
 	finish
@@ -26,6 +26,8 @@ inoremap &> &gt;
 inoremap ;; ;
 
 inoremap ;<CR> o
+
+imap ;cm <!--  -->bhi
 
 imap ;tv <!-- tmpl_var name="" -->bhhi
 imap ;tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
@@ -62,31 +64,38 @@ imap ;td <td></td>no
 
 function! FindCurrentTag()
 	call searchpair('<', '', '>', 'b')
-	normal w"lyiw
+	call search('\S')
+	normal "lyw
 	return @l
 endfunction
 
-imap ;n :silent call HTMLAttribute('name')
-nmap ;n :silent call HTMLAttribute('name')
+imap ;n :silent call HTMLAttribute('name')<CR>
+nmap ;n :silent call HTMLAttribute('name')<CR>
 
-imap ;v :silent call HTMLAttribute('value')
-nmap ;v :silent call HTMLAttribute('value')
+imap ;v :silent call HTMLAttribute('value')<CR>
+nmap ;v :silent call HTMLAttribute('value')<CR>
 
-imap ;s :silent call HTMLAttribute('size')
-nmap ;s :silent call HTMLAttribute('size')
+imap ;s :silent call HTMLAttribute('size')<CR>
+nmap ;s :silent call HTMLAttribute('size')<CR>
 
-imap ;c :silent call HTMLAttribute('class')
-nmap ;c :silent call HTMLAttribute('class')
+imap ;c :silent call HTMLAttribute('class')<CR>
+nmap ;c :silent call HTMLAttribute('class')<CR>
+
+imap ;e :silent call HTMLAttribute('escape')<CR>
+nmap ;e :silent call HTMLAttribute('escape')<CR>
 
 function! HTMLAttribute(attribute)
-	call FindCurrentTag()
-	call searchpair('<', a:attribute, '/\=>')
-	normal "lyiw
-	if getreg('l') == a:attribute
-		normal wss
+	let Current_Tag = FindCurrentTag()
+	call searchpair('<', a:attribute, '/\=>') 
+	normal "ly 
+	if getreg('l') == '>' || getreg('l') == '/'
+		if Current_Tag == '!-- '
+			normal bh
+		endif
+		execute 'normal i ' . a:attribute . '=""'
 		startinsert
 	else
-		execute 'normal a ' . a:attribute . '=""'
+		normal wss
 		startinsert
 	endif
 endfunction
