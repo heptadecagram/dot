@@ -1,0 +1,19 @@
+# $FreeBSD: src/share/skel/dot.mail_aliases,v 1.2 1999/08/28 00:21:53 peter Exp $
+#
+# .mail_aliases - private mail aliases
+#
+# see also mail(1)
+#
+
+# FreeBSD Mailing lists aliases
+# alias freebsd-bugs freebsd-bugs@freebsd.org
+# alias freebsd-questions freebsd-questions@freebsd.org
+
+# an alias for your good friends
+# alias bicycle  christoph gerhardt velophil zentralrad
+alias liana Liana Olear <liana@io.com>
+alias renee Renee Camus <camusr@erols.com>
+alias jacob Jacob Davenport <jacob@brightestbulb.net>
+alias morwen Zeynep Dilli <dilli@wam.umd.edu>
+alias lisa Lisa Norwalk Davenport <lisa@brightestbulb.net>
+alias petra Petra Mayer <pmayer@npr.org>
