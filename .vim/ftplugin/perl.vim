@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.24 19:13:35
+" Last Modified: 2005.03.25 08:37:13
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -41,6 +41,7 @@ function! PerlFunctionList()
 	wincmd j
 	execute 'resize ' . line('$')
 	setlocal nomodifiable
+	normal t
 
 	map <silent> <buffer> <CR> "lyw:q<CR>:call Perl_gd(@l, '&')<CR>
 endfunction
