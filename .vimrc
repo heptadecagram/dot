@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.01.29 08:16:28
+" Last Modified: 2005.03.23 14:16:08
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -34,9 +34,10 @@ endif
 set cpoptions-=<
 set nobackup
 set backspace=indent,start
+set history=50		" keep 50 lines of command line history
+set incsearch		" do incremental searching
 
 set nojoinspaces
-set incsearch
 
 " Dvorak
 noremap t j
@@ -46,8 +47,9 @@ noremap j n
 noremap gn gk
 noremap gt gj
 
-" Kinesis
-nmap  b
+" Kinesis Mappings
+nnoremap  b
+vnoremap  b
 
 " One True Brace Style
 nmap [[ 99[{
@@ -102,18 +104,23 @@ endfunction
 
 function CreateFileHeader()
 	execute 'normal aProject  Name: ' .
-			\ (exists('g:Project_Name') ? g:Project_Name : 'None') . '' .
-			\ 'File / Folder: ' .
-			\ (exists('g:Project_Path') ? 
-			\ substitute(expand('%:p'), g:Project_Path, '', '') :
-			\ expand('%') ) . '' .
-			\ 'File Language: ' . &syntax . '' .
-			\ 'Copyright (C): ' . strftime('%Y') . ' Liam Bryan' . '' .
-			\ 'First  Author: Liam Bryan' . '' .
-			\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
-			\ 'Last Modifier: Liam Bryan' . '' .
-			\ 'Last Modified: ' . strftime('%Y.%m.%d %T')
+				\ (exists('g:Project_Name') ? g:Project_Name : 'None') . '' .
+				\ 'File / Folder: ' .
+				\ (exists('g:Project_Path') ?
+				\ substitute(expand('%:p'), g:Project_Path, '', '') :
+				\ expand('%') ) . '' .
+				\ 'File Language: ' . &syntax . '' .
+				\ 'Copyright (C): ' . strftime('%Y') . ' Liam Bryan' . '' .
+				\ 'First  Author: Liam Bryan' . '' .
+				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
+				\ 'Last Modifier: Liam Bryan' . '' .
+				\ 'Last Modified: ' . strftime('%Y.%m.%d %T')
+  append
+
+.
+
 endfunction
+
 
 function NewProgramHeader()
 	if strlen(&syntax) < 1
@@ -135,19 +142,28 @@ function NewProgramHeader()
 	endif
 	if &syntax == 'perl'
 		1substitute'.*'#!/usr/bin/perl'
-		$
-		append
+		10append
 
 use strict;
 use warnings;
 
 .
-	endif
-	append
+		" Modules get a package name automatically
+		if -1 < match(expand('%'), '\.pm$')
+			let s:module_name = substitute(
+						\ exists('g:Project_Path') ?
+							\ substitute(expand('%:p'), g:Project_Path, '', '') :
+							\ expand('%'),
+						\ '/', '::', 'g')
+			let s:module_name = strpart(s:module_name, 0, strlen(s:module_name) - 3)
+			execute 'normal :10ipackage ' . s:module_name . ';Go1;n'
+			
 
-.
+		endif
+	endif
 endfunction
 
-autocmd BufWritePre,FileWritePre *	kl|silent! call UpdateFileLastModified()|'l
+autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 
-autocmd BufNewFile *	call NewProgramHeader()
+autocmd BufNewFile *    call NewProgramHeader()
+

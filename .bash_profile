@@ -1,9 +1,11 @@
 export TZ='America/New_York'
 
 alias ls='ls -FG'
-
-alias startk='sudo kbdcontrol -k /dev/kbd1 < /dev/ttyv0 > /dev/null'
-alias endk='sudo kbdcontrol -k /dev/kbd0 < /dev/ttyv0 > /dev/null'
+alias home='ssh liam@69.138.239.23'
+alias ns1='ssh lbryan@ns1.richard-group.com'
+alias ns2='ssh lbryan@ns2.richard-group.com'
+alias files='ssh 192.168.1.98'
+alias dev='ssh 192.168.1.99'
 
 PS1='\h:\w/ '
 
