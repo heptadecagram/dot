@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.23 14:28:02
+" Last Modified: 2005.03.24 19:13:35
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -18,10 +18,36 @@ function! Perl_gd(word, type)
 	endif
 endfunction
 
+nmap <silent> lf :call PerlFunctionList()<CR>
 
-nmap ,t :call Prove(0)
-nmap ,T :call Prove(1)
-nmap ,v :call Compile()
+function! PerlFunctionList()
+	normal mlgg
+	belowright new
+
+	setlocal noreadonly modifiable noswapfile nowrap
+	setlocal buftype=nowrite
+	setlocal bufhidden=delete
+
+	call setline('.', '# Function List')
+	wincmd k
+	while search('\<sub\s\+', 'W')
+		normal w"ryiw
+		wincmd j
+		call append('$', @r)
+		wincmd k
+	endwhile
+	normal 'l
+
+	wincmd j
+	execute 'resize ' . line('$')
+	setlocal nomodifiable
+
+	map <silent> <buffer> <CR> "lyw:q<CR>:call Perl_gd(@l, '&')<CR>
+endfunction
+
+nmap ,t :call Prove(0)<CR>
+nmap ,T :call Prove(1)<CR>
+nmap ,v :call Compile()<CR>
 nmap ,w :let g:testfile = expand('%',':p'):echo 'testfile is now' g:testfile
 nmap ,W :unlet g:testfile:echo 'testfile undefined; will run all tests'
 
