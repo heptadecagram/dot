@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2004.11.23 21:58:45
+" Last Modified: 2005.03.23 14:26:13
 
 if exists('b:loaded_html')
 	finish
@@ -25,6 +25,8 @@ inoremap &> &gt;
 
 inoremap ;; ;
 
+inoremap ;<CR> o
+
 imap ;tv <!-- tmpl_var name="" -->bhhi
 imap ;tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
 imap ;tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
@@ -42,14 +44,14 @@ imap ;h5 <h5></h5>bba
 imap ;pp <p></p>bba
 
 imap ;fm <form action="" method="POST"></form>BBhhi
-imap ;fe <select name=""></select>Bbi
-imap ;fo <option value="">OPTION</option>bbla
+imap ;fe <select name=""></select>Bbsa
+imap ;fo <option value="">OPTION</option>Bwsa
+imap ;ft <input name="" value="" size="16" maxlength="16"/>B;n
+imap ;fp <input type="password" name="" value="" size="16" maxlength="16"/>B;n
+imap ;fh <input type="hidden" name="" value=""/>B;n
 imap ;fs <input type="submit" value=""/>hhi
-imap ;fr <input type="radio" name="" value=""/>Bhhi
-imap ;fc <input type="checkbox" name="" value=""/>Bhhi
-imap ;fh <input type="hidden" name="" value=""/>Bhhi
-imap ;ft <input type="text" name="" value="" size="16" maxlength="16"/>3Bhhi
-imap ;fp <input type="password" name="" value="" size="16" maxlength="16"/>3Bhhi
+imap ;fr <input type="radio" name="" value=""/>B;n
+imap ;fc <input type="checkbox" name="" value=""/>B;n
 
 imap ;im <img src=""/>Bhhi
 imap ;ah <a href="">LINK</a>Bwla
