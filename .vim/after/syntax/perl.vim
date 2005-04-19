@@ -6,10 +6,12 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.18 21:23:58
 " Last Modifier: Liam Bryan
-" Last Modified: 2004.11.18 21:38:11
+" Last Modified: 2005.03.29 12:46:43
 
 unlet b:current_syntax
 syntax include @SQLString syntax/sql.vim
 "syntax sync clear
 
 syntax cluster perlQQ add=@SQLString
+
+syntax sync minlines=200
