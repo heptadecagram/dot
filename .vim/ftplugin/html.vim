@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.04.19 14:53:58
+" Last Modified: 2005.04.23 10:49:20
 
 if exists('b:loaded_html')
 	finish
@@ -37,6 +37,7 @@ imap ;tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
 imap ;tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
 
 imap ;ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head></head><body></body></html>3nO
+
 imap ;ti <title></title>bba
 
 imap ;h1 <h1></h1>bba
@@ -44,8 +45,6 @@ imap ;h2 <h2></h2>bba
 imap ;h3 <h3></h3>bba
 imap ;h4 <h4></h4>bba
 imap ;h5 <h5></h5>bba
-
-imap ;pp <p></p>bba
 
 imap ;fm <form action="" method="POST"></form>BBhhi
 imap ;fe <select name=""></select>Bbsa
@@ -58,7 +57,28 @@ imap ;fr <input type="radio" name="" value=""/>B;n
 imap ;fc <input type="checkbox" name="" value=""/>B;n
 
 imap ;im <img src=""/>Bhhi
-imap ;ah <a href="">LINK</a>Bwla
+
+imap ;lk <link href=""/>Bhhi
+
+imap ;ol <ol></ol>O
+imap ;ul <ul></ul>O
+imap ;li <li></li>bba
+vmap ;li `>a</li>`<i<li>
+
+imap ;pp <p></p>bba
+vmap ;pp `>a</p>`<i<p>
+
+imap ;qq <q lang="en-US"></q>Bwla
+vmap ;qq `>a</q>`<i<q lang="en-US">
+
+imap ;aa <a href="">LINK</a>Bwla
+vmap ;aa `>a</a>`<i<a href="">hi
+
+imap ;di <div></div>bba
+vmap ;di `>a</div>`<i<div>
+
+imap ;sp <span></span>bba
+vmap ;sp `>a</span>`<i<span>
 
 imap ;ta :call TableMaker()<LEFT>
 imap ;tr <tr></tr>no
@@ -71,20 +91,23 @@ function! FindCurrentTag()
 	return @l
 endfunction
 
-imap ;n :silent call HTMLAttribute('name')<CR>
-nmap ;n :silent call HTMLAttribute('name')<CR>
+imap ;h<SPACE> ;h
+nmap ;h<SPACE> :silent call HTMLAttribute('href')<CR>
 
-imap ;v :silent call HTMLAttribute('value')<CR>
-nmap ;v :silent call HTMLAttribute('value')<CR>
+imap ;n<SPACE> ;n
+nmap ;n<SPACE> :silent call HTMLAttribute('name')<CR>
 
-imap ;s :silent call HTMLAttribute('size')<CR>
-nmap ;s :silent call HTMLAttribute('size')<CR>
+imap ;v<SPACE> ;v
+nmap ;v<SPACE> :silent call HTMLAttribute('value')<CR>
 
-imap ;c :silent call HTMLAttribute('class')<CR>
-nmap ;c :silent call HTMLAttribute('class')<CR>
+imap ;s<SPACE> ;s
+nmap ;s<SPACE> :silent call HTMLAttribute('size')<CR>
 
-imap ;e :silent call HTMLAttribute('escape')<CR>
-nmap ;e :silent call HTMLAttribute('escape')<CR>
+imap ;c<SPACE> ;c
+nmap ;c<SPACE> :silent call HTMLAttribute('class')<CR>
+
+imap ;e<SPACE> ;e
+nmap ;e<SPACE> :silent call HTMLAttribute('escape')<CR>
 
 function! HTMLAttribute(attribute)
 	let Current_Tag = FindCurrentTag()
