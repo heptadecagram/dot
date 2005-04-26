@@ -265,10 +265,8 @@ therefore never send to know for whom the bell tolls; it tolls for thee."
 
 Liam's Five Laws of Web Design:
 1. Images are images, text is text.  Never substitute one for the other.
-2. Nothing will ever look the way you want it to.  So, design concepts,
-   not layouts.  The web is not a PDF.
-3. You will never need more than ten fonts, total.  Even then, most tasks
-   should be done with no more than two.
+2. Nothing will ever look the way you want it to.
+3. The more fonts, the worse.
 4. If you can't achieve a layout with just a text editor, then it's too
    complicated.  Use Flash, or simplify.
 5. Everything should be W3C spec.  Everything.
