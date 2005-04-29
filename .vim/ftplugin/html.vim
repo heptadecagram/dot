@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.04.23 10:49:20
+" Last Modified: 2005.04.29 14:26:05
 
 if exists('b:loaded_html')
 	finish
@@ -29,6 +29,7 @@ inoremap ;; ;
 inoremap ;<CR> o
 
 imap ;cm <!--  -->bhi
+vmap ;cm `>a -->`<i<!-- 
 
 imap ;tv <!-- tmpl_var name="" -->bhhi
 imap ;te <!-- tmpl_else -->
