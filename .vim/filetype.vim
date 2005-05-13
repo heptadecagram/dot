@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.17 08:18:55
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.23 14:21:46
+" Last Modified: 2005.05.13 11:24:44
 
 autocmd BufNewFile,BufRead	~/.vim/*
 			\   let g:Project_Path = expand('~/')
@@ -24,3 +24,19 @@ autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/cms/*
 autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/ecommerce/*
       \   let g:Project_Path = '/Library/WebServer/CGI-Executables/ecommerce/'
       \ | let g:Project_Name = 'RG_ECOMMERCE'
+autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/mailer/*
+      \   let g:Project_Path = '/Library/WebServer/CGI-Executables/mailer/'
+      \ | let g:Project_Name = 'RG_MAILER'
+
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/grovestreetwinery.com/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/grovestreetwinery.com/'
+      \ | let g:Project_Name = 'grovestreetwinery.com'
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/peterpaulwines.com/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/peterpaulwines.com/'
+      \ | let g:Project_Name = 'peterpaulwines.com'
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/simplysoles.com/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/simplysoles.com/'
+      \ | let g:Project_Name = 'simplysoles.com'
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/sfsassociation.org/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/sfsassociation.org/'
+      \ | let g:Project_Name = 'sfsassociation.org'
