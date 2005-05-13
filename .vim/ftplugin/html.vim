@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.04.29 14:26:05
+" Last Modified: 2005.05.12 10:04:26
 
 if exists('b:loaded_html')
 	finish
@@ -32,6 +32,7 @@ imap ;cm <!--  -->bhi
 vmap ;cm `>a -->`<i<!-- 
 
 imap ;tv <!-- tmpl_var name="" -->bhhi
+imap ;tn <!-- tmpl_include name="" -->bhhi
 imap ;te <!-- tmpl_else -->
 imap ;tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
 imap ;tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
@@ -40,6 +41,8 @@ imap ;tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
 imap ;ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head></head><body></body></html>3nO
 
 imap ;ti <title></title>bba
+
+imap ;ln <link href="" rel="" type=""/>BBhhi
 
 imap ;h1 <h1></h1>bba
 imap ;h2 <h2></h2>bba
@@ -57,9 +60,7 @@ imap ;fs <input type="submit" value=""/>hhi
 imap ;fr <input type="radio" name="" value=""/>B;n
 imap ;fc <input type="checkbox" name="" value=""/>B;n
 
-imap ;im <img src=""/>Bhhi
-
-imap ;lk <link href=""/>Bhhi
+imap ;im <img src=""/>hhi
 
 imap ;ol <ol></ol>O
 imap ;ul <ul></ul>O
