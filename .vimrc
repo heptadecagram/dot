@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.23 14:16:08
+" Last Modified: 2005.05.21 15:19:42
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -143,7 +143,6 @@ function NewProgramHeader()
 	if &syntax == 'perl'
 		1substitute'.*'#!/usr/bin/perl'
 		10append
-
 use strict;
 use warnings;
 
