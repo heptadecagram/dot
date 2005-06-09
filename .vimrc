@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.05.21 15:19:42
+" Last Modified: 2005.06.09 12:24:53
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -36,6 +36,7 @@ set nobackup
 set backspace=indent,start
 set history=50		" keep 50 lines of command line history
 set incsearch		" do incremental searching
+set background=light
 
 set nojoinspaces
 
