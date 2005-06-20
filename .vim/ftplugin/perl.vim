@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.03.26 12:39:28
+" Last Modified: 2005.06.15 15:20:49
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -48,6 +48,9 @@ function! PerlFunctionList()
 	wincmd k
 	while search('\<sub\s\+', 'W')
 		normal w"ryiw
+		if @r == '{'
+			continue 
+		endif
 		wincmd j
 		call append('$', @r)
 		wincmd k
@@ -59,7 +62,7 @@ function! PerlFunctionList()
 	setlocal nomodifiable
 	normal t
 
-	map <silent> <buffer> <CR> "lyw:q<CR>:call Perl_gd(@l, '&')<CR>
+	map <silent> <buffer> <CR> "lyiw:q<CR>:call Perl_gd(@l, '&')<CR>
 endfunction
 
 nmap ,t :call Prove(0)<CR>
