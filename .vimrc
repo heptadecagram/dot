@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.06.09 12:24:53
+" Last Modified: 2005.06.20 14:33:24
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -57,8 +57,8 @@ nmap [[ 99[{
 nmap ]] 99]}
 
 " Tab settings
-set ts=4
-set sw=4
+set ts=2
+set sw=2
 " show the cursor position all the time
 set ruler
 
@@ -100,6 +100,7 @@ if has("autocmd")
 endif " has("autocmd")
 
 function UpdateFileLastModified()
+	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Bryan/
 	8,9s/Last Modified: [^$].\+/\='Last Modified: ' . strftime('%Y.%m.%d %T')/
 endfunction
 
@@ -111,7 +112,7 @@ function CreateFileHeader()
 				\ substitute(expand('%:p'), g:Project_Path, '', '') :
 				\ expand('%') ) . '' .
 				\ 'File Language: ' . &syntax . '' .
-				\ 'Copyright (C): ' . strftime('%Y') . ' Liam Bryan' . '' .
+				\ 'Copyright (C): ' . strftime('%Y') . ' Richard Group, Inc.' . '' .
 				\ 'First  Author: Liam Bryan' . '' .
 				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
 				\ 'Last Modifier: Liam Bryan' . '' .
@@ -133,6 +134,8 @@ function NewProgramHeader()
 		let s:comment = '/*'
 	elseif &syntax == 'inform'
 		let s:comment = '!'
+	elseif &syntax == 'sh'
+		let s:comment = '#'
 	endif
 
 	execute 'normal i' . s:comment . ' '
@@ -140,6 +143,9 @@ function NewProgramHeader()
 
 	if &syntax == 'c'
 		normal o/
+	endif
+	if &syntax == 'sh'
+		1substitute'.*'#!/bin/sh'
 	endif
 	if &syntax == 'perl'
 		1substitute'.*'#!/usr/bin/perl'
