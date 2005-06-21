@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.05.12 10:04:26
+" Last Modified: 2005.06.21 15:01:19
 
 if exists('b:loaded_html')
 	finish
@@ -42,6 +42,10 @@ imap ;ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W
 
 imap ;ti <title></title>bba
 
+imap ;sc <script type="text/javascript"><!----></script>nO
+
+imap ;sy <style type="text/css"><!----></style>nO
+
 imap ;ln <link href="" rel="" type=""/>BBhhi
 
 imap ;h1 <h1></h1>bba
@@ -51,6 +55,7 @@ imap ;h4 <h4></h4>bba
 imap ;h5 <h5></h5>bba
 
 imap ;fm <form action="" method="POST"></form>BBhhi
+imap ;ff <fieldset></fieldset>O
 imap ;fe <select name=""></select>Bbsa
 imap ;fo <option value="">OPTION</option>Bwsa
 imap ;ft <input name="" value="" size="16" maxlength="16"/>B;n
@@ -78,6 +83,12 @@ vmap ;aa `>a</a>`<i<a href="">hi
 
 imap ;di <div></div>bba
 vmap ;di `>a</div>`<i<div>
+
+imap ;st <strong></strong>bba
+vmap ;st `>a</strong>`<i<strong>
+
+imap ;em <em></em>bba
+vmap ;em `>a</em>`<i<em>
 
 imap ;sp <span></span>bba
 vmap ;sp `>a</span>`<i<span>
