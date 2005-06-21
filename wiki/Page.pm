@@ -6,19 +6,30 @@
 # First  Author: Liam Bryan
 # First Created: 2005.06.16 19:47:34
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.06.20 22:07:24
+# Last Modified: 2005.06.21 12:35:45
 package Page;
 
 use strict;
 use warnings;
 
+my $dbh;
+
 sub new {
 	my $class = shift;
 	$class = ref($class) if(ref $class);
+	my %params = @_;
+	my $self = {};
 
-	bless {
-		text => '',
-	}, $class;
+	if($params{id}) {
+	}
+	elsif($params{name}) {
+		@$self{qw(_id _name _text)} = $dbh->selectrow_array(q{
+			}, undef,
+			$params{name},
+		);
+	}
+
+	bless $self, $class;
 }
 
 sub parse {
@@ -42,21 +53,29 @@ sub parse {
 	s#\[\[(.*?)(?:\|(.*?))?\]\]#'<a href="'.encode($1).'">'.($2 || $1).'</a>'#ge;
 
 	# ==Title== to <h1>Title</h1>
-	s#=(=+)(.*?)=\1\n*#'<h'.length($1).">$2</h".length($1).">\n\n"#ges;
+	s#^=(=+)(.*?)=\1\n*#'<h'.length($1).">$2</h".length($1).">\n\n"#gems;
 
 	# --- to <hr/>
-	s#^---*#<hr/>#g;
+	s#^---*#<hr/>#gm;
 
 	#  code to <pre> code</pre>
 	s#((?:^[ \t]+\S[^\n]*\n)+)\n*#<pre>\n$1</pre>\n\n#gms;
 
-	# text to <p>text</p>
-	s#((?:^(?!\s|<h|</?pre).+?)+)(?:\n{2,}|\Z)#<p>$1</p>\n\n#gms;
+	# # or * to <ol><li> or <ul><li>
+	if(s{^([#*]*)([#*])(.*?)\n}
+		{$1 . ($2 eq '*' ? '<ul>' : '<ol>') . "<li>$3</li>" . ($2 eq '*' ? '</ul>' : '</ol>') . "\n"}egm) {
+		$_ = reverse;
+		s"(\n[^\n]+)(>l([ou])<[*#]*)\n>l\3/<(?=[^\n]+\2)"$1\n"gms;
+		$_ = reverse;
+		s"(</li></[ou]l>)\n[*#]*(<(o|u)l>.*?</\3l>)"\n$2\n$1"gs;
+		s"</(o|u)l>\n<\1l>"\n"g;
+	}
+	#s";term:definition"<dl><dt>term</dt><dd>definition</dd></dl>"g;
+	#s#:#indent#g;
+	#s#~~~#[[Name]]#g;
 
-	s"^[*#](.*?)\n"<li>$1</li>\n"g;
-	#s#\*#<ul><li></li>#g;
-	#s"#"<ol><li></li>"g;
-	#s":dt;dd"<dl><dt></dt><dd></dd>"g;
+	# text to <p>text</p>
+	s#((?:^(?!\s|</?ol|</?ul|</?li|<h|</?pre).+?)+)(?:\n{2,}|\Z)#<p>$1</p>\n\n#gms;
 
 	$_;
 }
