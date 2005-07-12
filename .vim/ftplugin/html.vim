@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.07.08 17:31:53
+" Last Modified: 2005.07.12 14:45:10
 
 if exists('b:loaded_html')
 	finish
@@ -54,7 +54,7 @@ imap ;h3 <h3></h3>bba
 imap ;h4 <h4></h4>bba
 imap ;h5 <h5></h5>bba
 
-imap ;fm <form action="" method="POST"></form>BBhhi
+imap ;fm <form action="" method="post"></form>BBhhi
 imap ;ff <fieldset></fieldset>O
 imap ;fe <select name=""></select>Bbsa
 imap ;fo <option value="">OPTION</option>Bwsa
