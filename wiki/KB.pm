@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.07.12 13:42:22
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.07.12 15:26:16
+# Last Modified: 2005.07.12 15:48:52
 package KB;
 
 use strict;
@@ -32,9 +32,17 @@ sub handler {
 	my $r = shift;
 
 	my $Request = $r->uri;
+	$Request =~ s#^/##;
+	$Request =~ s#/$##;
 
 	if($Request =~ /^Special:/) {
+		$r->content_type('text/html');
 		$r->print('Not built yet!');
+		return Apache::DONE;
+	}
+	unless(length $Request) {
+		$r->content_type('text/html');
+		$r->print("Not built $Request yet!");
 		return Apache::DONE;
 	}
 
@@ -67,6 +75,7 @@ sub handler {
 		);
 	}
 
+	$r->content_type('text/html');
 	$r->print($page->output);
 	return Apache::DONE;
 }
