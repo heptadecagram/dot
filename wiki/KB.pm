@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.07.12 13:42:22
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.07.12 15:48:52
+# Last Modified: 2005.07.12 15:57:03
 package KB;
 
 use strict;
@@ -21,6 +21,7 @@ my $dbh;
 BEGIN {
 	$dbh = DBI->connect('DBI:Pg:dbname=kb;', 'kb', 'kb')
 		or die 'Cannot connect to knowledge base';
+	$ENV{HTML_TEMPLATE_ROOT} = '/Library/WebServer/CGI-Executables/KB/';
 }
 
 END {
@@ -34,6 +35,7 @@ sub handler {
 	my $Request = $r->uri;
 	$Request =~ s#^/##;
 	$Request =~ s#/$##;
+	$Request = URIDecode($Request);
 
 	if($Request =~ /^Special:/) {
 		$r->content_type('text/html');
@@ -46,7 +48,7 @@ sub handler {
 		return Apache::DONE;
 	}
 
-	my $page = HTML::Template->new(filename => 'content.html');
+	my $page = HTML::Template->new(filename => 'templates/content.html');
 	$page->param(
 		title => $Request,
 		title_uri => URIEncode($Request),
