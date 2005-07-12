@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.06.16 19:47:34
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.06.21 12:35:45
+# Last Modified: 2005.07.12 11:51:14
 package Page;
 
 use strict;
@@ -27,6 +27,9 @@ sub new {
 			}, undef,
 			$params{name},
 		);
+	}
+	elsif($params{text}) {
+		$$self{_text} = $params{text};
 	}
 
 	bless $self, $class;
@@ -62,6 +65,7 @@ sub parse {
 	s#((?:^[ \t]+\S[^\n]*\n)+)\n*#<pre>\n$1</pre>\n\n#gms;
 
 	# # or * to <ol><li> or <ul><li>
+	# TODO Not quite working correctly on nested lists, yet.
 	if(s{^([#*]*)([#*])(.*?)\n}
 		{$1 . ($2 eq '*' ? '<ul>' : '<ol>') . "<li>$3</li>" . ($2 eq '*' ? '</ul>' : '</ol>') . "\n"}egm) {
 		$_ = reverse;
@@ -70,12 +74,14 @@ sub parse {
 		s"(</li></[ou]l>)\n[*#]*(<(o|u)l>.*?</\3l>)"\n$2\n$1"gs;
 		s"</(o|u)l>\n<\1l>"\n"g;
 	}
+
 	#s";term:definition"<dl><dt>term</dt><dd>definition</dd></dl>"g;
-	#s#:#indent#g;
+
 	#s#~~~#[[Name]]#g;
 
 	# text to <p>text</p>
 	s#((?:^(?!\s|</?ol|</?ul|</?li|<h|</?pre).+?)+)(?:\n{2,}|\Z)#<p>$1</p>\n\n#gms;
+	s#<p>(:+)#'<p style="text-indent: ' . (2 * length $1) . 'em">'#gmse;
 
 	$_;
 }
