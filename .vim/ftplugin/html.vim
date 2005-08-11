@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.07.12 14:45:10
+" Last Modified: 2005.08.11 08:23:19
 
 if exists('b:loaded_html')
 	finish
@@ -24,78 +24,87 @@ inoremap &< &lt;
 inoremap &> &gt;
 inoremap &<SPACE> &nbsp;
 
-inoremap ;; ;
+inoremap `<CR> o
 
-inoremap ;<CR> o
+imap `cm <!--  -->bhi
+vmap `cm `>a -->`<i<!-- 
 
-imap ;cm <!--  -->bhi
-vmap ;cm `>a -->`<i<!-- 
+imap `tv <!-- tmpl_var name="" -->bhhi
+imap `tn <!-- tmpl_include name="" -->bhhi
+imap `te <!-- tmpl_else -->
+imap `tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
+imap `tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
+imap `tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
 
-imap ;tv <!-- tmpl_var name="" -->bhhi
-imap ;tn <!-- tmpl_include name="" -->bhhi
-imap ;te <!-- tmpl_else -->
-imap ;tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
-imap ;tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
-imap ;tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
+imap `ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN""http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"><head></head><body></body></html>3nO
 
-imap ;ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN""http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"><head></head><body></body></html>3nO
+imap `ti <title></title>bba
 
-imap ;ti <title></title>bba
+imap `sc <script type="text/javascript"><!----></script>nO
 
-imap ;sc <script type="text/javascript"><!----></script>nO
+imap `sy <style type="text/css"><!----></style>nO
 
-imap ;sy <style type="text/css"><!----></style>nO
+imap `ln <link href="" rel="" type=""/>BBhhi
 
-imap ;ln <link href="" rel="" type=""/>BBhhi
+imap `h1 <h1></h1>bba
+imap `h2 <h2></h2>bba
+imap `h3 <h3></h3>bba
+imap `h4 <h4></h4>bba
+imap `h5 <h5></h5>bba
 
-imap ;h1 <h1></h1>bba
-imap ;h2 <h2></h2>bba
-imap ;h3 <h3></h3>bba
-imap ;h4 <h4></h4>bba
-imap ;h5 <h5></h5>bba
+imap `fm <form action="" method="post"></form>BBhhi
+imap `ff <fieldset></fieldset>O
+imap `fe <select name=""></select>Bbsa
+imap `fo <option value="">OPTION</option>Bwsa
+imap `ft <input name="" value="" size="16" maxlength="16"/>B;n
+imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B;n
+imap `fh <input type="hidden" name="" value=""/>B;n
+imap `fs <input type="submit" value=""/>hhi
+imap `fr <input type="radio" name="" value=""/>B;n
+imap `fc <input type="checkbox" name="" value=""/>B;n
 
-imap ;fm <form action="" method="post"></form>BBhhi
-imap ;ff <fieldset></fieldset>O
-imap ;fe <select name=""></select>Bbsa
-imap ;fo <option value="">OPTION</option>Bwsa
-imap ;ft <input name="" value="" size="16" maxlength="16"/>B;n
-imap ;fp <input type="password" name="" value="" size="16" maxlength="16"/>B;n
-imap ;fh <input type="hidden" name="" value=""/>B;n
-imap ;fs <input type="submit" value=""/>hhi
-imap ;fr <input type="radio" name="" value=""/>B;n
-imap ;fc <input type="checkbox" name="" value=""/>B;n
+imap `im <img src=""/>hhi
 
-imap ;im <img src=""/>hhi
+imap `ol <ol></ol>O
+imap `ul <ul></ul>O
+imap `li <li></li>bba
+vmap `li `>a</li>`<i<li>
+imap `dl <dl></dl>O
+imap `dt <dt></dt>bba
+imap `dd <dd></dd>bba
 
-imap ;ol <ol></ol>O
-imap ;ul <ul></ul>O
-imap ;li <li></li>bba
-vmap ;li `>a</li>`<i<li>
+imap `pp <p></p>bba
+vmap `pp `>a</p>`<i<p>
 
-imap ;pp <p></p>bba
-vmap ;pp `>a</p>`<i<p>
+imap `qq <q lang="en-US"></q>Bwla
+vmap `qq `>a</q>`<i<q lang="en-US">
 
-imap ;qq <q lang="en-US"></q>Bwla
-vmap ;qq `>a</q>`<i<q lang="en-US">
+imap `aa <a href="">LINK</a>Bwla
+vmap `aa `>a</a>`<i<a href="">hi
 
-imap ;aa <a href="">LINK</a>Bwla
-vmap ;aa `>a</a>`<i<a href="">hi
+imap `bb <b></b>bba
+vmap `bb `>a</b>`<i<b>
 
-imap ;di <div></div>bba
-vmap ;di `>a</div>`<i<div>
+imap `ii <i></i>bba
+vmap `ii `>a</i>`<i<i>
 
-imap ;st <strong></strong>bba
-vmap ;st `>a</strong>`<i<strong>
+imap `di <div></div>O
+vmap `di `>a</div>`<i<div>
 
-imap ;em <em></em>bba
-vmap ;em `>a</em>`<i<em>
+imap `st <strong></strong>bba
+vmap `st `>a</strong>`<i<strong>
 
-imap ;sp <span></span>bba
-vmap ;sp `>a</span>`<i<span>
+imap `em <em></em>bba
+vmap `em `>a</em>`<i<em>
 
-imap ;ta :call TableMaker()<LEFT>
-imap ;tr <tr></tr>no
-imap ;td <td></td>no
+imap `sp <span></span>bba
+vmap `sp `>a</span>`<i<span>
+
+imap `ta :call TableMaker()<LEFT>
+imap `tr <tr></tr>no
+imap `td <td></td>no
+imap `th <th></th>no
+imap `tb <tbody></tbody>no
 
 function! FindCurrentTag()
 	call searchpair('<', '', '>', 'b')
@@ -104,23 +113,26 @@ function! FindCurrentTag()
 	return @l
 endfunction
 
-imap ;h<SPACE> ;h
-nmap ;h<SPACE> :silent call HTMLAttribute('href')<CR>
+imap `a<SPACE> :silent call HTMLAttribute('alt')<CR>
+nmap `a<SPACE> :silent call HTMLAttribute('alt')<CR>
 
-imap ;n<SPACE> ;n
-nmap ;n<SPACE> :silent call HTMLAttribute('name')<CR>
+imap `h<SPACE> :silent call HTMLAttribute('href')<CR>
+nmap `h<SPACE> :silent call HTMLAttribute('href')<CR>
 
-imap ;v<SPACE> ;v
-nmap ;v<SPACE> :silent call HTMLAttribute('value')<CR>
+imap `n<SPACE> :silent call HTMLAttribute('name')<CR>
+nmap `n<SPACE> :silent call HTMLAttribute('name')<CR>
 
-imap ;s<SPACE> ;s
-nmap ;s<SPACE> :silent call HTMLAttribute('size')<CR>
+imap `v<SPACE> :silent call HTMLAttribute('value')<CR>
+nmap `v<SPACE> :silent call HTMLAttribute('value')<CR>
 
-imap ;c<SPACE> ;c
-nmap ;c<SPACE> :silent call HTMLAttribute('class')<CR>
+imap `s<SPACE> :silent call HTMLAttribute('size')<CR>
+nmap `s<SPACE> :silent call HTMLAttribute('size')<CR>
 
-imap ;e<SPACE> ;e
-nmap ;e<SPACE> :silent call HTMLAttribute('escape')<CR>
+imap `c<SPACE> :silent call HTMLAttribute('class')<CR>
+nmap `c<SPACE> :silent call HTMLAttribute('class')<CR>
+
+imap `e<SPACE> :silent call HTMLAttribute('escape')<CR> 
+nmap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 
 function! HTMLAttribute(attribute)
 	let Current_Tag = FindCurrentTag()

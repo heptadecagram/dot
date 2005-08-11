@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.06.15 15:20:49
+" Last Modified: 2005.06.22 11:03:16
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
