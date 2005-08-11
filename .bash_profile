@@ -1,11 +1,17 @@
+#!/bin/sh
+# Project  Name: dot
+# File / Folder: ~/.bash_profile
+# File Language: sh
+# Copyright (C): 2004 Liam Bryan
+# First  Author: Liam Bryan
+# First Created: 2004.08.11
+# Last Modifier: Liam Bryan
+# Last Modified: 2005.08.11 10:49:47
+
 export TZ='America/New_York'
 
 alias ls='ls -FG'
-alias home='ssh liam@69.138.239.23'
-alias ns1='ssh lbryan@ns1.richard-group.com'
-alias ns2='ssh lbryan@ns2.richard-group.com'
-alias files='ssh 192.168.1.98'
-alias dev='ssh 192.168.1.99'
+alias home='ssh liam@68.34.41.250'
 
 PS1='\h:\w/ '
 
@@ -15,4 +21,7 @@ pager='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
-#/usr/local/bin/pg_ctl -D /usr/local/share/postgresql/data -l logfile start
+if [ -a "${HOME}/.bash_local" ]
+then
+	bash .bash_local
+fi
