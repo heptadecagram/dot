@@ -6,7 +6,7 @@
 -- First  Author: Liam Bryan
 -- First Created: 2005.06.21 12:36:17
 -- Last Modifier: Liam Bryan
--- Last Modified: 2005.07.12 15:21:34
+-- Last Modified: 2005.07.13 14:57:20
 --
 
 \c kb
@@ -17,6 +17,6 @@ CREATE TABLE page (
 	revision_id INTEGER NOT NULL,
 	"text" TEXT,
 	change_log VARCHAR(256),
-	changed_on TIMESTAMP WITH TIME ZONE,
+	"when" TIMESTAMP WITH TIME ZONE,
 	PRIMARY KEY(title, revision_id)
 );
