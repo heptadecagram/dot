@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.06.22 11:03:16
+" Last Modified: 2005.08.16 17:31:26
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -20,20 +20,14 @@ endfunction
 
 nmap <silent> lf :call PerlFunctionList()<CR>
 
-vmap <silent> # :call PerlCommentBlock()<CR>
+vnoremap <silent> # :call PerlCommentLine('.')<CR>
 
-function! PerlCommentBlock()
-	let Lines = line("'>") - line("'<")
-	execute line("'<")
-	while Lines + 1
-		if match(getline('.'), '^\s*#') != -1
-			normal ^x
+function! PerlCommentLine(line_number)
+		if match(getline(a:line_number), '^\s*#') != -1
+			normal ^x==
 		else
 			normal I#
 		endif
-		normal t
-		let Lines = Lines - 1
-	endwhile
 endfunction
 
 function! PerlFunctionList()
