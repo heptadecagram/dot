@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.08.17 09:33:33
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.08.18 06:32:01
+# Last Modified: 2005.08.18 12:08:44
 
 use strict;
 use warnings;
@@ -36,7 +36,7 @@ sub shuffle {
 
 sub LJify {
 	local $_ = $_[0];
-	1 while(s#<lj user="([^"]+)">#<span class='ljuser' style='white-space: nowrap;'><a href='http://www.livejournal.com/userinfo.bml?user=$1'><img src='http://stat.livejournal.com/img/userinfo.gif' alt='[info]' width='17' height='17' style='vertical-align: bottom; border: 0;'/></a><a href='http://www.livejournal.com/users/$1/'><b>$1</b></a></span>#);
+	1 while(s#<lj user=("?)(\w+)\1>#<span class='ljuser' style='white-space: nowrap;'><a href='http://www.livejournal.com/userinfo.bml?user=$2'><img src='http://stat.livejournal.com/img/userinfo.gif' alt='[info]' width='17' height='17' style='vertical-align: bottom; border: 0;'/></a><a href='http://www.livejournal.com/users/$2/'><b>$2</b></a></span>#);
 	$_;
 }
 
@@ -168,13 +168,15 @@ else {
 
 	<h4>Features!</h4>
 	<ul>
-		<li>Nearly 100 questions to show you! (Sorry, no more than 60 at at time)</li>
+		<li>Over 100 questions to show you! (Sorry, no more than 60 at at time)</li>
 		<li>Ready-to-use LJ-cut when pasting into your journal!</li>
 		<li>Is fun!</li>
 		<li>Won't break your friends page with shoddy HTML!</li>
 		<li>Uses correct grammar and spelling!</li>
 		<li>Uses the Fisher-Yates shuffling algorithm for maximum fun!</li>
 		<li>Help me, I'm trapped in a list!</li>
+		<li>No banner ads!</li>
+		<li>Made from 100% post-consumer recycled bytes!</li>
 	</ul>
 	);
 }
@@ -189,18 +191,18 @@ $Page->param(title => ' : The Completely Random Question Meme!');
 
 print $Page->output;
 
-
-
 __DATA__
 What would happen if you were to date ?
 What is the strangest thing ? has ever said to you
 What do ? and ? have in common
-What would happen in ? and ? went on a date together
+What would happen if ? and ? went on a date together
 What happened the last time you and ? were hanging out together
 Why shouldn't ? and ? be a couple
 What is ?'s favorite band
+What is ?'s favorite book
 What is ?'s favorite movie
 What is ?'s favorite song
+What is ?'s favorite meal
 What is ?'s fantasy
 When was the last time you talked to ?
 Is ? evil
@@ -255,7 +257,6 @@ How would ? survive on a desert island
 If ? and ? were superheroes, which one would be the sidekick
 What is ?'s sexiest feature
 What four adjectives best describe ?
-What is ?'s favorite meal
 Would ? be better described as a hero or a villian
 Have you ever seen ? naked
 Is ?'s spoon too big
@@ -273,11 +274,10 @@ What kind of person would you set up with ?
 What do you think of when you see ?
 What do you think of ?'s family
 What does ? think of America's involvement in Iraq
-Does ? understand quantum chronodynamics
+Does ? understand quantum chromodynamics
 ?: pansy, or wuss
 ?: ninja, pirate, monkey, or robot
 Where did ? leave the remote
-How does ? express anger and frustration
 Doesn't ? have anything better to do
 How long have you known ?
 Is ? a morning person or a night person
@@ -285,3 +285,17 @@ Is ? a morning person or a night person
 Did ? take the blue pill, or the red pill
 What would ? be like on an LSD trip
 It's all ?'s fault, isn't it
+What hobby do you think ? should take up
+What would ? and ? inherit from ?'s will
+What historical figure does ? most remind you of
+What will be ?'s last words
+Would ? look better not wearing pants, or not wearing a shirt
+What kind of book would ? and ? jointly write
+What would ? do with half a million dollars (U.S.)
+What is ? allergic to
+What would the minions of ?'s army look like
+How will ? die
+What is the most insightful thing you have heard ? say
+What does ? look for in a significant other
+Who would make a better window-washer, ? or ?
+What will ? be like in twenty years
