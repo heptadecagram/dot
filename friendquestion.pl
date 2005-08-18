@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.08.17 09:33:33
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.08.17 22:02:10
+# Last Modified: 2005.08.18 06:32:01
 
 use strict;
 use warnings;
@@ -164,7 +164,18 @@ else {
 	</form>
 
 	<h4>What's going on here?</h4>
-	<p>The deal is that you get about 10 completely random questions about your friends thrown back at you.  Answer them, and then this page will present you with the markup needed to put this in your LiveJournal.</p>
+	<p>The deal is that you get about 10 completely random questions about your friends thrown back at you.  Answer them, and then this page will present you with the markup needed to put this in your LiveJournal.  If you don't like the questions/friends you are presented with, try reloading, and you'll get different ones.</p>
+
+	<h4>Features!</h4>
+	<ul>
+		<li>Nearly 100 questions to show you! (Sorry, no more than 60 at at time)</li>
+		<li>Ready-to-use LJ-cut when pasting into your journal!</li>
+		<li>Is fun!</li>
+		<li>Won't break your friends page with shoddy HTML!</li>
+		<li>Uses correct grammar and spelling!</li>
+		<li>Uses the Fisher-Yates shuffling algorithm for maximum fun!</li>
+		<li>Help me, I'm trapped in a list!</li>
+	</ul>
 	);
 }
 
