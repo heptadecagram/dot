@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.08.17 09:33:33
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.08.18 12:08:44
+# Last Modified: 2005.08.18 16:26:39
 
 use strict;
 use warnings;
@@ -50,8 +50,8 @@ my $text = '';
 if($q->param('done') ) {
 	my $params = $q->Vars();
 	$text = '<dl>';
-	foreach(grep /^k\d$/, keys %$params) {
-		/^k(\d)$/;
+	foreach(grep /^k\d+$/, keys %$params) {
+		/^k(\d+)$/;
 		my $v = "v$1";
 		$text .= qq(<dt style="font-weight: bold;">$$params{$_}?</dt>);
 		$$params{$v} =~ s#\r?\n\r?#<br/>#g;
