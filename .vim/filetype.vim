@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.17 08:18:55
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.05.13 11:24:44
+" Last Modified: 2005.08.16 17:40:08
 
 autocmd BufNewFile,BufRead	~/.vim/*
 			\   let g:Project_Path = expand('~/')
@@ -40,3 +40,9 @@ autocmd BufNewFile,BufRead /Library/WebServer/Documents/simplysoles.com/*
 autocmd BufNewFile,BufRead /Library/WebServer/Documents/sfsassociation.org/*
       \   let g:Project_Path = '/Library/WebServer/Documents/sfsassociation.org/'
       \ | let g:Project_Name = 'sfsassociation.org'
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/hannawinery.com/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/sfsassociation.com/'
+      \ | let g:Project_Name = 'hannawinery.com'
+autocmd BufNewFile,BufRead /Library/WebServer/Documents/solesonsale.com/*
+      \   let g:Project_Path = '/Library/WebServer/Documents/solesonsale.com/'
+      \ | let g:Project_Name = 'solesonsale.com'
