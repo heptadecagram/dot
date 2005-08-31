@@ -263,7 +263,7 @@ to embrace."
 therefore never send to know for whom the bell tolls; it tolls for thee."
 	--John Donne
 
-Liam's Five Laws of Web Design:
+Liam's Five Laws of HTML Programming:
 1. Images are images, text is text.  Never substitute one for the other.
 2. Nothing will ever look the way you want it to.
 3. The more fonts, the worse.
@@ -424,3 +424,6 @@ people RTFM, but don't comprehend it.
 "Every actor is just an abused spouse who goes back, thinking he or she can
 make theatre change its ways."
 	--R.K. Milholland
+
+"All non-trivial abstractions, to some degree, are leaky."
+	--Joel Spolsky
