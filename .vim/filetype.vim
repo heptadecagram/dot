@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.17 08:18:55
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.08.16 17:40:08
+" Last Modified: 2005.08.31 11:59:40
 
 autocmd BufNewFile,BufRead	~/.vim/*
 			\   let g:Project_Path = expand('~/')
@@ -24,6 +24,9 @@ autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/cms/*
 autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/ecommerce/*
       \   let g:Project_Path = '/Library/WebServer/CGI-Executables/ecommerce/'
       \ | let g:Project_Name = 'RG_ECOMMERCE'
+autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/erp/*
+      \   let g:Project_Path = '/Library/WebServer/CGI-Executables/erp/'
+      \ | let g:Project_Name = 'RG_ERP'
 autocmd BufNewFile,BufRead /Library/WebServer/CGI-Executables/mailer/*
       \   let g:Project_Path = '/Library/WebServer/CGI-Executables/mailer/'
       \ | let g:Project_Name = 'RG_MAILER'
