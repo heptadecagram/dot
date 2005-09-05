@@ -6,11 +6,11 @@
 " First  Author: Liam Bryan
 " First Created: 2004.12.03 14:25:32
 " Last Modifier: Liam Bryan
-" Last Modified: 2004.12.05 09:38:14
+" Last Modified: 2005.09.04 09:30:22
 
 set smartindent
 
-set formatoptions+=or
+set formatoptions+=ocr
 
 set matchpairs+=[:]
 
