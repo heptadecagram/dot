@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.06.20 14:33:24
+" Last Modified: 2005.09.12 11:52:21
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -98,6 +98,8 @@ if has("autocmd")
 			\ endif
 
 endif " has("autocmd")
+
+autocmd BufReadPost *.t set filetype=perl
 
 function UpdateFileLastModified()
 	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Bryan/
