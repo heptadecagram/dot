@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.09.12 11:52:21
+" Last Modified: 2005.09.15 10:38:18
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -131,13 +131,11 @@ function NewProgramHeader()
 		return
 	endif
 
+	setlocal formatoptions+=cr
+
 	let s:comment = matchstr(&comments, '\(\_^\|,\):\zs[^,]\+')
 	if &syntax == 'c'
 		let s:comment = '/*'
-	elseif &syntax == 'inform'
-		let s:comment = '!'
-	elseif &syntax == 'sh'
-		let s:comment = '#'
 	endif
 
 	execute 'normal i' . s:comment . ' '
@@ -145,6 +143,9 @@ function NewProgramHeader()
 
 	if &syntax == 'c'
 		normal o/
+	endif
+	if &syntax == 'ruby'
+		1substitute'.*'#!/usr/local/bin/ruby'
 	endif
 	if &syntax == 'sh'
 		1substitute'.*'#!/bin/sh'
