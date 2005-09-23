@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.08.31 12:01:35
+" Last Modified: 2005.09.23 14:44:39
 
 if exists('b:loaded_html')
 	finish
@@ -55,13 +55,19 @@ imap `h5 <h5></h5>bba
 imap `fm <form action="" method="post"></form>BBhhi
 imap `ff <fieldset></fieldset>O
 imap `fe <select name=""></select>Bbsa
+
 imap `fo <option value="">OPTION</option>Bwsa
+vmap `fo `>a</option>`<i<option value="">Bwsa
+
 imap `ft <input name="" value="" size="16" maxlength="16"/>B`n 
+vmap `ft `>a" size="16" maxlength="16"/>`<i<input name="" value="`n 
+
 imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n 
 imap `fh <input type="hidden" name="" value=""/>B`n 
 imap `fs <input type="submit" value=""/>hhi
 imap `fr <input type="radio" name="" value=""/>B`n 
 imap `fc <input type="checkbox" name="" value=""/>B`n 
+imap `fb <input type="button" name="" value=""/>B`n 
 
 imap `im <img src=""/>hhi
 
