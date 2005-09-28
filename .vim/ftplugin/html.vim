@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.09.27 19:08:07
+" Last Modified: 2005.09.28 10:15:31
 
 if exists('b:loaded_html')
 	finish
@@ -23,8 +23,6 @@ inoremap && &amp;
 inoremap &< &lt;
 inoremap &> &gt;
 inoremap &<SPACE> &nbsp;
-nnoremap J gJ
-vnoremap J gJ
 
 inoremap `<CR> o
 
