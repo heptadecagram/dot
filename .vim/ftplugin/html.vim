@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.09.23 14:44:39
+" Last Modified: 2005.09.27 19:08:07
 
 if exists('b:loaded_html')
 	finish
@@ -23,6 +23,8 @@ inoremap && &amp;
 inoremap &< &lt;
 inoremap &> &gt;
 inoremap &<SPACE> &nbsp;
+nnoremap J gJ
+vnoremap J gJ
 
 inoremap `<CR> o
 
@@ -69,7 +71,7 @@ imap `fr <input type="radio" name="" value=""/>B`n
 imap `fc <input type="checkbox" name="" value=""/>B`n 
 imap `fb <input type="button" name="" value=""/>B`n 
 
-imap `im <img src=""/>hhi
+imap `im <img src="" alt=""/>Bhhi
 
 imap `ol <ol></ol>O
 imap `ul <ul></ul>O
