@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.08.17 09:33:33
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.08.18 16:26:39
+# Last Modified: 2005.08.30 06:26:07
 
 use strict;
 use warnings;
@@ -192,110 +192,113 @@ $Page->param(title => ' : The Completely Random Question Meme!');
 print $Page->output;
 
 __DATA__
-What would happen if you were to date ?
-What is the strangest thing ? has ever said to you
-What do ? and ? have in common
-What would happen if ? and ? went on a date together
-What happened the last time you and ? were hanging out together
-Why shouldn't ? and ? be a couple
-What is ?'s favorite band
-What is ?'s favorite book
-What is ?'s favorite movie
-What is ?'s favorite song
-What is ?'s favorite meal
-What is ?'s fantasy
-When was the last time you talked to ?
-Is ? evil
-What does ? spend the most time doing
-Who on your friends list would get along best with ?
-How did you meet ?
-How many siblings does ? have
-What is the most embarrassing thing you know about ?
-What would your life be like if you had never met ?
-Does ? have a funny-shaped head or what
-What was the last game you played with ?
-Where do you think ? is right now
-Who would win in a fight between ? and ?
-Why did ? cross the road
-Whom does ? get along best with
-If you had the chance to sleep with ?, would you
-Whom is ? attracted to
-Can ? raise the dead to perform common household tasks
-What do you find admirable about ?
-What habit does ? have that you think they should give up
-Could you take ? in a fight
-What would ? like to do for a living
-Of ?, ?, and ?, which one is most similar to ?
-Do you envy ?'s job
-What do you most envy about ?
-Where would you take ? on a vacation
-Would you sooner donate a kidney to ? or ?
-In what ways are you smarter than ?
-In what ways is ? smarter than you
-What kind of underwear does ? wear
-Does ? spend too much time on LiveJournal
-Why would ? go to heaven but ? go to hell
-Of ? and ?, who would call shotgun first
-Who would make a better stuffed animal, ? or ?
-What's up with ?
-How many people has ? seduced
-When's the last time you saw ?
-Can ? solve a Rubik's Cube
-What is ?'s religion
-How many licks would ? take to get to the center of a Tootsie Pop
-Does ? look better with long hair
-Does ? know how to spell the word 'embarrass' correctly
-What's the biggest difference between ? and ?
-Will ? ever amount to anything
-Did ? leave the stove on again
-What animal does ? most remind you of
+? is in a maze of twisty passages, all alike.  What now
+?: ninja, pirate, monkey, or robot
+?: pansy, or wuss
 After a cataclysmic war, whom would you pair with ? to repopulate the Earth
-Did ? steal the cookie from the cookie jar
-Why is ? sneaking up behind you right now
+Can ? become invisible at will
 Can ? do a headstand
+Can ? raise the dead to perform common household tasks
+Can ? solve a Rubik's Cube
+Could you take ? in a fight
+Did ? leave the stove on again
+Did ? steal the cookie from the cookie jar
+Did ? take the blue pill, or the red pill
+Do you envy ?'s job
+Does ? have a funny-shaped head or what
+Does ? know how to spell the word 'embarrass' correctly
+Does ? look better with long hair
+Does ? spend too much time on LiveJournal
+Does ? understand quantum chromodynamics
+Doesn't ? have anything better to do
+Have you ever seen ? naked
+Have you ever suspected ? of being a lifelike robot
+How did you meet ?
+How long have you known ?
+How many licks would ? take to get to the center of a Tootsie Pop
+How many people has ? seduced
+How many siblings does ? have
+How will ? die
 How would ? survive on a desert island
 If ? and ? were superheroes, which one would be the sidekick
-What is ?'s sexiest feature
-What four adjectives best describe ?
-Would ? be better described as a hero or a villian
-Have you ever seen ? naked
-Is ?'s spoon too big
-Is ? best described as a badger, a mushroom, or a snake
-Is ? hiding under your bed right now
-What was ? wearing, the last time you noticed
-Shouldn't ? be getting more sleep
-Is ? an innie or an outie
-Can ? become invisible at will
-What political beliefs of ? do you disagree with
-Have you ever suspected ? of being a lifelike robot
-What would you most like to do with ?
-What's the last thing you said to ?
-What kind of person would you set up with ?
-What do you think of when you see ?
-What do you think of ?'s family
-What does ? think of America's involvement in Iraq
-Does ? understand quantum chromodynamics
-?: pansy, or wuss
-?: ninja, pirate, monkey, or robot
-Where did ? leave the remote
-Doesn't ? have anything better to do
-How long have you known ?
+If you had the chance to sleep with ?, would you
+In what ways are you smarter than ?
+In what ways is ? smarter than you
 Is ? a morning person or a night person
-? is in a maze of twisty passages, all alike.  What now
-Did ? take the blue pill, or the red pill
-What would ? be like on an LSD trip
+Is ? an innie or an outie
+Is ? best described as a badger, a mushroom, or a snake
+Is ? evil
+Is ? hiding under your bed right now
+Is ?'s spoon too big
 It's all ?'s fault, isn't it
-What hobby do you think ? should take up
-What would ? and ? inherit from ?'s will
-What historical figure does ? most remind you of
-What will be ?'s last words
-Would ? look better not wearing pants, or not wearing a shirt
-What kind of book would ? and ? jointly write
-What would ? do with half a million dollars (U.S.)
-What is ? allergic to
-What would the minions of ?'s army look like
-How will ? die
-What is the most insightful thing you have heard ? say
+Of ? and ?, who would call shotgun first
+Of ?, ?, and ?, which one is most similar to ?
+Shouldn't ? be getting more sleep
+What animal does ? most remind you of
+What do ? and ? have in common
+What do you find admirable about ?
+What do you most envy about ?
+What do you think of ?'s family
+What do you think of when you see ?
 What does ? look for in a significant other
-Who would make a better window-washer, ? or ?
+What does ? spend the most time doing
+What does ? think of America's involvement in Iraq
+What fictional character is ? most like
+What four adjectives best describe ?
+What habit does ? have that you think they should give up
+What happened the last time you and ? were hanging out together
+What historical figure does ? most remind you of
+What hobby do you think ? should take up
+What is ? allergic to
+What is ?'s fantasy
+What is ?'s favorite band
+What is ?'s favorite book
+What is ?'s favorite meal
+What is ?'s favorite movie
+What is ?'s favorite song
+What is ?'s religion
+What is ?'s sexiest feature
+What is the most embarrassing thing you know about ?
+What is the most insightful thing you have heard ? say
+What is the strangest thing ? has ever said to you
+What kind of book would ? and ? jointly write
+What kind of person would you set up with ?
+What kind of underwear does ? wear
+What political beliefs of ? do you disagree with
+What was ? wearing, the last time you noticed
+What was the last game you played with ?
 What will ? be like in twenty years
+What will be ?'s last words
+What would ? and ? inherit from ?'s will
+What would ? be like on an LSD trip
+What would ? do with half a million dollars (U.S.)
+What would ? like to do for a living
+What would happen if ? and ? went on a date together
+What would happen if you were to date ?
+What would the minions of ?'s army look like
+What would you most like to do with ?
+What would you say at ?'s funeral
+What would your life be like if you had never met ?
+What's the biggest difference between ? and ?
+What's the last thing you said to ?
+What's up with ?
+When was the last time you talked to ?
+When's the last time you saw ?
+Where did ? go
+Where did ? leave the remote
+Where do you think ? is right now
+Where would you take ? on a vacation
+Who on your friends list would get along best with ?
+Who would make a better stuffed animal, ? or ?
+Who would make a better window-washer, ? or ?
+Who would win in a fight between ? and ?
+Whom does ? get along best with
+Whom is ? attracted to
+Why did ? cross the road
+Why is ? sneaking up behind you right now
+Why shouldn't ? and ? be a couple
+Why would ? go to heaven but ? go to hell
+Will ? ever amount to anything
+Would ? be better described as a hero or a villain
+Would ? look better not wearing pants, or not wearing a shirt
+Would you sooner donate a kidney to ? or ?
