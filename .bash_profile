@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.08.17 08:59:17
+# Last Modified: 2005.10.18 16:42:40
 
 export TZ='America/New_York'
 
@@ -23,5 +23,5 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
 if [ -a "${HOME}/.bash_local" ]
 then
-	source .bash_local
+	source ~/.bash_local
 fi
