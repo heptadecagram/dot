@@ -1,12 +1,12 @@
 /* 
  * Project  Name: None
- * File / Folder: siz.c
+ * File / Folder: size.c
  * File Language: c
- * Copyright (C): 2005 Richard Group, Inc.
+ * Copyright (C): 2005 Liam Bryan
  * First  Author: Liam Bryan
  * First Created: 2005.04.21 14:11:12
  * Last Modifier: Liam Bryan
- * Last Modified: 2005.10.24 09:41:12
+ * Last Modified: 2005.10.24 20:55:28
 
 */
 
