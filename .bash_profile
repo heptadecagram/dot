@@ -6,12 +6,12 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.10.18 16:42:40
+# Last Modified: 2006.01.25 07:18:21
 
 export TZ='America/New_York'
 
 alias ls='ls -FG'
-alias home='ssh liam@68.34.41.250'
+alias home='ssh home'
 
 PS1='\h:\w/ '
 
