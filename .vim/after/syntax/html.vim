@@ -42,7 +42,7 @@ syn region htmltmpl_attribute
 			\ nextgroup=htmltmpl_attribute
 
 " Hilighting
-syn match htmltmpl_attribute_name contained +\(name\|escape\)\(\s*=\)\@=+
+syn match htmltmpl_attribute_name contained +\(name\|escape\|default\)\(\s*=\)\@=+
 
 syn match htmltmpl_attribute_value contained +=\zs["'][^"']*["']+
 			\ contains=htmltmpl_attribute_loop_value

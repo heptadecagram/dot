@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.09.15 10:38:18
+" Last Modified: 2006.01.17 12:41:48
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -136,6 +136,11 @@ function NewProgramHeader()
 	let s:comment = matchstr(&comments, '\(\_^\|,\):\zs[^,]\+')
 	if &syntax == 'c'
 		let s:comment = '/*'
+	endif
+
+	if &syntax == 'html'
+		normal i`ht`ti
+		return
 	endif
 
 	execute 'normal i' . s:comment . ' '
