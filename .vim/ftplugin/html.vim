@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.01.17 14:55:04
+" Last Modified: 2006.02.09 09:30:28
 
 if exists('b:loaded_html')
 	finish
@@ -20,6 +20,8 @@ if exists("*MangleImageTag")
 endif
 
 inoremap && &amp;
+inoremap &. &hellip;
+inoremap &- &mdash;
 inoremap &< &lt;
 inoremap &> &gt;
 inoremap &<SPACE> &nbsp;
@@ -47,10 +49,15 @@ imap `sy <style type="text/css"><!----></style>nO
 imap `ln <link href="" rel="" type=""/>BBhhi
 
 imap `h1 <h1></h1>bba
+vmap `h1 `>a</h3>`<i<h3>
 imap `h2 <h2></h2>bba
+vmap `h2 `>a</h2>`<i<h2>
 imap `h3 <h3></h3>bba
+vmap `h3 `>a</h3>`<i<h3>
 imap `h4 <h4></h4>bba
+vmap `h4 `>a</h4>`<i<h4>
 imap `h5 <h5></h5>bba
+vmap `h5 `>a</h5>`<i<h5>
 
 imap `fm <form action="" method="post"></form>BBhhi
 imap `ff <fieldset></fieldset>O
@@ -63,12 +70,13 @@ vmap `fo `>a</option>`<i<option value="">Bwsa
 imap `ft <input name="" value="" size="16" maxlength="16"/>B`n 
 vmap `ft `>a" size="16" maxlength="16"/>`<i<input name="" value="`n 
 
-imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n 
 imap `fh <input type="hidden" name="" value=""/>B`n 
 imap `fs <input type="submit" value=""/>hhi
 imap `fr <input type="radio" name="" value=""/>B`n 
 imap `fc <input type="checkbox" name="" value=""/>B`n 
 imap `fb <input type="button" name="" value=""/>B`n 
+imap `fx <textarea rows="6" cols="60"></textarea>bhhi
+imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n 
 
 imap `im <img src="" alt=""/>Bhhi
 
@@ -107,11 +115,15 @@ vmap `em `>a</em>`<i<em>
 imap `sp <span></span>bba
 vmap `sp `>a</span>`<i<span>
 
+imap `hr <hr/>
+
 imap `ta :call TableMaker()<LEFT>
-imap `tr <tr></tr>no
-imap `td <td></td>no
-imap `th <th></th>no
+imap `ca <caption></caption>bhhi
 imap `tb <tbody></tbody>no
+imap `tr <tr></tr>no
+imap `td <td></td>bhhi
+vmap `td `>a</td>`<i<td>
+imap `th <th></th>bhhi
 
 function! FindCurrentTag()
 	call searchpair('<', '', '>', 'b')
