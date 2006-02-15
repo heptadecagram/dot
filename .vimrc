@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.01.17 12:41:48
+" Last Modified: 2006.02.15 10:45:24
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -69,6 +69,10 @@ nmap <C-N> <C-W>k<C-W>_
 set wmw=0
 nmap <C-S> <C-W>l<C-W><BAR>
 nmap <C-H> <C-W>h<C-W><BAR>
+
+let &titlestring = hostname() . ":" . fnamemodify(expand("%:p"), ":~")
+let &titleold = hostname()
+set title
 
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
