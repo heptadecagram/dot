@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.02.09 09:30:28
+" Last Modified: 2006.03.07 09:32:45
 
 if exists('b:loaded_html')
 	finish
@@ -218,7 +218,7 @@ function! TableMaker(...)
 
 		let idx = Cols
 		while idx > 0
-			normal o<td></td>
+			normal o<td></td>
 			let idx = idx - 1
 		endwhile
 
