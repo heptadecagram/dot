@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.03.07 09:32:45
+" Last Modified: 2006.03.07 10:02:12
 
 if exists('b:loaded_html')
 	finish
@@ -150,7 +150,7 @@ nmap `s<SPACE> :silent call HTMLAttribute('size')<CR>
 imap `c<SPACE> :silent call HTMLAttribute('class')<CR>
 nmap `c<SPACE> :silent call HTMLAttribute('class')<CR>
 
-imap `e<SPACE> :silent call HTMLAttribute('escape')<CR> 
+imap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 nmap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 
 function! HTMLAttribute(attribute)
