@@ -6,12 +6,14 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.01.25 07:18:21
+# Last Modified: 2006.03.10 18:58:55
 
 export TZ='America/New_York'
 
 alias ls='ls -FG'
 alias home='ssh home'
+alias n='ls'
+alias o='vim'
 
 PS1='\h:\w/ '
 

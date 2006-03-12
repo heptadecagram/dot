@@ -9,17 +9,17 @@
 # Note: $folder should be set _before_ any other path vars where `+' or `='
 # is used because paths are expanded when parsed
 #
-set folder=~/Mail		# where i keep my mailboxes
-set spoolfile='/var/mail/liam'	# where my new mail is located
+#set folder=~/Mail		# where i keep my mailboxes
+#set spoolfile='/var/mail/liam'	# where my new mail is located
 
-#set folder="imaps://liam+heptadecagram.net@heptadecagram.net/"
-#set spoolfile="imaps://liam+heptadecagram.net@heptadecagram.net/inbox"
+set folder="imaps://liam+heptadecagram.net@heptadecagram.net/"
+set spoolfile="imaps://liam+heptadecagram.net@heptadecagram.net/inbox"
 set hostname="heptadecagram.net"	# my DNS domain
 
-set pop_host='pop://liam:PASSWORD@mail.wunderland.com'
+#set pop_host='pop://liam:PASSWORD@mail.wunderland.com'
 #set pop_host='pop://liam:PASSWORD@mail.richard-group.com'
-set pop_delete=yes
-set pop_checkinterval=90
+#set pop_delete=yes
+#set pop_checkinterval=90
 
 set mail_check=90		# how often to poll for new mail
 set timeout=15			# timeout for prompt in the index menu
@@ -90,7 +90,7 @@ set nosave_empty		# remove files when no messages are left
 #set save_name			# save outgoing messages by recipient, if the
 #set sendmail="/usr/lib/sendmail -oi -oem"	# how to deliver mail
 #set shell="/bin/zsh"		# program to use for shell escapes
-set signature="~/bin/quote.pl ~/thought_residue |" # file containing signature
+#set signature="~/bin/quote.pl ~/thought_residue |" # file containing signature
 
 # I subscribe to a lot of mailing lists, so this is _very_ useful.  This
 # groups messages on the same subject to make it easier to follow a
