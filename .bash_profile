@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.14 07:28:01
+# Last Modified: 2006.03.14 10:02:47
 
 export TZ='America/New_York'
 
@@ -22,7 +22,7 @@ PS1='\h:\w/ '
 
 export EDITOR='vim'
 export VISUAL='vim'
-pager='less'
+export PAGER='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
