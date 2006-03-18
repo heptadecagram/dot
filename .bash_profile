@@ -6,12 +6,14 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.17 20:36:34
+# Last Modified: 2006.03.17 21:20:23
 
 export TZ='America/New_York'
 
 alias ls='ls -FG'
 alias home='ssh home'
+alias work="ruby -r net/http -e'Net::HTTP.start(\"files.richard-group.com\",80){|http|http.get(\"/open/barley\")}';ssh work"
+
 alias n='ls'
 alias nn='ls -lA'
 alias o='vim'
