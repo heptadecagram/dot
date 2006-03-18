@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.14 10:02:47
+# Last Modified: 2006.03.17 20:36:34
 
 export TZ='America/New_York'
 
@@ -17,6 +17,8 @@ alias nn='ls -lA'
 alias o='vim'
 alias oo='vimdiff'
 alias so='sudoedit'
+
+alias ri='ri -Tf ansi'
 
 PS1='\h:\w/ '
 
