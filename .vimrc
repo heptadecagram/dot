@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.02.15 10:45:24
+" Last Modified: 2006.03.23 07:18:53
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -138,7 +138,7 @@ function NewProgramHeader()
 	setlocal formatoptions+=cr
 
 	let s:comment = matchstr(&comments, '\(\_^\|,\):\zs[^,]\+')
-	if &syntax == 'c'
+	if &syntax == 'c' || &syntax == 'css'
 		let s:comment = '/*'
 	endif
 
@@ -150,7 +150,7 @@ function NewProgramHeader()
 	execute 'normal i' . s:comment . ' '
 	call CreateFileHeader()
 
-	if &syntax == 'c'
+	if &syntax == 'c' || &syntax == 'css'
 		normal o/
 	endif
 	if &syntax == 'ruby'
@@ -175,13 +175,15 @@ use warnings;
 						\ '/', '::', 'g')
 			let s:module_name = strpart(s:module_name, 0, strlen(s:module_name) - 3)
 			execute 'normal :10ipackage ' . s:module_name . ';Go1;n'
-			
+
 
 		endif
 	endif
 endfunction
 
 autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
+
+autocmd BufRead * silent! %s/[\r \t]\+$//
 
 autocmd BufNewFile *    call NewProgramHeader()
 
