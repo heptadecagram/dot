@@ -53,5 +53,6 @@ if version >= 500
 endif
 
 set gfn=Monaco:h16
+set antialias
 set lines=40
 colorscheme koehler
