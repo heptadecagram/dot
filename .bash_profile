@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.27 10:51:43
+# Last Modified: 2006.03.27 15:09:29
 
 export TZ='America/New_York'
 
@@ -19,7 +19,7 @@ alias work="ruby -r net/http -e'Net::HTTP.start(\"files.richard-group.com\",80){
 # Vim alias with sudo built-ins
 function o {
 	for file in $*; do
-		if [ ! -w "$file" -a ! -O "$file" ]; then
+		if [ -a "$file" -a ! -w "$file" -a ! -O "$file" ]; then
 			if [ -x "sudoedit" ]; then
 				sudoedit $*
 				return
