@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.27 15:09:29
+# Last Modified: 2006.03.31 15:05:18
 
 export TZ='America/New_York'
 
@@ -39,6 +39,7 @@ alias s='svn'
 alias a='cd'
 alias oo='vimdiff'
 
+alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
 
 PS1='\h:\w/ '

@@ -1,4 +1,4 @@
-" 
+"
 " Project  Name: Vim Settings
 " File / Folder: .vim/ftplugin/html.vim
 " File Language: vim
@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.03.07 10:02:12
+" Last Modified: 2006.04.05 12:35:12
 
 if exists('b:loaded_html')
 	finish
@@ -14,7 +14,7 @@ endif
 let b:loaded_html = 1
 
 " Update an image tag's WIDTH & HEIGHT attributes (experimental!):
-runtime! MangleImageTag.vim 
+runtime! MangleImageTag.vim
 if exists("*MangleImageTag")
 	nnoremap ;mi :call MangleImageTag()<CR>
 endif
@@ -29,7 +29,7 @@ inoremap &<SPACE> &nbsp;
 inoremap `<CR> o
 
 imap `cm <!--  -->bhi
-vmap `cm `>a -->`<i<!-- 
+vmap `cm `>a -->`<i<!--
 
 imap `tv <!-- tmpl_var name="" -->bhhi
 imap `tn <!-- tmpl_include name="" -->bhhi
@@ -67,16 +67,16 @@ imap `fe <select name=""></select>Bbsa
 imap `fo <option value="">OPTION</option>Bwsa
 vmap `fo `>a</option>`<i<option value="">Bwsa
 
-imap `ft <input name="" value="" size="16" maxlength="16"/>B`n 
-vmap `ft `>a" size="16" maxlength="16"/>`<i<input name="" value="`n 
+imap `ft <input name="" value="" size="16" maxlength="16"/>B`n
+vmap `ft `>a" size="16" maxlength="16"/>`<i<input name="" value="`n
 
-imap `fh <input type="hidden" name="" value=""/>B`n 
+imap `fh <input type="hidden" name="" value=""/>B`n
 imap `fs <input type="submit" value=""/>hhi
-imap `fr <input type="radio" name="" value=""/>B`n 
-imap `fc <input type="checkbox" name="" value=""/>B`n 
-imap `fb <input type="button" name="" value=""/>B`n 
+imap `fr <input type="radio" name="" value=""/>B`n
+imap `fc <input type="checkbox" name="" value=""/>B`n
+imap `fb <input type="button" name="" value=""/>B`n
 imap `fx <textarea rows="6" cols="60"></textarea>bhhi
-imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n 
+imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n
 
 imap `im <img src="" alt=""/>Bhhi
 
@@ -116,6 +116,7 @@ imap `sp <span></span>bba
 vmap `sp `>a</span>`<i<span>
 
 imap `hr <hr/>
+imap `br <br/>
 
 imap `ta :call TableMaker()<LEFT>
 imap `ca <caption></caption>bhhi
@@ -155,8 +156,8 @@ nmap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 
 function! HTMLAttribute(attribute)
 	let Current_Tag = FindCurrentTag()
-	call searchpair('<', a:attribute, '/\=>') 
-	normal "ly 
+	call searchpair('<', a:attribute, '/\=>')
+	normal "ly
 	if getreg('l') == '>' || getreg('l') == '/'
 		if Current_Tag == '!-- '
 			normal bh
