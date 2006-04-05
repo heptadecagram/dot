@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.11.06 19:18:47
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.10.24 09:39:33
+# Last Modified: 2006.04.05 12:37:12
 package Statistics;
 
 use strict;
@@ -14,56 +14,56 @@ use warnings;
 
 
 sub Median {
-	my $Array;
-	if(ref $_[0] eq 'ARRAY') {
-		$Array = $_[0];
-	}
-	else {
-		$Array = \@_;
-	}
+	my @Array = sort({ $a <=> $b } ref($_[0]) eq 'ARRAY' ? @{$_[0]} : @_);
 
-	my $Index = @$Array - 1;
-	if(@$Array % 2) {
-		return $$Array[$Index / 2];
+	my $Index = 1 + scalar @Array;
+	if(@Array % 2) {
+		return $Array[($Index - 1) / 2];
 	}
 	else {
-		return ($$Array[$Index / 2] + $$Array[($Index + 1) / 2]) / 2.0;
+		return ($Array[$Index / 2 - 1] + $Array[$Index / 2]) / 2.0;
 	}
 }
 
+sub Q1 {
+	my @Array = sort({ $a <=> $b } ref($_[0]) eq 'ARRAY' ? @{$_[0]} : @_);
+
+	my $Index = 0.25 * (1 + @Array);
+	++$Index if($Index - int($Index) >= .5);
+	$Index = int $Index;
+
+	$Array[$Index - 1];
+}
+
+sub Q3 {
+	my @Array = sort({ $a <=> $b } ref($_[0]) eq 'ARRAY' ? @{$_[0]} : @_);
+
+	my $Index = 0.75 * (1 + scalar @Array);
+	++$Index if($Index - int($Index) >= .5);
+	$Index = int $Index;
+
+	$Array[$Index - 1];
+}
+
 sub Mean {
-	my $Length = 0;
-	if(ref $_[0] eq 'ARRAY') {
-		my $Array = $_[0];
-		$Length = @$Array;
-	}
-	else {
-		$Length = @_;
-	}
+	my $Length = ref($_[0]) eq 'ARRAY' ? scalar @{$_[0]} : scalar @_;
+
 	return &Sum / $Length;
 }
 
 sub HarmonicMean {
-	my($Sum, $Array);
-	if(ref $_[0] eq 'ARRAY') {
-		$Array = $_[0];
-	}
-	else {
-		$Array = \@_;
-	}
-	$Sum += 1.0 / $_ foreach(@$Array);
-	return 1.0 / ($Sum / @$Array);
+	my @Array = ref($_[0]) eq 'ARRAY' ? @{$_[0]} : @_;
+	my $Sum = 0;
+
+	$Sum += 1.0 / $_ foreach(@Array);
+	return 1.0 / ($Sum / @Array);
 }
 
 sub Sum {
-	my($Sum, $Array);
-	if(ref $_[0] eq 'ARRAY') {
-		$Array = $_[0];
-	}
-	else {
-		$Array = \@_;
-	}
-	$Sum += $_ foreach(@$Array);
+	my @Array = ref($_[0]) eq 'ARRAY' ? @{$_[0]} : @_;
+	my $Sum = 0;
+
+	$Sum += $_ foreach(@Array);
 	$Sum;
 }
 
@@ -83,17 +83,11 @@ sub SumOfSquares {
 # in normal distribution.
 
 sub StandardDeviation {
-	my $Array;
-	if(ref $_[0] eq 'ARRAY') {
-		$Array = $_[0];
-	}
-	else {
-		$Array = \@_;
-	}
+	my $Length = ref($_[0]) eq 'ARRAY' ? scalar @{$_[0]} : scalar @_;
 	my $Sum = &Sum;
 
-	return sqrt( (@$Array * &SumOfSquares - $Sum * $Sum) /
-		(@$Array * @$Array) );
+	return sqrt( ($Length * &SumOfSquares - $Sum * $Sum) /
+		($Length * $Length) );
 }
 
 sub SampleStandardDeviation {
