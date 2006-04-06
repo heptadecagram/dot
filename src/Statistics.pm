@@ -6,11 +6,15 @@
 # First  Author: Liam Bryan
 # First Created: 2004.11.06 19:18:47
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.04.05 12:37:12
+# Last Modified: 2006.04.06 18:37:31
 package Statistics;
 
 use strict;
 use warnings;
+
+use Exporter 'import';
+our @ISA = qw(Exporter);
+our @EXPORT = qw(Median Mean StandardDeviation Max Min Q1 Q3 Mode);
 
 
 sub Median {
