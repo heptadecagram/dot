@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.31 15:05:18
+# Last Modified: 2006.04.20 13:17:45
 
 export TZ='America/New_York'
 
@@ -20,7 +20,7 @@ alias work="ruby -r net/http -e'Net::HTTP.start(\"files.richard-group.com\",80){
 function o {
 	for file in $*; do
 		if [ -a "$file" -a ! -w "$file" -a ! -O "$file" ]; then
-			if [ -x "sudoedit" ]; then
+			if [ -x "`which sudoedit`" ]; then
 				sudoedit $*
 				return
 			else
@@ -33,10 +33,28 @@ function o {
 	vim $*
 }
 
+# cd alias with directory substitution and directory-for-file shortcut
+function a {
+	if [ -z "$1" ]; then
+		builtin cd
+	else
+		if [ -n "$2" ]; then
+			TRY="${PWD/$1/$2}"
+		else
+			TRY="$1"
+		fi
+
+		if [ -f "${TRY}" ]; then
+			builtin cd "$(dirname ${TRY})"
+		else
+			builtin cd "${TRY}"
+		fi
+	fi
+}
+
 alias n='ls'
 alias nn='ls -lA'
 alias s='svn'
-alias a='cd'
 alias oo='vimdiff'
 
 alias perl="perl -I${HOME}/src"
