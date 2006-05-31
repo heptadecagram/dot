@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.03.23 07:18:53
+" Last Modified: 2006.05.24 
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -52,6 +52,9 @@ noremap gt gj
 nnoremap  b
 vnoremap  b
 
+" More logical function
+nmap Y y$
+
 " One True Brace Style
 nmap [[ 99[{
 nmap ]] 99]}
@@ -66,9 +69,9 @@ set ruler
 set wmh=0
 nmap <C-T> <C-W>j<C-W>_
 nmap <C-N> <C-W>k<C-W>_
-set wmw=0
-nmap <C-S> <C-W>l<C-W><BAR>
-nmap <C-H> <C-W>h<C-W><BAR>
+" Tabbed Editing
+nnoremap <C-S> gt
+nnoremap <C-H> gT
 
 let &titlestring = hostname() . ":" . fnamemodify(expand("%:p"), ":~")
 let &titleold = hostname()
