@@ -52,6 +52,10 @@ if version >= 500
 
 endif
 
+if version >= 700
+	set nomacatsui
+endif
+
 set gfn=Monaco:h16
 set antialias
 set lines=40
