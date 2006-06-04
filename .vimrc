@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.05.24 
+" Last Modified: 2006.06.04 08:07:00
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -121,7 +121,7 @@ function CreateFileHeader()
 				\ substitute(expand('%:p'), g:Project_Path, '', '') :
 				\ expand('%') ) . '' .
 				\ 'File Language: ' . &syntax . '' .
-				\ 'Copyright (C): ' . strftime('%Y') . ' Richard Group, Inc.' . '' .
+				\ 'Copyright (C): ' . strftime('%Y') . ' Liam Bryan' . '' .
 				\ 'First  Author: Liam Bryan' . '' .
 				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
 				\ 'Last Modifier: Liam Bryan' . '' .
