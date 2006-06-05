@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.06.04 08:07:00
+" Last Modified: 2006.06.05 11:41:35
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -121,7 +121,7 @@ function CreateFileHeader()
 				\ substitute(expand('%:p'), g:Project_Path, '', '') :
 				\ expand('%') ) . '' .
 				\ 'File Language: ' . &syntax . '' .
-				\ 'Copyright (C): ' . strftime('%Y') . ' Liam Bryan' . '' .
+				\ 'Copyright (C): ' . strftime('%Y') . ' Richard Group' . '' .
 				\ 'First  Author: Liam Bryan' . '' .
 				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
 				\ 'Last Modifier: Liam Bryan' . '' .
@@ -189,4 +189,18 @@ autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 autocmd BufRead * silent! %s/[\r \t]\+$//
 
 autocmd BufNewFile *    call NewProgramHeader()
+
+function! Perl_eval() range
+	let src = tempname()
+	let dst = tempname()
+	execute ": " . a:firstline . "," . a:lastline . "w " . src
+	execute ":silent ! perl " . src . " > " . dst . "2>&1"
+	pclose!
+	redraw!
+	vsplit
+	normal l
+	execute ":e! " . dst
+	set pvw
+	normal h
+endfunction
 
