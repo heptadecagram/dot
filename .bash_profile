@@ -6,9 +6,10 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.04.20 13:17:45
+# Last Modified: 2006.06.06 12:38:28
 
 export TZ='America/New_York'
+export COPYRIGHT='Liam Bryan'
 
 alias ls='ls -FG'
 alias grep='grep --color'
