@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.06.20 08:18:40
+# Last Modified: 2006.06.20 08:41:59
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -15,7 +15,7 @@ alias ls='ls -FG'
 alias grep='grep --color'
 
 alias home='ssh home'
-alias work="perl -MSocket -e'socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));connect(SOCK,sockaddr_in(80,inet_aton(\"files.richard-group.com\")))or die$!;syswrite(SOCK,\"GET /open/barley HTTP/1.0\n\n\",27);'&& ssh work"
+alias work="perl -MSocket -e'socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));connect(SOCK,sockaddr_in(80,inet_aton(\"files.richard-group.com\")))or die\$!;syswrite(SOCK,\"GET /open/barley HTTP/1.0\\n\\n\",27);'&& ssh work"
 
 # Vim alias with sudo built-ins
 function o {

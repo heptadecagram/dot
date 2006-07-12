@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.06.06 12:38:06
+" Last Modified: 2006.07.12 11:11:51
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -70,6 +70,7 @@ set wmh=0
 nmap <C-T> <C-W>j<C-W>_
 nmap <C-N> <C-W>k<C-W>_
 " Tabbed Editing
+nnoremap <C-_> gt
 nnoremap <C-S> gt
 nnoremap <C-H> gT
 
