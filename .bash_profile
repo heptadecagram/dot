@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.06.20 08:41:59
+# Last Modified: 2006.07.17 12:44:24
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -57,6 +57,18 @@ alias n='ls'
 alias nn='ls -lA'
 alias s='svn'
 alias oo='vimdiff'
+
+function sd {
+	if [ $# != 1 ]; then
+		echo "Usage: sd <file>"
+		exit 2
+	else
+		TEMP=/tmp/tmp.$$.`basename $1`
+		svn cat $1 > $TEMP
+		vimdiff $TEMP $1
+		rm -f $TEMP
+	fi
+}
 
 alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
