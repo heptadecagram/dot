@@ -52,7 +52,7 @@ if version >= 500
 
 endif
 
-if version >= 700
+if exists('&macatsui')
 	set nomacatsui
 endif
 
