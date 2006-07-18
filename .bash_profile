@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.18 11:19:30
+# Last Modified: 2006.07.18 14:41:20
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -61,11 +61,18 @@ alias oo='vimdiff'
 function sd {
 	if [ $# != 1 ]; then
 		echo "Usage: sd <file>"
-		exit 2
+		return 2
+	elif [ ! -e "$1" ]; then
+		echo "File not found: $1"
+		return 2
+	elif [ `expr "$(svn status $1)" : "M"` -eq 0 ]; then
+		echo "No difference in working copy of $1"
+		return 1
 	else
 		TEMP=/tmp/tmp.$$.`basename $1`
-		svn cat "$1" > "$TEMP"
-		vimdiff "$TEMP" "$1"
+		cat "$1" > "$TEMP"
+		svn diff "$1" | patch -R "$TEMP" >/dev/null
+		vimdiff -c "wincmd l" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
 		rm -f "$TEMP"
 	fi
 }
