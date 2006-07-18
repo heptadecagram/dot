@@ -1,0 +1,38 @@
+### This file specifies server-specific protocol parameters,
+### including HTTP proxy information, and HTTP timeout settings.
+###
+### The currently defined server options are:
+###   http-proxy-host            Proxy host for HTTP connection
+###   http-proxy-port            Port number of proxy host service
+###   http-proxy-username        Username for auth to proxy service
+###   http-proxy-password        Password for auth to proxy service
+###   http-proxy-exceptions      List of sites that do not use proxy
+###   http-timeout               Timeout for HTTP requests in seconds
+###   http-compression           Whether to compress HTTP requests
+###   neon-debug-mask            Debug mask for Neon HTTP library
+###   ssl-authority-files        List of files, each of a trusted CAs
+###   ssl-trust-default-ca       Trust the system 'default' CAs
+###   ssl-client-cert-file       PKCS#12 format client certificate file
+###   ssl-client-cert-password   Client Key password, if needed.
+###
+### HTTP timeouts, if given, are specified in seconds.  A timeout
+### of 0, i.e. zero, causes a builtin default to be used.
+###
+
+[groups]
+work = *.richard-group.com
+
+[work]
+ssl-client-cert-file = /home/lbryan/.ssh/lbryan.p12
+#ssl-client-cert-password = 
+
+# [global]
+# http-proxy-exceptions = *.exception.com, www.internal-site.org
+# http-proxy-host = defaultproxy.whatever.com
+# http-proxy-port = 7000
+# http-proxy-username = defaultusername
+# http-proxy-password = defaultpassword
+# http-compression = no
+# No http-timeout, so just use the builtin default.
+# No neon-debug-mask, so neon debugging is disabled.
+# ssl-authority-files = /path/to/CAcert.pem;/path/to/CAcert2.pem
