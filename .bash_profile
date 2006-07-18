@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.17 12:44:24
+# Last Modified: 2006.07.18 11:19:30
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -19,19 +19,19 @@ alias work="perl -MSocket -e'socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(\"tc
 
 # Vim alias with sudo built-ins
 function o {
-	for file in $*; do
+	for file in "$@"; do
 		if [ -a "$file" -a ! -w "$file" -a ! -O "$file" ]; then
 			if [ -x "`which sudoedit`" ]; then
-				sudoedit $*
+				sudoedit "$@"
 				return
 			else
-				sudo vim $*
+				sudo vim "$@"
 				return
 			fi
 		fi
 	done
 
-	vim $*
+	vim "$@"
 }
 
 # cd alias with directory substitution and directory-for-file shortcut
@@ -64,9 +64,9 @@ function sd {
 		exit 2
 	else
 		TEMP=/tmp/tmp.$$.`basename $1`
-		svn cat $1 > $TEMP
-		vimdiff $TEMP $1
-		rm -f $TEMP
+		svn cat "$1" > "$TEMP"
+		vimdiff "$TEMP" "$1"
+		rm -f "$TEMP"
 	fi
 }
 
