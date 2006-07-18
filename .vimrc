@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.07.12 11:11:51
+" Last Modified: 2006.07.18 14:37:19
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -77,6 +77,11 @@ nnoremap <C-H> gT
 let &titlestring = hostname() . ":" . fnamemodify(expand("%:p"), ":~")
 let &titleold = hostname()
 set title
+
+" Mappings for diffmode, to take or put a change and then immediately move
+" to the next difference.
+nnoremap do do[c
+nnoremap dp dp[c
 
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
