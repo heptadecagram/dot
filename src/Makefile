@@ -6,20 +6,20 @@
 # First  Author: Liam Bryan
 # First Created: 2005.10.24 21:00:33
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.17 12:38:37
+# Last Modified: 2006.07.18 13:25:28
 
 CC = gcc
 
 BIN_PATH = ../bin/
 
-all: $(BIN_PATH)hist.rb $(BIN_PATH)differ.pl $(BIN_PATH)beeper
+all: beeper diff_tree.pl history_check.rb
 
-../bin/beeper: beeper.c
+beeper: beeper.c
 	$(CC) -O3 -o beeper beeper.c
-	mv beeper ../bin/
+	mv beeper $(HOME)/bin/
 
-../bin/differ.pl: differ.pl
-	ln -s differ.pl ../bin/differ.pl
+diff_tree.pl: differ.pl
+	ln -s $(HOME)/src/differ.pl $(HOME)/bin/diff_tree.pl
 
-../bin/hist.rb: hist.rb
-	ln -s hist.rb ../bin/hist.rb
+history_check.rb: hist.rb
+	ln -s $(HOME)/src/hist.rb $(HOME)/bin/history_check.rb
