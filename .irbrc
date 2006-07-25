@@ -1,11 +1,19 @@
 #!/usr/local/bin/ruby
+# Project  Name: None
+# File / Folder: .irbrc
+# File Language: ruby
+# Copyright (C): 2006 Liam Bryan
+# First  Author: Liam Bryan
+# First Created: 2006.03.17 20:33:27
+# Last Modifier: Liam Bryan
+# Last Modified: 2006.07.25 06:38:03
 
 IRB.conf[:AUTO_INDENT] = true
-#IRB.conf[:USE_READLINE] = true
+IRB.conf[:USE_READLINE] = true
 
-#unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
-#	IRB.conf[:LOAD_MODULES] << 'irb/completion'
-#end
+unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
+	IRB.conf[:LOAD_MODULES] << 'irb/completion'
+end
 
 class Object
 	def megaClone
