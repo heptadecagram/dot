@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.18 14:41:20
+# Last Modified: 2006.07.26 15:17:22
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -79,6 +79,17 @@ function sd {
 
 alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
+
+function ap_log {
+	if [ -e '/var/log/apache2/error.log' ]; then
+		sudo tail -f /var/log/apache2/error.log
+	elif [ -e '/usr/local/apache2/logs/error_log' ]; then
+		tail -f /usr/local/apache2/logs/error.log
+	else
+		echo "Don't know where Apache2 error log is found"
+		return 2
+	fi
+}
 
 PS1='\h:\w/ '
 
