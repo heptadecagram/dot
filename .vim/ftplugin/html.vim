@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.04.05 12:35:12
+" Last Modified: 2006.08.16 09:18:57
 
 if exists('b:loaded_html')
 	finish
@@ -38,7 +38,7 @@ imap `tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
 imap `tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
 imap `tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
 
-imap `ht <?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN""http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"><head></head><body></body></html>3nO
+imap `ht <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd"><html><head></head><body></body></html>3nO
 
 imap `ti <title></title>bba
 
