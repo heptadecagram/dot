@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.08.16 09:18:57
+" Last Modified: 2006.08.28 12:14:18
 
 if exists('b:loaded_html')
 	finish
@@ -22,8 +22,11 @@ endif
 inoremap && &amp;
 inoremap &. &hellip;
 inoremap &- &mdash;
+inoremap &/ &frasl;
 inoremap &< &lt;
 inoremap &> &gt;
+inoremap &c &copy;
+inoremap &r &reg;
 inoremap &<SPACE> &nbsp;
 
 inoremap `<CR> o
@@ -41,6 +44,7 @@ imap `tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
 imap `ht <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd"><html><head></head><body></body></html>3nO
 
 imap `ti <title></title>bba
+vmap `ti `>a</title>`<i<title>
 
 imap `sc <script type="text/javascript"><!----></script>nO
 
