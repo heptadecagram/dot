@@ -6,9 +6,9 @@
 # First  Author: Liam Bryan
 # First Created: 2006.07.20 09:19:23
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.20 09:21:23
+# Last Modified: 2006.09.01 15:24:25
 
-source .bash_profile
+source $HOME/.bash_profile
 
 if [ "$USER" = 'root' ]; then
 	PS1="root@$PS1"
