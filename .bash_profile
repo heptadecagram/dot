@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.07.31 14:48:04
+# Last Modified: 2006.09.04 20:26:23
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -98,6 +98,8 @@ export VISUAL='vim'
 export PAGER='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
+
+complete -A command man
 
 if [ -a "${HOME}/.bash_local" ]
 then
