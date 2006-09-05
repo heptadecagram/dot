@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.04 20:26:23
+# Last Modified: 2006.09.05 12:01:44
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -99,7 +99,71 @@ export PAGER='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
+complete -A directory a
+complete -A directory cd
+complete -A command sudo
 complete -A command man
+function _svn {
+	local cur=$2
+ 	local prev=$3
+	COMPREPLY=()
+	local opts="add blame praise annotate ann cat checkout co cleanup commit ci copy cp delete del remove rm diff di export help h ? import info list ls lock log merge mkdir move mv rename ren propdel propedit propget proplist propset resolved revert status stat st switch sw unlock update up"
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+		return 0
+	fi
+
+	case "${prev}" in
+	prop* | pd | pe | pg | pl | ps)
+		opts="ignore executable externals"
+		COMPREPLY=( $(compgen -P "svn:" -W "${opts}" -- ${cur}) )
+		return 0
+		;;
+	add)
+		if [ "$cur" ]; then
+			opts=`svn status ${cur}* 2>/dev/null | grep ^? | sed s/\?[[:space:]]*//`
+		else
+			opts=`svn status 2>/dev/null | grep ^? | sed s/\?[[:space:]]*//`
+		fi
+		svn status ${cur}* 2>/dev/null >/dev/null
+		# If the directory errors on svn status, it is unversioned, so
+		# display all its contents
+		if [ $? -eq 1 ]; then
+			COMPREPLY=( $(compgen -X ".swp" -f "${cur}") )
+		# If nothing is returned, there is nothing to add.  Stop.
+		elif [ -z "$opts" ]; then
+			COMPREPLY=()
+		# If something is returned, this is a repository, and show the new files
+		else
+			COMPREPLY=( $(compgen -X ".svn" -W "${opts}") )
+		fi
+		return 0
+		;;
+	ci | commit)
+		if [ "$cur" ]; then
+			opts=`svn status ${cur}* 2>/dev/null | grep ^M | sed s/M[[:space:]]*//`
+		else
+			opts=`svn status 2>/dev/null | grep ^M | sed s/M[[:space:]]*//`
+		fi
+		# If nothing is returned, there is nothing to commit.  Stop.
+		if [ -z "$opts" ]; then
+			COMPREPLY=()
+		else
+			COMPREPLY=( $(compgen -X ".svn" -W "${opts}") )
+		fi
+		return 0
+		;;
+	? | h | help)
+		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+		return 0
+		;;
+	esac
+
+	COMPREPLY=( $(compgen -X ".svn" -f ${cur}) )
+}
+complete -o filenames -F _svn svn
+complete -o filenames -F _svn s
 
 if [ -a "${HOME}/.bash_local" ]
 then
