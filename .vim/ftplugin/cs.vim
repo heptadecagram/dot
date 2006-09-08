@@ -1,16 +1,18 @@
-" 
+"
 " Project  Name: None
 " File / Folder: .vim\ftplugin\cs.vim
 " File Language: vim
 " Copyright (C): 2006 Richard Group, Inc.
 " First  Author: Liam Bryan
-" First Created: 2006.02.28 
+" First Created: 2006.02.28
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.03.01 09:10:27
+" Last Modified: 2006.09.07 08:35:17
 
 nmap <silent> lf :call CSharpFunctionList()<CR>
 
 nmap <silent> gd "lyiw :call CSharp_gd(@l)<CR>
+
+let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 
 function! CSharp_gd(word)
 	call search('\%(unsafe \)\?\%(\%(public\|internal\|private\|protected\%( internal\)\?\) \)\%(\%(\%(sealed \|abstract \)\?override \)\|\%(new \)\?\%(virtual\|abstract\|static\%( extern\)\? \)\?\)\?\%(void\|\w\+\) ' . a:word . ' \?([^)]*) \?{', 'b')
@@ -29,7 +31,7 @@ function! CSharpFunctionList()
 	while search('\%(unsafe \)\?\%(\%(public\|internal\|private\|protected\%( internal\)\?\) \)\%(\%(\%(sealed \|abstract \)\?override \)\|\%(new \)\?\%(virtual\|abstract\|static\%( extern\)\? \)\?\)\?\%(void\|\w\+\) \(\w\+\) \?([^)]*) \?{', 'W')
 		normal $F)%b"ryiw
 		if @r == '{'
-			continue 
+			continue
 		endif
 		wincmd j
 		call append('$', @r)
