@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.07 09:52:41
+# Last Modified: 2006.09.12 12:09:17
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -185,8 +185,7 @@ function _ssh {
 
 # This function expands tildes in pathnames
 #
-_expand()
-{
+function _expand {
 	[ "$cur" != "${cur%\\}" ] && cur="$cur\\"
 
 	# expand ~username type directory specifications
@@ -204,8 +203,7 @@ _expand()
 # If passed -d, it completes only on directories. If passed anything else,
 # it's assumed to be a file glob to complete on.
 #
-_filedir()
-{
+function _filedir {
 	local IFS=$'\t\n' xspec #glob
 
 	_expand || return 0
