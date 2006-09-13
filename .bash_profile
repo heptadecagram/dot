@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.12 12:09:17
+# Last Modified: 2006.09.13 08:03:02
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -100,7 +100,7 @@ export PAGER='less'
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
 complete -A directory a cd
-complete -A command man
+complete -A command man which
 function _svn {
 	local cur=$2
  	local prev=$3
@@ -138,9 +138,9 @@ function _svn {
 		;;
 	ci | commit)
 		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^M | sed s/M[[:space:]]*//`
+			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | sed s/[AM][[:space:]]*//`
 		else
-			opts=`svn status 2>/dev/null | grep ^M | sed s/M[[:space:]]*//`
+			opts=`svn status 2>/dev/null | grep ^[AM] | sed s/[AM][[:space:]]*//`
 		fi
 		# If nothing is returned, there is nothing to commit.  Stop.
 		if [ -z "$opts" ]; then
@@ -178,10 +178,6 @@ function _svn {
 	COMPREPLY=( $(compgen -X ".svn" -f ${cur}) )
 }
 complete -o filenames -F _svn svn s
-
-function _ssh {
-	return 0
-}
 
 # This function expands tildes in pathnames
 #
@@ -228,8 +224,7 @@ function _filedir {
 # completion definition - currently not quite foolproof (e.g. mount and umount
 # don't work properly), but still quite useful.
 #
-_command()
-{
+function _command {
 	local cur func cline cspec noglob cmd done i \
 	      _COMMAND_FUNC _COMMAND_FUNC_ARGS
 
@@ -309,8 +304,7 @@ _command()
 complete -F _command nohup exec nice eval strace time ltrace then \
 	else do command xargs
 
-_root_command()
-{
+function _root_command {
 	PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin _command $1 $2 $3
 }
 complete -F _root_command sudo fakeroot really
