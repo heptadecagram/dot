@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.13 08:03:02
+# Last Modified: 2006.09.15 15:20:08
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -14,8 +14,24 @@ export COPYRIGHT='Liam Bryan'
 alias ls='ls -FG'
 alias grep='grep --color'
 
+alias n='ls'
+alias nn='ls -lA'
+alias s='svn'
+alias oo='vimdiff'
+
 alias home='ssh home'
 alias work='perl -MSocket -e"socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(q(tcp)));connect(SOCK,sockaddr_in(80,inet_aton(q(files.richard-group.com))))or die\$!;syswrite(SOCK,qq(GET /open/barley HTTP/1.0\\n\\n),27);"&& ssh work'
+
+alias perl="perl -I${HOME}/src"
+alias ri='ri -Tf ansi'
+
+PS1='\h:\w/ '
+
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
 # Vim alias with sudo built-ins
 function o {
@@ -53,11 +69,7 @@ function a {
 	fi
 }
 
-alias n='ls'
-alias nn='ls -lA'
-alias s='svn'
-alias oo='vimdiff'
-
+# SVN diff, loads changed version alongside current in vimdiff
 function sd {
 	if [ $# != 1 ]; then
 		echo "Usage: sd <file>"
@@ -77,9 +89,7 @@ function sd {
 	fi
 }
 
-alias perl="perl -I${HOME}/src"
-alias ri='ri -Tf ansi'
-
+# Apache error log
 function ap_log {
 	if [ -e '/var/log/apache2/error.log' ]; then
 		sudo tail -f /var/log/apache2/error.log
@@ -91,13 +101,7 @@ function ap_log {
 	fi
 }
 
-PS1='\h:\w/ '
-
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
+# Completion functions
 
 complete -A directory a cd
 complete -A command man which
@@ -105,7 +109,7 @@ function _svn {
 	local cur=$2
  	local prev=$3
 	local opts="add blame praise annotate ann cat checkout co cleanup commit ci
-	copy cp delete del remove rm diff di export help h ? import info list ls
+	copy cp delete del remove rm diff di export help h \? import info list ls
 	lock log merge mkdir move mv rename ren propdel propedit propget proplist
 	propset resolved revert status stat st switch sw unlock update up"
 	COMPREPLY=()
@@ -138,9 +142,9 @@ function _svn {
 		;;
 	ci | commit)
 		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | sed s/[AM][[:space:]]*//`
+			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | sed s/^[AM[:space:]]*[[:space:]]//`
 		else
-			opts=`svn status 2>/dev/null | grep ^[AM] | sed s/[AM][[:space:]]*//`
+			opts=`svn status 2>/dev/null | grep ^[AM] | sed s/^[AM[:space:]]*[[:space:]]//`
 		fi
 		# If nothing is returned, there is nothing to commit.  Stop.
 		if [ -z "$opts" ]; then
@@ -169,7 +173,7 @@ function _svn {
 		fi
 		return 0
 		;;
-	? | h | help)
+	'\?' | h | help)
 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 		return 0
 		;;
@@ -301,13 +305,16 @@ function _command {
 
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
-complete -F _command nohup exec nice eval strace time ltrace then \
-	else do command xargs
+complete -F _command nohup exec nice eval strace time ltrace then else do command xargs
 
 function _root_command {
 	PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin _command $1 $2 $3
 }
-complete -F _root_command sudo fakeroot really
+complete -F _root_command sudo
+
+if [ -x "`which tabs`" ]; then
+	tabs -2
+fi
 
 if [ -a "${HOME}/.bash_local" ]; then
 	source ~/.bash_local
