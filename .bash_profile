@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.15 15:20:08
+# Last Modified: 2006.09.25 07:54:38
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -311,10 +311,6 @@ function _root_command {
 	PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin _command $1 $2 $3
 }
 complete -F _root_command sudo
-
-if [ -x "`which tabs`" ]; then
-	tabs -2
-fi
 
 if [ -a "${HOME}/.bash_local" ]; then
 	source ~/.bash_local
