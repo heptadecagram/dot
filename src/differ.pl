@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.03.16 14:48:20
 # Last Modifier: Liam Bryan
-# Last Modified: 2005.11.09 15:45:25
+# Last Modified: 2006.10.27 13:06:45
 
 use strict;
 use warnings;
@@ -36,7 +36,7 @@ sub GetAllFiles {
 	return @File_List;
 }
 
-my @Files = GetAllFiles($Directory);
+my @Files = map { s/$Directory\///; $_; } GetAllFiles($Directory);
 
 my $md5 = 'md5';
 eval {
@@ -49,9 +49,9 @@ my @Missing = grep {
 
 my @Different = grep {
 	if(-e "$Other/$_") {
-		my $This = `$md5 $_`;
+		my $This = `$md5 $Directory/$_`;
 		my $That = `$md5 $Other/$_`;
-		$This =~ s/$_//;
+		$This =~ s/$Directory\/$_//;
 		$That =~ s/$Other\/$_//;
 		$This ne $That;
 	}
