@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.09.25 07:54:38
+# Last Modified: 2006.11.10 08:35:29
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -104,7 +104,7 @@ function ap_log {
 # Completion functions
 
 complete -A directory a cd
-complete -A command man which
+complete -A command man which sudo
 function _svn {
 	local cur=$2
  	local prev=$3
@@ -306,11 +306,6 @@ function _command {
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
 complete -F _command nohup exec nice eval strace time ltrace then else do command xargs
-
-function _root_command {
-	PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin _command $1 $2 $3
-}
-complete -F _root_command sudo
 
 if [ -a "${HOME}/.bash_local" ]; then
 	source ~/.bash_local
