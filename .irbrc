@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.08.31 15:32:01
+# Last Modified: 2006.10.17 07:31:04
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -14,6 +14,8 @@ IRB.conf[:USE_READLINE] = true
 unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 	IRB.conf[:LOAD_MODULES] << 'irb/completion'
 end
+
+IRB.conf[:LOAD_MODULES] << 'net/http'
 
 class Object
 	def what?(*a)

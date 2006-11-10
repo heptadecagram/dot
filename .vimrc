@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.07.18 14:37:19
+" Last Modified: 2006.11.08 14:30:00
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -120,6 +120,11 @@ function UpdateFileLastModified()
 endfunction
 
 function CreateFileHeader()
+	" Autodetect the path if it is not set
+	if filereadable(".svn/entries") && !exists('g:Project_Path')
+		let g:Project_Path = substitute(getcwd(), substitute(substitute(system('grep url= .svn/entries | sed s/\ \ \ url=\"//'), '"\n', '', ''), substitute(system('grep repos= .svn/entries | sed s/\ \ \ repos=\"//'), '"\n', '', '') . '/', '', ''), '', '')
+	endif
+
 	execute 'normal aProject  Name: ' .
 				\ (exists('g:Project_Name') ? g:Project_Name : 'None') . '' .
 				\ 'File / Folder: ' .
