@@ -1,4 +1,4 @@
-" 
+"
 " Project  Name: Vim Settings
 " File / Folder: .vim/ftplugin/sql.vim
 " File Language: vim
@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.12.10 10:46:28
 " Last Modifier: Liam Bryan
-" Last Modified: 2005.08.26 09:54:50
+" Last Modified: 2007.01.06 12:41:57
 
 set formatoptions+=or
 
@@ -21,6 +21,16 @@ function! SQL_gd(word)
 	call search('\cCREATE TABLE ' . a:word, 'b')
 endfunction
 
+setlocal omnifunc=sqlcomplete#Complete
+function! TabComplete()
+	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+		return "\<Tab>"
+	else
+		return "\<C-X>\<C-O>"
+	endif
+endfunction
+inoremap <Tab> <C-R>=TabComplete()<CR>
+
 nmap <silent> lf :call SQLFunctionList()<CR>
 
 function! SQLFunctionList()
@@ -34,9 +44,9 @@ function! SQLFunctionList()
 	call setline('.', '# Table List')
 	wincmd k
 	while search('\<\cCREATE TABLE\s\+', 'W')
-		normal ww"ryf 
+		normal ww"ryf
 		if @r == '{'
-			continue 
+			continue
 		endif
 		wincmd j
 		call append('$', @r)
