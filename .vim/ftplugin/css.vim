@@ -6,18 +6,18 @@
 " First  Author: Liam Bryan
 " First Created: 2005.09.29 18:42:16
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.01.08 07:24:44
+" Last Modified: 2007.01.08 09:03:15
 
 " Set 'comments' to format dashed lists in comments.
 setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/
 
 setlocal formatoptions+=o
 
-if has('omnifunc')
+if exists('+omnifunc')
 	setlocal omnifunc=csscomplete#CompleteCSS
 
 	function! TabComplete()
-		if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+		if strpart(getline('.'), 0, col('.') - 1) =~ /^\s*$/
 			return "\<Tab>"
 		else
 			return "\<C-X>\<C-O>"
