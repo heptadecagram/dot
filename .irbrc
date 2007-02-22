@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.10.17 07:31:04
+# Last Modified: 2007.01.18 13:50:30
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -16,6 +16,14 @@ unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'
+
+def get_url(url)
+	url =~ %r{http://([^/]+)(.*/)([^/]+)}
+	Net::HTTP.start($1) do |http|
+		resp = http.get($2 + $3)
+		open($3, "w") { |file| file.write(resp.body) }
+	end
+end
 
 class Object
 	def what?(*a)
