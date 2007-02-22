@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2006.11.08 14:30:00
+" Last Modified: 2007.01.18 13:50:14
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -39,6 +39,7 @@ set incsearch		" do incremental searching
 set background=light
 
 set nojoinspaces
+highlight MatchParen ctermbg=DarkBlue
 
 " Dvorak
 noremap t j
