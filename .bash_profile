@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.11.10 08:35:29
+# Last Modified: 2007.02.22 07:06:47
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -84,7 +84,7 @@ function sd {
 		TEMP=/tmp/tmp.$$.`basename $1`
 		cat "$1" > "$TEMP"
 		svn diff "$1" | patch -R "$TEMP" >/dev/null
-		vimdiff -c "wincmd l" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
+		vimdiff -c "wincmd l" -c "set readonly" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
 		rm -f "$TEMP"
 	fi
 }
