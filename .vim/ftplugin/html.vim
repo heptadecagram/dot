@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.01.08 07:05:41
+" Last Modified: 2007.03.13 20:13:05
 
 if exists('b:loaded_html')
 	finish
@@ -74,8 +74,8 @@ imap `fe <select name=""></select>Bbsa
 imap `fo <option value="">OPTION</option>Bwsa
 vmap `fo `>a</option>`<i<option value="">Bwsa
 
-imap `ft <input name="" value="" size="16" maxlength="16"/>B`n a
-vmap `ft `>a" size="16" maxlength="16"/>`<i<input name="" value="`n a
+imap `ft <input name="" value="" maxlength="255"/>B`n a
+vmap `ft `>a" maxlength="255"/>`<i<input name="" value="`n a
 
 imap `fh <input type="hidden" name="" value=""/>B`n a
 imap `fs <input type="submit" value=""/>hhi
@@ -83,7 +83,7 @@ imap `fr <input type="radio" name="" value=""/>B`n a
 imap `fc <input type="checkbox" name="" value=""/>B`n a
 imap `fb <input type="button" name="" value=""/>B`n a
 imap `fx <textarea rows="6" cols="60"></textarea>bhhi
-imap `fp <input type="password" name="" value="" size="16" maxlength="16"/>B`n a
+imap `fp <input type="password" name="" value="" maxlength="255"/>B`n a
 
 imap `im <img src="" alt=""/>Bhhi
 
@@ -122,6 +122,9 @@ vmap `em `>a</em>`<i<em>
 imap `sp <span></span>bba
 vmap `sp `>a</span>`<i<span>
 
+imap `ci <cite></cite>bba
+vmap `ci `>a</cite>`<i<cite>
+
 imap `hr <hr/>
 imap `br <br/>
 
@@ -134,11 +137,15 @@ vmap `td `>a</td>`<i<td>
 imap `th <th></th>bhhi
 
 function! FindCurrentTag()
+	call search('<\|>', 'b')
 	call searchpair('<', '', '>', 'b')
 	call search('\S')
 	normal "lyw
 	return @l
 endfunction
+
+imap `i<SPACE> :silent call HTMLAttribute('id')<CR>
+nmap `i<SPACE> :silent call HTMLAttribute('id')<CR>
 
 imap `a<SPACE> :silent call HTMLAttribute('alt')<CR>
 nmap `a<SPACE> :silent call HTMLAttribute('alt')<CR>
@@ -152,8 +159,8 @@ nmap `n<SPACE> :silent call HTMLAttribute('name')<CR>
 imap `v<SPACE> :silent call HTMLAttribute('value')<CR>
 nmap `v<SPACE> :silent call HTMLAttribute('value')<CR>
 
-imap `s<SPACE> :silent call HTMLAttribute('size')<CR>
-nmap `s<SPACE> :silent call HTMLAttribute('size')<CR>
+imap `s<SPACE> :silent call HTMLAttribute('src')<CR>
+nmap `s<SPACE> :silent call HTMLAttribute('src')<CR>
 
 imap `c<SPACE> :silent call HTMLAttribute('class')<CR>
 nmap `c<SPACE> :silent call HTMLAttribute('class')<CR>
@@ -161,10 +168,13 @@ nmap `c<SPACE> :silent call HTMLAttribute('class')<CR>
 imap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 nmap `e<SPACE> :silent call HTMLAttribute('escape')<CR>
 
+imap `y<SPACE> :silent call HTMLAttribute('style')<CR>
+nmap `y<SPACE> :silent call HTMLAttribute('style')<CR>
+
 function! HTMLAttribute(attribute)
 	let Current_Tag = FindCurrentTag()
 	call searchpair('<', a:attribute, '/\=>')
-	normal "ly
+	normal "lyl
 	if getreg('l') == '>' || getreg('l') == '/'
 		if Current_Tag == '!-- '
 			normal bh
