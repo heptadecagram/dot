@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.04.11 15:16:36
+# Last Modified: 2007.04.11 18:42:46
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -16,6 +16,9 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 	IRB.conf[:LOAD_MODULES] << 'irb/completion'
+end
+unless IRB.conf[:LOAD_MODULES].include?('irb/ext/save-history')
+	IRB.conf[:LOAD_MODULES] << 'irb/ext/save-history'
 end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'

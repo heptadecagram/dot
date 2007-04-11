@@ -6,10 +6,11 @@
 # First  Author: Liam Bryan
 # First Created: 2005.07.08 10:18:44
 # Last Modifier: Liam Bryan
-# Last Modified: 2006.03.10 15:08:34
+# Last Modified: 2007.03.15 12:54:41
 
 #set editing-mode vi
 "\C-b"	backward-word
+"\C-Rubout"	backward-kill-word
 "\C-f"	forward-word
 "\C-x\C-["	start-kbd-macro
 "\C-x\C-]"	end-kbd-macro
