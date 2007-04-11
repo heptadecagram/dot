@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.02.22 07:06:47
+# Last Modified: 2007.03.14 20:54:01
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -122,9 +122,9 @@ function _svn {
 	case "${prev}" in
 	add)
 		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^? | sed s/\?[[:space:]]*//`
+			opts=`svn status ${cur}* 2>/dev/null | grep ^? | cut -c 8-200`
 		else
-			opts=`svn status 2>/dev/null | grep ^? | sed s/\?[[:space:]]*//`
+			opts=`svn status 2>/dev/null | grep ^? | cut -c 8-200`
 		fi
 		svn status ${cur}* 2>/dev/null >/dev/null
 		# If the directory errors on svn status, it is unversioned, so
@@ -142,9 +142,9 @@ function _svn {
 		;;
 	ci | commit)
 		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | sed s/^[AM[:space:]]*[[:space:]]//`
+			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | cut -c 8-200`
 		else
-			opts=`svn status 2>/dev/null | grep ^[AM] | sed s/^[AM[:space:]]*[[:space:]]//`
+			opts=`svn status 2>/dev/null | grep ^[AM] | cut -c 8-200`
 		fi
 		# If nothing is returned, there is nothing to commit.  Stop.
 		if [ -z "$opts" ]; then
@@ -161,9 +161,9 @@ function _svn {
 		;;
 	resolved)
 		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^C | sed s/C[[:space:]]*//`
+			opts=`svn status ${cur}* 2>/dev/null | grep ^C | cut -c 8-200`
 		else
-			opts=`svn status 2>/dev/null | grep ^C | sed s/C[[:space:]]*//`
+			opts=`svn status 2>/dev/null | grep ^C | cut -c 8-200`
 		fi
 		# If nothing is returned, there is nothing to commit.  Stop.
 		if [ -z "$opts" ]; then
