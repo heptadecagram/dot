@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.04.11 13:45:56
+# Last Modified: 2007.04.11 15:16:36
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -33,42 +33,57 @@ module Enumerable
 	def size
 		inject(0) { |size, k| size + 1 }
 	end
-	alias :mean, :arithmetic_mean
 	def arithmetic_mean
-		inject{|sum,k| sum + k} / size.to_f
+		sum / size.to_f
 	end
+	alias_method :mean, :arithmetic_mean
 	def harmonic_mean
-		size / inject(0) { |sum, n| sum += 1.0/n }
+		size / sum { |n| 1.0/n }
 	end
 	def quadratic_mean
-		Math.sqrt(inject(0) { |product, n| product + n**2 } / size)
+		Math.sqrt(sum { |n| n**2 } / size)
 	end
 	def geometric_mean
 		inject { |product, n| product * n } ** (1.0/size)
 	end
 	def standard_deviation
-		Math.sqrt(inject(0) { |sum, n| sum + (n - mean)**2 } / size)
+		Math.sqrt(variance)
 	end
 	def sample_standard_deviation
 		size * standard_deviation / (size - 1)
 	end
 	def geometric_standard_deviation
-		Math.exp(Math.sqrt(inject(0) { |sum, n| sum + (Math.log(n) - Math.log(geometric_mean) )**2 } / size) )
+		mean_log = Math.log(geometric_mean)
+		Math.exp(Math.sqrt(sum { |n| (Math.log(n) - mean_log)**2 } / size) )
 	end
 	def variance
-		standard_deviation**2
+		sum { |n| (n - mean)**2 } / size
+	end
+	def kurtosis
+		sum { |n| ( (n - mean) / standard_deviation)**4 } / size - 3
 	end
 	def median
 		if self.size % 2 == 1
 			self.sort[self.size/2]
 		else
-			self.sort[self.size/2-1, 2].inject {|sum,k| sum+k}/2.0
+			self.sort[self.size/2-1, 2].sum / 2.0
 		end
 	end
 	def mode
 		stats = Hash.new(0)
 		self.each { |item| stats[item] += 1 }
 		stats.select { |item, times| times == stats.values.max }.map {|k| k[0] }
+	end
+	def midrange
+		(max + min) / 2.0
+	end
+
+	def sum
+		if block_given?
+			inject(0) { |sum, n| sum + yield(n) }
+		else
+			inject { |sum, n| sum + n }
+		end
 	end
 end
 
