@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.03.13 20:13:05
+" Last Modified: 2007.05.04 14:49:01
 
 if exists('b:loaded_html')
 	finish
@@ -34,12 +34,12 @@ inoremap `<CR> o
 imap `cm <!--  -->bhi
 vmap `cm `>a -->`<i<!--
 
-imap `tv <!-- tmpl_var name="" -->bhhi
-imap `tn <!-- tmpl_include name="" -->bhhi
-imap `te <!-- tmpl_else -->
-imap `tf <!-- tmpl_if name="" --><!-- /tmpl_if -->4Bhhi
-imap `tu <!-- tmpl_unless name="" --><!-- /tmpl_unless -->4Bhhi
-imap `tl <!-- tmpl_loop name="" --><!-- /tmpl_loop -->4Bhhi
+imap `tv <tmpl_var name="">hi
+imap `tn <tmpl_include name="">hi
+imap `te <tmpl_else>
+imap `tf <tmpl_if name=""></tmpl_if>Bbsa
+imap `tu <tmpl_unless name=""></tmpl_unless>Bbsa
+imap `tl <tmpl_loop name=""></tmpl_loop>Bbsa
 
 imap `ht <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd"><html><head></head><body></body></html>3nO
 
