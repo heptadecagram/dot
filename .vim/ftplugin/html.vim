@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.05.04 14:49:01
+" Last Modified: 2007.05.05 08:24:56
 
 if exists('b:loaded_html')
 	finish
@@ -187,33 +187,19 @@ function! HTMLAttribute(attribute)
 	endif
 endfunction
 
-map <F8> :call JavaScriptImageSource()<LEFT>
-function! JavaScriptImageSource(...)
-  let idx = 1
-  while idx <= a:0
-    execute "normal o" . a:{idx} . " = new Image();" . a:{idx} .
-          \ ".src = '/images/" . a:{idx} . ".gif';"
-    execute "normal o" . a:{idx} . "over = new Image();" . a:{idx} .
-          \ "over.src = '/images/" . a:{idx} . "over.gif';"
-    let idx = idx + 1
-  endwhile
+function! Lisp2HTML()
+	call searchpair('(', '', ')', 'b')
+	normal s"lyw aoeu
+	if getreg('l') == 'doctype'
+		normal! w"lyt hl
+		if getreg('l') == '4.01'
+			insert
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+.
+		endif
+	endif
 endfunction
 
-function! WriteSizes(name, width, height)
-  execute "normal /" . a:name . "/width/"a" . a:width .
-        \ "/height/"a" . a:height . "^n"
-endfunction
-
-" HTML helper macro
-map <F3> :call RolloverMaker('', '')<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
-function! RolloverMaker(a_href, img_name)
-    execute 'normal I<a href="' . a:a_href .  '"onMouseOver = "' .
-          \ "changeImages('" . a:img_name . "', '" .  a:img_name . "over')" .
-          \ '"onMouseOut = "' . "changeImages('" .  a:img_name . "', '" .
-          \ a:img_name . "')" . '"><img src="/images/' . a:img_name .
-          \ '.gif" name="' . a:img_name . '"border="0" width="" height=""/>' .
-          \ '</a>n^'
-endfunction
 
 " HTML helper macros
 map <F2> :call TableMaker()<LEFT>
