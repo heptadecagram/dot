@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.04.11 18:42:46
+# Last Modified: 2007.04.20 18:34:12
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -23,6 +23,7 @@ end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'
 
+class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
 
 def get_url(url)
 	url =~ %r{http://([^/]+)(.*/)([^/]+)}
@@ -66,15 +67,15 @@ module Enumerable
 		sum { |n| ( (n - mean) / standard_deviation)**4 } / size - 3
 	end
 	def median
-		if self.size % 2 == 1
-			self.sort[self.size/2]
+		if size % 2 == 1
+			sort[size/2]
 		else
-			self.sort[self.size/2-1, 2].sum / 2.0
+			sort[size/2-1, 2].sum / 2.0
 		end
 	end
 	def mode
 		stats = Hash.new(0)
-		self.each { |item| stats[item] += 1 }
+		each { |item| stats[item] += 1 }
 		stats.select { |item, times| times == stats.values.max }.map {|k| k[0] }
 	end
 	def midrange
