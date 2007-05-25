@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.05.05 08:24:56
+" Last Modified: 2007.05.08 14:05:33
 
 if exists('b:loaded_html')
 	finish
@@ -89,9 +89,9 @@ imap `im <img src="" alt=""/>Bhhi
 
 imap `ol <ol></ol>O
 imap `ul <ul></ul>O
+imap `dl <dl></dl>O
 imap `li <li></li>bba
 vmap `li `>a</li>`<i<li>
-imap `dl <dl></dl>O
 imap `dt <dt></dt>bba
 imap `dd <dd></dd>bba
 
@@ -106,7 +106,6 @@ vmap `aa `>a</a>`<i<a href="">hi
 
 imap `bb <b></b>bba
 vmap `bb `>a</b>`<i<b>
-
 imap `ii <i></i>bba
 vmap `ii `>a</i>`<i<i>
 

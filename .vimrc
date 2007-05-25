@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.02.27 14:02:57
+" Last Modified: 2007.05.25 13:16:20
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -167,7 +167,7 @@ function NewProgramHeader()
 	call CreateFileHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
-		normal o/
+		normal no/t
 	endif
 	if &syntax == 'ruby'
 		1substitute'.*'#!/usr/local/bin/ruby'
