@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.04.25 07:44:45
+# Last Modified: 2007.05.15 10:59:45
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -16,6 +16,7 @@ alias grep='grep --color'
 
 alias n='ls'
 alias nn='ls -lA'
+alias N='ls -la'
 alias s='svn'
 alias oo='vimdiff'
 
@@ -182,6 +183,15 @@ function _svn {
 	COMPREPLY=( $(compgen -X ".svn" -f ${cur}) )
 }
 complete -o filenames -F _svn svn s
+
+function _ssh {
+	local cur=$2
+	local opts=`sed -ne's/\*//;s/Host //p' ~/.ssh/config`
+
+	COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+complete -F _ssh ssh
+
 
 # This function expands tildes in pathnames
 #

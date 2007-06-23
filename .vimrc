@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.05.25 13:16:20
+" Last Modified: 2007.06.21 12:42:33
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -124,7 +124,8 @@ endfunction
 function CreateFileHeader()
 	" Autodetect the path if it is not set
 	if filereadable(".svn/entries") && !exists('g:Project_Path')
-		let g:Project_Path = substitute(getcwd(), substitute(substitute(system('grep url= .svn/entries | sed s/\ \ \ url=\"//'), '"\n', '', ''), substitute(system('grep repos= .svn/entries | sed s/\ \ \ repos=\"//'), '"\n', '', '') . '/', '', ''), '', '')
+		let g:Project_Name = substitute(system("svn info | sed -n '/^Repository Root/s#.*/\\([^/]*\\)$#\\1#p'"), "\n", '', '')
+		let g:Project_Path = substitute(expand("%:p:h"), substitute(substitute(system('grep url= .svn/entries | sed s/\ \ \ url=\"//'), '"\n', '', ''), substitute(system('grep repos= .svn/entries | sed s/\ \ \ repos=\"//'), '"\n', '', '') . '/', '', ''), '', '')
 	endif
 
 	execute 'normal aProject  Name: ' .
@@ -168,6 +169,9 @@ function NewProgramHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
 		normal no/t
+	endif
+	if &syntax == 'python'
+		1substitute'.*'#!/usr/local/bin/python'
 	endif
 	if &syntax == 'ruby'
 		1substitute'.*'#!/usr/local/bin/ruby'
