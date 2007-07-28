@@ -6,24 +6,25 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.04.20 18:34:12
+# Last Modified: 2007.07.27 07:31:04
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
-
-IRB.conf[:SAVE_HISTORY] = 200
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+#IRB.conf[:MATH_MODE] = true
 
 unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 	IRB.conf[:LOAD_MODULES] << 'irb/completion'
 end
 unless IRB.conf[:LOAD_MODULES].include?('irb/ext/save-history')
-	IRB.conf[:LOAD_MODULES] << 'irb/ext/save-history'
+	if File.exist? IRB.conf[:IRB_LIB_PATH] + '/ext/save-history'
+		IRB.conf[:LOAD_MODULES] << 'irb/ext/save-history'
+
+		IRB.conf[:SAVE_HISTORY] = 200
+		IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+	end
 end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'
-
-class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
 
 def get_url(url)
 	url =~ %r{http://([^/]+)(.*/)([^/]+)}
@@ -33,6 +34,8 @@ def get_url(url)
 	end
 end
 
+class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
+
 module Enumerable
 	def size
 		inject(0) { |size, k| size + 1 }
@@ -40,7 +43,8 @@ module Enumerable
 	def arithmetic_mean
 		sum / size.to_f
 	end
-	alias_method :mean, :arithmetic_mean
+	alias :mean :arithmetic_mean
+
 	def harmonic_mean
 		size / sum { |n| 1.0/n }
 	end
@@ -49,6 +53,10 @@ module Enumerable
 	end
 	def geometric_mean
 		inject { |product, n| product * n } ** (1.0/size)
+	end
+
+	def variance
+		sum { |n| (n - mean)**2 } / size
 	end
 	def standard_deviation
 		Math.sqrt(variance)
@@ -60,12 +68,14 @@ module Enumerable
 		mean_log = Math.log(geometric_mean)
 		Math.exp(Math.sqrt(sum { |n| (Math.log(n) - mean_log)**2 } / size) )
 	end
-	def variance
-		sum { |n| (n - mean)**2 } / size
-	end
 	def kurtosis
-		sum { |n| ( (n - mean) / standard_deviation)**4 } / size - 3
+		sum { |n| (n - mean)**4 } / size / variance**2 - 3
 	end
+
+	def skewness
+		sum { |n| (n - mean)**3 } / standard_deviation**3 / size
+	end
+
 	def median
 		if size % 2 == 1
 			sort[size/2]
@@ -73,11 +83,35 @@ module Enumerable
 			sort[size/2-1, 2].sum / 2.0
 		end
 	end
+	alias :second_quartile :median
+	alias :q2 :median
+
+	def first_quartile
+		sort[0 ... size/2].median
+	end
+	alias :q1 :first_quartile
+	def third_quartile
+		sort[(size + 1)/2 .. -1].median
+	end
+	alias :q3 :third_quartile
+
+	def interquartile_range
+		q3 - q1
+	end
+	alias :iqr :interquartile_range
+
+	def outliers
+		select do |k|
+			k > q3 + 1.5*iqr || k < q1 - 1.5*iqr
+		end
+	end
+
 	def mode
 		stats = Hash.new(0)
 		each { |item| stats[item] += 1 }
 		stats.select { |item, times| times == stats.values.max }.map {|k| k[0] }
 	end
+
 	def midrange
 		(max + min) / 2.0
 	end
