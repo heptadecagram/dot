@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.07.27 07:31:04
+# Last Modified: 2007.12.07 08:42:05
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -25,6 +25,8 @@ unless IRB.conf[:LOAD_MODULES].include?('irb/ext/save-history')
 end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'
+IRB.conf[:LOAD_MODULES] << 'tempfile'
+#IRB.conf[:LOAD_MODULES] << 'statistics'
 
 def get_url(url)
 	url =~ %r{http://([^/]+)(.*/)([^/]+)}
@@ -34,96 +36,18 @@ def get_url(url)
 	end
 end
 
-class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
-
-module Enumerable
-	def size
-		inject(0) { |size, k| size + 1 }
-	end
-	def arithmetic_mean
-		sum / size.to_f
-	end
-	alias :mean :arithmetic_mean
-
-	def harmonic_mean
-		size / sum { |n| 1.0/n }
-	end
-	def quadratic_mean
-		Math.sqrt(sum { |n| n**2 } / size)
-	end
-	def geometric_mean
-		inject { |product, n| product * n } ** (1.0/size)
-	end
-
-	def variance
-		sum { |n| (n - mean)**2 } / size
-	end
-	def standard_deviation
-		Math.sqrt(variance)
-	end
-	def sample_standard_deviation
-		size * standard_deviation / (size - 1)
-	end
-	def geometric_standard_deviation
-		mean_log = Math.log(geometric_mean)
-		Math.exp(Math.sqrt(sum { |n| (Math.log(n) - mean_log)**2 } / size) )
-	end
-	def kurtosis
-		sum { |n| (n - mean)**4 } / size / variance**2 - 3
-	end
-
-	def skewness
-		sum { |n| (n - mean)**3 } / standard_deviation**3 / size
-	end
-
-	def median
-		if size % 2 == 1
-			sort[size/2]
-		else
-			sort[size/2-1, 2].sum / 2.0
-		end
-	end
-	alias :second_quartile :median
-	alias :q2 :median
-
-	def first_quartile
-		sort[0 ... size/2].median
-	end
-	alias :q1 :first_quartile
-	def third_quartile
-		sort[(size + 1)/2 .. -1].median
-	end
-	alias :q3 :third_quartile
-
-	def interquartile_range
-		q3 - q1
-	end
-	alias :iqr :interquartile_range
-
-	def outliers
-		select do |k|
-			k > q3 + 1.5*iqr || k < q1 - 1.5*iqr
-		end
-	end
-
-	def mode
-		stats = Hash.new(0)
-		each { |item| stats[item] += 1 }
-		stats.select { |item, times| times == stats.values.max }.map {|k| k[0] }
-	end
-
-	def midrange
-		(max + min) / 2.0
-	end
-
-	def sum
-		if block_given?
-			inject(0) { |sum, n| sum + yield(n) }
-		else
-			inject { |sum, n| sum + n }
-		end
-	end
+def editor
+	file = Tempfile.new("irb")
+	system("vim #{file.path}")
+	file.open
+	eval(file.readlines.join('') )
+	file.unlink
 end
+
+unless Symbol.instance_methods.member? 'to_proc'
+	class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
+end
+
 
 class Integer
 	def P(size)
