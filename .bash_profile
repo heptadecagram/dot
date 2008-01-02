@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.05.15 10:59:45
+# Last Modified: 2007.08.29 11:23:53
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Bryan'
@@ -320,3 +320,13 @@ complete -F _command nohup exec nice eval strace time ltrace then else do comman
 if [ -a "${HOME}/.bash_local" ]; then
 	source ~/.bash_local
 fi
+
+function spin {
+	i=1
+	sp="/-\|"
+	echo -n ' '
+	while true; do
+		echo -en "\b${sp:i++%${#sp}:1}"
+	done
+}
+
