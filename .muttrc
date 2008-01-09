@@ -12,12 +12,18 @@
 #set folder=~/Mail		# where i keep my mailboxes
 #set spoolfile='/var/mail/liam'	# where my new mail is located
 
-set folder="imaps://liam+heptadecagram.net@heptadecagram.net/"
-set spoolfile="imaps://liam+heptadecagram.net@heptadecagram.net/inbox"
+mailboxes imaps://heptadecagram.net
+mailboxes pop://mail.wunderland.com
+
+set imap_user='liam+heptadecagram.net'
+set folder="imaps://heptadecagram.net/"
+set spoolfile="imaps://heptadecagram.net/inbox"
 set hostname="heptadecagram.net"	# my DNS domain
 
-#set pop_host='pop://liam:PASSWORD@mail.wunderland.com'
-#set pop_host='pop://liam:PASSWORD@mail.richard-group.com'
+#account-hook imaps://mail.richard-group.com 'set imap_user="liam"'
+
+set pop_user='liam'
+#set pop_host='pop://mail.wunderland.com'
 #set pop_delete=yes
 #set pop_checkinterval=90
 
@@ -190,7 +196,7 @@ color body color5 color0 [-a-z_0-9.]+@[-a-z_0-9.]+	# e-mail addresses
 #		generic		generic keymap for all of the above
 #		editor		line editor
 #		pager		text viewer
-#		
+#
 
 bind generic "\e<" first-entry	# emacs-like bindings for moving to top/bottom
 bind generic \e> last-entry
