@@ -6,21 +6,21 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.12.07 08:42:05
+# Last Modified: 2008.01.09 05:29:16
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
 #IRB.conf[:MATH_MODE] = true
 
+IRB.conf[:SAVE_HISTORY] = 200
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+
 unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 	IRB.conf[:LOAD_MODULES] << 'irb/completion'
 end
 unless IRB.conf[:LOAD_MODULES].include?('irb/ext/save-history')
-	if File.exist? IRB.conf[:IRB_LIB_PATH] + '/ext/save-history'
+	if File.exist? IRB.conf[:IRB_LIB_PATH] + '/ext/save-history.rb'
 		IRB.conf[:LOAD_MODULES] << 'irb/ext/save-history'
-
-		IRB.conf[:SAVE_HISTORY] = 200
-		IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 	end
 end
 

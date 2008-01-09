@@ -6,10 +6,12 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Bryan
-# Last Modified: 2007.08.29 11:23:53
+# Last Modified: 2008.01.09 05:30:01
 
 export TZ='America/New_York'
-export COPYRIGHT='Liam Bryan'
+export COPYRIGHT='Liam Echlin'
+
+shopt -s histappend
 
 alias ls='ls -FG'
 alias grep='grep --color'
