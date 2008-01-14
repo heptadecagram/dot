@@ -5,8 +5,8 @@
 # Copyright (C): 2004 Liam Bryan
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
-# Last Modifier: Liam Bryan
-# Last Modified: 2008.01.09 05:30:01
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.01.14 05:20:44
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'

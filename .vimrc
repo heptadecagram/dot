@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.06.21 12:42:33
+" Last Modified: 2008.01.08 09:37:11
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -117,7 +117,7 @@ autocmd BufReadPost *.t set filetype=perl
 autocmd BufReadPost /tmp/* set nobackup|set nowritebackup
 
 function UpdateFileLastModified()
-	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Bryan/
+	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Echlin/
 	8,9s/Last Modified: [^$].\+/\='Last Modified: ' . strftime('%Y.%m.%d %T')/
 endfunction
 
@@ -136,9 +136,9 @@ function CreateFileHeader()
 				\ expand('%') ) . '' .
 				\ 'File Language: ' . &syntax . '' .
 				\ 'Copyright (C): ' . strftime('%Y') . ' ' . $COPYRIGHT . '' .
-				\ 'First  Author: Liam Bryan' . '' .
+				\ 'First  Author: Liam Echlin' . '' .
 				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
-				\ 'Last Modifier: Liam Bryan' . '' .
+				\ 'Last Modifier: Liam Echlin' . '' .
 				\ 'Last Modified: ' . strftime('%Y.%m.%d %T')
   append
 
