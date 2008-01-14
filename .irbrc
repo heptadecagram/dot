@@ -5,8 +5,8 @@
 # Copyright (C): 2006 Liam Bryan
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
-# Last Modifier: Liam Bryan
-# Last Modified: 2008.01.09 05:29:16
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.01.14 12:40:04
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -26,7 +26,7 @@ end
 
 IRB.conf[:LOAD_MODULES] << 'net/http'
 IRB.conf[:LOAD_MODULES] << 'tempfile'
-#IRB.conf[:LOAD_MODULES] << 'statistics'
+IRB.conf[:LOAD_MODULES] << "#{ENV['HOME']}/src/statistics.rb"
 
 def get_url(url)
 	url =~ %r{http://([^/]+)(.*/)([^/]+)}
