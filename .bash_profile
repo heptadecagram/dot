@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.01.14 05:20:44
+# Last Modified: 2008.02.19 10:33:18
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -28,7 +28,27 @@ alias work='perl -MSocket -e"socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(q(tc
 alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
 
-PS1='\h:\w/ '
+CODE_RED=$'\[\033[0;31m\]'
+CODE_GREEN=$'\[\033[0;32m\]'
+CODE_YELL=$'\[\033[0;33m\]'
+CODE_BLUE=$'\[\033[0;34m\]'
+CODE_NORM=$'\[\033[m\]'
+PS1='\h:\w/\n'
+
+function prompt_command {
+	if [ $? -ne 0 ]; then
+		PS1="[$CODE_RED\$?$CODE_NORM]"
+	else
+		PS1=''
+	fi
+	if [ $UID -eq 0 ]; then
+		PS1="$PS1$CODE_RED\h$CODE_NORM:\w/\\n "
+	else
+		PS1="$PS1\h:\w/\\n "
+	fi
+	PS1="`svn info 2>/dev/null | sed -ne's/$/\\/\\\n/;s/URL: //p'`$PS1"
+}
+PROMPT_COMMAND="prompt_command"
 
 export EDITOR='vim'
 export VISUAL='vim'
