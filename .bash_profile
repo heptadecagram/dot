@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.02.19 13:11:04
+# Last Modified: 2008.02.20 07:23:41
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -42,11 +42,11 @@ function prompt_command {
 		PS1=''
 	fi
 	if [ $UID -eq 0 ]; then
-		PS1="$PS1$CODE_RED\h$CODE_NORM:\w/\\n "
+		PS1="$PS1$CODE_RED\h$CODE_NORM"
 	else
-		PS1="$PS1\h:\w/\\n "
+		PS1="$PS1\h"
 	fi
-	PS1="(`svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: //p'`$PS1"
+	PS1="`svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'`$PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
 
