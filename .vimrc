@@ -5,8 +5,8 @@
 " Copyright (C): 2004 Liam Bryan
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
-" Last Modifier: Liam Bryan
-" Last Modified: 2008.01.08 09:37:11
+" Last Modifier: Liam Echlin
+" Last Modified: 2008.02.28 10:02:35
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -157,6 +157,8 @@ function NewProgramHeader()
 	let s:comment = matchstr(&comments, '\(\_^\|,\):\zs[^,]\+')
 	if &syntax == 'c' || &syntax == 'css'
 		let s:comment = '/*'
+	elseif &syntax == 'python'
+		let s:comment = '#'
 	endif
 
 	if &syntax == 'html'
