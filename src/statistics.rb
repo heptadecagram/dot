@@ -5,8 +5,8 @@
 # Copyright (C): 2007 Richard Group, Inc.
 # First  Author: Liam Bryan
 # First Created: 2007.10.23 08:00:53
-# Last Modifier: Liam Bryan
-# Last Modified: 2007.10.23 08:01:22
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.03.04 13:48:35
 
 module Enumerable
 	def size
@@ -38,7 +38,20 @@ module Enumerable
 	def variance
 		return nil unless any?
 
-		sum { |n| (n - mean)**2 } / size
+		m = mean
+		sum { |n| (n - m)**2 } / size
+	end
+	def mean_absolute_deviation
+		return nil unless any?
+
+		m = mean
+		sum { |n| (n - m).abs } / size
+	end
+	def median_absolute_deviation
+		return nil unless any?
+
+		m = median
+		sum { |n| (n - m).abs } / size
 	end
 	def standard_deviation
 		return nil unless any?
@@ -59,13 +72,15 @@ module Enumerable
 	def kurtosis
 		return nil unless any?
 
-		sum { |n| (n - mean)**4 } / size / variance**2 - 3
+		m = mean
+		sum { |n| (n - m)**4 } / size / variance**2 - 3
 	end
 
 	def skewness
 		return nil unless any?
 
-		sum { |n| (n - mean)**3 } / standard_deviation**3 / size
+		m = mean
+		sum { |n| (n - m)**3 } / standard_deviation**3 / size
 	end
 
 	def median

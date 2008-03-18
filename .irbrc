@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.03.17 20:33:27
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.01.14 12:40:04
+# Last Modified: 2008.03.04 09:28:23
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
@@ -46,16 +46,6 @@ end
 
 unless Symbol.instance_methods.member? 'to_proc'
 	class Symbol;def to_proc;lambda{|*a|a.shift.__send__(self, *a)};end;end
-end
-
-
-class Integer
-	def P(size)
-		((self-size+1)..self).inject { |factorial,k| factorial*k }
-	end
-	def C(size)
-		self.P(size) / (1..size).inject { |factorial,k| factorial*k }
-	end
 end
 
 class Object
