@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.02.20 07:23:41
+# Last Modified: 2008.04.12 19:35:52
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -23,7 +23,6 @@ alias s='svn'
 alias oo='vimdiff'
 
 alias home='ssh home'
-alias work='perl -MSocket -e"socket(SOCK,PF_INET,SOCK_STREAM,getprotobyname(q(tcp)));connect(SOCK,sockaddr_in(80,inet_aton(q(files.richard-group.com))))or die\$!;syswrite(SOCK,qq(GET /open/barley HTTP/1.0\\n\\n),27);"&& ssh work'
 
 alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
@@ -112,17 +111,6 @@ function sd {
 	fi
 }
 
-# Apache error log
-function ap_log {
-	if [ -e '/var/log/apache2/error.log' ]; then
-		sudo tail -f /var/log/apache2/error.log
-	elif [ -e '/usr/local/apache2/logs/error_log' ]; then
-		tail -f /usr/local/apache2/logs/error_log
-	else
-		echo "Don't know where Apache2 error log is found"
-		return 2
-	fi
-}
 
 # Completion functions
 
