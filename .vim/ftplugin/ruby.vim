@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2005.09.04 09:10:41
 " Last Modifier: Liam Bryan
-" Last Modified: 2007.03.08 13:17:06
+" Last Modified: 2007.07.28 06:24:09
 
 
 setlocal comments=:#
@@ -15,7 +15,7 @@ setlocal formatoptions+=cr
 
 nmap <silent> gd "lyiw:call Ruby_gd(@l)<CR>
 
-setlocal omnifunc=rubycomplete#Complete
+"setlocal omnifunc=rubycomplete#Complete
 
 function! TabComplete()
 	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
