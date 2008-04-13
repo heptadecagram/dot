@@ -20,6 +20,8 @@ set folder="imaps://heptadecagram.net/"
 set spoolfile="imaps://heptadecagram.net/inbox"
 set hostname="heptadecagram.net"	# my DNS domain
 
+set certificate_file="~/.ssh/mutt_certificates"
+
 #account-hook imaps://mail.richard-group.com 'set imap_user="liam"'
 
 set pop_user='liam'
