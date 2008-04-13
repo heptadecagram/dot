@@ -4,14 +4,24 @@
 
 
 syntax cluster htmlPreproc add=htmltmpl_start,htmltmpl_end
+syntax cluster htmlPreproc add=tt_start,tt_end
+
+" Template Toolkit
+syntax region tt_start keepend matchgroup=Delimiter
+			\ start=+\[% \(GET\|CALL\|SET\|DEFAULT\|INSERT\|INCLUDE\|PROCESS\|WRAPPER\|BLOCK\|IF\|UNLESS\|ELSIF\|ELSE\|SWITCH\|CASE\|FOREACH\|WHILE\|FILTER\|USE\|MACRO\|PERL\|RAWPERL\|TRY\|THROW\|CATCH\|FINAL\|NEXT\|LAST\|RETURN\|STOP\|CLEAR\|META\|TAGS\|DEBUG\)+	end=+%\]+
+			\ containedin=ALL
+			\ contains=tt_attribute_name,tt_attribute_value,tt_bare_attribute
+syntax region tt_end oneline keepend
+			\ start=+\[% END+	end=+%\]+
+			\ containedin=ALL
 
 
+
+" HTML-Template
 syntax region htmltmpl_start keepend matchgroup=Delimiter
 			\ start=+<\(!\z(--\)\)\= *tmpl_\(var\|if\|include\|else\|unless\|loop\)+	end=+\z1>+
 			\ containedin=ALL
 			\ contains=htmltmpl_attribute_name,htmltmpl_attribute_value,htmltmpl_bare_attribute
-
-" TMPL End Tag
 syntax region htmltmpl_end oneline keepend
 			\ start=+<\(!\z(--\)\)\= */tmpl_\(if\|unless\|else\|loop\)+	end=+\z1>+
 			\ containedin=ALL
