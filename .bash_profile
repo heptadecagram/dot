@@ -6,10 +6,11 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.04.12 19:35:52
+# Last Modified: 2008.04.15 10:23:28
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
+export LC_CTYPE='en_US.UTF-8'
 
 shopt -s histappend
 
