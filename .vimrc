@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.02.28 10:02:35
+" Last Modified: 2008.04.17 07:13:18
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -34,8 +34,8 @@ endif
 set cpoptions-=<
 set nobackup
 set backspace=indent,start
-set history=50		" keep 50 lines of command line history
-set incsearch		" do incremental searching
+set history=50  " keep 50 lines of command line history
+set incsearch   " do incremental searching
 set background=light
 
 set nojoinspaces
@@ -101,7 +101,7 @@ if has("autocmd")
 	filetype plugin indent on
 
 	" For all text files set 'textwidth' to 78 characters.
-	autocmd FileType text	setlocal textwidth=78
+	autocmd FileType text setlocal textwidth=78
 
 	" When editing a file, always jump to the last known cursor position.
 	" Don't do it when the position is invalid or when inside an event handler
