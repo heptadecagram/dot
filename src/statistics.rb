@@ -2,11 +2,11 @@
 # Project  Name: None
 # File / Folder: statistics.rb
 # File Language: ruby
-# Copyright (C): 2007 Richard Group, Inc.
+# Copyright (C): 2007 Liam Echlin
 # First  Author: Liam Bryan
 # First Created: 2007.10.23 08:00:53
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.03.04 13:48:35
+# Last Modified: 2008.04.22 10:11:31
 
 module Enumerable
 	def size

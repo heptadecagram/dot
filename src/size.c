@@ -1,12 +1,12 @@
-/* 
+/*
  * Project  Name: None
  * File / Folder: size.c
  * File Language: c
  * Copyright (C): 2005 Liam Bryan
  * First  Author: Liam Bryan
  * First Created: 2005.04.21 14:11:12
- * Last Modifier: Liam Bryan
- * Last Modified: 2005.10.24 20:55:28
+ * Last Modifier: Liam Echlin
+ * Last Modified: 2008.04.22 10:11:24
 
 */
 

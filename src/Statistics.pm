@@ -5,8 +5,8 @@
 # Copyright (C): 2004 Liam Bryan
 # First  Author: Liam Bryan
 # First Created: 2004.11.06 19:18:47
-# Last Modifier: Liam Bryan
-# Last Modified: 2006.11.06 15:02:50
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.04.22 10:10:24
 package Statistics;
 
 use strict;

@@ -2,11 +2,11 @@
 # Project  Name: None
 # File / Folder: differ.pl
 # File Language: perl
-# Copyright (C): 2005 Richard Group, Inc.
+# Copyright (C): 2005 Liam Echlin
 # First  Author: Liam Bryan
 # First Created: 2005.03.16 14:48:20
-# Last Modifier: Liam Bryan
-# Last Modified: 2006.10.27 13:06:45
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.04.22 10:11:04
 
 use strict;
 use warnings;
