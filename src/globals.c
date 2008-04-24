@@ -5,8 +5,8 @@
  * Copyright (C): 2005 Liam Bryan
  * First  Author: Liam Bryan
  * First Created: 2002.07.12
- * Last Modifier: Liam Bryan
- * Last Modified: 2007.06.30 08:17:34
+ * Last Modifier: Liam Echlin
+ * Last Modified: 2008.04.22 10:10:40
  * Compilation  : $(CC) -lncurses -dM -o globals globals.c
  * Purpose      : This program will print out various global symbols.
  *                Note that the program is only valid when built, and

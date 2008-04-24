@@ -2,11 +2,11 @@
 # Project  Name: None
 # File / Folder: hist.rb
 # File Language: ruby
-# Copyright (C): 2006 Richard Group, Inc.
+# Copyright (C): 2006 Liam Echlin
 # First  Author: Liam Bryan
 # First Created: 2006.03.13 20:14:58
-# Last Modifier: Liam Bryan
-# Last Modified: 2006.04.03 14:39:10
+# Last Modifier: Liam Echlin
+# Last Modified: 2008.04.22 10:10:54
 
 command = {}
 execution = {}
