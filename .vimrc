@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.04.17 07:13:18
+" Last Modified: 2008.04.27 15:29:02
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -137,9 +137,9 @@ function CreateFileHeader()
 				\ 'File Language: ' . &syntax . '' .
 				\ 'Copyright (C): ' . strftime('%Y') . ' ' . $COPYRIGHT . '' .
 				\ 'First  Author: Liam Echlin' . '' .
-				\ 'First Created: ' . strftime('%Y.%m.%d %T') . '' .
+				\ 'First Created: ' . strftime('%Y.%m.%d') . '' .
 				\ 'Last Modifier: Liam Echlin' . '' .
-				\ 'Last Modified: ' . strftime('%Y.%m.%d %T')
+				\ 'Last Modified: ' . strftime('%Y.%m.%d')
   append
 
 .
