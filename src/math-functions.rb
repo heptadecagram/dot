@@ -6,7 +6,7 @@
 # First  Author: Liam Echlin
 # First Created: 2008.02.08 11:11:48
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.04.22 10:11:21
+# Last Modified: 2008.05.02
 
 module Math
 	PHI = (1 + sqrt(5))/2
