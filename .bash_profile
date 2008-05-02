@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.04.26 07:51:01
+# Last Modified: 2008.05.02
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -20,6 +20,8 @@ alias n='ls'
 alias nn='ls -lA'
 alias N='ls -la'
 alias s='svn'
+alias c='cvs'
+alias g='git'
 alias oo='vimdiff'
 
 alias home='ssh home'
@@ -45,7 +47,7 @@ function prompt_command {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="`svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'`$PS1:\w/\\n> "
+	PS1="`cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'`$PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
 
@@ -111,14 +113,51 @@ function sd {
 	fi
 }
 
+function cvs-diff {
+	if [ $# != 1 ]; then
+		echo "Usage: cvs-diff <file>"
+		return 2
+	elif [ ! -e "$1" ]; then
+		echo "File not found: $1"
+		return 2
+	elif [ `expr "$(cvs -nq update $1)" : "M"` -eq 0 ]; then
+		echo "No difference in working copy of $1"
+		return 1
+	else
+		TEMP=/tmp/tmp.$$.`basename $1`
+		cat "$1" > "$TEMP"
+		cvs diff "$1" | patch -R "$TEMP" >/dev/null
+		vimdiff -c "wincmd l" -c "set readonly" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
+		rm -f "$TEMP"
+	fi
+}
+
 
 # Completion functions
 
 complete -A directory a cd
 complete -A command man which sudo
-function _svn {
+
+function _cvs {
 	local cur=$2
  	local prev=$3
+	local opts="add admin annotate checkout ci co commit diff edit editors export
+	history import init log login logout pserver rannotate rdiff release remove
+	rlog rtag server status tag unedit update version watch watchers"
+	COMPREPLY=()
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+		return 0
+	fi
+
+	COMPREPLY=( $(compgen -X "CVS" -f ${cur}) )
+}
+complete -o filenames -F _cvs cvs c
+
+function _svn {
+	local cur=$2
+	local prev=$3
 	local opts="add blame praise annotate ann cat checkout co cleanup commit ci
 	copy cp delete del remove rm diff di export help h \? import info list ls
 	lock log merge mkdir move mv rename ren propdel propedit propget proplist
