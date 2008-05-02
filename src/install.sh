@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2006.07.18 13:27:11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.02.29 03:17:47
+# Last Modified: 2008.05.02
 
 svn checkout svn+ssh://home.liamtara.net/home/svn/dot $HOME/dot
 mv $HOME/.ssh $HOME/.old.ssh

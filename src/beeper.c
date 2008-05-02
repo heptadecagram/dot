@@ -6,7 +6,7 @@
  * First  Author: Liam Bryan
  * First Created: 2002.07.12
  * Last Modifier: Liam Echlin
- * Last Modified: 2008.04.22 10:10:27
+ * Last Modified: 2008.05.02
  *
  * Compilation  : $(CC) -O3 -o beeper beeper.c
  * Purpose      : This program sounds the terminal bell.  It is useful to
