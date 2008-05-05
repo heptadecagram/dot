@@ -1,8 +1,8 @@
-[a-zA-Z]*
-.bash_history
-.irb_history
-.psql_history
-.viminfo
-.lesshst
+/[a-zA-Z]*
+/.bash_history
+/.irb_history
+/.psql_history
+/.viminfo
+/.lesshst
 !src
 !thought_residue
