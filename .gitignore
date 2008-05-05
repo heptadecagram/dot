@@ -1,0 +1,5 @@
+[a-zA-Z]*
+.bash_history
+.irb_history
+.psql_history
+.viminfo
