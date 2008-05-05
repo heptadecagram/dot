@@ -10,10 +10,18 @@ syntax cluster htmlPreproc add=tt_start,tt_end
 syntax region tt_start keepend matchgroup=Delimiter
 			\ start=+\[% \(GET\|CALL\|SET\|DEFAULT\|INSERT\|INCLUDE\|PROCESS\|WRAPPER\|BLOCK\|IF\|UNLESS\|ELSIF\|ELSE\|SWITCH\|CASE\|FOREACH\|WHILE\|FILTER\|USE\|MACRO\|PERL\|RAWPERL\|TRY\|THROW\|CATCH\|FINAL\|NEXT\|LAST\|RETURN\|STOP\|CLEAR\|META\|TAGS\|DEBUG\)+	end=+%\]+
 			\ containedin=ALL
-			\ contains=tt_attribute_name,tt_attribute_value,tt_bare_attribute
+			\ contains=tt_attribute_name,tt_attribute_value,tt_bare_attribute,tt_operator
 syntax region tt_end oneline keepend
 			\ start=+\[% END+	end=+%\]+
 			\ containedin=ALL
+
+syntax match tt_operator "[+*/%:?-]"                       contained
+syntax match tt_operator "\<\(mod\|div\|or\|and\|not\)\>"  contained
+syntax match tt_operator "[!=<>]=\=\|&&\|||"               contained
+syntax match tt_operator "\(\s\)\@<=_\(\s\)\@="            contained
+syntax match tt_operator "=>\|,"                           contained
+
+hi def link tt_operator Statement
 
 
 
