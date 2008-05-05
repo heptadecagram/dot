@@ -3,3 +3,6 @@
 .irb_history
 .psql_history
 .viminfo
+.lesshst
+!src
+!thought_residue
