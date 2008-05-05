@@ -1,8 +1,9 @@
 /[a-zA-Z]*
 /.bash_history
+/.bash_local
 /.irb_history
+/.lesshst
 /.psql_history
 /.viminfo
-/.lesshst
 !src
 !thought_residue
