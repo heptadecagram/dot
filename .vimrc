@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.04.27 15:29:02
+" Last Modified: 2008.04.29
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -113,12 +113,15 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+autocmd BufReadPost *.tt set filetype=html
+autocmd BufReadPost *.tt source ~/.vim/syntax/tt2html.vim
+
 autocmd BufReadPost *.t set filetype=perl
 autocmd BufReadPost /tmp/* set nobackup|set nowritebackup
 
 function UpdateFileLastModified()
 	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Echlin/
-	8,9s/Last Modified: [^$].\+/\='Last Modified: ' . strftime('%Y.%m.%d %T')/
+	8,9s/Last Modified: [^$].\+/\='Last Modified: ' . strftime('%Y.%m.%d')/
 endfunction
 
 function CreateFileHeader()
@@ -208,18 +211,3 @@ autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 autocmd BufRead * silent! %s/[\r \t]\+$//
 
 autocmd BufNewFile *    call NewProgramHeader()
-
-function! Perl_eval() range
-	let src = tempname()
-	let dst = tempname()
-	execute ": " . a:firstline . "," . a:lastline . "w " . src
-	execute ":silent ! perl " . src . " > " . dst . "2>&1"
-	pclose!
-	redraw!
-	vsplit
-	normal l
-	execute ":e! " . dst
-	set pvw
-	normal h
-endfunction
-
