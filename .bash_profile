@@ -384,7 +384,7 @@ function _command {
 
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
-complete -F _command nohup exec nice eval strace time ltrace then else do command xargs
+complete -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
 
 if [ -a "${HOME}/.bash_local" ]; then
 	source ~/.bash_local
