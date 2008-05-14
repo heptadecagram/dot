@@ -9,42 +9,7 @@
 # Note: $folder should be set _before_ any other path vars where `+' or `='
 # is used because paths are expanded when parsed
 #
-#set folder=~/Mail		# where i keep my mailboxes
-#set spoolfile='/var/mail/liam'	# where my new mail is located
 
-mailboxes imaps://scalix.sourcefire.com
-#mailboxes imaps://heptadecagram.net
-#mailboxes pop://mail.wunderland.com
-
-#set imap_user='liam+heptadecagram.net'
-#set folder="imaps://heptadecagram.net/"
-#set spoolfile="imaps://heptadecagram.net/inbox"
-#set hostname="heptadecagram.net"	# my DNS domain
-#set from="Liam Echlin <liam@heptadecagram.net>"
-#set certificate_file="~/.ssh/mutt_certificates"
-#lists origins besc tribearcane
-
-set imap_user='wechlin'
-set folder="imaps://scalix.sourcefire.com/"
-set spoolfile="imaps://scalix.sourcefire.com/inbox"
-set hostname="gauss.sfeng.sourcefire.com"
-set from="Liam Echlin <wechlin@sourcefire.com>"
-
-lists homeoffice firemen
-subscribe homeoffice firemen
-
-folder-hook License\ Keys 'set sort=subject'
-
-save-hook '~s \\[Bug' =Bugs/
-
-
-set postponed=+postponed	# mailbox to store postponed messages in
-set record=+outbox		# default location to save outgoing mail
-
-#set pop_user='liam'
-#set pop_host='pop://mail.wunderland.com'
-#set pop_delete=yes
-#set pop_checkinterval=90
 
 set sendmail='/usr/bin/msmtp'
 
@@ -59,7 +24,6 @@ unhdr_order *
 hdr_order date to cc from subject
 
 set arrow_cursor		# use -> instead of hiliting the whole line
-set attribution="%n wrote:"	# how to attribute replies
 set autoedit			# go to the editor right away when composing
 set beep_new
 set noconfirmappend		# don't ask me if i want to append to mailboxes
@@ -67,7 +31,7 @@ set delete=yes			# purge deleted messages without asking
 set edit_headers		# let me edit the message header when composing
 set include=yes			# always include messages when replying
 set nomark_old			# i don't care about whether a message is old
-set mime_forward=ask-no		# use message/rfc822 type to forward messages
+set mime_forward=no # use message/rfc822 type to forward messages
 set move=no			# don't ask about moving messages, just do it
 set pager_index_lines=6		# how many index lines to show in the pager
 set print_command=/bin/false	# how to print things (I like to save trees)
@@ -78,7 +42,6 @@ set reverse_name    # use my address as it appears in message
 set sort=threads		# primary sorting method
 set tilde			# virtual lines to pad blank lines in the pager
 set sort_browser=reverse-date	# how to sort files in the dir browser
-set xterm_set_titles=yes
 
 # Default
 #set status_format="-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?  %l]---(%s)-%>-(%P)---"
@@ -153,23 +116,12 @@ bind generic { top-page
 bind generic } bottom-page
 bind generic \177 last-entry
 bind editor <delete> backspace
-#bind editor <backspace> backspace
-
-# simulate the old browse-url function
-macro index \cb |urlview\n
-macro index G !imapfilter\n
-
-#macro index \# /bug^M	# search for bugs
-#macro index "\""        ":set realname=\"real hairy macro\"^M:set ?realname^M" # and a comment to boot!
-
-# just like vi and less
 bind pager G bottom
 
-#macro   pager   \Ck     "|pgp -kaf^M"   # a comment is valid here
-#macro pager X "|morepgp^M"	# pipe PGP message to a script
 
-
-
+macro generic H c=INBOX\n # Go to INBOX
+macro generic G !imapfilter\n # Filter mail with imapfilter
+macro index \cb |urlview\n # View URLs in message
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
