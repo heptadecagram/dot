@@ -1,12 +1,12 @@
-" 
+"
 " Project  Name: Vim Settings
 " File / Folder: .vim/ftplugin/perl.vim
 " File Language: vim
 " Copyright (C): 2004 Liam Bryan
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
-" Last Modifier: Liam Bryan
-" Last Modified: 2005.08.16 17:31:26
+" Last Modifier: Liam Echlin
+" Last Modified: 2008.05.14
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -40,10 +40,10 @@ function! PerlFunctionList()
 
 	call setline('.', '# Function List')
 	wincmd k
-	while search('\<sub\s\+', 'W')
+	while search('[$@%]\@<!\<sub\s\+', 'W')
 		normal w"ryiw
 		if @r == '{'
-			continue 
+			continue
 		endif
 		wincmd j
 		call append('$', @r)
