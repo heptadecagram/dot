@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.05.05
+# Last Modified: 2008.05.14
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -56,6 +56,14 @@ export VISUAL='vim'
 export PAGER='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
+
+function mutt {
+	if [ "$USER" = wechlin ]; then
+		`which mutt` -F ~/.mutt/sourcefire.com
+	else
+		`which mutt` -F ~/.mutt/heptadecagram.net
+	fi
+}
 
 # Vim alias with sudo built-ins
 function o {

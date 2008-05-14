@@ -1,0 +1,19 @@
+mailboxes imaps://mail.heptadecagram.net
+
+set imap_user='liam+heptadecagram.net'
+set folder="imaps://heptadecagram.net/"
+set spoolfile="imaps://heptadecagram.net/INBOX"
+
+set hostname="heptadecagram.net"
+set from="Liam Echlin <liam@heptadecagram.net>"
+
+lists origins besc tribearcane
+subscribe origins besc tribearcane
+
+set postponed =INBOX.Postponed
+set record =INBOX.Outbox
+
+save-hook '.'  =INBOX.
+save-hook 'origins'  =INBOX.Lists.Origins
+
+source ~/.muttrc
