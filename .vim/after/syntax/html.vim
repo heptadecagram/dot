@@ -11,7 +11,7 @@ syntax region tt_start keepend matchgroup=Delimiter
 			\ start=+\[% \(GET\|CALL\|SET\|DEFAULT\|INSERT\|INCLUDE\|PROCESS\|WRAPPER\|BLOCK\|IF\|UNLESS\|ELSIF\|ELSE\|SWITCH\|CASE\|FOREACH\|WHILE\|FILTER\|USE\|MACRO\|PERL\|RAWPERL\|TRY\|THROW\|CATCH\|FINAL\|NEXT\|LAST\|RETURN\|STOP\|CLEAR\|META\|TAGS\|DEBUG\)+	end=+%\]+
 			\ containedin=ALL
 			\ contains=tt_attribute_name,tt_attribute_value,tt_bare_attribute,tt_operator
-syntax region tt_end oneline keepend
+syntax region tt_end oneline keepend matchgroup=Delimiter
 			\ start=+\[% END+	end=+%\]+
 			\ containedin=ALL
 
