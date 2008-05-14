@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.04.29
+" Last Modified: 2008.05.13
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -211,3 +211,12 @@ autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 autocmd BufRead * silent! %s/[\r \t]\+$//
 
 autocmd BufNewFile *    call NewProgramHeader()
+
+function! TabComplete()
+	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+		return "\<Tab>"
+	else
+		return "\<C-X>\<C-O>"
+	endif
+endfunction
+inoremap <Tab> <C-R>=TabComplete()<CR>

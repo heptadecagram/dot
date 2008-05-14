@@ -5,8 +5,8 @@
 " Copyright (C): 2005 Liam Bryan
 " First  Author: Liam Bryan
 " First Created: 2005.09.04 09:10:41
-" Last Modifier: Liam Bryan
-" Last Modified: 2007.07.28 06:24:09
+" Last Modifier: Liam Echlin
+" Last Modified: 2008.05.13
 
 
 setlocal comments=:#
@@ -15,16 +15,7 @@ setlocal formatoptions+=cr
 
 nmap <silent> gd "lyiw:call Ruby_gd(@l)<CR>
 
-"setlocal omnifunc=rubycomplete#Complete
-
-function! TabComplete()
-	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
-		return "\<Tab>"
-	else
-		return "\<C-X>\<C-O>"
-	endif
-endfunction
-inoremap <Tab> <C-R>=TabComplete()<CR>
+setlocal omnifunc=rubycomplete#Complete
 
 function! Ruby_gd(word)
 	if !search('\<def\s\+' . a:word . '\>', 'b')
