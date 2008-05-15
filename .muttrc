@@ -119,8 +119,8 @@ bind editor <delete> backspace
 bind pager G bottom
 
 
-macro generic H c=INBOX\n # Go to INBOX
-macro generic G !imapfilter\n # Filter mail with imapfilter
+macro index H c=INBOX\n # Go to INBOX
+macro index G !imapfilter\n # Filter mail with imapfilter
 macro index \cb |urlview\n # View URLs in message
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
