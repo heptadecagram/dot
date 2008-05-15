@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.05.14
+# Last Modified: 2008.05.15
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -68,7 +68,7 @@ function mutt {
 # Vim alias with sudo built-ins
 function o {
 	for file in "$@"; do
-		if [ -a "$file" -a ! -w "$file" -a ! -O "$file" ]; then
+		if [ ! -a "$file" -a ! -w "`dirname "$file"`" ] || [ ! -w "$file" -a ! -O "$file" ]; then
 			if [ -x "`which sudoedit`" ]; then
 				sudoedit "$@"
 				return
