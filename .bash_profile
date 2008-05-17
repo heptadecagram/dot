@@ -68,7 +68,7 @@ function mutt {
 # Vim alias with sudo built-ins
 function o {
 	for file in "$@"; do
-		if [ ! -a "$file" -a ! -w "`dirname "$file"`" ] || [ ! -w "$file" -a ! -O "$file" ]; then
+		if [ ! -e "$file" -a ! -w "`dirname "$file"`" ] || [ -e "$file" -a ! -w "$file" -a ! -O "$file" ]; then
 			if [ -x "`which sudoedit`" ]; then
 				sudoedit "$@"
 				return
