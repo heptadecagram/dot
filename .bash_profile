@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.05.15
+# Last Modified: 2008.05.19
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -47,7 +47,7 @@ function prompt_command {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="`cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'`$PS1:\w/\\n> "
+	PS1="`if [ -d CVS ]; then cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'; fi``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
 
