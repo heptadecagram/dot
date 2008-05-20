@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.05.05 10:23:06
+" Last Modified: 2008.05.16
 
 if exists('b:loaded_html')
 	finish
@@ -108,6 +108,9 @@ imap <buffer> <Leader>fc <input type="checkbox" name="" value=""/>B`n a
 imap <buffer> <Leader>fb <input type="button" name="" value=""/>B`n a
 imap <buffer> <Leader>fx <textarea rows="6" cols="60"></textarea>bhhi
 imap <buffer> <Leader>fp <input type="password" name="" value="" maxlength="255"/>B`n a
+
+imap <buffer> <Leader>bu <button></button>bba
+vmap <buffer> <Leader>bu `>a</button>`<i<button>
 
 imap <buffer> <Leader>im <img src="" alt=""/>Bhhi
 
