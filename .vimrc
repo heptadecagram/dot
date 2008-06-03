@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.05.13
+" Last Modified: 2008.06.03
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -113,11 +113,13 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-autocmd BufReadPost *.tt set filetype=html
-autocmd BufReadPost *.tt source ~/.vim/syntax/tt2html.vim
+autocmd BufEnter *.mkd set filetype=mkd
 
-autocmd BufReadPost *.t set filetype=perl
-autocmd BufReadPost /tmp/* set nobackup|set nowritebackup
+autocmd BufEnter *.tt set filetype=html
+autocmd BufEnter *.tt set filetype=tt
+autocmd BufEnter *.tt source ~/.vim/syntax/tt2html.vim
+
+autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
 function UpdateFileLastModified()
 	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Echlin/
@@ -164,7 +166,7 @@ function NewProgramHeader()
 		let s:comment = '#'
 	endif
 
-	if &syntax == 'html'
+	if &syntax == 'html' || &syntax == 'tt'
 		normal i`ht`ti
 		return
 	endif
@@ -220,3 +222,5 @@ function! TabComplete()
 	endif
 endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
+
+nmap <silent> <F8> :silent !dcp -h uncia %

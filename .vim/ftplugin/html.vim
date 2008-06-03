@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.05.16
+" Last Modified: 2008.06.02
 
 if exists('b:loaded_html')
 	finish
@@ -161,6 +161,8 @@ imap <buffer> <Leader>tr <tr></tr>no
 imap <buffer> <Leader>td <td></td>bhhi
 vmap <buffer> <Leader>td `>a</td>`<i<td>
 imap <buffer> <Leader>th <th></th>bhhi
+imap <buffer> <Leader>cg <colgroup></colgroup>no
+imap <buffer> <Leader>co <col/>
 
 function! FindCurrentTag()
 	call search('<\|>', 'b')
@@ -241,7 +243,7 @@ function! TableMaker(...)
 		let Cols = a:1
 	endif
 
-	normal o<table border="1">
+	normal o<table>
 
 	while Rows > 0
 		normal o<tr>
