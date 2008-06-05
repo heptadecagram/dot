@@ -1,0 +1,5 @@
+[color]
+	diff = true
+	branch = true
+	interactive = true
+	status = true
