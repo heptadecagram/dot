@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.06.03
+" Last Modified: 2008.06.04
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -223,4 +223,5 @@ function! TabComplete()
 endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
 
-nmap <silent> <F8> :silent !dcp -h uncia %
+let b:dcp_host = 'uncia'
+nmap <silent> <F8> :silent !dcp -h =b:dcp_host %
