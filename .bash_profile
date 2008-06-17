@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.05.19
+# Last Modified: 2008.06.13
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -36,7 +36,7 @@ CODE_BLUE=$'\[\033[0;34m\]'
 CODE_NORM=$'\[\033[m\]'
 PS1='\h:\w/\n'
 
-function prompt_command {
+prompt_command () {
 	if [ $? -ne 0 ]; then
 		PS1="[$CODE_RED\$?$CODE_NORM]"
 	else
@@ -57,16 +57,16 @@ export PAGER='less'
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
 
-function mutt {
+mutt () {
 	if [ "$USER" = wechlin ]; then
-		`which mutt` -F ~/.mutt/sourcefire.com
+		command mutt -F ~/.mutt/sourcefire.com
 	else
-		`which mutt` -F ~/.mutt/heptadecagram.net
+		command mutt -F ~/.mutt/heptadecagram.net
 	fi
 }
 
 # Vim alias with sudo built-ins
-function o {
+o () {
 	for file in "$@"; do
 		if [ ! -e "$file" -a ! -w "`dirname "$file"`" ] || [ -e "$file" -a ! -w "$file" -a ! -O "$file" ]; then
 			if [ -x "`which sudoedit`" ]; then
@@ -83,163 +83,159 @@ function o {
 }
 
 # cd alias with directory substitution and directory-for-file shortcut
-function a {
+a () {
 	if [ -z "$1" ]; then
 		builtin cd
 	else
+		local try=''
 		if [ -n "$2" ]; then
-			TRY="${PWD/$1/$2}"
+			try="${PWD/$1/$2}"
 		else
-			TRY="$1"
+			try="$1"
 		fi
 
-		if [ -f "${TRY}" ]; then
-			builtin cd "$(dirname ${TRY})"
+		if [ -f "$try" ]; then
+			builtin cd "`dirname $try`"
 		else
-			builtin cd "${TRY}"
+			builtin cd "$try"
 		fi
 	fi
 }
 
-# git diff, loads changed version alongside current in vimdiff
-function gd {
-	if [ $# != 1 ]; then
-		echo "Usage: gd <file>"
-		return 2
-	elif [ ! -e "$1" ]; then
-		echo "File not found: $1"
-		return 2
-	elif [ ! "`git diff $1`" ]; then
-		echo "No difference in working copy of $1"
-		return 1
-	else
-		TEMP=/tmp/tmp.$$.`basename $1`
-		cat "$1" > "$TEMP"
-		git diff "$1" | patch -R "$TEMP" >/dev/null
-		vimdiff -c "wincmd l" -c "set readonly" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
-		rm -f "$TEMP"
-	fi
+# Version Control diff editor
+_vc-diff () {
+	local vc=$1
+	shift
+
+	for file in "$@"; do
+		if [ ! -e "$file" ]; then
+			echo "File not found: $file"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			$vc "$file" | patch -sRo "$TEMP" "$file"
+			#vimdiff -c 'set diffopt=filler,iwhite' -c 'wincmd l' -c 'set readonly' -c 'set nomodifiable' -c 'wincmd h' -c '0' -c 'normal ]c' "$TEMP" "$file"
+			meld "$TEMP" "$file"
+			rm -f "$TEMP"
+		fi
+	done
 }
 
-# SVN diff, loads changed version alongside current in vimdiff
-function sd {
-	if [ $# != 1 ]; then
-		echo "Usage: sd <file>"
-		return 2
-	elif [ ! -e "$1" ]; then
-		echo "File not found: $1"
-		return 2
-	elif [ `expr "$(svn status $1)" : "M"` -eq 0 ]; then
-		echo "No difference in working copy of $1"
-		return 1
-	else
-		TEMP=/tmp/tmp.$$.`basename $1`
-		cat "$1" > "$TEMP"
-		svn diff "$1" | patch -R "$TEMP" >/dev/null
-		vimdiff -c "wincmd l" -c "set readonly" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
-		rm -f "$TEMP"
-	fi
+gd () {
+	_vc-diff 'git diff' "$@"
+}
+gd-all () {
+	_vc-diff 'git diff' `git-status | sed -ne's/^#\s*\S*:\s*//p'`
 }
 
-function cvs-diff {
-	if [ $# != 1 ]; then
-		echo "Usage: cvs-diff <file>"
-		return 2
-	elif [ ! -e "$1" ]; then
-		echo "File not found: $1"
-		return 2
-	elif [ `expr "$(cvs -nq update $1)" : "M"` -eq 0 ]; then
-		echo "No difference in working copy of $1"
-		return 1
-	else
-		TEMP=/tmp/tmp.$$.`basename $1`
-		cat "$1" > "$TEMP"
-		cvs diff "$1" | patch -R "$TEMP" >/dev/null
-		vimdiff -c "wincmd l" -c "set readonly" -c "set nomodifiable" -c "wincmd h" -c "0" -c "normal ]c" "$1" "$TEMP"
-		rm -f "$TEMP"
-	fi
+sd () {
+	_vc-diff 'svn diff' "$@"
+}
+
+cvs-diff () {
+	_vc-diff 'cvs diff' "$@"
 }
 
 
 # Completion functions
 
-complete -A directory a cd
+complete -A directory a cd rmdir
 complete -A command man which sudo
 
-function _cvs {
-	local cur=$2
- 	local prev=$3
-	local opts="add admin annotate checkout ci co commit diff edit editors export
+_cvs () {
+	local current=$2
+ 	local previous=$3
+
+	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
+	local commands='ad add new  admin annotate checkout ci co commit diff edit editors export
 	history import init log login logout pserver rannotate rdiff release remove
-	rlog rtag server status tag unedit update version watch watchers"
+	rlog rtag server status tag unedit update version watch watchers'
+
 	COMPREPLY=()
 
 	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-		return 0
+		if [ "${current#-}" != "$current" ]; then
+			COMPREPLY=(`compgen -W "$global_options" -- $current`)
+		else
+			COMPREPLY=(`compgen -W "$commands" -- $current`)
+		fi
+		return
 	fi
 
-	COMPREPLY=( $(compgen -X "CVS" -f ${cur}) )
+	COMPREPLY=(`compgen -X 'CVS' -f -- $current`)
 }
 complete -o filenames -F _cvs cvs c
 
-function _svn {
-	local cur=$2
+_svn () {
+	local current=$2
 	local prev=$3
-	local opts="add blame praise annotate ann cat checkout co cleanup commit ci
+	local opts='add blame praise annotate ann cat checkout co cleanup commit ci
 	copy cp delete del remove rm diff di export help h \? import info list ls
 	lock log merge mkdir move mv rename ren propdel propedit propget proplist
-	propset resolved revert status stat st switch sw unlock update up"
+	propset resolved revert status stat st switch sw unlock update up'
 	COMPREPLY=()
 
 	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-		return 0
+		COMPREPLY=(`compgen -W "$opts" -- "$current"`)
+		return
 	fi
 
-	case "${prev}" in
+	case "$prev" in
 	add)
-		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^? | cut -c 8-`
-		else
-			opts=`svn status 2>/dev/null | grep ^? | cut -c 8-`
+		# If the current directory is unversioned, nothing can be added
+		if [ ! -d "`dirname "$current"`/.svn" ] || [ -d "$current" -a ! -d "$current/.svn" ]; then
+			COMPREPLY=()
+			return
 		fi
-		svn status ${cur}* 2>/dev/null >/dev/null
+
+		if [ "$current" ]; then
+			opts=`svn status "$current"* | sed -ne's#^?\s*##p'`
+		else
+			opts=`svn status | sed -ne's#^?\s*##p'`
+		fi
+
+		# The goal here is to adjust the completion options to get directories
+		# to work properly.  Currently, only the basename of a path is displayed
+		# for completion, when it should be the next step in a directory tree.
+		#if [ "${opts#*/}" != "$opts" ]; then
+			#if [ "${current#*/}" != "$current" ]; then
+				#opts=`echo "$opts" | sed -e"s#${current%/*}##" -e's#/.*##' | uniq`
+			#else
+				#opts=`echo "$opts" | sed -e's#/.*##' | uniq`
+			#fi
+		#fi
+
 		# If the directory errors on svn status, it is unversioned, so
 		# display all its contents
-		if [ $? -eq 1 ]; then
-			COMPREPLY=( $(compgen -X ".swp" -f "${cur}") )
 		# If nothing is returned, there is nothing to add.  Stop.
-		elif [ -z "$opts" ]; then
+		if [ -z "$opts" ]; then
 			COMPREPLY=()
 		# If something is returned, this is a repository, and show the new files
 		else
-			COMPREPLY=( $(compgen -X ".svn" -W "${opts}") )
+			COMPREPLY=(`compgen -X '.svn' -W "$opts" -- "$current"`)
 		fi
-		return 0
+		return
 		;;
 	ci | commit)
-		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^[AM] | cut -c 8-`
+		if [ "$current" ]; then
+			opts=`svn status "$current"* 2>/dev/null | sed -ne's#^[AM]\s*##p'`
 		else
-			opts=`svn status 2>/dev/null | grep ^[AM] | cut -c 8-`
+			opts=`svn status 2>/dev/null | sed -ne's#^[AM]\s*##p'`
 		fi
 		# If nothing is returned, there is nothing to commit.  Stop.
 		if [ -z "$opts" ]; then
 			COMPREPLY=()
 		else
-			COMPREPLY=( $(compgen -X ".svn" -W "${opts}") )
+			COMPREPLY=(`compgen -X '.svn' -W "$opts" -- "$current" `)
 		fi
-		return 0
+		return
 		;;
 	prop* | pd | pe | pg | pl | ps)
-		opts="ignore executable externals"
-		COMPREPLY=( $(compgen -P "svn:" -W "${opts}" -- ${cur}) )
-		return 0
+		COMPREPLY=(`compgen -P 'svn:' -W 'executable externals ignore' -- "$current"`)
+		return
 		;;
 	resolved)
-		if [ "$cur" ]; then
-			opts=`svn status ${cur}* 2>/dev/null | grep ^C | cut -c 8-`
+		if [ "$current" ]; then
+			opts=`svn status "$current"* 2>/dev/null | grep ^C | cut -c 8-`
 		else
 			opts=`svn status 2>/dev/null | grep ^C | cut -c 8-`
 		fi
@@ -247,50 +243,86 @@ function _svn {
 		if [ -z "$opts" ]; then
 			COMPREPLY=()
 		else
-			COMPREPLY=( $(compgen -X ".svn" -W "${opts}") )
+			COMPREPLY=(`compgen -X '.svn' -W "$opts"`)
 		fi
-		return 0
+		return
 		;;
 	'\?' | h | help)
-		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-		return 0
+		COMPREPLY=(`compgen -W "$opts" -- "$current"`)
+		return
 		;;
 	esac
 
-	COMPREPLY=( $(compgen -X ".svn" -f ${cur}) )
+	COMPREPLY=(`compgen -X '.svn' -f -- "$current"`)
 }
 complete -o filenames -F _svn svn s
 
-function _ssh {
-	local cur=$2
-	local opts=`sed -ne's/\*//;s/Host //p' ~/.ssh/config`
+_svnadmin () {
+	local current=$2
+	local previous=$3
+	local commands='crashtest create deltify dump help hotcopy list-dblogs
+	list-unused-dblogs load lslocks lstxns recover rmlocks rmtxns setlog verify'
 
-	COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		return
+	else
+		COMPREPLY=(`compgen -f -- "$current"`)
+	fi
+}
+complete -o filenames -F _svnadmin svnadmin
+
+_git () {
+	local current=$2
+	local commands='add am annotate apply archive bisect blame branch bundle cat-file check-attr checkout checkout-index check-ref-format cherry cherry-pick
+	clean clone commit commit-tree config count-objects cvsexportcommit cvsimport cvsserver daemon describe diff diff-files diff-index diff-tree fast-export
+	fast-import fetch fetch-pack filter-branch fmt-merge-msg for-each-ref format-patch fsck fsck-objects gc get-tar-commit-id grep hash-object help
+	http-fetch http-push imap-send index-pack init init-db instaweb log lost-found ls-files ls-remote ls-tree mailinfo mailsplit merge merge-base merge-file
+	merge-index merge-octopus merge-one-file merge-ours merge-recursive merge-resolve merge-stupid merge-subtree merge-tree mergetool mktag mktree mv
+	name-rev pack-objects pack-redundant pack-refs parse-remote patch-id peek-remote prune prune-packed pull push quiltimport read-tree rebase receive-pack
+	reflog relink remote repack repo-config request-pull rerere reset revent rev-list rev-parse rm send-pack shell shortlog show show-branch show-index
+	show-ref sh-setup stash status stripspace submodule svn symbolic-ref tag tar-tree unpack-file unpack-objects update-index update-ref update-server-info
+	upload-archive upload-pack var verify-pack verify-tag whatchanged write-tree'
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+	else
+		COMPREPLY=(`compgen -X '.git' -f -- "$current"`)
+	fi
+}
+complete -F _git git g
+
+
+_ssh () {
+	local current=$2
+	local opts=`sed -ne's/Host //p' ~/.ssh/config`
+
+	COMPREPLY=(`compgen -W "${opts}" -- "$current"`)
 }
 complete -F _ssh ssh
 
 
 # This function expands tildes in pathnames
 #
-function _expand {
+_expand () {
 	[ "$cur" != "${cur%\\}" ] && cur="$cur\\"
 
 	# expand ~username type directory specifications
 	if [[ "$cur" == \~*/* ]]; then
 		eval cur=$cur
-
 	elif [[ "$cur" == \~* ]]; then
 		cur=${cur#\~}
 		COMPREPLY=( $( compgen -P '~' -u $cur ) )
 		return ${#COMPREPLY[@]}
 	fi
 }
+
 # This function performs file and directory completion. It's better than
 # simply using 'compgen -f', because it honours spaces in filenames.
 # If passed -d, it completes only on directories. If passed anything else,
 # it's assumed to be a file glob to complete on.
 #
-function _filedir {
+_filedir () {
 	local IFS=$'\t\n' xspec #glob
 
 	_expand || return 0
@@ -315,7 +347,7 @@ function _filedir {
 # completion definition - currently not quite foolproof (e.g. mount and umount
 # don't work properly), but still quite useful.
 #
-function _command {
+_command () {
 	local cur func cline cspec noglob cmd done i \
 	      _COMMAND_FUNC _COMMAND_FUNC_ARGS
 
@@ -392,18 +424,17 @@ function _command {
 
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
-complete -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
+complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
 
-if [ -a "${HOME}/.bash_local" ]; then
+if [ -a "$HOME/.bash_local" ]; then
 	source ~/.bash_local
 fi
 
-function spin {
+fix_everything () {
 	i=1
-	sp="/-\|"
+	sp='/-\|'
 	echo -n ' '
 	while true; do
 		echo -en "\b${sp:i++%${#sp}:1}"
 	done
 }
-
