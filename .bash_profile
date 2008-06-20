@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.06.13
+# Last Modified: 2008.06.20
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -47,7 +47,7 @@ prompt_command () {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="`if [ -d CVS ]; then cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'; fi``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$PS1:\w/\\n> "
+	PS1="\n`if [ -d CVS ]; then cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'; fi``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
 
@@ -274,6 +274,7 @@ complete -o filenames -F _svnadmin svnadmin
 
 _git () {
 	local current=$2
+	local previous=$3
 	local commands='add am annotate apply archive bisect blame branch bundle cat-file check-attr checkout checkout-index check-ref-format cherry cherry-pick
 	clean clone commit commit-tree config count-objects cvsexportcommit cvsimport cvsserver daemon describe diff diff-files diff-index diff-tree fast-export
 	fast-import fetch fetch-pack filter-branch fmt-merge-msg for-each-ref format-patch fsck fsck-objects gc get-tar-commit-id grep hash-object help
@@ -289,15 +290,50 @@ _git () {
 	else
 		COMPREPLY=(`compgen -X '.git' -f -- "$current"`)
 	fi
+
+	if [ "$previous" = 'checkout' ]; then
+		COMPREPLY=(`compgen -W "$(git-branch)" -- "$current"`)
+	fi
 }
 complete -F _git git g
+
+_git-checkout () {
+	local current=$2
+	local previous=$3
+
+	if [ "$previous" = '-b' ]; then
+		COMPREPLY=()
+	else
+		COMPREPLY=(`compgen -W "$(git-branch | sed -e's/\*//')" -- "$current"`)
+	fi
+}
+complete -o default -F _git-checkout git-checkout
+
+_vmrun () {
+	local current=$2
+	local previous=$3
+	local commands='start stop reset suspend listSnapshots snapshot deleteSnapshot revertToSnapshot runProgramInGuest fileExistsInGuest setSharedFolderState addSharedFolder removeSharedFolder listProcessesInGuest killProcessInGuest runScriptInGuest deleteFileInGuest createDirectoryInGuest deleteDirectoryInGuest listDirectoryInGuest copyFileFromHostToGuest copyFileFromGuestToHosta renameFileInGuest list upgradevm installtools'
+
+	local vmdir=/home/$USER/vmware
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		return
+	fi
+
+	if [ "$previous" = 'listSnapshots' ]; then
+		COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
+	fi
+
+}
+complete -o default -F _vmrun vmrun
 
 
 _ssh () {
 	local current=$2
-	local opts=`sed -ne's/Host //p' ~/.ssh/config`
+	local hosts=`sed -ne's/Host //p' ~/.ssh/config`
 
-	COMPREPLY=(`compgen -W "${opts}" -- "$current"`)
+	COMPREPLY=(`compgen -W "$hosts" -- "$current"`)
 }
 complete -F _ssh ssh
 
