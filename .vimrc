@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.06.04
+" Last Modified: 2008.06.18
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -81,8 +81,8 @@ set title
 
 " Mappings for diffmode, to take or put a change and then immediately move
 " to the next difference.
-nnoremap do do[c
-nnoremap dp dp[c
+nnoremap do do]c
+nnoremap dp dp]c
 
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
@@ -215,7 +215,7 @@ autocmd BufRead * silent! %s/[\r \t]\+$//
 autocmd BufNewFile *    call NewProgramHeader()
 
 function! TabComplete()
-	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$' || exists(&paste)
 		return "\<Tab>"
 	else
 		return "\<C-X>\<C-O>"
@@ -223,5 +223,5 @@ function! TabComplete()
 endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
 
-let b:dcp_host = 'uncia'
+let b:dcp_host = 'puma'
 nmap <silent> <F8> :silent !dcp -h =b:dcp_host %
