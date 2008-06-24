@@ -1,7 +1,6 @@
 /[a-zA-Z]*
 /*.swp
 /.bash_history
-/.bash_local
 /.irb_history
 /.lesshst
 /.psql_history
