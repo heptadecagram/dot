@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.06.13
+# Last Modified: 2008.06.24
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -426,8 +426,8 @@ _command () {
 }
 complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
 
-if [ -a "$HOME/.bash_local" ]; then
-	source ~/.bash_local
+if [ -a "$HOME/.local/bash_profile" ]; then
+	source ~/.local/bash_profile
 fi
 
 fix_everything () {
