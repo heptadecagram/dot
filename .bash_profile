@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.06.24
+# Last Modified: 2008.06.25
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -321,8 +321,12 @@ _vmrun () {
 		return
 	fi
 
-	if [ "$previous" = 'listSnapshots' ]; then
-		COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
+	if expr "$commands" : ".*\<$previous\>" >/dev/null; then
+		if [ "${current#/}" != "$current" ]; then
+			COMPREPLY=(`compgen -S '.vmx' -W "$(command find $vmdir -maxdepth 1 -mindepth 1 | sed -e's#/[^/]*$#&&#')" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
+		fi
 	fi
 
 }
