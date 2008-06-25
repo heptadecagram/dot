@@ -335,7 +335,7 @@ complete -o default -F _vmrun vmrun
 
 _ssh () {
 	local current=$2
-	local hosts=`sed -ne's/Host //p' ~/.ssh/config`
+	local hosts=`cat .ssh/config .ssh/known_hosts | sed -ne's/Host //p ; s/^\([^,]*\),.*/\1/p' | sort | uniq`
 
 	COMPREPLY=(`compgen -W "$hosts" -- "$current"`)
 }
