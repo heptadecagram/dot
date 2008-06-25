@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.06.20
+# Last Modified: 2008.06.24
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -124,7 +124,7 @@ gd () {
 	_vc-diff 'git diff' "$@"
 }
 gd-all () {
-	_vc-diff 'git diff' `git-status | sed -ne's/^#\s*\S*:\s*//p'`
+	_vc-diff 'git diff --cached' `git-status | sed -ne's/^#\s*\S*:\s*//p'`
 }
 
 sd () {
@@ -462,8 +462,8 @@ _command () {
 }
 complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
 
-if [ -a "$HOME/.bash_local" ]; then
-	source ~/.bash_local
+if [ -a "$HOME/.local/bash_profile" ]; then
+	source ~/.local/bash_profile
 fi
 
 fix_everything () {
