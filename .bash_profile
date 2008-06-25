@@ -462,8 +462,8 @@ _command () {
 }
 complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
 
-if [ -a "$HOME/.bash_local" ]; then
-	source ~/.bash_local
+if [ -a "$HOME/.local/bash_profile" ]; then
+	source ~/.local/bash_profile
 fi
 
 fix_everything () {
