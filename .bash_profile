@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.06.25
+# Last Modified: 2008.07.14
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -298,16 +298,52 @@ _git () {
 complete -F _git git g
 
 _git-checkout () {
+	local command=$1
 	local current=$2
 	local previous=$3
 
-	if [ "$previous" = '-b' ]; then
+	case "$previous" in
+	-b)
 		COMPREPLY=()
-	else
+		;;
+	$command)
 		COMPREPLY=(`compgen -W "$(git-branch | sed -e's/\*//')" -- "$current"`)
+		;;
+	*)
+		# Assuming that this is git-checkout -b <new-word> _
+		COMPREPLY=(`compgen -W "$(git-branch -a | sed -e's/\*//')" -- "$current"`)
+		;;
+	esac
+}
+complete -o filenames -F _git-checkout git-checkout git-merge
+
+_git-branch () {
+	local current=$2
+	local previous=$3
+
+	if [ "$previous" = '-d' -o "$previous" = '-m' ]; then
+		COMPREPLY=(`compgen -W "$(git-branch | sed -e's/\*//')" -- "$current"`)
+	else
+		COMPREPLY=()
 	fi
 }
-complete -o default -F _git-checkout git-checkout
+complete -o default -F _git-branch git-branch
+
+_git-remote () {
+	local current=$2
+	local previous=$3
+	local commands='add rm prune show update'
+
+	case "$previous" in
+	show | rm | prune | update)
+		COMPREPLY=(`compgen -W "$(git-remote)" -- "$current"`)
+		;;
+	*)
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-remote git-remote
 
 _vmrun () {
 	local current=$2
