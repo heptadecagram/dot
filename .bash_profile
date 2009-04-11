@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.07.14
+# Last Modified: 2009.06.11
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
