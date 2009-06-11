@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Project  Name: dot
 # File / Folder: ~/.bash_profile
 # File Language: sh
@@ -115,6 +115,41 @@ _vc-diff () {
 			$vc "$file" | patch -sRo "$TEMP" "$file"
 			#vimdiff -c 'set diffopt=filler,iwhite' -c 'wincmd l' -c 'set readonly' -c 'set nomodifiable' -c 'wincmd h' -c '0' -c 'normal ]c' "$TEMP" "$file"
 			meld "$TEMP" "$file"
+			#echo "meld  $TEMP $file"
+			rm -f "$TEMP"
+		fi
+	done
+}
+
+gd-branch () {
+	local branch=$1
+	shift
+
+	for file in `git-files-in-branch $branch`; do
+		file=`git-rev-parse --show-cdup`$file
+		if [ ! -e "$file" ]; then
+			echo "File not found: $file"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git-diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			meld "$file" "$TEMP"
+			rm -f "$TEMP"
+		fi
+	done
+}
+
+gd-choice () {
+	local branch=$1
+	shift
+
+	select file in `git-files-in-branch $branch`; do
+		file=`git-rev-parse --show-cdup`$file
+		if [ ! -e "$file" ]; then
+			echo "File not found: $file"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git-diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			meld "$file" "$TEMP"
 			rm -f "$TEMP"
 		fi
 	done
@@ -124,7 +159,7 @@ gd () {
 	_vc-diff 'git diff' "$@"
 }
 gd-all () {
-	_vc-diff 'git diff --cached' `git-status | sed -ne's/^#\s*\S*:\s*//p'`
+	_vc-diff 'git diff --cached' `git-status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
 }
 
 sd () {
@@ -137,6 +172,50 @@ cvs-diff () {
 
 
 # Completion functions
+
+_split_longopt() {
+	if [[ "$current" == --?*=* ]]; then
+		# Cut also backslash before '=' in case it ended up there
+		# for some reason.
+		previous="${current%%?(\\)=*}"
+		current="${current#*=}"
+		return 0
+	fi
+
+	return 1
+}
+
+
+_longopt () {
+	local cur opt
+
+	cur=${COMP_WORDS[$COMP_CWORD]}
+
+	if [[ "$cur" == --*=* ]]; then
+		opt=${cur%%=*}
+		# cut backslash that gets inserted before '=' sign
+		opt=${opt%\\*}
+		cur=${cur#*=}
+		#_filedir
+		COMPREPLY=(`compgen -f`)
+		COMPREPLY=(`compgen -P "$opt=" -W '${COMPREPLY[@]}' -- $cur`)
+		return 0
+	fi
+
+	if [[ "$cur" == -* ]]; then
+		# ((This gets the --help output, prints only lines with --,
+		# extracts them the --option (with potential = sign),))
+		# then checks to see which of these map $current, sorted alphabetically
+		COMPREPLY=( $( $1 --help 2>&1 | sed -e '/--/!d' \
+		-e 's/.*\(--[-A-Za-z0-9]\+=\?\).*/\1/' | \
+		command grep "^$cur" | sort -u ) )
+	#elif [[ "$1" == @(mk|rm)dir ]]; then
+		#_filedir -d
+	#else
+		#_filedir
+	fi
+}
+
 
 complete -A directory a cd rmdir
 complete -A command man which sudo
@@ -291,11 +370,31 @@ _git () {
 		COMPREPLY=(`compgen -X '.git' -f -- "$current"`)
 	fi
 
-	if [ "$previous" = 'checkout' ]; then
-		COMPREPLY=(`compgen -W "$(git-branch)" -- "$current"`)
-	fi
+	case "$previous" in
+		checkout) _git-checkout "$@" ;;
+		diff) _git-diff "$@" ;;
+		diff) _git-diff "$@" ;;
+	esac
 }
 complete -F _git git g
+
+_git_branch_completion () {
+	local showall=$1
+
+	local current
+	if [ "$2" ]; then
+		current=$2
+	else
+		current=${COMP_WORDS[COMP_CWORD]}
+	fi
+
+	if [ "$showall" ]; then
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git-branch -a | sed -e's/\*//')" -- "$current"`)
+	else
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git-branch | sed -e's/\*//')" -- "$current"`)
+	fi
+}
+complete -F _git_branch_completion gd-branch gd-choice git-files-in-branch
 
 _git-checkout () {
 	local command=$1
@@ -304,28 +403,92 @@ _git-checkout () {
 
 	case "$previous" in
 	-b)
+		# When creating a new branch, do not complete branch or filenames
 		COMPREPLY=()
 		;;
+	-)
+		COMPREPLY=(`compgen -o filenames`)
+		;;
 	$command)
-		COMPREPLY=(`compgen -W "$(git-branch | sed -e's/\*//')" -- "$current"`)
+		_git_branch_completion
 		;;
 	*)
-		# Assuming that this is git-checkout -b <new-word> _
-		COMPREPLY=(`compgen -W "$(git-branch -a | sed -e's/\*//')" -- "$current"`)
+		_git_branch_completion 1
 		;;
 	esac
 }
-complete -o filenames -F _git-checkout git-checkout git-merge
+complete -o default -F _git-checkout git-checkout git-merge
+
+_git-diff () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-a -b -B -C -l: -M -p -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color --color-words --diff-filter= --dst-prefix= --exit-code --ext-diff --find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol --ignore-space-change --name-only --name-status --no-color --no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --pickaxe-all --pickaxe-regex --quiet --raw --shortstat --src-prefix= --stat --summary --text --unified='
+
+	case "$previous" in
+	-b)
+		# When creating a new branch, do not complete branch or filenames
+		COMPREPLY=()
+		;;
+	-)
+		COMPREPLY=(`compgen -o filenames`)
+		;;
+	*)
+		_git_branch_completion 1
+		;;
+	esac
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+
+}
+complete -o default -F _git-diff git-diff
 
 _git-branch () {
 	local current=$2
 	local previous=$3
 
-	if [ "$previous" = '-d' -o "$previous" = '-m' ]; then
-		COMPREPLY=(`compgen -W "$(git-branch | sed -e's/\*//')" -- "$current"`)
-	else
+	local OPTIONS='--abbrev= --color --no-abbrev --no-color --no-track --track'
+	local FLAGS='-a -d -D -f -l -m -M -r -v'
+
+	case "$previous" in
+	-d | -m)
+		_git_branch_completion
+		;;
+	-r)
+		_git_branch_completion 1
+		;;
+	*)
 		COMPREPLY=()
-	fi
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
 }
 complete -o default -F _git-branch git-branch
 
