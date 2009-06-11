@@ -1,19 +1,14 @@
-mailboxes imaps://scalix.sourcefire.com
-
-set imap_user='wechlin'
-set folder="imaps://scalix.sourcefire.com/"
-set spoolfile="imaps://scalix.sourcefire.com/inbox"
+set imap_user='wechlin@sourcefire.com'
+set folder="imaps://imap.gmail.com:993"
+set spoolfile="+INBOX"
 set hostname="gauss.sfeng.sourcefire.com"
 set from="Liam Echlin <wechlin@sourcefire.com>"
 
-set postponed=+postponed
-set record=+outbox
+set postponed="+[Gmail]/Drafts"
 
-lists homeoffice firemen
-subscribe homeoffice firemen
+source ~/.muttrc
 
 folder-hook License\ Keys 'set sort=subject'
 
 save-hook '~s \\[Bug' =Bugs/
 
-source ~/.muttrc
