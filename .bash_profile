@@ -401,6 +401,15 @@ _git-checkout () {
 	local current=$2
 	local previous=$3
 
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '-' ]; then
+			COMPREPLY=(`compgen -o filenames -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
 	case "$previous" in
 	-b)
 		# When creating a new branch, do not complete branch or filenames
