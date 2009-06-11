@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.06.02
+" Last Modified: 2008.09.10
 
 if exists('b:loaded_html')
 	finish
@@ -261,3 +261,12 @@ function! TableMaker(...)
 	normal o</table>?<tablettw
 
 endfunction "TableMaker()
+
+map <F3> ciw=ExpandColor('"')F#
+
+function! ExpandColor(word)
+	let numbers = substitute(a:word, '^#', '', '')
+	if(len(numbers) == 6)
+		return 'rgb(' . str2nr(numbers[0:1], 16) . ', ' . str2nr(numbers[2:3], 16) . ', ' . str2nr(numbers[4:5], 16) . ')'
+	endif
+endfunction

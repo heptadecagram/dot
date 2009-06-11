@@ -47,9 +47,19 @@ prompt_command () {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="\n`if [ -d CVS ]; then cat CVS/Root 2>/dev/null | sed -ne's/$/\//p'; fi``cat CVS/Repository 2>/dev/null | sed -ne's/$/\\\n/p'``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
+	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi``_git_prompt`$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
+
+_git_prompt () {
+	if git-rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
+		local branch=`git-symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}:"`git-rev-parse --show-prefix`
+		git-diff --quiet || branch="$branch*"
+
+		echo "$branch\n"
+	fi
+}
 
 export EDITOR='vim'
 export VISUAL='vim'
@@ -107,6 +117,7 @@ _vc-diff () {
 	local vc=$1
 	shift
 
+	# Might want to consider using 'select' to choose which files to edit in which order
 	for file in "$@"; do
 		if [ ! -e "$file" ]; then
 			echo "File not found: $file"
@@ -168,6 +179,27 @@ sd () {
 
 cvs-diff () {
 	_vc-diff 'cvs diff' "$@"
+}
+
+git-files-in-branch () {
+	if [ "$1" ]; then
+		git-log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
+	else
+		git-log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
+	fi
+}
+
+git-mark-branch-old () {
+	local branch=
+	if [ "$1" ]; then
+		branch=$1
+	else
+		local branch=`git-symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}"
+	fi
+
+	local first_letter=${branch:0:1}
+	git-branch -m {$first_letter,`echo $first_letter | tr [:lower:] [:upper:]`}${branch#$first_letter};
 }
 
 
@@ -351,6 +383,21 @@ _svnadmin () {
 }
 complete -o filenames -F _svnadmin svnadmin
 
+_bzr () {
+	local current=$2
+	local previous=$3
+	local commands='add annotate bind branch break-lock cat check checkout commit conflicts deleted diff export help ignore ignored info init init-repository
+	log ls merge missing mkdir mv nick pack plugins pull push reconcile reconfigure remerge remove remove-tree renames resolve revert revno root send serve
+	sign-my-commits split status switch tag tags testament unbind uncommit update upgrade version version-info whoami'
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+	else
+		COMPREPLY=(`compgen -X '.bzr' -f -- "$current"`)
+	fi
+}
+complete -o filenames -F _bzr bzr
+
 _git () {
 	local current=$2
 	local previous=$3
@@ -529,11 +576,19 @@ _vmrun () {
 		return
 	fi
 
+	# Generate paths to .vmx files
 	if expr "$commands" : ".*\<$previous\>" >/dev/null; then
 		if [ "${current#/}" != "$current" ]; then
 			COMPREPLY=(`compgen -S '.vmx' -W "$(command find $vmdir -maxdepth 1 -mindepth 1 | sed -e's#/[^/]*$#&&#')" -- "$current"`)
 		else
 			COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
+		fi
+	fi
+
+	# List snapshot names if reverting
+	if expr "$previous" : "/" >/dev/null; then
+		if expr "${COMP_WORDS[1]}" : "revert" >/dev/null; then
+			COMPREPLY=(`compgen -W "$(command vmrun listSnapshots ${COMP_WORDS[2]} | sed -e "1d ; s/^.*$/'&'/")" -- "$current"`)
 		fi
 	fi
 
@@ -680,9 +735,9 @@ fi
 
 fix_everything () {
 	i=1
-	sp='/-\|'
+	s='/-\|'
 	echo -n ' '
 	while true; do
-		echo -en "\b${sp:i++%${#sp}:1}"
+		echo -en "\b${s:i++%${#s}:1}"
 	done
 }
