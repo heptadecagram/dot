@@ -15,6 +15,7 @@
 /.dmrc
 /.esd_auth
 /.evolution
+/.fontconfig
 /.gconf
 /.gconfd
 /.gitk
@@ -25,9 +26,11 @@
 /.gtk-bookmarks
 /.gtkrc-1.2-gnome2
 /.hplip
+/.macromedia
 /.metacity
 /.mozilla
 /.nautilus
+/.openoffice.org2
 /.pulse-cookie
 /.pulse
 /.purple
@@ -37,6 +40,7 @@
 /.thumbnails
 /.update-manager-core
 /.vmware
+/.wine
 /.xsession-errors
 !src
 !thought_residue
