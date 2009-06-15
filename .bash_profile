@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.06.11
+# Last Modified: 2009.06.14
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -52,10 +52,10 @@ prompt_command () {
 PROMPT_COMMAND="prompt_command"
 
 _git_prompt () {
-	if git-rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
-		local branch=`git-symbolic-ref HEAD 2>/dev/null`
-		branch="${branch#refs/heads/}:"`git-rev-parse --show-prefix`
-		git-diff --quiet || branch="$branch*"
+	if git rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}:"`git rev-parse --show-prefix`
+		git diff --quiet || branch="$branch*"
 
 		echo "$branch\n"
 	fi
@@ -137,12 +137,12 @@ gd-branch () {
 	shift
 
 	for file in `git-files-in-branch $branch`; do
-		file=`git-rev-parse --show-cdup`$file
+		file=`git rev-parse --show-cdup`$file
 		if [ ! -e "$file" ]; then
 			echo "File not found: $file"
 		else
 			TEMP=/tmp/tmp.$$.`basename $file`
-			git-diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			git diff master..$branch "$file" | patch -so "$TEMP" "$file"
 			meld "$file" "$TEMP"
 			rm -f "$TEMP"
 		fi
@@ -154,12 +154,12 @@ gd-choice () {
 	shift
 
 	select file in `git-files-in-branch $branch`; do
-		file=`git-rev-parse --show-cdup`$file
+		file=`git rev-parse --show-cdup`$file
 		if [ ! -e "$file" ]; then
 			echo "File not found: $file"
 		else
 			TEMP=/tmp/tmp.$$.`basename $file`
-			git-diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			git diff master..$branch "$file" | patch -so "$TEMP" "$file"
 			meld "$file" "$TEMP"
 			rm -f "$TEMP"
 		fi
@@ -170,7 +170,7 @@ gd () {
 	_vc-diff 'git diff' "$@"
 }
 gd-all () {
-	_vc-diff 'git diff --cached' `git-status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
+	_vc-diff 'git diff --cached' `git status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
 }
 
 sd () {
@@ -183,23 +183,23 @@ cvs-diff () {
 
 git-files-in-branch () {
 	if [ "$1" ]; then
-		git-log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
+		git log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
 	else
-		git-log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
+		git log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
 	fi
 }
 
 git-mark-branch-old () {
-	local branch=
+	local branch
 	if [ "$1" ]; then
 		branch=$1
 	else
-		local branch=`git-symbolic-ref HEAD 2>/dev/null`
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
 		branch="${branch#refs/heads/}"
 	fi
 
 	local first_letter=${branch:0:1}
-	git-branch -m {$first_letter,`echo $first_letter | tr [:lower:] [:upper:]`}${branch#$first_letter};
+	git branch -m {$first_letter,`echo $first_letter | tr [:lower:] [:upper:]`}${branch#$first_letter};
 }
 
 
@@ -417,10 +417,13 @@ _git () {
 		COMPREPLY=(`compgen -X '.git' -f -- "$current"`)
 	fi
 
+	# TODO This should try to determine if this was the command, rather than
+	# just the previous word
 	case "$previous" in
+		branch) _git-branch "$@" ;;
 		checkout) _git-checkout "$@" ;;
 		diff) _git-diff "$@" ;;
-		diff) _git-diff "$@" ;;
+		remote) _git-remote "$@" ;;
 	esac
 }
 complete -F _git git g
@@ -436,9 +439,9 @@ _git_branch_completion () {
 	fi
 
 	if [ "$showall" ]; then
-		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git-branch -a | sed -e's/\*//')" -- "$current"`)
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git branch -a | sed -e's/\*//')" -- "$current"`)
 	else
-		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git-branch | sed -e's/\*//')" -- "$current"`)
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git branch | sed -e's/\*//')" -- "$current"`)
 	fi
 }
 complete -F _git_branch_completion gd-branch gd-choice git-files-in-branch
@@ -555,7 +558,7 @@ _git-remote () {
 
 	case "$previous" in
 	show | rm | prune | update)
-		COMPREPLY=(`compgen -W "$(git-remote)" -- "$current"`)
+		COMPREPLY=(`compgen -W "$(git remote)" -- "$current"`)
 		;;
 	*)
 		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
