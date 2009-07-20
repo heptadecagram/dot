@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.06.14
+# Last Modified: 2009.07.30
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -423,6 +423,9 @@ _git () {
 		branch) _git-branch "$@" ;;
 		checkout) _git-checkout "$@" ;;
 		diff) _git-diff "$@" ;;
+		log) _git-log "$@" ;;
+		merge) _git-checkout "$@" ;;
+		rebase) _git-rebase "$@" ;;
 		remote) _git-remote "$@" ;;
 	esac
 }
@@ -550,6 +553,26 @@ _git-branch () {
 	esac
 }
 complete -o default -F _git-branch git-branch
+
+_git-rebase () {
+	local current=$2
+	local previous=$3
+	local FLAGS='-i -C: -m -p -s: -v'
+	local OPTIONS='--abort --continue --interactive --merge --onto --preserve-merges --skip --strategy= --verbose --whitespace='
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	*)
+		_git_branch_completion
+		;;
+	esac
+}
+complete -o default -F _git-rebase git-rebase
 
 _git-remote () {
 	local current=$2
