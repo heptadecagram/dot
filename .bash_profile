@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.07.30
+# Last Modified: 2009.12.12
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -422,7 +422,9 @@ _git () {
 	case "$previous" in
 		branch) _git-branch "$@" ;;
 		checkout) _git-checkout "$@" ;;
+		commit) _git-commit "$@" ;;
 		diff) _git-diff "$@" ;;
+		format-patch) _git_branch_completion "$@" ;;
 		log) _git-log "$@" ;;
 		merge) _git-checkout "$@" ;;
 		rebase) _git-rebase "$@" ;;
@@ -455,7 +457,7 @@ _git-checkout () {
 	local previous=$3
 
 	for param in "${COMP_WORDS[@]}"; do
-		if [ "$param" = '-' ]; then
+		if [ "$param" = '--' ]; then
 			COMPREPLY=(`compgen -o filenames -- "$current"`)
 			return
 		elif [ "$param" = "$current" ]; then
@@ -480,6 +482,55 @@ _git-checkout () {
 	esac
 }
 complete -o default -F _git-checkout git-checkout git-merge
+
+_git-commit () {
+	local command=$1
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--all --allow-empty --amend --author= --cleanup= --edit --file --interactive --message= --no-verify --reedit-message= --reuse-message= --signoff --template='
+	local FLAGS='-a -c -C -e -F -i -m -o -s -t -u -v'
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-commit git-commit
+
+_git-branch () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--abbrev= --color --no-abbrev --no-color --no-track --track'
+	local FLAGS='-a -d -D -f -l -m -M -r -v'
+
+	case "$previous" in
+	-d | -m)
+		_git_branch_completion
+		;;
+	-r)
+		_git_branch_completion 1
+		;;
+	*)
+		COMPREPLY=()
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-branch git-branch
 
 _git-diff () {
 	local current=$2
@@ -550,6 +601,7 @@ _git-branch () {
 	-*)
 		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
 		;;
+		# TODO Complete on files or branches?
 	esac
 }
 complete -o default -F _git-branch git-branch
