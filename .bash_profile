@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.07.30
+# Last Modified: 2009.12.12
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -411,10 +411,16 @@ _git () {
 	show-ref sh-setup stash status stripspace submodule svn symbolic-ref tag tar-tree unpack-file unpack-objects update-index update-ref update-server-info
 	upload-archive upload-pack var verify-pack verify-tag whatchanged write-tree'
 
-	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
-	else
-		COMPREPLY=(`compgen -X '.git' -f -- "$current"`)
+	# Default to the list of files available
+	COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+
+	# If a full command was not found, then complete on that command or option
+	if [ -z "$git_command" ]; then
+		if [ "$current" = "${current##--*}" ]; then
+			COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		fi
 	fi
 
 	# TODO This should try to determine if this was the command, rather than
@@ -422,14 +428,16 @@ _git () {
 	case "$previous" in
 		branch) _git-branch "$@" ;;
 		checkout) _git-checkout "$@" ;;
+		commit) _git-commit "$@" ;;
 		diff) _git-diff "$@" ;;
+		format-patch) _git_format-patch "$@" ;;
 		log) _git-log "$@" ;;
 		merge) _git-checkout "$@" ;;
 		rebase) _git-rebase "$@" ;;
 		remote) _git-remote "$@" ;;
 	esac
 }
-complete -F _git git g
+complete -o filenames -F _git git g
 
 _git_branch_completion () {
 	local showall=$1
@@ -454,9 +462,13 @@ _git-checkout () {
 	local current=$2
 	local previous=$3
 
+	local OPTIONS='--no-track --track'
+	local FLAGS='-b -f -l -m -q'
+
+
 	for param in "${COMP_WORDS[@]}"; do
-		if [ "$param" = '-' ]; then
-			COMPREPLY=(`compgen -o filenames -- "$current"`)
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
 			return
 		elif [ "$param" = "$current" ]; then
 			break
@@ -468,9 +480,6 @@ _git-checkout () {
 		# When creating a new branch, do not complete branch or filenames
 		COMPREPLY=()
 		;;
-	-)
-		COMPREPLY=(`compgen -o filenames`)
-		;;
 	$command)
 		_git_branch_completion
 		;;
@@ -478,15 +487,85 @@ _git-checkout () {
 		_git_branch_completion 1
 		;;
 	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
 }
 complete -o default -F _git-checkout git-checkout git-merge
+
+_git-commit () {
+	local command=$1
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--all --allow-empty --amend --author= --cleanup= --edit --file --interactive --message= --no-verify --reedit-message= --reuse-message= --signoff --template='
+	local FLAGS='-a -c -C -e -F -i -m -o -s -t -u -v'
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-commit git-commit
+
+_git-branch () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--abbrev= --color --no-abbrev --no-color --no-track --track'
+	local FLAGS='-a -d -D -f -l -m -M -r -v'
+
+	case "$previous" in
+	-d | -m)
+		_git_branch_completion
+		;;
+	-r)
+		_git_branch_completion 1
+		;;
+	*)
+		COMPREPLY=()
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-branch git-branch
 
 _git-diff () {
 	local current=$2
 	local previous=$3
 
 	local FLAGS='-a -b -B -C -l: -M -p -R -S: -u -U: -w -z'
-	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color --color-words --diff-filter= --dst-prefix= --exit-code --ext-diff --find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol --ignore-space-change --name-only --name-status --no-color --no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --pickaxe-all --pickaxe-regex --quiet --raw --shortstat --src-prefix= --stat --summary --text --unified='
+	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color --color-words --diff-filter= --dst-prefix= --exit-code --ext-diff
+	--find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol --ignore-space-change --name-only --name-status --no-color
+	--no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --pickaxe-all --pickaxe-regex --quiet --raw
+	--shortstat --src-prefix= --stat --summary --text --unified='
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
 
 	case "$previous" in
 	-b)
@@ -524,12 +603,56 @@ _git-diff () {
 }
 complete -o default -F _git-diff git-diff
 
-_git-branch () {
+_git-format-patch () {
 	local current=$2
 	local previous=$3
 
-	local OPTIONS='--abbrev= --color --no-abbrev --no-color --no-track --track'
-	local FLAGS='-a -d -D -f -l -m -M -r -v'
+	local FLAGS='-k -n -N -o -s'
+	local OPTIONS='--attach --attach= --cc --cover-letter --ignore-if-in-upstream --inline --inline= --in-reply-to= --no-numbered --numbered --numbered-files --signoff --start-number --stdout --subject-prefix= --suffix= --thread'
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-format-patch git-format-patch
+
+_git-log () {
+	local current="${COMP_WORDS[COMP_CWORD]}"
+	local previous=$3
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
 
 	case "$previous" in
 	-d | -m)
@@ -550,6 +673,7 @@ _git-branch () {
 	-*)
 		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
 		;;
+		# TODO Complete on files or branches?
 	esac
 }
 complete -o default -F _git-branch git-branch
