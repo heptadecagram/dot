@@ -6,7 +6,7 @@
  * First  Author: Liam Bryan
  * First Created: 2005.04.21 14:11:12
  * Last Modifier: Liam Echlin
- * Last Modified: 2008.05.02
+ * Last Modified: 2010.11.30
 
 */
 
@@ -15,23 +15,23 @@
 
 int main(int argc, char** argv) {
 	printf("size\ttype\n");
-	printf("%d\t", sizeof(char) );
+	printf("%zu\t", sizeof(char) );
 	printf("char\n");
-	printf("%d\t", sizeof(short) );
+	printf("%zu\t", sizeof(short) );
 	printf("short\n");
-	printf("%d\t", sizeof(int) );
+	printf("%zu\t", sizeof(int) );
 	printf("int\n");
-	printf("%d\t", sizeof(long) );
+	printf("%zu\t", sizeof(long) );
 	printf("long\n");
-	printf("%d\t", sizeof(long int) );
+	printf("%zu\t", sizeof(long int) );
 	printf("long int\n");
-	printf("%d\t", sizeof(long long) );
+	printf("%zu\t", sizeof(long long) );
 	printf("long long\n");
-	printf("%d\t", sizeof(float) );
+	printf("%zu\t", sizeof(float) );
 	printf("float\n");
-	printf("%d\t", sizeof(double) );
+	printf("%zu\t", sizeof(double) );
 	printf("double\n");
-	printf("%d\t", sizeof(long double) );
+	printf("%zu\t", sizeof(long double) );
 	printf("long double\n");
 	return EXIT_SUCCESS;
 }
