@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2005.10.24 21:00:33
 # Last Modifier: Liam Echlin
-# Last Modified: 2008.05.20
+# Last Modified: 2010.12.04
 
 CC = gcc
 
@@ -16,8 +16,8 @@ beeper: beeper.c
 	$(CC) -O3 -o beeper beeper.c
 	mv beeper $(HOME)/bin/
 
-diff_tree: differ.pl
-	ln -s $(HOME)/src/differ.pl $(HOME)/bin/diff_tree.pl
+diff_tree: diff-dir
+	ln -s $(HOME)/src/diff-dir $(HOME)/bin/diff-dir
 
 history_check: hist.rb
 	ln -s $(HOME)/src/hist.rb $(HOME)/bin/history_check.rb
