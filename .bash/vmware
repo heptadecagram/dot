@@ -1,0 +1,45 @@
+#!/usr/local/bin/bash
+# Project  Name: None
+# File / Folder: /.bash/vmware
+# File Language: sh
+# Copyright (C): 2010 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2010.12.05
+# Last Modifier: Liam Echlin
+# Last Modified: 2010.12.05
+
+_vmrun () {
+	local current=$2
+	local previous=$3
+	local commands='start stop reset suspend listSnapshots snapshot
+	deleteSnapshot revertToSnapshot runProgramInGuest fileExistsInGuest
+	setSharedFolderState addSharedFolder removeSharedFolder listProcessesInGuest
+	killProcessInGuest runScriptInGuest deleteFileInGuest createDirectoryInGuest
+	deleteDirectoryInGuest listDirectoryInGuest copyFileFromHostToGuest
+	copyFileFromGuestToHosta renameFileInGuest list upgradevm installtools'
+
+	local vmdir=/home/$USER/vmware
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		return
+	fi
+
+	# Generate paths to .vmx files
+	if expr "$commands" : ".*\<$previous\>" >/dev/null; then
+		if [ "${current#/}" != "$current" ]; then
+			COMPREPLY=(`compgen -S '.vmx' -W "$(command find $vmdir -maxdepth 1 -mindepth 1 | sed -e's#/[^/]*$#&&#')" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
+		fi
+	fi
+
+	# List snapshot names if reverting
+	if expr "$previous" : "/" >/dev/null; then
+		if expr "${COMP_WORDS[1]}" : "revert" >/dev/null; then
+			COMPREPLY=(`compgen -W "$(command vmrun listSnapshots ${COMP_WORDS[2]} | sed -e "1d ; s/^.*$/'&'/")" -- "$current"`)
+		fi
+	fi
+
+}
+complete -o default -F _vmrun vmrun

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Project  Name: dot
 # File / Folder: ~/.bash_profile
 # File Language: sh
@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.12.12
+# Last Modified: 2010.12.05
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -401,15 +401,24 @@ complete -o filenames -F _bzr bzr
 _git () {
 	local current=$2
 	local previous=$3
-	local commands='add am annotate apply archive bisect blame branch bundle cat-file check-attr checkout checkout-index check-ref-format cherry cherry-pick
-	clean clone commit commit-tree config count-objects cvsexportcommit cvsimport cvsserver daemon describe diff diff-files diff-index diff-tree fast-export
-	fast-import fetch fetch-pack filter-branch fmt-merge-msg for-each-ref format-patch fsck fsck-objects gc get-tar-commit-id grep hash-object help
-	http-fetch http-push imap-send index-pack init init-db instaweb log lost-found ls-files ls-remote ls-tree mailinfo mailsplit merge merge-base merge-file
-	merge-index merge-octopus merge-one-file merge-ours merge-recursive merge-resolve merge-stupid merge-subtree merge-tree mergetool mktag mktree mv
-	name-rev pack-objects pack-redundant pack-refs parse-remote patch-id peek-remote prune prune-packed pull push quiltimport read-tree rebase receive-pack
-	reflog relink remote repack repo-config request-pull rerere reset revent rev-list rev-parse rm send-pack shell shortlog show show-branch show-index
-	show-ref sh-setup stash status stripspace submodule svn symbolic-ref tag tar-tree unpack-file unpack-objects update-index update-ref update-server-info
-	upload-archive upload-pack var verify-pack verify-tag whatchanged write-tree'
+	local commands='add am annotate apply archive bisect blame branch bundle
+	cat-file check-attr checkout checkout-index check-ref-format cherry
+	cherry-pick clean clone commit commit-tree config count-objects
+	cvsexportcommit cvsimport cvsserver daemon describe diff diff-files
+	diff-index diff-tree fast-export fast-import fetch fetch-pack filter-branch
+	fmt-merge-msg for-each-ref format-patch fsck fsck-objects gc
+	get-tar-commit-id grep hash-object help http-fetch http-push imap-send
+	index-pack init init-db instaweb log lost-found ls-files ls-remote ls-tree
+	mailinfo mailsplit merge merge-base merge-file merge-index merge-octopus
+	merge-one-file merge-ours merge-recursive merge-resolve merge-stupid
+	merge-subtree merge-tree mergetool mktag mktree mv name-rev pack-objects
+	pack-redundant pack-refs parse-remote patch-id peek-remote prune prune-packed
+	pull push quiltimport read-tree rebase receive-pack reflog relink remote
+	repack repo-config request-pull rerere reset revent rev-list rev-parse rm
+	send-pack shell shortlog show show-branch show-index show-ref sh-setup stash
+	status stripspace submodule svn symbolic-ref tag tar-tree unpack-file
+	unpack-objects update-index update-ref update-server-info upload-archive
+	upload-pack var verify-pack verify-tag whatchanged write-tree'
 
 	# Default to the list of files available
 	COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
@@ -504,7 +513,9 @@ _git-commit () {
 	local current=$2
 	local previous=$3
 
-	local OPTIONS='--all --allow-empty --amend --author= --cleanup= --edit --file --interactive --message= --no-verify --reedit-message= --reuse-message= --signoff --template='
+	local OPTIONS='--all --allow-empty --amend --author= --cleanup= --edit --file
+	--interactive --message= --no-verify --reedit-message= --reuse-message=
+	--signoff --template='
 	local FLAGS='-a -c -C -e -F -i -m -o -s -t -u -v'
 
 	case "$current" in
@@ -553,10 +564,13 @@ _git-diff () {
 	local previous=$3
 
 	local FLAGS='-a -b -B -C -l: -M -p -R -S: -u -U: -w -z'
-	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color --color-words --diff-filter= --dst-prefix= --exit-code --ext-diff
-	--find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol --ignore-space-change --name-only --name-status --no-color
-	--no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --pickaxe-all --pickaxe-regex --quiet --raw
-	--shortstat --src-prefix= --stat --summary --text --unified='
+	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color
+	--color-words --diff-filter= --dst-prefix= --exit-code --ext-diff
+	--find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol
+	--ignore-space-change --name-only --name-status --no-color --no-ext-diff
+	--no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat
+	--pickaxe-all --pickaxe-regex --quiet --raw --shortstat --src-prefix= --stat
+	--summary --text --unified='
 
 	for param in "${COMP_WORDS[@]}"; do
 		if [ "$param" = '--' ]; then
@@ -608,7 +622,9 @@ _git-format-patch () {
 	local previous=$3
 
 	local FLAGS='-k -n -N -o -s'
-	local OPTIONS='--attach --attach= --cc --cover-letter --ignore-if-in-upstream --inline --inline= --in-reply-to= --no-numbered --numbered --numbered-files --signoff --start-number --stdout --subject-prefix= --suffix= --thread'
+	local OPTIONS='--attach --attach= --cc --cover-letter --ignore-if-in-upstream
+	--inline --inline= --in-reply-to= --no-numbered --numbered --numbered-files
+	--signoff --start-number --stdout --subject-prefix= --suffix= --thread'
 
 	for param in "${COMP_WORDS[@]}"; do
 		if [ "$param" = '--' ]; then
@@ -682,7 +698,8 @@ _git-rebase () {
 	local current=$2
 	local previous=$3
 	local FLAGS='-i -C: -m -p -s: -v'
-	local OPTIONS='--abort --continue --interactive --merge --onto --preserve-merges --skip --strategy= --verbose --whitespace='
+	local OPTIONS='--abort --continue --interactive --merge --onto
+	--preserve-merges --skip --strategy= --verbose --whitespace='
 
 	case "$current" in
 	--*)
@@ -713,38 +730,6 @@ _git-remote () {
 	esac
 }
 complete -o default -F _git-remote git-remote
-
-_vmrun () {
-	local current=$2
-	local previous=$3
-	local commands='start stop reset suspend listSnapshots snapshot deleteSnapshot revertToSnapshot runProgramInGuest fileExistsInGuest setSharedFolderState addSharedFolder removeSharedFolder listProcessesInGuest killProcessInGuest runScriptInGuest deleteFileInGuest createDirectoryInGuest deleteDirectoryInGuest listDirectoryInGuest copyFileFromHostToGuest copyFileFromGuestToHosta renameFileInGuest list upgradevm installtools'
-
-	local vmdir=/home/$USER/vmware
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
-		return
-	fi
-
-	# Generate paths to .vmx files
-	if expr "$commands" : ".*\<$previous\>" >/dev/null; then
-		if [ "${current#/}" != "$current" ]; then
-			COMPREPLY=(`compgen -S '.vmx' -W "$(command find $vmdir -maxdepth 1 -mindepth 1 | sed -e's#/[^/]*$#&&#')" -- "$current"`)
-		else
-			COMPREPLY=(`compgen -P "$vmdir/" -S '.vmx' -W "$(command ls $vmdir | sed -e's#.*#&/&#')" -- "$current"`)
-		fi
-	fi
-
-	# List snapshot names if reverting
-	if expr "$previous" : "/" >/dev/null; then
-		if expr "${COMP_WORDS[1]}" : "revert" >/dev/null; then
-			COMPREPLY=(`compgen -W "$(command vmrun listSnapshots ${COMP_WORDS[2]} | sed -e "1d ; s/^.*$/'&'/")" -- "$current"`)
-		fi
-	fi
-
-}
-complete -o default -F _vmrun vmrun
-
 
 _ssh () {
 	local current=$2
