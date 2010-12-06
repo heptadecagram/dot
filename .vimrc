@@ -230,3 +230,7 @@ inoremap <Tab> <C-R>=TabComplete()<CR>
 
 let b:dcp_host = 'puma'
 nmap <silent> <F8> :silent !dcp -h =b:dcp_host %
+
+function! SyntaxItem()
+	return synIDattr(synID(line("."),col("."),1),"name")
+endfunction
