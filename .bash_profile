@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2010.12.05
+# Last Modified: 2010.12.06
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -257,9 +257,10 @@ _cvs () {
  	local previous=$3
 
 	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
-	local commands='ad add new  admin annotate checkout ci co commit diff edit editors export
-	history import init log login logout pserver rannotate rdiff release remove
-	rlog rtag server status tag unedit update version watch watchers'
+	local commands='ad add new  admin annotate checkout ci co commit diff edit
+	editors export history import init log login logout pserver rannotate rdiff
+	release remove rlog rtag server status tag unedit update version watch
+	watchers'
 
 	COMPREPLY=()
 
@@ -386,9 +387,12 @@ complete -o filenames -F _svnadmin svnadmin
 _bzr () {
 	local current=$2
 	local previous=$3
-	local commands='add annotate bind branch break-lock cat check checkout commit conflicts deleted diff export help ignore ignored info init init-repository
-	log ls merge missing mkdir mv nick pack plugins pull push reconcile reconfigure remerge remove remove-tree renames resolve revert revno root send serve
-	sign-my-commits split status switch tag tags testament unbind uncommit update upgrade version version-info whoami'
+	local commands='add annotate bind branch break-lock cat check checkout commit
+	conflicts deleted diff export help ignore ignored info init init-repository
+	log ls merge missing mkdir mv nick pack plugins pull push reconcile
+	reconfigure remerge remove remove-tree renames resolve revert revno root send
+	serve sign-my-commits split status switch tag tags testament unbind uncommit
+	update upgrade version version-info whoami'
 
 	if [ $COMP_CWORD -eq 1 ]; then
 		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
