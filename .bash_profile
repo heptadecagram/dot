@@ -194,7 +194,9 @@ cvs-diff () {
 }
 
 git-files-in-branch () {
-	if [ "$1" ]; then
+	if [ "$2" ]; then
+		git log --name-only --pretty=format: $1..$2 |  grep '.' | sort | uniq
+	elif [ "$1" ]; then
 		git log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
 	else
 		git log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
@@ -903,6 +905,40 @@ _command () {
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
 complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
+
+__get_action() {
+	local index=1
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			return "${COMP_WORDS[$index]}"
+		fi
+		index=$(($index + 1))
+	done
+}
+
+_flag_option_action_complete() {
+	local FLAGS=$1
+	local OPTIONS=$2
+	local ACTIONS=$3
+
+	local current_action=__get_action
+
+	# Default to the list of files available
+	COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+
+	# If a full command was not found, then complete on that command or option
+	if [ -z "$current_action" ]; then
+		if [ "${current##-*}" ]; then
+			COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+		elif [ "${current##--*}" ]; then
+			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		fi
+	fi
+
+}
 
 if [ -a "$HOME/.local/bash_profile" ]; then
 	source ~/.local/bash_profile
