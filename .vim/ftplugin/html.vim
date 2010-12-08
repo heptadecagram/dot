@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.09.10
+" Last Modified: 2010.07.29
 
 if exists('b:loaded_html')
 	finish
@@ -39,6 +39,40 @@ imap <buffer> <Leader>cm <!--  -->bhi
 vmap <buffer> <Leader>cm `>a -->`<i<!--
 
 " Template::Toolkit mappings
+"
+nmap <silent> gd "lyiwh"ry :call TemplateToolkit_gd(@l)<CR>
+nmap <silent> lf :call TemplateToolkitFunctionList()<CR>
+
+function! TemplateToolkit_gd(word)
+	call search('\[%-\?\s*MACRO\s\+' . a:word . '\>', 'b')
+endfunction
+
+function! TemplateToolkitFunctionList()
+	normal mlgg
+	belowright new
+
+	setlocal noreadonly modifiable noswapfile nowrap
+	setlocal buftype=nowrite
+	setlocal bufhidden=delete
+
+	call setline('.', '# MACRO List')
+	wincmd k
+	while search('\[%-\?\s*MACRO\s\+', 'We')
+		normal w"ryiw
+		wincmd j
+		call append('$', @r)
+		wincmd k
+	endwhile
+	normal 'l
+
+	wincmd j
+	execute 'resize ' . line('$')
+	setlocal nomodifiable
+	normal t
+
+	map <silent> <buffer> <CR> "lyiw:q<CR>:call TemplateToolkit_gd(@l)<CR>
+endfunction
+
 imap <buffer> <Leader>tt [%  %]hhi
 imap <buffer> <Leader>tg [% GET  %]hhi
 imap <buffer> <Leader>tc [% CALL  %]hhi
