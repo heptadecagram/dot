@@ -133,18 +133,30 @@ _vc-diff () {
 }
 
 gd-branch () {
-	local branch=$1
-	shift
+	local from=$1
+	local branch=$2
 
-	for file in `git-files-in-branch $branch`; do
-		file=`git rev-parse --show-cdup`$file
-		if [ ! -e "$file" ]; then
-			echo "File not found: $file"
+	if [ ! "$branch" ]; then
+		branch=$from
+		from=master
+	fi
+
+	for file in `git-files-in-branch $from $branch`; do
+		local_file=`git rev-parse --show-cdup`$file
+		if ! git rev-parse $branch:$file >/dev/null 2>/dev/null ; then
+			echo "Deleted File $file"
+		elif ! git rev-parse $from:$file >/dev/null 2>/dev/null ; then
+			echo "New File $file"
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git show $branch:$file > "$TEMP"
+			vim -g "$TEMP"
 		else
 			TEMP=/tmp/tmp.$$.`basename $file`
-			git diff master..$branch "$file" | patch -so "$TEMP" "$file"
-			meld "$file" "$TEMP"
-			rm -f "$TEMP"
+			git show $from:$file > "$TEMP.original"
+			git diff $from..$branch -- "$local_file" | patch -so "$TEMP" "$TEMP.original"
+
+			meld "$TEMP.original" "$TEMP"
+			rm -f "$TEMP" "$TEMP.original"
 		fi
 	done
 }
