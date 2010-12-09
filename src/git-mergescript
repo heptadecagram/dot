@@ -1,0 +1,18 @@
+#!/bin/sh
+# Project  Name: None
+# File / Folder: /git-mergescript
+# File Language: sh
+# Copyright (C): 2010 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2010.09.14
+# Last Modifier: Liam Echlin
+# Last Modified: 2010.09.20
+
+BASE="$1"
+LOCAL="$2"
+REMOTE="$3"
+MERGED="$4"
+
+echo "{$REMOTE}"
+
+vim -c"vert diffsplit $BASE" -c"tabe $LOCAL" -c"vert diffsplit $MERGED" -c"vert diffsplit $REMOTE" -c"tabe $BASE" -c"vert diffsplit $REMOTE" -- $LOCAL 

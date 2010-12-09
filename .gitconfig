@@ -9,3 +9,7 @@
 	branch = true
 	interactive = true
 	status = true
+[merge]
+	tool = vimdiffmeld
+[mergetool "vimdiffmeld"]
+	cmd = $HOME/bin/git-mergescript $BASE $LOCAL $REMOTE $MERGED
