@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2010.12.06
+# Last Modified: 2010.12.09
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -124,8 +124,8 @@ _vc-diff () {
 		else
 			TEMP=/tmp/tmp.$$.`basename $file`
 			$vc "$file" | patch -sRo "$TEMP" "$file"
-			#vimdiff -c 'set diffopt=filler,iwhite' -c 'wincmd l' -c 'set readonly' -c 'set nomodifiable' -c 'wincmd h' -c '0' -c 'normal ]c' "$TEMP" "$file"
-			meld "$TEMP" "$file"
+			vimdiff -c 'set diffopt=filler,iwhite' -c 'wincmd l' -c 'set readonly' -c 'set nomodifiable' -c 'wincmd h' -c '0' -c 'normal ]c' "$TEMP" "$file"
+			#meld "$TEMP" "$file"
 			#echo "meld  $TEMP $file"
 			rm -f "$TEMP"
 		fi
@@ -257,7 +257,7 @@ _cvs () {
  	local previous=$3
 
 	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
-	local commands='ad add new  admin annotate checkout ci co commit diff edit
+	local ACTIONS='ad add new  admin annotate checkout ci co commit diff edit
 	editors export history import init log login logout pserver rannotate rdiff
 	release remove rlog rtag server status tag unedit update version watch
 	watchers'
@@ -268,7 +268,7 @@ _cvs () {
 		if [ "${current#-}" != "$current" ]; then
 			COMPREPLY=(`compgen -W "$global_options" -- $current`)
 		else
-			COMPREPLY=(`compgen -W "$commands" -- $current`)
+			COMPREPLY=(`compgen -W "$ACTIONS" -- $current`)
 		fi
 		return
 	fi
@@ -372,11 +372,11 @@ complete -o filenames -F _svn svn s
 _svnadmin () {
 	local current=$2
 	local previous=$3
-	local commands='crashtest create deltify dump help hotcopy list-dblogs
+	local ACTIONS='crashtest create deltify dump help hotcopy list-dblogs
 	list-unused-dblogs load lslocks lstxns recover rmlocks rmtxns setlog verify'
 
 	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
 		return
 	else
 		COMPREPLY=(`compgen -f -- "$current"`)
@@ -387,7 +387,7 @@ complete -o filenames -F _svnadmin svnadmin
 _bzr () {
 	local current=$2
 	local previous=$3
-	local commands='add annotate bind branch break-lock cat check checkout commit
+	local ACTIONS='add annotate bind branch break-lock cat check checkout commit
 	conflicts deleted diff export help ignore ignored info init init-repository
 	log ls merge missing mkdir mv nick pack plugins pull push reconcile
 	reconfigure remerge remove remove-tree renames resolve revert revno root send
@@ -395,7 +395,7 @@ _bzr () {
 	update upgrade version version-info whoami'
 
 	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
 	else
 		COMPREPLY=(`compgen -X '.bzr' -f -- "$current"`)
 	fi
@@ -404,8 +404,7 @@ complete -o filenames -F _bzr bzr
 
 _git () {
 	local current=$2
-	local previous=$3
-	local commands='add am annotate apply archive bisect blame branch bundle
+	local ACTIONS='add am annotate apply archive bisect blame branch bundle
 	cat-file check-attr checkout checkout-index check-ref-format cherry
 	cherry-pick clean clone commit commit-tree config count-objects
 	cvsexportcommit cvsimport cvsserver daemon describe diff diff-files
@@ -424,21 +423,34 @@ _git () {
 	unpack-objects update-index update-ref update-server-info upload-archive
 	upload-pack var verify-pack verify-tag whatchanged write-tree'
 
+	local OPTIONS='--bare --exec-path= --git-dir= --help --no-pager --paginate --work-tree= --version'
+
+	local index=1
+	local current_action=
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			current_action="${COMP_WORDS[$index]}"
+			break
+		fi
+		index=$(($index + 1))
+	done
+
 	# Default to the list of files available
 	COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
 
 	# If a full command was not found, then complete on that command or option
-	if [ -z "$git_command" ]; then
-		if [ "$current" = "${current##--*}" ]; then
-			COMPREPLY=(`compgen -W "$commands" -- "$current"`)
-		else
+	if [ -z "$current_action" ]; then
+		if [ "${current##-*}" ]; then
+			COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+		elif [ "${current##--*}" ]; then
 			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
 		fi
 	fi
 
-	# TODO This should try to determine if this was the command, rather than
-	# just the previous word
-	case "$previous" in
+	case "$current_action" in
 		branch) _git-branch "$@" ;;
 		checkout) _git-checkout "$@" ;;
 		commit) _git-commit "$@" ;;
@@ -665,6 +677,18 @@ _git-log () {
 	local current="${COMP_WORDS[COMP_CWORD]}"
 	local previous=$3
 
+	local FLAGS='-a -b -B -C -l -M -p -O -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --check --color --color-words
+	--color-words= --decorate --diff-filter= --dirstat-by-file --dirstat-by-file=
+	--dirstat --dirstat= --dst-prefix= --exit-code --ext-diff
+	--find-copies-harder --follow --full-diff --full-index --ignore-all-space
+	--ignore-space-at-eol --ignore-space-change --ignore-submodules
+	--inter-hunk-context= --log-size --name-only --name-status --no-color
+	--no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw
+	--patch-with-stat --patience --pickaxe-all --pickaxe-regex --quiet --raw
+	--relative --relative= --shortstat --source --src-prefix= --stat --stat=
+	--summary --text --unified='
+
 	for param in "${COMP_WORDS[@]}"; do
 		if [ "$param" = '--' ]; then
 			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
@@ -722,14 +746,14 @@ complete -o default -F _git-rebase git-rebase
 _git-remote () {
 	local current=$2
 	local previous=$3
-	local commands='add rm prune show update'
+	local ACTIONS='add rm prune show update'
 
 	case "$previous" in
 	show | rm | prune | update)
 		COMPREPLY=(`compgen -W "$(git remote)" -- "$current"`)
 		;;
 	*)
-		COMPREPLY=(`compgen -W "$commands" -- "$current"`)
+		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
 		;;
 	esac
 }
@@ -799,15 +823,15 @@ _command () {
 	# switches, get rid of them. Most definitely not foolproof.
 	done=
 	while [ -z $done ] ; do
-	cmd=${COMP_WORDS[1]}
-	    if [[ "$cmd" == -* ]] ; then
-		for (( i=1 ; i<=COMP_CWORD ; i++)) ; do
-		    COMP_WORDS[i]=${COMP_WORDS[i+1]}
-		done
-		COMP_CWORD=$(($COMP_CWORD-1))
-	    else
-		done=1
-	    fi
+		cmd=${COMP_WORDS[1]}
+		if [[ "$cmd" == -* ]] ; then
+			for (( i=1 ; i<=COMP_CWORD ; i++)) ; do
+				COMP_WORDS[i]=${COMP_WORDS[i+1]}
+			done
+			COMP_CWORD=$(($COMP_CWORD-1))
+		else
+			done=1
+		fi
 	done
 
 	if [ $COMP_CWORD -eq 1 ]; then
