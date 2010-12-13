@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2009.12.12
+" Last Modified: 2010.12.13
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -41,17 +41,21 @@ set background=light
 set nojoinspaces
 highlight MatchParen ctermbg=DarkBlue
 
-" Dvorak
-noremap t j
-noremap n k
-noremap s l
-noremap j n
-noremap gn gk
-noremap gt gj
+if executable('lsusb')
+	if system('lsusb | grep Kinesis')
+		" Dvorak
+		noremap t j
+		noremap n k
+		noremap s l
+		noremap j n
+		noremap gn gk
+		noremap gt gj
 
-" Kinesis Mappings
-nnoremap  b
-vnoremap  b
+		" Kinesis Mappings
+		nnoremap  b
+		vnoremap  b
+	endif
+endif
 
 " More logical function
 nmap Y y$
