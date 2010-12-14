@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.12.13
+" Last Modified: 2010.12.14
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -52,8 +52,8 @@ if executable('lsusb')
 		noremap gt gj
 
 		" Kinesis Mappings
-		nnoremap  b
-		vnoremap  b
+		nnoremap <CR> b
+		vnoremap <CR> b
 	endif
 endif
 
@@ -72,12 +72,17 @@ set ruler
 
 " Window mappings
 set wmh=0
+" Adding the control keys to hjkl jump to the window and make it full-screen
 nmap <C-T> <C-W>j<C-W>_
 nmap <C-N> <C-W>k<C-W>_
-" Tabbed Editing
-nnoremap <C-_> gt
-nnoremap <C-S> gt
-nnoremap <C-H> gT
+" Move between windows using arrow keys
+nnoremap <left> <C-W>h
+nnoremap <right> <C-W>l
+nnoremap <up> <C-W>k
+nnoremap <down> <C-W>j
+" Move between tabs using shifted arrow keys
+nnoremap <S-left> gT
+nnoremap <S-right> gt
 
 let &titlestring = hostname() . ":" . fnamemodify(expand("%:p"), ":~")
 let &titleold = hostname()
@@ -117,13 +122,15 @@ if has("autocmd")
 
 endif " has("autocmd")
 
+autocmd BufEnter *.go set filetype=go
+
 autocmd BufEnter *.mkd set filetype=mkd
 
 autocmd BufEnter *.tt set filetype=html
 autocmd BufEnter *.tt set filetype=tt
 autocmd BufEnter *.tt source ~/.vim/syntax/tt2html.vim
 
-autocmd BufEnter *.tex set makeprg=pdflatex\ -interaction\ nonstopmode\ \\\\input\\{%<}
+autocmd BufEnter *.tex set makeprg=xelatex\ -interaction=nonstopmode\ %<
 
 autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
@@ -223,6 +230,8 @@ autocmd BufRead * silent! %s/[\r \t]\+$//
 
 autocmd BufNewFile *    call NewProgramHeader()
 
+autocmd BufRead * let b:dcp_host = 'puma'
+
 function! TabComplete()
 	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$' || exists(&paste)
 		return "\<Tab>"
@@ -232,7 +241,6 @@ function! TabComplete()
 endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
 
-let b:dcp_host = 'puma'
 nmap <silent> <F8> :silent !dcp -h =b:dcp_host %
 
 function! SyntaxItem()
