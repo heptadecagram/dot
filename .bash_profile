@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2010.12.09
+# Last Modified: 2010.12.15
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -647,6 +647,59 @@ _git-diff () {
 }
 complete -o default -F _git-diff git-diff
 
+_git-branch () {
+	local current="${COMP_WORDS[COMP_CWORD]}"
+	local previous=$3
+	local commands='add rm prune show update'
+
+	local FLAGS='-a -b -B -C -l -M -p -O -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --check --color --color-words --color-words= --decorate --diff-filter= --dirstat-by-file
+	--dirstat-by-file= --dirstat --dirstat= --dst-prefix= --exit-code --ext-diff --find-copies-harder --follow --full-diff --full-index
+	--ignore-all-space --ignore-space-at-eol --ignore-space-change --ignore-submodules --inter-hunk-context= --log-size --name-only
+	--name-status --no-color --no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --patience --pickaxe-all
+	--pickaxe-regex --quiet --raw --relative --relative= --shortstat --source --src-prefix= --stat --stat= --summary --text --unified='
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '-' ]; then
+			COMPREPLY=(`compgen -o filenames -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		# TODO Allow for all specifiable revisions in git-rev-parse
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--date=*)
+		COMPREPLY=(`compgen -W "relative iso8601 rfc2822 short local default" -- "${current##--date=}"`)
+		;;
+	--pretty=*)
+		COMPREPLY=(`compgen -W "oneline short medium full fuller email raw" -- "${current##--pretty=}"`)
+		;;
+	--diff-filter=*)
+		COMPREPLY=(`compgen -W "A B C D M R T U X" -- "${current##--diff-filter=*}"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-branch git-branch
+
 _git-format-patch () {
 	local current=$2
 	local previous=$3
@@ -734,7 +787,7 @@ _git-log () {
 		# TODO Complete on files or branches?
 	esac
 }
-complete -o default -F _git-branch git-branch
+complete -o default -F _git-log git-log
 
 _git-rebase () {
 	local current=$2
