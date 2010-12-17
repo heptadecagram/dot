@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.12.14
+" Last Modified: 2010.12.15
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -145,8 +145,8 @@ function CreateFileHeader()
 		let g:Project_Name = substitute(system("svn info | sed -n '/^Repository Root/s#.*/\\([^/]*\\)$#\\1#p'"), "\n", '', '')
 		let g:Project_Path = substitute(expand("%:p:h"), substitute(substitute(system('grep url= .svn/entries | sed s/\ \ \ url=\"//'), '"\n', '', ''), substitute(system('grep repos= .svn/entries | sed s/\ \ \ repos=\"//'), '"\n', '', '') . '/', '', ''), '', '')
 	endif
-	if !empty(system("git-rev-parse --show-prefix")) && !exists('g:Project_Path')
-		let g:Project_Path = substitute(expand("%:p:h"), substitute(system("git-rev-parse --show-prefix"), '/\n', '', ''), '', '')
+	if !empty(system("git rev-parse --show-prefix")) && !exists('g:Project_Path')
+		let g:Project_Path = substitute(expand("%:p:h"), substitute(system("git rev-parse --show-prefix"), '/\n', '', ''), '', '')
 	endif
 
 	execute 'normal aProject  Name: ' .
