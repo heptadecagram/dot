@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.12.15
+" Last Modified: 2010.12.17
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -73,8 +73,8 @@ set ruler
 " Window mappings
 set wmh=0
 " Adding the control keys to hjkl jump to the window and make it full-screen
-nmap <C-T> <C-W>j<C-W>_
-nmap <C-N> <C-W>k<C-W>_
+nmap <C-J> <C-W>j<C-W>_
+nmap <C-K> <C-W>k<C-W>_
 " Move between windows using arrow keys
 nnoremap <left> <C-W>h
 nnoremap <right> <C-W>l
@@ -191,7 +191,9 @@ function NewProgramHeader()
 	call CreateFileHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
-		normal no/t
+		insert 
+ */
+.
 	endif
 	if &syntax == 'python'
 		1substitute'.*'#!/usr/local/bin/python'
