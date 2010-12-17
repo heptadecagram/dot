@@ -1,0 +1,498 @@
+#!/usr/local/bin/bash
+# Project  Name: None
+# File / Folder: /.bash/git
+# File Language: sh
+# Copyright (C): 2010 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2010.12.17
+# Last Modifier: Liam Echlin
+# Last Modified: 2010.12.17
+
+alias g='git'
+
+_git () {
+	local current=$2
+	local ACTIONS='add am annotate apply archive bisect blame branch bundle
+	cat-file check-attr checkout checkout-index check-ref-format cherry
+	cherry-pick clean clone commit commit-tree config count-objects
+	cvsexportcommit cvsimport cvsserver daemon describe diff diff-files
+	diff-index diff-tree fast-export fast-import fetch fetch-pack filter-branch
+	fmt-merge-msg for-each-ref format-patch fsck fsck-objects gc
+	get-tar-commit-id grep hash-object help http-fetch http-push imap-send
+	index-pack init init-db instaweb log lost-found ls-files ls-remote ls-tree
+	mailinfo mailsplit merge merge-base merge-file merge-index merge-octopus
+	merge-one-file merge-ours merge-recursive merge-resolve merge-stupid
+	merge-subtree merge-tree mergetool mktag mktree mv name-rev pack-objects
+	pack-redundant pack-refs parse-remote patch-id peek-remote prune prune-packed
+	pull push quiltimport read-tree rebase receive-pack reflog relink remote
+	repack repo-config request-pull rerere reset revent rev-list rev-parse rm
+	send-pack shell shortlog show show-branch show-index show-ref sh-setup stash
+	status stripspace submodule svn symbolic-ref tag tar-tree unpack-file
+	unpack-objects update-index update-ref update-server-info upload-archive
+	upload-pack var verify-pack verify-tag whatchanged write-tree'
+
+	local OPTIONS='--bare --exec-path= --git-dir= --help --no-pager --paginate --work-tree= --version'
+
+	local index=1
+	local current_action=
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			current_action="${COMP_WORDS[$index]}"
+			break
+		fi
+		index=$(($index + 1))
+	done
+
+	# Default to the list of files available
+	COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+
+	# If a full command was not found, then complete on that command or option
+	if [ -z "$current_action" ]; then
+		if [ "${current##-*}" ]; then
+			COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+		elif [ "${current##--*}" ]; then
+			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		fi
+	fi
+
+	case "$current_action" in
+		branch) _git-branch "$@" ;;
+		checkout) _git-checkout "$@" ;;
+		commit) _git-commit "$@" ;;
+		diff) _git-diff "$@" ;;
+		format-patch) _git_format-patch "$@" ;;
+		log) _git-log "$@" ;;
+		merge) _git-checkout "$@" ;;
+		rebase) _git-rebase "$@" ;;
+		remote) _git-remote "$@" ;;
+	esac
+}
+complete -o filenames -F _git git g
+
+_git_branch_completion () {
+	local showall=$1
+
+	local current
+	if [ "$2" ]; then
+		current=$2
+	else
+		current=${COMP_WORDS[COMP_CWORD]}
+	fi
+
+	if [ "$showall" ]; then
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git branch -a | sed -e's/\*//')" -- "$current"`)
+	else
+		COMPREPLY=(`compgen -W "HEAD ORIG_HEAD $(git branch | sed -e's/\*//')" -- "$current"`)
+	fi
+}
+complete -F _git_branch_completion gd-branch gd-choice git-files-in-branch
+
+_git-checkout () {
+	local command=$1
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--no-track --track'
+	local FLAGS='-b -f -l -m -q'
+
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$previous" in
+	-b)
+		# When creating a new branch, do not complete branch or filenames
+		COMPREPLY=()
+		;;
+	$command)
+		_git_branch_completion
+		;;
+	*)
+		_git_branch_completion 1
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-checkout git-checkout git-merge
+
+_git-commit () {
+	local command=$1
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--all --allow-empty --amend --author= --cleanup= --edit --file
+	--interactive --message= --no-verify --reedit-message= --reuse-message=
+	--signoff --template='
+	local FLAGS='-a -c -C -e -F -i -m -o -s -t -u -v'
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-commit git-commit
+
+_git-branch () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--abbrev= --color --no-abbrev --no-color --no-track --track'
+	local FLAGS='-a -d -D -f -l -m -M -r -v'
+
+	case "$previous" in
+	-d | -m)
+		_git_branch_completion
+		;;
+	-r)
+		_git_branch_completion 1
+		;;
+	*)
+		COMPREPLY=()
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-branch git-branch
+
+_git-diff () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-a -b -B -C -l: -M -p -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --cached --check --color
+	--color-words --diff-filter= --dst-prefix= --exit-code --ext-diff
+	--find-copies-harder --full-index --ignore-all-space --ignore-space-at-eol
+	--ignore-space-change --name-only --name-status --no-color --no-ext-diff
+	--no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat
+	--pickaxe-all --pickaxe-regex --quiet --raw --shortstat --src-prefix= --stat
+	--summary --text --unified='
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$previous" in
+	-b)
+		# When creating a new branch, do not complete branch or filenames
+		COMPREPLY=()
+		;;
+	-)
+		COMPREPLY=(`compgen -o filenames`)
+		;;
+	*)
+		_git_branch_completion 1
+		;;
+	esac
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+
+}
+complete -o default -F _git-diff git-diff
+
+_git-branch () {
+	local current="${COMP_WORDS[COMP_CWORD]}"
+	local previous=$3
+	local commands='add rm prune show update'
+
+	local FLAGS='-a -b -B -C -l -M -p -O -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --check --color --color-words --color-words= --decorate --diff-filter= --dirstat-by-file
+	--dirstat-by-file= --dirstat --dirstat= --dst-prefix= --exit-code --ext-diff --find-copies-harder --follow --full-diff --full-index
+	--ignore-all-space --ignore-space-at-eol --ignore-space-change --ignore-submodules --inter-hunk-context= --log-size --name-only
+	--name-status --no-color --no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --patience --pickaxe-all
+	--pickaxe-regex --quiet --raw --relative --relative= --shortstat --source --src-prefix= --stat --stat= --summary --text --unified='
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '-' ]; then
+			COMPREPLY=(`compgen -o filenames -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		# TODO Allow for all specifiable revisions in git-rev-parse
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--date=*)
+		COMPREPLY=(`compgen -W "relative iso8601 rfc2822 short local default" -- "${current##--date=}"`)
+		;;
+	--pretty=*)
+		COMPREPLY=(`compgen -W "oneline short medium full fuller email raw" -- "${current##--pretty=}"`)
+		;;
+	--diff-filter=*)
+		COMPREPLY=(`compgen -W "A B C D M R T U X" -- "${current##--diff-filter=*}"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-branch git-branch
+
+_git-format-patch () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-k -n -N -o -s'
+	local OPTIONS='--attach --attach= --cc --cover-letter --ignore-if-in-upstream
+	--inline --inline= --in-reply-to= --no-numbered --numbered --numbered-files
+	--signoff --start-number --stdout --subject-prefix= --suffix= --thread'
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$current" in
+	*[^/]..)
+		# If this doesn't look like a filename, but rather a branch..branch format,
+		# complete with branch names
+		_git_branch_completion 1 ""
+		COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
+		;;
+	*..[[:alnum:]]*)
+		local actual_current=${current##*..}
+		_git_branch_completion 1 "$actual_current"
+		COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
+		;;
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-format-patch git-format-patch
+
+_git-log () {
+	local current="${COMP_WORDS[COMP_CWORD]}"
+	local previous=$3
+
+	local FLAGS='-a -b -B -C -l -M -p -O -R -S: -u -U: -w -z'
+	local OPTIONS='--abbrev --abbrev= --binary --check --color --color-words
+	--color-words= --decorate --diff-filter= --dirstat-by-file --dirstat-by-file=
+	--dirstat --dirstat= --dst-prefix= --exit-code --ext-diff
+	--find-copies-harder --follow --full-diff --full-index --ignore-all-space
+	--ignore-space-at-eol --ignore-space-change --ignore-submodules
+	--inter-hunk-context= --log-size --name-only --name-status --no-color
+	--no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw
+	--patch-with-stat --patience --pickaxe-all --pickaxe-regex --quiet --raw
+	--relative --relative= --shortstat --source --src-prefix= --stat --stat=
+	--summary --text --unified='
+
+	for param in "${COMP_WORDS[@]}"; do
+		if [ "$param" = '--' ]; then
+			COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
+			return
+		elif [ "$param" = "$current" ]; then
+			break
+		fi
+	done
+
+	case "$previous" in
+	-d | -m)
+		_git_branch_completion
+		;;
+	-r)
+		_git_branch_completion 1
+		;;
+	*)
+		COMPREPLY=()
+		;;
+	esac
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+		# TODO Complete on files or branches?
+	esac
+}
+complete -o default -F _git-log git-log
+
+_git-rebase () {
+	local current=$2
+	local previous=$3
+	local FLAGS='-i -C: -m -p -s: -v'
+	local OPTIONS='--abort --continue --interactive --merge --onto
+	--preserve-merges --skip --strategy= --verbose --whitespace='
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	*)
+		_git_branch_completion
+		;;
+	esac
+}
+complete -o default -F _git-rebase git-rebase
+
+_git-remote () {
+	local current=$2
+	local previous=$3
+	local ACTIONS='add rm prune show update'
+
+	case "$previous" in
+	show | rm | prune | update)
+		COMPREPLY=(`compgen -W "$(git remote)" -- "$current"`)
+		;;
+	*)
+		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+		;;
+	esac
+}
+complete -o default -F _git-remote git-remote
+
+git-files-in-branch () {
+	if [ "$2" ]; then
+		git log --name-only --pretty=format: $1..$2 |  grep '.' | sort | uniq
+	elif [ "$1" ]; then
+		git log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
+	else
+		git log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
+	fi
+}
+
+git-mark-branch-old () {
+	local branch
+	if [ "$1" ]; then
+		branch=$1
+	else
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}"
+	fi
+
+	local first_letter=${branch:0:1}
+	git branch -m {$first_letter,`echo $first_letter | tr [:lower:] [:upper:]`}${branch#$first_letter};
+}
+
+
+gd-branch () {
+	local from=$1
+	local branch=$2
+
+	if [ ! "$branch" ]; then
+		branch=$from
+		from=master
+	fi
+
+	for file in `git-files-in-branch $from $branch`; do
+		local_file=`git rev-parse --show-cdup`$file
+		if ! git rev-parse $branch:$file >/dev/null 2>/dev/null ; then
+			echo "Deleted File $file"
+		elif ! git rev-parse $from:$file >/dev/null 2>/dev/null ; then
+			echo "New File $file"
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git show $branch:$file > "$TEMP"
+			vim -g "$TEMP"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git show $from:$file > "$TEMP.original"
+			git diff $from..$branch -- "$local_file" | patch -so "$TEMP" "$TEMP.original"
+
+			meld "$TEMP.original" "$TEMP"
+			rm -f "$TEMP" "$TEMP.original"
+		fi
+	done
+}
+
+gd-choice () {
+	local branch=$1
+	shift
+
+	select file in `git-files-in-branch $branch`; do
+		file=`git rev-parse --show-cdup`$file
+		if [ ! -e "$file" ]; then
+			echo "File not found: $file"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			meld "$file" "$TEMP"
+			rm -f "$TEMP"
+		fi
+	done
+}
+
+gd () {
+	_vc-diff 'git diff' "$@"
+}
+gd-all () {
+	_vc-diff 'git diff --cached' `git status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
+}
