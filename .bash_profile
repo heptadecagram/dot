@@ -120,6 +120,7 @@ a () {
 		fi
 	fi
 }
+complete -A directory a cd rmdir
 
 # Version Control diff editor
 _vc-diff () {
@@ -197,8 +198,6 @@ _longopt () {
 }
 
 
-complete -A directory a cd rmdir
-complete -A command man which sudo
 
 _cvs () {
 	local current=$2
@@ -483,6 +482,7 @@ _command () {
 	[ ${#COMPREPLY[@]} -eq 0 ] && _filedir
 }
 complete -o nospace -o filenames -F _command sudo nohup exec nice eval strace time ltrace then else do command xargs
+complete -A command man which
 
 __get_action() {
 	local index=1
