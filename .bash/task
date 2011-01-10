@@ -1,0 +1,15 @@
+#!/usr/local/bin/bash
+# Project  Name: None
+# File / Folder: .bash/task
+# File Language: sh
+# Copyright (C): 2011 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2011.01.10
+# Last Modifier: Liam Echlin
+# Last Modified: 2011.01.10
+
+source /usr/local/share/taskwarrior/scripts/bash/task_completion.sh
+
+alias t='task'
+
+complete -F _task t

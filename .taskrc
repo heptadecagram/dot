@@ -1,0 +1,17 @@
+# 
+# Project  Name: None
+# File / Folder: .taskrc
+# File Language: conf
+# Copyright (C): 2011 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2010.12.14
+# Last Modifier: Liam Echlin
+# Last Modified: 2011.01.08
+
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=/home/liam/.task
+
+dateformat=Y.M.D
