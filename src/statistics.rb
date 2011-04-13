@@ -1,9 +1,20 @@
 #!/usr/local/bin/ruby
+# Project  Name: None
+# File / Folder: statistics.rb
+# File Language: ruby
+# Copyright (C): 2007 Liam Bryan
+# First  Author: Liam Bryan
+# First Created: 2007.10.23 08:00:53
+# Last Modifier: Liam Echlin
+# Last Modified: 2011.04.11
 
 module Enumerable
+	# This is added because Enumerable does not guarantee a size method.  So, do
+	# it the slow way.
 	def size
 		inject(0) { |size, k| size + 1 }
 	end
+
 	def arithmetic_mean
 		return nil unless any?
 
@@ -45,6 +56,9 @@ module Enumerable
 		m = median
 		sum { |n| (n - m).abs } / size
 	end
+
+	# Don't forget: Standard deviations contain 68.26%, 95.46%, 99.73% of the
+	# data in normal distribution.
 	def standard_deviation
 		return nil unless any?
 
