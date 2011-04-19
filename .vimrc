@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.12.17
+" Last Modified: 2011.04.19
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -41,19 +41,28 @@ set background=light
 set nojoinspaces
 highlight MatchParen ctermbg=DarkBlue
 
-if executable('lsusb')
-	if system('lsusb | grep Kinesis')
-		" Dvorak
-		noremap t j
-		noremap n k
-		noremap s l
-		noremap j n
-		noremap gn gk
-		noremap gt gj
+function Kinesis()
+	" Dvorak
+	noremap t j
+	noremap n k
+	noremap s l
+	noremap j n
+	noremap gn gk
+	noremap gt gj
 
-		" Kinesis Mappings
-		nnoremap <CR> b
-		vnoremap <CR> b
+	" Kinesis Mappings
+	nnoremap <CR> b
+	vnoremap <CR> b
+endfunction
+
+if executable('lsusb')
+	if strlen(system('lsusb | grep Kinesis')) > 8
+		call Kinesis()
+	endif
+	endif
+if executable('system_profiler')
+	if strlen(system('system_profiler SPUSBDataType | grep Kinesis')) > 8
+		call Kinesis()
 	endif
 endif
 
@@ -191,7 +200,7 @@ function NewProgramHeader()
 	call CreateFileHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
-		insert 
+		insert
  */
 .
 	endif
