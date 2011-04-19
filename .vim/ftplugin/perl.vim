@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.21 18:40:00
 " Last Modifier: Liam Echlin
-" Last Modified: 2008.05.14
+" Last Modified: 2011.04.19
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 
@@ -40,7 +40,7 @@ function! PerlFunctionList()
 
 	call setline('.', '# Function List')
 	wincmd k
-	while search('[$@%]\@<!\<sub\s\+', 'W')
+	while search('[$@%]\@<!\<sub\s\+[^{]', 'W')
 		normal w"ryiw
 		if @r == '{'
 			continue
