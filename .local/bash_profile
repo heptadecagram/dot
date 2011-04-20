@@ -1,1 +1,2 @@
 export PATH=$PATH:/opt/local/bin
+export MANPATH=$MANPATH:/opt/local/man
