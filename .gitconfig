@@ -3,7 +3,8 @@
 	ci = commit
 	co = checkout
 [user]
-	email = wechlin@sourcefire.com
+	email = wechlin@vetstreet.com
+	name  = Liam Echlin
 [color]
 	diff = true
 	branch = true
