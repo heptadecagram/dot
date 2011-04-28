@@ -1,2 +1,8 @@
 export PATH=$PATH:/opt/local/bin
 export MANPATH=$MANPATH:/opt/local/man
+
+
+alias  dbDEV='psql -h ya-vsdbdev-01  -U lechlin vidb05'
+alias dbTEST='psql -h ya-vsdbtest-01 -U lechlin vidb05'
+alias dbPIT='psql -h ya-vsdbpit-01 -U lechlin vidb05'
+alias dbLIVE='psql -h ya-vsdbprod-01 -U lechlin vidb05'
