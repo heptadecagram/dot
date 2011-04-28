@@ -1,0 +1,5 @@
+\set HISTFILE ~/.psql_history- :HOST
+
+\set PROMPT1 '%n@%m[%/] %x%# '
+
+\set AUTOCOMMIT off

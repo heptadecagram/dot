@@ -3,7 +3,7 @@
 /.bash_history
 /.irb_history
 /.lesshst
-/.psql_history
+/.psql_history*
 /.mysql_history
 /.viminfo
 /.ssh/id_rsa*
