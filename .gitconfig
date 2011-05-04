@@ -14,3 +14,5 @@
 	tool = vimdiffmeld
 [mergetool "vimdiffmeld"]
 	cmd = $HOME/bin/git-mergescript $BASE $LOCAL $REMOTE $MERGED
+[github]
+	user = heptadecagram
