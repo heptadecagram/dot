@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.04.19
+" Last Modified: 2011.04.29
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -53,6 +53,20 @@ function Kinesis()
 	" Kinesis Mappings
 	nnoremap <CR> b
 	vnoremap <CR> b
+endfunction
+
+function DeKinesis()
+	" Dvorak
+	unmap t
+	unmap n
+	unmap s
+	unmap j
+	unmap gn
+	unmap gt
+
+	" Kinesis Mappings
+	nunmap <CR>
+	vunmap <CR>
 endfunction
 
 if executable('lsusb')
