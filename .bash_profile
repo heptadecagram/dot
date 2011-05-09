@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2010.12.17
+# Last Modified: 2011.05.05
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -352,7 +352,7 @@ complete -o filenames -F _bzr bzr
 
 _ssh () {
 	local current=$2
-	local hosts=`cat .ssh/config .ssh/known_hosts | sed -ne's/Host //p ; s/^\([^,]*\),.*/\1/p' | sort | uniq`
+	local hosts=`cat ~/.ssh/config ~/.ssh/known_hosts | sed -ne's/Host //p ; s/^\([^,]*\),.*/\1/p' | sort | uniq`
 
 	COMPREPLY=(`compgen -W "$hosts" -- "$current"`)
 }
