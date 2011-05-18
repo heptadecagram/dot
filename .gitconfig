@@ -16,3 +16,5 @@
 	cmd = $HOME/bin/git-mergescript $BASE $LOCAL $REMOTE $MERGED
 [github]
 	user = heptadecagram
+[core]
+	editor = /usr/bin/vim
