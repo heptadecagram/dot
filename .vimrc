@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.04.29
+" Last Modified: 2011.05.18
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -103,7 +103,11 @@ nnoremap <left> <C-W>h
 nnoremap <right> <C-W>l
 nnoremap <up> <C-W>k
 nnoremap <down> <C-W>j
+
 " Move between tabs using shifted arrow keys
+" Note: Getting these to work in Mac Terminal involved checking terminfo
+" for a terminal that supported kRIT and kLFT (xterm), and adding the
+" input strings to Terminal's keycombo settings.
 nnoremap <S-left> gT
 nnoremap <S-right> gt
 
