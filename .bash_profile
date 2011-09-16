@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2011.05.05
+# Last Modified: 2011.09.16
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -358,6 +358,13 @@ _ssh () {
 }
 complete -F _ssh ssh
 
+_scp () {
+	local current=$2
+	local hosts=`cat ~/.ssh/config ~/.ssh/known_hosts | sed -ne's/Host //p ; s/^\([^,]*\),.*/\1/p' | sort | uniq`
+
+	COMPREPLY=(`compgen -S ":" -W "$hosts" -- "$current"`)
+}
+complete -F _scp scp
 
 # This function expands tildes in pathnames
 #
