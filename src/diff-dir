@@ -6,11 +6,14 @@
 # First  Author: Liam Echlin
 # First Created: 2009.07.30
 # Last Modifier: Liam Echlin
-# Last Modified: 2009.07.30
+# Last Modified: 2011.09.02
 
 EXCLUDES='CVS .* logs'
 
 USAGE="Usage: "`basename $0`" [-cd?] [-x <pattern> ...] <directory> [directory]"
+
+
+MD5="md5 -q"
 
 while getopts cdx:? param; do
 	case "$param" in
@@ -40,7 +43,7 @@ if [ $# -lt 1 ]; then
 fi
 
 DIR1=$1
-DIR2=${2:-.}
+DIR2=$2
 
 exclude_pattern=
 set -o noglob
@@ -53,7 +56,7 @@ set +o noglob
 for file in $fileset; do
 	rel_file=`echo $file | sed "s#^$1##"`
 	if [ -e "$DIR2/$rel_file" -a -z "$DELETE" ]; then
-		if [ "`md5sum $DIR2/$rel_file | sed 's# .*##'`" != "`md5sum $file | sed 's# .*##'`" ]; then
+		if [ "`$MD5 $DIR2/$rel_file`" != "`$MD5 $file`" ]; then
 			echo "C $rel_file"
 		fi
 	elif [ "$DELETE" ]; then
