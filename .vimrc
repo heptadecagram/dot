@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.05.18
+" Last Modified: 2011.12.16
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -156,8 +156,6 @@ autocmd BufEnter *.mkd set filetype=mkd
 autocmd BufEnter *.tt set filetype=html
 autocmd BufEnter *.tt set filetype=tt
 autocmd BufEnter *.tt source ~/.vim/syntax/tt2html.vim
-
-autocmd BufEnter *.tex set makeprg=xelatex\ -interaction=nonstopmode\ %<
 
 autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
