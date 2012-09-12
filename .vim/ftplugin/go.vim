@@ -6,7 +6,7 @@
 " First  Author: Liam Echlin
 " First Created: 2011.09.15
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.09.16
+" Last Modified: 2011.12.14
 
 if exists('b:loaded_golang')
 	finish
@@ -14,7 +14,7 @@ endif
 let b:loaded_golang = 1
 
 function! Golang_gd(word)
-	call search('func\( \+\| *([^()]*) *\)' . a:word, 'b')
+	call search('^func\( \+\| *([^()]*) *\)' . a:word, 'b')
 endfunction
 
 function! GolangFunctionList()
@@ -27,7 +27,7 @@ function! GolangFunctionList()
 
 	call setline('.', '# Function List')
 	wincmd k
-	while search('func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W')
+	while search('^func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W')
 		normal! w"ryt{
 		wincmd j
 		call append('$', @r)
@@ -45,3 +45,4 @@ endfunction
 
 nmap <silent> lf :call GolangFunctionList()<CR>
 
+autocmd BufWritePost *.go :silent Fmt
