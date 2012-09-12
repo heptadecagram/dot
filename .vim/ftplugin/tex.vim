@@ -6,7 +6,7 @@
 " First  Author: Liam Echlin
 " First Created: 2010.05.02
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.05.03
+" Last Modified: 2011.12.16
 
 nmap <silent> lf :call TexFunctionList()<CR>
 function! TexFunctionList()
@@ -46,3 +46,7 @@ endfunction
 function! Tex_gd(section)
 	call search('\\\%(sub\)*section{' . a:section . '}', 'b')
 endfunction
+
+setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
+setlocal makeprg=xelatex\ -interaction=nonstopmode\ \\"%<\\"
+
