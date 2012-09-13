@@ -1,4 +1,4 @@
-/[a-zA-Z]*
+/[^.]*
 /*.swp
 /.bash_history
 /.irb_history
