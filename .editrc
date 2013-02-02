@@ -1,0 +1,11 @@
+bind "^b"	ed-prev-word
+#bind "^Rubout"	ed-delete-prev-word
+bind "^f"	em-next-word
+#"\C-x\C-["	em-start-kbd-macro
+#"\C-x\C-]"	em-end-kbd-macro
+#"\C-x\C-k"	em-call-last-kbd-macro
+
+#set meta-flag on
+#set input-meta on
+#set output-meta on
+#set convert-meta off
