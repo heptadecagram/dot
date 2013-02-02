@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.10.16 10:43:13
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.12.16
+" Last Modified: 2012.12.11
 " CVS Committed:
 " Compile Flags:
 " Ducks Flogged:
@@ -30,6 +30,8 @@ if &term == 'cons25'
 	set t_kb=
 	set t_kD=
 endif
+
+set t_te= t_ti=
 
 set cpoptions-=<
 set nobackup
