@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2012.12.11
+# Last Modified: 2013.02.02
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -27,7 +27,7 @@ alias oo='vimdiff'
 # on what is available.
 if [ -d $HOME/.bash ]; then
 	for file in $HOME/.bash/*; do
-		if [ -x `which -s ${file#*.bash}` ]; then
+		if [ -x `which ${file#*.bash} 2>/dev/null` ]; then
 			source $file
 		fi
 	done
