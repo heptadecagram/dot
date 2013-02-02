@@ -6,7 +6,7 @@
 # First  Author: Liam Bryan
 # First Created: 2004.08.11
 # Last Modifier: Liam Echlin
-# Last Modified: 2011.09.16
+# Last Modified: 2012.12.11
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'
@@ -72,9 +72,9 @@ _git_prompt () {
 
 export EDITOR='vim'
 export VISUAL='vim'
-export PAGER='less'
+export PAGER='less -X'
 
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/X11R6/bin:$HOME/bin
+PATH=$PATH:$HOME/bin
 
 mutt () {
 	if [ "$USER" = wechlin ]; then
