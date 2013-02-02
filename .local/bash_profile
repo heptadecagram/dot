@@ -6,3 +6,6 @@ alias  dbDEV='psql -h ya-vsdbdev-01  -U lechlin vidb05'
 alias dbTEST='psql -h ya-vsdbtest-01 -U lechlin vidb05'
 alias dbPIT='psql -h ya-vsdbpit-01 -U lechlin vidb05'
 alias dbLIVE='psql -h ya-vsdbprod-01 -U lechlin vidb05'
+
+alias ls='ls -FG --color'
+alias watchlog='tail -f -n 1000 /x/vetinsite/home/vidb/bin/notification/et/vimail.log | grep -C 3'
