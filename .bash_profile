@@ -154,51 +154,6 @@ cvs-diff () {
 
 # Completion functions
 
-_split_longopt() {
-	if [[ "$current" == --?*=* ]]; then
-		# Cut also backslash before '=' in case it ended up there
-		# for some reason.
-		previous="${current%%?(\\)=*}"
-		current="${current#*=}"
-		return 0
-	fi
-
-	return 1
-}
-
-
-_longopt () {
-	local cur opt
-
-	cur=${COMP_WORDS[$COMP_CWORD]}
-
-	if [[ "$cur" == --*=* ]]; then
-		opt=${cur%%=*}
-		# cut backslash that gets inserted before '=' sign
-		opt=${opt%\\*}
-		cur=${cur#*=}
-		#_filedir
-		COMPREPLY=(`compgen -f`)
-		COMPREPLY=(`compgen -P "$opt=" -W '${COMPREPLY[@]}' -- $cur`)
-		return 0
-	fi
-
-	if [[ "$cur" == -* ]]; then
-		# ((This gets the --help output, prints only lines with --,
-		# extracts them the --option (with potential = sign),))
-		# then checks to see which of these map $current, sorted alphabetically
-		COMPREPLY=( $( $1 --help 2>&1 | sed -e '/--/!d' \
-		-e 's/.*\(--[-A-Za-z0-9]\+=\?\).*/\1/' | \
-		command grep "^$cur" | sort -u ) )
-	#elif [[ "$1" == @(mk|rm)dir ]]; then
-		#_filedir -d
-	#else
-		#_filedir
-	fi
-}
-
-
-
 _cvs () {
 	local current=$2
  	local previous=$3
