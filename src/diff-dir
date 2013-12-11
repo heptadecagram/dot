@@ -1,4 +1,12 @@
 #!/bin/sh
+# Project  Name: None
+# File / Folder: /diff-dir
+# File Language: sh
+# Copyright (C): 2009 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2009.07.30
+# Last Modifier: Liam Echlin
+# Last Modified: 2013.12.11
 
 EXCLUDES='CVS .* logs'
 
@@ -34,6 +42,8 @@ if [ $# -lt 1 ]; then
 	exit 2
 fi
 
+APP=md5
+
 DIR1=$1
 DIR2=$2
 
@@ -48,7 +58,7 @@ set +o noglob
 for file in $fileset; do
 	rel_file=`echo $file | sed "s#^$1##"`
 	if [ -e "$DIR2/$rel_file" -a -z "$DELETE" ]; then
-		if [ "`$MD5 $DIR2/$rel_file`" != "`$MD5 $file`" ]; then
+		if [ "`$APP $DIR2/$rel_file | sed 's# .*##'`" != "`$APP $file | sed 's# .*##'`" ]; then
 			echo "C $rel_file"
 		fi
 	elif [ "$DELETE" ]; then
