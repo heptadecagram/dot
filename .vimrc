@@ -113,6 +113,8 @@ nnoremap dp dp]c
 " text is lost and it only works for putting the current register.
 vnoremap p "_dp
 
+set rtp+=$GOROOT/misc/vim
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -121,6 +123,8 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 set runtimepath+=$GOROOT/misc/vim
+
+highlight SignColumn ctermbg=NONE
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
