@@ -27,7 +27,7 @@ alias oo='vimdiff'
 # on what is available.
 if [ -d $HOME/.bash ]; then
 	for file in $HOME/.bash/*; do
-		if [ -x "`which ${file#*.bash/} 2>/dev/null`" ]; then
+		if [ -x `which ${file#*.bash} 2>/dev/null` ]; then
 			source $file
 		fi
 	done
