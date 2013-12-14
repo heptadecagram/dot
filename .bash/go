@@ -6,7 +6,7 @@
 # First  Author: Liam Echlin
 # First Created: 2013.02.02
 # Last Modifier: Liam Echlin
-# Last Modified: 2013.02.02
+# Last Modified: 2013.12.12
 
 export GOROOT=/usr/local/go
-export GOPATH=~/go
+export GOPATH=~/self/go
