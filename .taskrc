@@ -12,7 +12,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=/home/liam/.task
+data.location=~/.task
 
 dateformat=Y.M.D
 
