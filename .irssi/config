@@ -4,12 +4,6 @@ servers = (
     chatnet = "Freenode";
     nick = "heptadecagram";
   },
-  {
-    address = "irc.freenode.org";
-    chatnet = "Freenode-SF";
-    port = "6667";
-    nick = "wechlin";
-  },
   { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
   { address = "irc.open-ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
   { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
@@ -23,7 +17,6 @@ servers = (
 
 chatnets = {
   Freenode = { type = "IRC"; };
-  "Freenode-SF" = { type = "IRC"; };
   IRCnet = {
     type = "IRC";
     max_kicks = "4";
@@ -92,11 +85,12 @@ chatnets = {
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
-  { name = "#sfire"; chatnet = "Freenode-SF"; autojoin = "Yes"; },
-  { name = "#vim"; chatnet = "Freenode"; autojoin = "Yes"; },
-  { name = "##gwt"; chatnet = "Freenode"; autojoin = "Yes"; },
+
+  { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#git"; chatnet = "Freenode"; autojoin = "Yes"; },
+  { name = "#vim"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#perl"; chatnet = "Freenode"; autojoin = "Yes"; },
+  { name = "#snort"; chatnet = "Freenode"; autojoin = "No"; },
   {
     name = "#redditmakesagame";
     chatnet = "Freenode";
