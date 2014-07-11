@@ -6,18 +6,12 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2010.07.29
+" Last Modified: 2014.07.11
 
 if exists('b:loaded_html')
 	finish
 endif
 let b:loaded_html = 1
-
-" Update an image tag's WIDTH & HEIGHT attributes (experimental!):
-runtime! MangleImageTag.vim
-if exists("*MangleImageTag")
-	nnoremap ;mi :call MangleImageTag()<CR>
-endif
 
 let maplocalleader='&'
 
@@ -33,82 +27,57 @@ inoremap <buffer> <LocalLeader><SPACE> &nbsp;
 
 let mapleader='`'
 
+" When typing, hit `-<Enter> to hop to the next line
 inoremap <buffer> <Leader><CR> o
 
 imap <buffer> <Leader>cm <!--  -->bhi
 vmap <buffer> <Leader>cm `>a -->`<i<!--
 
-" Template::Toolkit mappings
+
+imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title></head><body></body></html>3nO
+
+
+" NOTE: Using <expr> when defining these mappings would, indeed, be
+" less buggy, error-prone, and expandable, but <expr> does not allow
+" cursor movement, which is part of what makes these so pleasant to use.
 "
-nmap <silent> gd "lyiwh"ry :call TemplateToolkit_gd(@l)<CR>
-nmap <silent> lf :call TemplateToolkitFunctionList()<CR>
-
-function! TemplateToolkit_gd(word)
-	call search('\[%-\?\s*MACRO\s\+' . a:word . '\>', 'b')
-endfunction
-
-function! TemplateToolkitFunctionList()
-	normal mlgg
-	belowright new
-
-	setlocal noreadonly modifiable noswapfile nowrap
-	setlocal buftype=nowrite
-	setlocal bufhidden=delete
-
-	call setline('.', '# MACRO List')
-	wincmd k
-	while search('\[%-\?\s*MACRO\s\+', 'We')
-		normal w"ryiw
-		wincmd j
-		call append('$', @r)
-		wincmd k
-	endwhile
-	normal 'l
-
-	wincmd j
-	execute 'resize ' . line('$')
-	setlocal nomodifiable
-	normal t
-
-	map <silent> <buffer> <CR> "lyiw:q<CR>:call TemplateToolkit_gd(@l)<CR>
-endfunction
-
-imap <buffer> <Leader>tt [%  %]hhi
-imap <buffer> <Leader>tg [% GET  %]hhi
-imap <buffer> <Leader>tc [% CALL  %]hhi
-imap <buffer> <Leader>ts [% SET  %]hhi
-"imap <buffer> <Leader>ti [% INSERT  %]hhi
-"imap <buffer> <Leader>ti [% INCLUDE  %]hhi
-imap <buffer> <Leader>tp [% PROCESS  %]hhi
-imap <buffer> <Leader>tw [% WRAPPER %][% END %]nnA
-vmap <buffer> <Leader>tw `>o[% END %]`<O[% WRAPPER %]nA
-"imap <buffer> <Leader>tb [% BLOCK  %][% END %]na
-"vmap <buffer> <Leader>tb `>o[% END %]`<O[% BLOCK  %]hhi
-imap <buffer> <Leader>tf [% IF  %][% END %]nhhi
-imap <buffer> <Leader>tef [% ELSIF  %]hhi
-imap <buffer> <Leader>tel [% ELSE  %]hhi
-imap <buffer> <Leader>tu [% UNLESS  %][% END %]nssi
-"imap <buffer> <Leader>ts [% SWITCH  %][% END %]nssi
-"imap <buffer> <Leader>tc [% CASE  %]hhi
-"imap <buffer> <Leader>tf [% FOREACH  IN  %][% END %]nwhi
-"imap <buffer> <Leader>tn [% NEXT  %]hhi
-"imap <buffer> <Leader>tl [% LAST  %]hhi
-"imap <buffer> <Leader>tf [% FILTER  %]hhi
-"imap <buffer> <Leader>tu [% USE  %]hhi
-"imap <buffer> <Leader>tm [% MACRO  %]hhi
-"
-
-
-imap <buffer> <Leader>ht <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd"><html><head></head><body></body></html>3nO
-
-imap <buffer> <Leader>ti <title></title>bba
-vmap <buffer> <Leader>ti `>a</title>`<i<title>
-
 imap <buffer> <Leader>sc <script type="text/javascript"><!----></script>nO
 
 imap <buffer> <Leader>sy <style type="text/css"><!----></style>nO
 
 imap <buffer> <Leader>ln <link href="" rel="" type=""/>BBhhi
+
+
+" HTML5 elements
+" <section>
+" <nav>
+" <article>
+" <aside>
+" <hgroup>
+" <header>
+" <footer>
+" <time>
+" <mark>
+
+imap <buffer> <Leader>he <header></header>O
+vmap <buffer> <Leader>he `>a</header>`<i<header>
+
+imap <buffer> <Leader>hg <hgroup></hgroup>O
+vmap <buffer> <Leader>hg `>a</hgroup>`<i<hgroup>
+
+imap <buffer> <Leader>ar <article></article>O
+vmap <buffer> <Leader>ar `>a</article>`<i<article>
+
+imap <buffer> <Leader>se <section></section>O
+vmap <buffer> <Leader>se `>a</section>`<i<section>
+
+imap <buffer> <Leader>ti <time></time>bba
+vmap <buffer> <Leader>ti `>a</time>`<i<time>
+
+imap <buffer> <Leader>na <nav></nav>O
+vmap <buffer> <Leader>na `>a</nav>`<i<nav>
+
+" footer is omitted, since it is only usually written once.
 
 imap <buffer> <Leader>h1 <h1></h1>bba
 vmap <buffer> <Leader>h1 `>a</h3>`<i<h3>
@@ -135,6 +104,17 @@ vmap <buffer> <Leader>fo `>a</option>`<i<option value="">Bwsa
 imap <buffer> <Leader>ft <input name="" value="" maxlength="255"/>B`n a
 vmap <buffer> <Leader>ft `>a" maxlength="255"/>`<i<input name="" value="`n a
 
+" placeholder="Placeholder text"
+" autofocus="autofocus"
+" novalidate="novalidate"
+" required="required"
+" <input type="email"/>
+" <input type="url"/>
+" <input type="number" min="0" max="10" step="2" value="6"/> Spinbox
+" <input type="range" min="0" max="10" step="2" value="6"/> Slider
+" <input type="date, datetime, datetime-local, month, week, time"/>
+" <input type="search"/>
+" <input type="color"/>
 imap <buffer> <Leader>fh <input type="hidden" name="" value=""/>B`n a
 imap <buffer> <Leader>fs <input type="submit" value=""/>hhi
 imap <buffer> <Leader>fr <input type="radio" name="" value=""/>B`n a
@@ -191,6 +171,7 @@ imap <buffer> <Leader>br <br/>
 imap <buffer> <Leader>ta :call TableMaker()<LEFT>
 imap <buffer> <Leader>ca <caption></caption>bhhi
 imap <buffer> <Leader>tb <tbody></tbody>no
+imap <buffer> <Leader>tf <tfoot></tfoot>no
 imap <buffer> <Leader>tr <tr></tr>no
 imap <buffer> <Leader>td <td></td>bhhi
 vmap <buffer> <Leader>td `>a</td>`<i<td>
@@ -211,6 +192,9 @@ nmap <buffer> <Leader>i<SPACE> :silent call HTMLAttribute('id')<CR>
 
 imap <buffer> <Leader>a<SPACE> :silent call HTMLAttribute('alt')<CR>
 nmap <buffer> <Leader>a<SPACE> :silent call HTMLAttribute('alt')<CR>
+
+imap <buffer> <Leader>c<SPACE> :silent call HTMLAttribute('class')<CR>
+nmap <buffer> <Leader>c<SPACE> :silent call HTMLAttribute('class')<CR>
 
 imap <buffer> <Leader>h<SPACE> :silent call HTMLAttribute('href')<CR>
 nmap <buffer> <Leader>h<SPACE> :silent call HTMLAttribute('href')<CR>
@@ -249,22 +233,7 @@ function! HTMLAttribute(attribute)
 	endif
 endfunction
 
-function! Lisp2HTML()
-	call searchpair('(', '', ')', 'b')
-	normal s"lyw aoeu
-	if getreg('l') == 'doctype'
-		normal! w"lyt hl
-		if getreg('l') == '4.01'
-			insert
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
-.
-		endif
-	endif
-endfunction
 
-
-" HTML helper macros
-map <F2> :call TableMaker()<LEFT>
 " TableMaker( [rows = 1 [, cols = 1] ] )
 function! TableMaker(...)
 	let Cols = 1
@@ -297,7 +266,6 @@ function! TableMaker(...)
 endfunction "TableMaker()
 
 map <F3> ciw=ExpandColor('"')F#
-
 function! ExpandColor(word)
 	let numbers = substitute(a:word, '^#', '', '')
 	if(len(numbers) == 6)
