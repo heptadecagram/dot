@@ -1,10 +1,7 @@
 /[^.]*
 /*.swp
-/.bash_history
-/.irb_history
+/.[a-z]*history*
 /.lesshst
-/.psql_history*
-/.mysql_history
 /.viminfo
 /.ssh/id_rsa*
 /.gnome*
