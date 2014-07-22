@@ -6,7 +6,7 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [user]
-	email = wechlin@vetstreet.com
+	email = wechlin@umbctraining.com
 	name = Liam Echlin
 [color]
 	diff = true
@@ -23,3 +23,6 @@
 	editor = /usr/bin/vim
 [push]
 	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
