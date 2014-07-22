@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2014.07.11
+" Last Modified: 2014.07.17
 
 if exists('b:loaded_html')
 	finish
@@ -139,6 +139,9 @@ imap <buffer> <Leader>dd <dd></dd>bba
 imap <buffer> <Leader>pp <p></p>bba
 vmap <buffer> <Leader>pp `>a</p>`<i<p>
 
+imap <buffer> <Leader>as <aside></aside>bba
+vmap <buffer> <Leader>as `>a</aside>`<i<aside>
+
 imap <buffer> <Leader>qq <q lang="en-US"></q>Bwla
 vmap <buffer> <Leader>qq `>a</q>`<i<q lang="en-US">
 
@@ -162,8 +165,13 @@ vmap <buffer> <Leader>em `>a</em>`<i<em>
 imap <buffer> <Leader>sp <span></span>bba
 vmap <buffer> <Leader>sp `>a</span>`<i<span>
 
+imap <buffer> <Leader>dn <dfn></dfn>bba
+vmap <buffer> <Leader>dn `>a</dfn>`<i<dfn>
+
 imap <buffer> <Leader>ci <cite></cite>bba
 vmap <buffer> <Leader>ci `>a</cite>`<i<cite>
+imap <buffer> <Leader>df <dfn></dfn>bba
+vmap <buffer> <Leader>df `>a</dfn>`<i<dfn>
 
 imap <buffer> <Leader>hr <hr/>
 imap <buffer> <Leader>br <br/>
