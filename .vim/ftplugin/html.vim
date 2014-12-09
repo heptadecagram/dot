@@ -6,7 +6,7 @@
 " First  Author: Liam Bryan
 " First Created: 2004.11.17 09:57:23
 " Last Modifier: Liam Echlin
-" Last Modified: 2014.07.17
+" Last Modified: 2014.09.05
 
 if exists('b:loaded_html')
 	finish
@@ -17,12 +17,15 @@ let maplocalleader='&'
 
 inoremap <buffer> <LocalLeader>& &amp;
 inoremap <buffer> <LocalLeader>. &hellip;
-inoremap <buffer> <LocalLeader>- &mdash;
+inoremap <buffer> <LocalLeader>- &ndash;
 inoremap <buffer> <LocalLeader>/ &frasl;
 inoremap <buffer> <LocalLeader>< &lt;
 inoremap <buffer> <LocalLeader>> &gt;
 inoremap <buffer> <LocalLeader>c &copy;
 inoremap <buffer> <LocalLeader>r &reg;
+inoremap <buffer> <LocalLeader>x &times;
+inoremap <buffer> <LocalLeader>→ &rarr;
+inoremap <buffer> <LocalLeader>← &larr;
 inoremap <buffer> <LocalLeader><SPACE> &nbsp;
 
 let mapleader='`'
@@ -77,7 +80,9 @@ vmap <buffer> <Leader>ti `>a</time>`<i<time>
 imap <buffer> <Leader>na <nav></nav>O
 vmap <buffer> <Leader>na `>a</nav>`<i<nav>
 
-" footer is omitted, since it is only usually written once.
+imap <buffer> <Leader>fo <footer></footer>bba
+vmap <buffer> <Leader>fo `>a</footer>`<i<footer>
+
 
 imap <buffer> <Leader>h1 <h1></h1>bba
 vmap <buffer> <Leader>h1 `>a</h3>`<i<h3>
@@ -98,8 +103,8 @@ imap <buffer> <Leader>le <legend></legend>bba
 vmap <buffer> <Leader>le `>a</legend>`<i<legend>
 imap <buffer> <Leader>fe <select name=""></select>Bbsa
 
-imap <buffer> <Leader>fo <option value="">OPTION</option>Bwsa
-vmap <buffer> <Leader>fo `>a</option>`<i<option value="">Bwsa
+imap <buffer> <Leader>oo <option value="">OPTION</option>Bwsa
+vmap <buffer> <Leader>oo `>a</option>`<i<option value="">Bwsa
 
 imap <buffer> <Leader>ft <input name="" value="" maxlength="255"/>B`n a
 vmap <buffer> <Leader>ft `>a" maxlength="255"/>`<i<input name="" value="`n a
@@ -136,11 +141,16 @@ vmap <buffer> <Leader>li `>a</li>`<i<li>
 imap <buffer> <Leader>dt <dt></dt>bba
 imap <buffer> <Leader>dd <dd></dd>bba
 
+imap <buffer> <Leader>cd <code></code>bba
+vmap <buffer> <Leader>cd `>a</code>`<i<code>
+
 imap <buffer> <Leader>pp <p></p>bba
 vmap <buffer> <Leader>pp `>a</p>`<i<p>
 
 imap <buffer> <Leader>as <aside></aside>bba
 vmap <buffer> <Leader>as `>a</aside>`<i<aside>
+
+imap <buffer> <Leader>bq <blockquote></blockquote>O
 
 imap <buffer> <Leader>qq <q lang="en-US"></q>Bwla
 vmap <buffer> <Leader>qq `>a</q>`<i<q lang="en-US">
@@ -203,6 +213,9 @@ nmap <buffer> <Leader>a<SPACE> :silent call HTMLAttribute('alt')<CR>
 
 imap <buffer> <Leader>c<SPACE> :silent call HTMLAttribute('class')<CR>
 nmap <buffer> <Leader>c<SPACE> :silent call HTMLAttribute('class')<CR>
+
+imap <buffer> <Leader>l<SPACE> :silent call HTMLAttribute('lang')<CR>
+nmap <buffer> <Leader>l<SPACE> :silent call HTMLAttribute('lang')<CR>
 
 imap <buffer> <Leader>h<SPACE> :silent call HTMLAttribute('href')<CR>
 nmap <buffer> <Leader>h<SPACE> :silent call HTMLAttribute('href')<CR>
