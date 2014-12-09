@@ -6,7 +6,7 @@
 " First  Author: Liam Echlin
 " First Created: 2008.05.02
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.05.10
+" Last Modified: 2014.07.22
 
 set mousehide		" Hide the mouse when typing text
 
@@ -14,7 +14,7 @@ set mousehide		" Hide the mouse when typing text
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
-set guifont=Monaco:h14
+set guifont=Monaco:h19
 
 set antialias
 set lines=40
