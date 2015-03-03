@@ -120,6 +120,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+set runtimepath+=$GOROOT/misc/vim
+
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 	" Enable file type detection, load indent files.
