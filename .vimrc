@@ -1,17 +1,4 @@
-"
-" Project  Name: None
-" File / Folder: ~/.vimrc
-" File Language: vim
-" Copyright (C): 2004 Liam Bryan
-" First  Author: Liam Bryan
-" First Created: 2004.10.16 10:43:13
-" Last Modifier: Liam Echlin
-" Last Modified: 2012.12.11
-" CVS Committed:
-" Compile Flags:
-" Ducks Flogged:
-
-" check out
+" Take a look at:
 " modeline
 " 43.1
 " <C-O>
@@ -161,39 +148,6 @@ autocmd BufEnter *.tt source ~/.vim/syntax/tt2html.vim
 
 autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
-function UpdateFileLastModified()
-	7,8s/Last Modifier: [^$].\+/Last Modifier: Liam Echlin/
-	8,9s/Last Modified: [^$].\+/\='Last Modified: ' . strftime('%Y.%m.%d')/
-endfunction
-
-function CreateFileHeader()
-	" Autodetect the path if it is not set
-	if filereadable(".svn/entries") && !exists('g:Project_Path')
-		let g:Project_Name = substitute(system("svn info | sed -n '/^Repository Root/s#.*/\\([^/]*\\)$#\\1#p'"), "\n", '', '')
-		let g:Project_Path = substitute(expand("%:p:h"), substitute(substitute(system('grep url= .svn/entries | sed s/\ \ \ url=\"//'), '"\n', '', ''), substitute(system('grep repos= .svn/entries | sed s/\ \ \ repos=\"//'), '"\n', '', '') . '/', '', ''), '', '')
-	endif
-	if !empty(system("git rev-parse --show-prefix")) && !exists('g:Project_Path')
-		let g:Project_Path = substitute(expand("%:p:h"), substitute(system("git rev-parse --show-prefix"), '/\n', '', ''), '', '')
-	endif
-
-	execute 'normal aProject  Name: ' .
-				\ (exists('g:Project_Name') ? g:Project_Name : 'None') . '' .
-				\ 'File / Folder: ' .
-				\ (exists('g:Project_Path') ?
-				\ substitute(expand('%:p'), g:Project_Path, '', '') :
-				\ expand('%') ) . '' .
-				\ 'File Language: ' . &syntax . '' .
-				\ 'Copyright (C): ' . strftime('%Y') . ' ' . $COPYRIGHT . '' .
-				\ 'First  Author: Liam Echlin' . '' .
-				\ 'First Created: ' . strftime('%Y.%m.%d') . '' .
-				\ 'Last Modifier: Liam Echlin' . '' .
-				\ 'Last Modified: ' . strftime('%Y.%m.%d')
-  append
-
-.
-
-endfunction
-
 
 function NewProgramHeader()
 	if strlen(&syntax) < 1
@@ -213,9 +167,6 @@ function NewProgramHeader()
 		normal i`ht`ti
 		return
 	endif
-
-	execute 'normal i' . s:comment . ' '
-	call CreateFileHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
 		insert
@@ -253,7 +204,7 @@ use warnings;
 	endif
 endfunction
 
-autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
+"autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 
 autocmd BufRead * silent! %s/[\r \t]\+$//
 
