@@ -193,9 +193,11 @@ int main(int argc, char *argv[])
 	endif
 	if &syntax == 'perl'
 		1substitute'.*'#!/usr/bin/perl'
-		10append
+		1append
+
 use strict;
 use warnings;
+use 5.20.0;
 
 .
 		" Modules get a package name automatically
@@ -206,10 +208,9 @@ use warnings;
 							\ expand('%'),
 						\ '/', '::', 'g')
 			let s:module_name = strpart(s:module_name, 0, strlen(s:module_name) - 3)
-			execute 'normal :10ipackage ' . s:module_name . ';Go1;n'
-
-
+			execute 'normal :2ipackage ' . s:module_name . ';Go1;n'
 		endif
+
 	endif
 endfunction
 
