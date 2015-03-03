@@ -170,9 +170,18 @@ function NewProgramHeader()
 
 	if &syntax == 'c' || &syntax == 'css'
 		insert
- */
+
+
+
+int main(int argc, char *argv[])
+{
+
+	return 0;
+}
 .
+		2
 	endif
+	
 	if &syntax == 'python'
 		1substitute'.*'#!/usr/local/bin/python'
 	endif
