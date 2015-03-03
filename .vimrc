@@ -218,11 +218,9 @@ endfunction
 
 "autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
 
-autocmd BufRead * silent! %s/[\r \t]\+$//
+autocmd BufRead *   silent! %s/[\r \t]\+$//
 
-autocmd BufNewFile *    call NewProgramHeader()
-
-autocmd BufRead * let b:dcp_host = 'puma'
+autocmd BufNewFile *   call NewProgramHeader()
 
 function! TabComplete()
 	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$' || exists(&paste)
@@ -232,8 +230,6 @@ function! TabComplete()
 	endif
 endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
-
-nmap <silent> <F8> :silent !dcp -h =b:dcp_host %
 
 function! SyntaxItem()
 	return synIDattr(synID(line("."),col("."),1),"name")
