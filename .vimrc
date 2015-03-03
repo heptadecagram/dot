@@ -170,20 +170,22 @@ function NewProgramHeader()
 		return
 	endif
 
-	if &syntax == 'c' || &syntax == 'css'
-		insert
+	if &syntax == 'c'
+		1append
 
 
 
-int main(int argc, char *argv[])
+main(int argc, char *argv[])
 {
 
 	return 0;
 }
 .
+		" Prevent vim from thinking the return value is the :intro call
+		4substitute'^'int '
 		2
 	endif
-	
+
 	if &syntax == 'python'
 		1substitute'.*'#!/usr/local/bin/python'
 	endif
