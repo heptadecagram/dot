@@ -6,7 +6,7 @@
 " First  Author: Liam Echlin
 " First Created: 2011.09.15
 " Last Modifier: Liam Echlin
-" Last Modified: 2011.12.14
+" Last Modified: 2014.11.18
 
 if exists('b:loaded_golang')
 	finish
@@ -45,4 +45,4 @@ endfunction
 
 nmap <silent> lf :call GolangFunctionList()<CR>
 
-autocmd BufWritePost *.go :silent Fmt
+"autocmd BufWritePost *.go :silent Fmt
