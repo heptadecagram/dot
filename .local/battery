@@ -1,0 +1,32 @@
+#!/usr/local/bin/bash
+# Project  Name: Home
+# File / Folder: .local/battery
+# File Language: sh
+# Copyright (C): 2012 Liam Echlin
+# First  Author: Liam Echlin
+# First Created: 2012.03.10
+# Last Modifier: Liam Echlin
+# Last Modified: 2012.03.10
+
+CODE_RED=$'\[\033[0;31m\]'
+CODE_GREEN=$'\[\033[0;32m\]'
+CODE_YELL=$'\[\033[0;33m\]'
+CODE_BLUE=$'\[\033[0;34m\]'
+CODE_NORM=$'\[\033[m\]'
+
+BAT_LIFE=`sysctl -n hw.acpi.battery.life`
+if [ $BAT_LIFE -gt 50 ]; then
+	echo -n $CODE_GREEN
+elif [ $BAT_LIFE -gt 25 ]; then
+	echo -n $CODE_YELL
+else
+	echo -n $CODE_RED
+fi
+
+echo -n $BAT_LIFE$CODE_NORM
+
+if [ `sysctl -n hw.acpi.battery.time` -lt 0 ]; then
+	echo -n ${CODE_GREEN}ñ${CODE_NORM}
+else
+	echo -n %
+fi
