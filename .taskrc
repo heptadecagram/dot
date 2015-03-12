@@ -1,12 +1,5 @@
-#
-# Project  Name: None
-# File / Folder: .taskrc
-# File Language: conf
-# Copyright (C): 2011 Liam Echlin
-# First  Author: Liam Echlin
-# First Created: 2010.12.14
-# Last Modifier: Liam Echlin
-# Last Modified: 2011.01.10
+
+include /usr/local/share/taskwarrior/rc/holidays.en-US.rc
 
 
 # Use the command 'task show' to see all defaults and overrides
@@ -18,3 +11,8 @@ dateformat=Y.M.D
 
 color.tag.email=cyan
 color.tag.call=yellow
+default.command=list
+color=on
+dateformat.annotation=Y.m.d H:N
+journal.time=on
+calendar.holidays=sparse
