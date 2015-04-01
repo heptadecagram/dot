@@ -170,8 +170,23 @@ function NewProgramHeader()
 		return
 	endif
 
-	if &syntax == 'c'
-		1append
+	if &syntax == 'c' || &syntax == 'cpp'
+		if match(expand('%'), '.h$')
+			1append
+
+#ifndef
+# define
+
+
+
+#endif
+.
+			let header = toupper(substitute(expand('%'), '\.', '_', ''))
+			2substitute'$'\=" " . header '
+			3substitute'$'\=" " . header '
+			5
+		else
+			1append
 
 
 
@@ -181,9 +196,10 @@ main(int argc, char *argv[])
 	return 0;
 }
 .
-		" Prevent vim from thinking the return value is the :intro call
-		4substitute'^'int '
-		2
+			" Prevent vim from thinking the return value is the :intro call
+			4substitute'^'int '
+			2
+		endif
 	endif
 
 	if &syntax == 'python'
