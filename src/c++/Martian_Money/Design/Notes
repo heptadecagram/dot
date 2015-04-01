@@ -1,0 +1,21 @@
+Money is worth a different amount each day, depending on how it was traded the
+	previous day.
+
+The bank will trade at a fixed rate, and you can trade with other people at 
+	whatever rate the two people agree upon.
+
+The more one particular currency is traded out from the bank, the less it is
+	worth.  The more a currency comes into the bank, the more it is worth.
+	(Cheap bastards)
+
+The values start randomly seeded.  How?
+
+Each player either gets the exact same starting money, or chooses his or her 
+	starting money before values are seeded.
+
+A shop will sell objects for certain exact amount of certain currencies.
+
+Whomever gets a particular random-at-start combination of shop objects wins.
+
+Bank values are based on an arctangent relationship of the amount the bank has
+	at the beginning of the day.
