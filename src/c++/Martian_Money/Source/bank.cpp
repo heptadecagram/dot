@@ -52,7 +52,7 @@ void Bank::Make_Rates(void) {
 	for(unsigned int n=0; n<M_Rate.Get_Width(); n++)
 		for(unsigned int nn=0; nn<M_Rate.Get_Height(); nn++)
 			M_Rate(n, nn)=1.0 + 2*atan(
-					M_Money(n, nn)/M_Normalizer)/PI ;
+					M_Money(n, nn)/M_Normalizer)/M_PI ;
 }
 
 
