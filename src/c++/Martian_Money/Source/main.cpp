@@ -1,9 +1,3 @@
-// File: main.cpp
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.07.17
-// Last Modified: 2002.08.12
-
 
 #include <iostream>
 #include <string>

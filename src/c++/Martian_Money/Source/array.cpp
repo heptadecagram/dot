@@ -1,8 +1,3 @@
-// File: array.cpp
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.07.23
-// Last Modified: 2002.08.11
 
 #ifndef LIAM_ARRAY_IMPLEMENT
 # define LIAM_ARRAY_IMPLEMENT

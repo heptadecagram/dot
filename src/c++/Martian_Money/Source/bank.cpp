@@ -1,8 +1,3 @@
-// File: bank.cpp
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.08.11
-// Last Modified: 2002.08.12
 
 #include "bank.h"
 

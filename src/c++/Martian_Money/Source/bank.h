@@ -1,8 +1,3 @@
-// File: bank.h
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.08.11
-// Last Modified: 2002.08.12
 
 #ifndef LIAM_BANK
 # define LIAM_BANK

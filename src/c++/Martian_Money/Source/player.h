@@ -1,8 +1,3 @@
-// File: player.h
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.07.23
-// Last Modified: 2002.08.11
 
 #ifndef LIAM_PLAYER
 # define LIAM_PLAYER
