@@ -35,12 +35,6 @@ Array<Type>::Array(unsigned int Width, unsigned int Height) {
 }
 
 
-// Destructor
-template<typename Type>
-Array<Type>::~Array(void) {
-}
-
-
 // Facilitators
 template<typename Type>
 void Array<Type>::Flood(Type Value) {

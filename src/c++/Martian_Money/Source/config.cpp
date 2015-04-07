@@ -100,11 +100,6 @@ Configuration::Configuration(std::string Config_Filename) {
 }
 
 
-// Destructor
-Configuration::~Configuration(void) {
-}
-
-
 // Inspectors
 int Configuration::Get_Variable_Count(Config_Variable Variable) const {
 	switch(Variable) {

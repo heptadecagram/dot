@@ -12,9 +12,6 @@ public:
 	Array(void) ;
 	Array(unsigned int Width, unsigned int Height) ;
 
-	// Destructor
-	~Array(void) ;
-
 	// Facilitators
 	void Flood(Type Value) ;
 

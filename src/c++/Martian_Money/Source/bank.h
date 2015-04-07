@@ -16,9 +16,6 @@ public:
 	Bank(void) ;
 	Bank(Configuration Config) ;
 
-	// Destructors
-	~Bank(void) ;
-
 	// Facilitators
 	unsigned int Trade(unsigned int Offer_Type,unsigned int Offer_Adjective,
 			unsigned int Offer_Amount, unsigned int Receive_Type,

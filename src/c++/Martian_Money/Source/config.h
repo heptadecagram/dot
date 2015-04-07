@@ -17,11 +17,6 @@ public:
 	// Constructors
 	Configuration(std::string Config=DEFAULT_CONFIG) ;
 
-	// Destructor
-	~Configuration(void) ;
-
-	// Facilitators
-
 	// Inspectors
 	int Get_Variable_Count(Config_Variable Variable) const ;
 	std::string Get_Variable(Config_Variable Variable, unsigned int Index=0) const ;
