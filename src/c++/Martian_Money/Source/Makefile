@@ -11,7 +11,7 @@ CC=c++
 LIBS=-lm
 CXXFLAGS+= -Wall -Werror -Wpedantic -Wno-deprecated -std=c++1y
 BFLAGS+= -Wall -Werror -Wpedantic -Wno-deprecated
-OBJECTS=array.o config.o player.o bank.o main.o
+OBJECTS=array.o config.o bank.o main.o
 
 SHELL=/bin/sh
 
@@ -24,9 +24,6 @@ main.o: main.cpp config.h
 	$(CC) -I$(srcdir) $(CXXFLAGS) -c $< -o $@
 
 bank.o: bank.cpp bank.h config.h array.o
-	$(CC) -I$(srcdir) $(CXXFLAGS) -c $< -o $@
-
-player.o: player.cpp player.h config.h array.o
 	$(CC) -I$(srcdir) $(CXXFLAGS) -c $< -o $@
 
 config.o: config.cpp config.h
