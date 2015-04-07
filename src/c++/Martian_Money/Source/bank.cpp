@@ -49,11 +49,6 @@ unsigned int Bank::Trade(unsigned int Offer_Type, unsigned int Offer_Adjective,
 }
 
 void Bank::Make_Rates(void) {
-	if(M_Normalizer==0.0) {
-		cerr << "Bank.Make_Rates(" << M_Normalizer <<
-			") cannot be 0!" << endl ;
-		return ;
-	}
 	for(unsigned int n=0; n<M_Rate.Get_Width(); n++)
 		for(unsigned int nn=0; nn<M_Rate.Get_Height(); nn++)
 			M_Rate(n, nn)=1.0 + 2*atan(
