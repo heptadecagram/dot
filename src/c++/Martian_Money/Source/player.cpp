@@ -1,17 +1,14 @@
-// File: player.cpp
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.07.23
-// Last Modified: 2002.08.11
 
 #include "player.h"
+
+using namespace std ;
 
 // Constructors
 Player::Player(void) {
 	M_Name="" ;
 }
 
-Player::Player(string Name, Configuration Config) {
+Player::Player(std::string Name, Configuration Config) {
 	M_Name=Name ;
 	M_Money.Resize(Config.Get_Variable_Count(Money_Type),
 			Config.Get_Variable_Count(Money_Adjective) ) ;
@@ -19,22 +16,14 @@ Player::Player(string Name, Configuration Config) {
 			Config.Get_Variable_Count(Object_Adjective) ) ;
 }
 
-// Destructors
-Player::~Player(void) {
-}
-
-
-// Facilitators
-
-
 // Inspectors
-string Player::Get_Name(void) const {
+std::string Player::Get_Name(void) const {
 	return M_Name ;
 }
 
 unsigned int Player::Get_Money(unsigned int Type, unsigned int Adjective) const{
-	if(Adjective>=M_Money.Get_Height() || Adjective<0 ||
-			Type>=M_Money.Get_Width() || Type<0) {
+	if(Adjective>=M_Money.Get_Height() ||
+			Type>=M_Money.Get_Width()) {
 		cerr << "Player.Get_Money(" << Type << ", " << Adjective <<
 			") out of range for (" << M_Money.Get_Width() <<
 			", " << M_Money.Get_Height() << ")!" << endl ;
@@ -45,8 +34,8 @@ unsigned int Player::Get_Money(unsigned int Type, unsigned int Adjective) const{
 }
 
 unsigned int Player::Get_Object(unsigned int Type, unsigned int Adjective)const{
-	if(Adjective>=M_Object.Get_Height() || Adjective<0 ||
-			Type>=M_Object.Get_Width() || Type<0) {
+	if(Adjective>=M_Object.Get_Height() ||
+			Type>=M_Object.Get_Width() ) {
 		cerr << "Player.Get_Object(" << Type << ", " << Adjective <<
 			") out of range for (" << M_Object.Get_Width() <<
 			", " << M_Object.Get_Height() << ")!" << endl ;
@@ -63,8 +52,8 @@ void Player::Set_Name(string Name) {
 }
 
 void Player::Set_Money(unsigned int Type, unsigned int Adjective, int Amount) {
-	if(Adjective>=M_Money.Get_Height() || Adjective<0 ||
-			Type>=M_Money.Get_Width() || Type<0 ||
+	if(Adjective>=M_Money.Get_Height() ||
+			Type>=M_Money.Get_Width() ||
 			Amount>(signed)M_Money(Type, Adjective) ) {
 		cerr << "Player.Set_Money(" << Type << ", " << Adjective <<
 			", " << Amount << ") out of range for (" <<
@@ -77,8 +66,8 @@ void Player::Set_Money(unsigned int Type, unsigned int Adjective, int Amount) {
 }
 
 void Player::Set_Object(unsigned int Type, unsigned int Adjective, int Amount){
-	if(Adjective>=M_Object.Get_Height() || Adjective<0 ||
-			Type>=M_Object.Get_Width() || Type<0 ||
+	if(Adjective>=M_Object.Get_Height() ||
+			Type>=M_Object.Get_Width() ||
 			Amount>(signed)M_Object(Type, Adjective) ) {
 		cerr << "Player.Set_Object(" << Type << ", " << Adjective <<
 			", " << Amount << ") out of range for (" <<

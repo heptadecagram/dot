@@ -8,7 +8,6 @@
 # define LIAM_PLAYER
 
 # include <string>
-using namespace std ;
 
 # include "array.h"
 # include "config.h"
@@ -17,27 +16,24 @@ class Player {
 public:
 	// Constructors
 	Player(void) ;
-	Player(string Name, Configuration Config) ;
-
-	// Destructors
-	~Player(void) ;
+	Player(std::string Name, Configuration Config) ;
 
 	// Facilitators
-	bool Process_Command(string Command) ;
+	bool Process_Command(std::string Command) ;
 
 	// Inspectors
-	string Get_Name(void) const ;
+	std::string Get_Name(void) const ;
 	unsigned int Get_Money(unsigned int Type, unsigned int Adjective) const;
 	unsigned int Get_Object(unsigned int Type, unsigned int Adjective)const;
 
 	// Mutators
-	void Set_Name(string Name) ;
+	void Set_Name(std::string Name) ;
 	void Set_Money(unsigned int Type, unsigned int Adjective, int Amount) ;
 	void Set_Object(unsigned int Type, unsigned int Adjective, int Amount) ;
 
 protected:
 	// Member Variables
-	string M_Name ;
+	std::string M_Name ;
 	Array<unsigned int> M_Money ;
 	Array<unsigned int> M_Object ;
 } ;

@@ -8,7 +8,6 @@
 # define LIAM_BANK
 
 # include <cmath>
-using namespace std ;
 # ifndef PI
 #  define PI 3.14159265358979323846264338
 # endif // PI

@@ -12,6 +12,10 @@
 # include "array.h"
 #endif // LIAM_ARRAY
 
+#include <iostream>
+
+using namespace std ;
+
 // Constructors
 template<class Type>
 Array<Type>::Array(void) {
@@ -24,7 +28,7 @@ Array<Type>::Array(void) {
 template<class Type>
 Array<Type>::Array(unsigned int Width, unsigned int Height) {
 	if(Height==0 || Width==0) {
-		cerr << "Array(" << Height << ", " << Width << 
+		cerr << "Array(" << Height << ", " << Width <<
 			") cannot contain 0!" << endl ;
 		exit(EXIT_FAILURE) ;
 	}
@@ -54,8 +58,8 @@ void Array<Type>::Flood(Type Value) {
 template<typename Type>
 Type Array<Type>::operator () (unsigned int Column, unsigned int Row) const {
 	if(Row>=M_Height || Column>=M_Width) {
-		cerr << "Array(" << Row << ", " << Column << 
-			") out of range for size: " << M_Height << ", " << 
+		cerr << "Array(" << Row << ", " << Column <<
+			") out of range for size: " << M_Height << ", " <<
 			M_Width << endl ;
 		exit(EXIT_FAILURE) ;
 	}
@@ -78,8 +82,8 @@ unsigned int Array<Type>::Get_Height(void) const {
 template<typename Type>
 Type& Array<Type>::operator () (unsigned int Column, unsigned int Row) {
 	if(Row>=M_Height || Column>=M_Width) {
-		cerr << "&Array(" << Row << ", " << Column << 
-			") out of range for size: " << M_Height << ", " << 
+		cerr << "&Array(" << Row << ", " << Column <<
+			") out of range for size: " << M_Height << ", " <<
 			M_Width << endl ;
 		exit(EXIT_FAILURE) ;
 	}
@@ -90,7 +94,7 @@ Type& Array<Type>::operator () (unsigned int Column, unsigned int Row) {
 template<typename Type>
 void Array<Type>::Resize(unsigned int Width, unsigned int Height) {
 	if(Height==0 || Width==0) {
-		cerr << "Array.Resize(" << Height << ", " << Width << 
+		cerr << "Array.Resize(" << Height << ", " << Width <<
 			") cannot contain 0!" << endl ;
 		exit(EXIT_FAILURE) ;
 	}

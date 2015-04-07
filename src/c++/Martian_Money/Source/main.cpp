@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <string>
-using namespace std ;
 
 #include "config.h"
 #include "array.h"
@@ -15,7 +14,7 @@ using namespace std ;
 #include "bank.h"
 
 int main(int argc, char** argv) {
-	cout << "Executing..." << endl ;
+	std::cout << "Executing..." << std::endl ;
 
 	// The game-wide configuration
 	Configuration Config ;
@@ -23,6 +22,6 @@ int main(int argc, char** argv) {
 
 
 
-	cout << "Done!" << endl ;
+	std::cout << "Done!" << std::endl ;
 	return 0 ;
 }

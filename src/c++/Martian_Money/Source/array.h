@@ -9,7 +9,6 @@
 
 # include <cstdlib>
 # include <vector>
-using namespace std ;
 
 template<typename Type>
 class Array {
@@ -37,7 +36,7 @@ protected:
 	// Variables
 	unsigned int M_Width ;
 	unsigned int M_Height ;
-	vector<Type> M_Values ;
+	std::vector<Type> M_Values ;
 } ;
 
 # ifndef LIAM_ARRAY_IMPLEMENT

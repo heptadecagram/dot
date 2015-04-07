@@ -9,7 +9,7 @@
 
 CC=c++
 LIBS=-lm
-CFLAGS+= -Wall
+CFLAGS+= -Wall -Werror -Wpedantic -Wno-deprecated -std=c++1y
 BFLAGS+= -Wall
 OBJECTS=array.o config.o player.o bank.o main.o
 

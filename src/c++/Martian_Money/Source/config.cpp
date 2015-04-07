@@ -1,19 +1,16 @@
-// File: config.cpp
-// Author: Liam Bryan
-// Language: C++
-// First Created: 2002.07.17
-// Last Modified: 2002.07.29
 
 #include "config.h"
 
+using namespace std ;
+
 // Constructors
-Configuration::Configuration(char* Config_Filename) {
+Configuration::Configuration(std::string Config_Filename) {
 	ifstream Config_File ;
 	Config_File.open(Config_Filename) ;
 
 	if(!Config_File.is_open() ) {
 		cerr << "Could not open '" << Config_Filename <<
-			"' for reading!" << endl << "Using defaults...." << 
+			"' for reading!" << endl << "Using defaults...." <<
 			endl ;
 		Default_Variable(Money_Type) ;
 		Default_Variable(Money_Adjective) ;
@@ -30,7 +27,7 @@ Configuration::Configuration(char* Config_Filename) {
 			string Begin_Quote=Buffer.substr(Buffer.find('\'') ) ;
 			int Length=Begin_Quote.find('\'', 1) ;
 			if(Length>0)
-				M_Money_Types.push_back(Begin_Quote.substr(1, 
+				M_Money_Types.push_back(Begin_Quote.substr(1,
 					Length-1) ) ;
 			else
 				cerr << "Error reading " << Config_Filename <<
@@ -51,7 +48,7 @@ Configuration::Configuration(char* Config_Filename) {
 			string Begin_Quote=Buffer.substr(Buffer.find('\'') ) ;
 			int Length=Begin_Quote.find('\'', 1) ;
 			if(Length>0)
-				/*M_Money_Start=atoi(Begin_Quote.substr(1, 
+				/*M_Money_Start=atoi(Begin_Quote.substr(1,
 					Length-1) ) ;*/
 				M_Money_Start=100 ;
 			else
@@ -62,7 +59,7 @@ Configuration::Configuration(char* Config_Filename) {
 			string Begin_Quote=Buffer.substr(Buffer.find('\'') ) ;
 			int Length=Begin_Quote.find('\'', 1) ;
 			if(Length>0)
-				M_Object_Base_Type=Begin_Quote.substr(1, 
+				M_Object_Base_Type=Begin_Quote.substr(1,
 					Length-1) ;
 			else
 				cerr << "Error reading " << Config_Filename <<
@@ -72,7 +69,7 @@ Configuration::Configuration(char* Config_Filename) {
 			string Begin_Quote=Buffer.substr(Buffer.find('\'') ) ;
 			int Length=Begin_Quote.find('\'', 1) ;
 			if(Length>0)
-				M_Object_Types.push_back(Begin_Quote.substr(1, 
+				M_Object_Types.push_back(Begin_Quote.substr(1,
 					Length-1) ) ;
 			else
 				cerr << "Error reading " << Config_Filename <<
@@ -120,13 +117,13 @@ int Configuration::Get_Variable_Count(Config_Variable Variable) const {
 	case Object_Adjective:
 		return M_Object_Adjectives.size() ;
 	default:
-		cerr << "Get_Variable_Count(" << Variable << ") defaulted!" << 
+		cerr << "Get_Variable_Count(" << Variable << ") defaulted!" <<
 			endl ;
 		return 0 ;
 	}
 }
 
-string Configuration::Get_Variable(Config_Variable Variable, 
+string Configuration::Get_Variable(Config_Variable Variable,
 		unsigned int Index) const {
 	switch(Variable) {
 	case Money_Type:
@@ -154,18 +151,18 @@ string Configuration::Get_Variable(Config_Variable Variable,
 		else
 			break ;
 	default:
-		cerr << "Get_Variable(" << Variable << ", " << Index <<  
+		cerr << "Get_Variable(" << Variable << ", " << Index <<
 			") defaulted!" << endl ;
 		return "" ;
 	}
-	cerr << "Get_Variable(" << Variable << ", " << Index << 
+	cerr << "Get_Variable(" << Variable << ", " << Index <<
 		") out of range!" << endl ;
 	return "" ;
 }
 
 
 // Mutators
-void Configuration::Set_Variable(Config_Variable Variable, string Value, 
+void Configuration::Set_Variable(Config_Variable Variable, string Value,
 		unsigned int Index) {
 	switch(Variable) {
 	case Money_Type:
@@ -188,11 +185,11 @@ void Configuration::Set_Variable(Config_Variable Variable, string Value,
 			M_Object_Adjectives[Index]=Value ;
 		break ;
 	default:
-		cerr << "Set_Variable(" << Variable << ", " << Index << ", " << 
+		cerr << "Set_Variable(" << Variable << ", " << Index << ", " <<
 			Value << ") defaulted!" << endl ;
 	}
 }
-	
+
 
 // Private Functions
 // Facilitators
