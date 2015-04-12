@@ -1,8 +1,3 @@
-// File: error.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2001.11.25
-
 // Description of use and declared constants.
 #include "error.h"
 
@@ -11,7 +6,7 @@ void Die(char* Format, ...) {
 	char Buffer[1023] ;
 
 	// The caller of Die() chooses the format for the error, so
-	// all that is done here is to format the arguments and put 
+	// all that is done here is to format the arguments and put
 	// them in Buffer.
 	va_list List ;
 	va_start(List, Format) ;
@@ -43,7 +38,7 @@ void Warn(char* Format, ...) {
 	char Buffer[1023] ;
 
 	// The caller of Warn() chooses the format for the warning, so
-	// all that is done here is to format the arguments and put 
+	// all that is done here is to format the arguments and put
 	// them in Buffer.
 	va_list List ;
 	va_start(List, Format) ;

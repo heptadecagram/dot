@@ -1,8 +1,3 @@
-// File: main.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2001.11.26
-
 #include <cstdlib>
 using namespace std ;
 

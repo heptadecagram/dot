@@ -1,7 +1,3 @@
-// File: terrain.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.03.10
 
 #ifndef LIAM_TERRAIN
 #define LIAM_TERRAIN
@@ -22,7 +18,7 @@ public:
 	~Terrain(void) ;
 
 	// Facilitator
-	
+
 	// Mutators
 	void Set_Density(Density density) ;
 

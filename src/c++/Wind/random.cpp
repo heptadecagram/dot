@@ -1,8 +1,3 @@
-// File: random.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.05.12
-
 #include "random.h"
 
 void Start_Random(void) {

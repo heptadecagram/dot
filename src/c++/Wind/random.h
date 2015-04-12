@@ -1,7 +1,3 @@
-// File: random.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.07.10
 
 #ifndef LIAM_RANDOM
 #define LIAM_RANDOM

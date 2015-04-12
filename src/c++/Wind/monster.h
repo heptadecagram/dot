@@ -1,7 +1,3 @@
-// File: monster.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2001.11.27
 
 #ifndef LIAM_MONSTER
 #define LIAM_MONSTER
@@ -20,7 +16,7 @@ class Monster : public Screen_Object {
 	~Monster(void) ;
 
 	// Facilitators
-	
+
 	// Mutators
 	void Set_Playable(bool Playable) ;
 	bool Damage(int Damage) ;

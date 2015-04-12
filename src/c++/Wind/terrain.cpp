@@ -1,8 +1,3 @@
-// File: terrain.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.03.10
-
 #include "terrain.h"
 
 // Constructors

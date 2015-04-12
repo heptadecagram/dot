@@ -1,7 +1,3 @@
-// File: io.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2001.11.26
 //
 // This file is designed for system-dependent configuration of input and output
 // routines.  All functions that deal with keyboard input or terminal output
@@ -21,9 +17,9 @@
 // functions Clear_Screen() and Clear_Line() clear the screen and clear up
 // until the end of the cursor's current line, respectively, and also require
 // Refresh() to view the changes.  Locate() will set the cursor's position
-// on the screen according to its arguments.  Locate_X() and Locate_Y() 
+// on the screen according to its arguments.  Locate_X() and Locate_Y()
 // return the X or Y coordinate of the cursor on the screen, respectively.
-// Input_Char() accepts a single alphanumeric input from the keyboard and 
+// Input_Char() accepts a single alphanumeric input from the keyboard and
 // returns it.
 
 
@@ -52,7 +48,7 @@ using namespace std ;
 #include "error.h"
 
 
-enum Color {Empty, Red, Green, Brown, Navy, Magenta, Cyan, Grey, 
+enum Color {Empty, Red, Green, Brown, Navy, Magenta, Cyan, Grey,
 	Black, Orange, Lime, Yellow, Blue, Pink, Aqua, White} ;
 
 void Begin_Display(void) ;

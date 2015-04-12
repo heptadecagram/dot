@@ -1,8 +1,3 @@
-// File: output.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2001.11.26
-
 // Description of use and declared constants
 #include "io.h"
 
@@ -98,7 +93,7 @@ void Locate(int X_Coord, int Y_Coord) {
 	// Insure that the value lies within accepted viewing space
 	if(X_Coord>SCREEN_HEIGHT || Y_Coord>SCREEN_WIDTH ||
 			X_Coord<1 || Y_Coord<1)
-		Warn("Locate(%d, %d) Out of Range of standar(%d, %d)", 
+		Warn("Locate(%d, %d) Out of Range of standar(%d, %d)",
 				X_Coord, Y_Coord,
 				SCREEN_HEIGHT, SCREEN_WIDTH) ;
 #ifdef UNIX

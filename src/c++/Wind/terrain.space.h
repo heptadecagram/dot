@@ -1,8 +1,3 @@
-// File: terrain.space.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.03.10
-
 #ifndef LIAM_TERRAIN_SPACE
 #define LIAM_TERRAIN_SPACE
 

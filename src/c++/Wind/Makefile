@@ -1,7 +1,3 @@
-# File: Makefile
-# Author: Liam Bryan
-# Language: sh
-# Last Modified: 2002.05.10
 #
 # __GNUC__ is the predefined macro for gcc
 # __cplusplus is the predefined macro for a C++ compiler

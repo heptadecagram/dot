@@ -1,8 +1,3 @@
-// File: screen_object.cpp
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.05.11
-
 #include "screen_object.h"
 
 // Constructors

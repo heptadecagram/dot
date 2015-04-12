@@ -1,9 +1,5 @@
-// File: screen_object.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.05.11
 //
-// This file is designed for the manipulation of any graphical object.  It 
+// This file is designed for the manipulation of any graphical object.  It
 // defines a class Screen_Object that has a name, picture, and color.
 
 #ifndef LIAM_SCREEN_OBJECT

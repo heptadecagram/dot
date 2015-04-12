@@ -1,16 +1,12 @@
-// File: error.h
-// Author: Liam Bryan
-// Language: C++
-// Last Modified: 2002.03.10
 //
 // This file is designed for simple error trapping and inspection.  It declares
-// two functions, Die() and Warn(), which are identical in arguments to the 
-// printf(3) function.  Neither have a return value.  Die() is designed for 
-// critical errors that require the termination of the program.  Die() 
-// terminates the program after being called.  Warn() is designed to catch 
-// oddities that are not critical to the execution of the program, and 
-// hence does not stop execution.  Both write the errors out to files, 
-// defined below.  The size of the formatted string passed to both Die() 
+// two functions, Die() and Warn(), which are identical in arguments to the
+// printf(3) function.  Neither have a return value.  Die() is designed for
+// critical errors that require the termination of the program.  Die()
+// terminates the program after being called.  Warn() is designed to catch
+// oddities that are not critical to the execution of the program, and
+// hence does not stop execution.  Both write the errors out to files,
+// defined below.  The size of the formatted string passed to both Die()
 // and Warn() is 1023 characters.
 
 #ifndef LIAM_ERROR
