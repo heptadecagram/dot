@@ -1,12 +1,4 @@
 #!/usr/local/bin/ruby
-# Project  Name: None
-# File / Folder: statistics.rb
-# File Language: ruby
-# Copyright (C): 2007 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2007.10.23 08:00:53
-# Last Modifier: Liam Echlin
-# Last Modified: 2008.05.02
 
 module Enumerable
 	def size

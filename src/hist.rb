@@ -1,12 +1,4 @@
 #!/usr/bin/ruby
-# Project  Name: None
-# File / Folder: hist.rb
-# File Language: ruby
-# Copyright (C): 2006 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2006.03.13 20:14:58
-# Last Modifier: Liam Echlin
-# Last Modified: 2008.05.02
 
 command = {}
 execution = {}

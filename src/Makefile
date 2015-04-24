@@ -1,14 +1,3 @@
-#
-# Project  Name: None
-# File / Folder: Makefile
-# File Language: make
-# Copyright (C): 2005 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2005.10.24 21:00:33
-# Last Modifier: Liam Echlin
-# Last Modified: 2010.12.04
-
-CC = gcc
 
 all: beeper diff_tree history_check
 

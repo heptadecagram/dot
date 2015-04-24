@@ -1,12 +1,3 @@
-#!/usr/bin/perl
-# Project  Name: None
-# File / Folder: Statistics.pl
-# File Language: perl
-# Copyright (C): 2004 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2004.11.06 19:18:47
-# Last Modifier: Liam Echlin
-# Last Modified: 2008.05.02
 package Statistics;
 
 use strict;

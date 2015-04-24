@@ -1,12 +1,4 @@
 #!/usr/local/bin/ruby
-# Project  Name: None
-# File / Folder: math-functions.rb
-# File Language: ruby
-# Copyright (C): 2008 Liam Echlin
-# First  Author: Liam Echlin
-# First Created: 2008.02.08 11:11:48
-# Last Modifier: Liam Echlin
-# Last Modified: 2008.05.02
 
 module Math
 	PHI = (1 + sqrt(5))/2

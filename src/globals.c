@@ -1,17 +1,9 @@
 /*
- * Project  Name: None
- * File / Folder: globals.c
- * File Language: c
- * Copyright (C): 2005 Liam Bryan
- * First  Author: Liam Bryan
- * First Created: 2002.07.12
- * Last Modifier: Liam Echlin
- * Last Modified: 2008.05.02
- * Compilation  : $(CC) -lncurses -dM -o globals globals.c
- * Purpose      : This program will print out various global symbols.
- *                Note that the program is only valid when built, and
- *                thus should be re-compiled before use to avoid
- *                erroneous statements.
+ * Compilation: $(CC) -lncurses -dM -o globals globals.c
+ * Purpose    : This program will print out various global symbols.
+ *              Note that the program is only valid when built, and
+ *              thus should be re-compiled before use to avoid
+ *              erroneous statements.
  */
 
 #include <stdio.h>
