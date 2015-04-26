@@ -1,12 +1,4 @@
 #!/bin/sh
-# Project  Name: None
-# File / Folder: /diff-dir
-# File Language: sh
-# Copyright (C): 2009 Liam Echlin
-# First  Author: Liam Echlin
-# First Created: 2009.07.30
-# Last Modifier: Liam Echlin
-# Last Modified: 2013.12.11
 
 EXCLUDES='CVS .* logs'
 
