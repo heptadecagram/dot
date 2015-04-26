@@ -20,7 +20,7 @@
 [github]
 	user = heptadecagram
 [core]
-	editor = /usr/bin/vim
+	editor = vim
 [push]
 	default = simple
 [filter "media"]
