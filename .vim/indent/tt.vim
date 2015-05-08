@@ -1,15 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: vim/tt.vim
-" File Language: vim
-" Copyright (C): 2008 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2008.05.30
-" Last Modifier: Liam Echlin
-" Last Modified: 2008.06.02
-"
-" Globals:
-"   g:tt_dedent -- Set to 0 to prevent dedenting of CASE directives.
 
 " Load the HTML Indentation if it has not yet been loaded
 if !exists('*HtmlIndentGet')

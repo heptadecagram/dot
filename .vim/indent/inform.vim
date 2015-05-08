@@ -1,12 +1,3 @@
-" 
-" Project  Name: Vim Settings
-" File / Folder: .vim/indent.vim
-" File Language: vim
-" Copyright (C): 2004 Liam Bryan
-" First  Author: Liam Bryan
-" First Created: 2004.12.03 14:49:50
-" Last Modifier: Liam Bryan
-" Last Modified: 2004.12.06 21:50:49
 
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")

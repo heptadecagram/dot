@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/html.vim
-" File Language: vim
-" Copyright (C): 2004 Liam Bryan
-" First  Author: Liam Bryan
-" First Created: 2004.11.17 09:57:23
-" Last Modifier: Liam Echlin
-" Last Modified: 2014.09.05
 
 if exists('b:loaded_html')
 	finish

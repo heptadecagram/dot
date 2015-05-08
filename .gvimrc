@@ -1,12 +1,3 @@
-"
-" Project  Name: dot
-" File / Folder: .gvimrc
-" File Language: vim
-" Copyright (C): 2008 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2008.05.02
-" Last Modifier: Liam Echlin
-" Last Modified: 2014.07.22
 
 set mousehide		" Hide the mouse when typing text
 

@@ -1,12 +1,3 @@
-#!/usr/local/bin/bash
-# Project  Name: dot
-# File / Folder: ~/.bash_profile
-# File Language: sh
-# Copyright (C): 2004 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2004.08.11
-# Last Modifier: Liam Echlin
-# Last Modified: 2013.02.02
 
 export TZ='America/New_York'
 export COPYRIGHT='Liam Echlin'

@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/indent/sql.vim
-" File Language: vim
-" Copyright (C): 2004 Richard Group, Inc.
-" First  Author: Liam Bryan
-" First Created: 2004.12.10 10:25:09
-" Last Modifier: Liam Echlin
-" Last Modified: 2008.05.06
 
 if exists('b:did_indent')
 	finish

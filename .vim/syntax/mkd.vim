@@ -1,12 +1,3 @@
-" 
-" Project  Name: Vim Settings
-" File / Folder: .vim/syntax/mkd.vim
-" File Language: vim
-" Copyright (C): 2008 Liam Echlin
-" First  Author: Ben Williams
-" First Created: 2008.04.29
-" Last Modifier: Liam Echlin
-" Last Modified: 2008.06.03
 
 
 " Read the HTML syntax to start with

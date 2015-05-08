@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/tex.vim
-" File Language: vim
-" Copyright (C): 2010 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2010.05.02
-" Last Modifier: Liam Echlin
-" Last Modified: 2014.05.09
 
 nmap <silent> lf :call TexFunctionList()<CR>
 function! TexFunctionList()

@@ -1,12 +1,3 @@
-#!/usr/local/bin/bash
-# Project  Name: None
-# File / Folder: /.bash/vmware
-# File Language: sh
-# Copyright (C): 2010 Liam Echlin
-# First  Author: Liam Echlin
-# First Created: 2010.12.05
-# Last Modifier: Liam Echlin
-# Last Modified: 2010.12.05
 
 _vmrun () {
 	local current=$2

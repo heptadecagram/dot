@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/mail.vim
-" File Language: vim
-" Copyright (C): 2008 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2008.05.09
-" Last Modifier: Liam Echlin
-" Last Modified: 2008.06.17
 
 set spell
 

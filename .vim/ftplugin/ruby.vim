@@ -1,13 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/ruby.vim
-" File Language: vim
-" Copyright (C): 2005 Liam Bryan
-" First  Author: Liam Bryan
-" First Created: 2005.09.04 09:10:41
-" Last Modifier: Liam Echlin
-" Last Modified: 2008.05.13
-
 
 setlocal comments=:#
 setlocal commentstring=#%s

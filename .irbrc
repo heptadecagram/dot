@@ -1,12 +1,3 @@
-#!/usr/local/bin/ruby
-# Project  Name: None
-# File / Folder: .irbrc
-# File Language: ruby
-# Copyright (C): 2006 Liam Bryan
-# First  Author: Liam Bryan
-# First Created: 2006.03.17 20:33:27
-# Last Modifier: Liam Echlin
-# Last Modified: 2012.03.20
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true

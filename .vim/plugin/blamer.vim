@@ -1,12 +1,3 @@
-"
-" Project  Name: None
-" File / Folder: /blamer.vim
-" File Language: vim
-" Copyright (C): 2010 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2010.02.09
-" Last Modifier: Liam Echlin
-" Last Modified: 2011.04.21
 
 if exists('loaded_blamer') || &cp
     finish

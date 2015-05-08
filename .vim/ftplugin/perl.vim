@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/perl.vim
-" File Language: vim
-" Copyright (C): 2004 Liam Bryan
-" First  Author: Liam Bryan
-" First Created: 2004.10.21 18:40:00
-" Last Modifier: Liam Echlin
-" Last Modified: 2011.04.19
 
 nmap <silent> gd "lyiwh"ry :call Perl_gd(@l, @r)<CR>
 

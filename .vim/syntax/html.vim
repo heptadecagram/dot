@@ -1,12 +1,3 @@
-" 
-" Project  Name: Vim Settings
-" File / Folder: .vim/syntax/html.vim
-" File Language: vim
-" Copyright (C): 2014 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2014.05.06
-" Last Modifier: Liam Echlin
-" Last Modified: 2014.05.06
 
 " new html 5 tags
 syn keyword htmlTagName contained article aside audio canvas command datalist

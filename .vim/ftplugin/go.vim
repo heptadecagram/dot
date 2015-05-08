@@ -1,12 +1,3 @@
-"
-" Project  Name: Vim Settings
-" File / Folder: .vim/ftplugin/go.vim
-" File Language: vim
-" Copyright (C): 2011 Liam Echlin
-" First  Author: Liam Echlin
-" First Created: 2011.09.15
-" Last Modifier: Liam Echlin
-" Last Modified: 2014.11.18
 
 if exists('b:loaded_golang')
 	finish
