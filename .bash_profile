@@ -483,6 +483,9 @@ _flag_option_action_complete() {
 if [ -a "$HOME/.local/bash_profile" ]; then
 	source ~/.local/bash_profile
 fi
+if [ -a "$HOME/.local/`hostname`" ]; then
+	source ~/.local/`hostname`
+fi
 
 fix_everything () {
 	i=1
