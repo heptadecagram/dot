@@ -7,9 +7,9 @@ Screen_Object::Screen_Object(void) {
 	M_Color=Black ;
 }
 
-Screen_Object::Screen_Object(char* Name, char Image, Color color) {
+Screen_Object::Screen_Object(std::string Name, char Image, Color color) {
 	if(Image<32 || Image>126 || color<0 || color>15)
-		Die("Screen_Object(%s,%d,%d) usage", Name, Image, color) ;
+		Die("Screen_Object(%s,%d,%d) usage", Name.c_str(), Image, color) ;
 	M_Name=Name ;
 	M_Image=Image ;
 	M_Color=color ;
@@ -29,25 +29,25 @@ void Screen_Object::Put_Image(void) {
 
 
 // Mutators
-void Screen_Object::Set_Name(char* Name) {
+void Screen_Object::Set_Name(std::string Name) {
 	M_Name=Name ;
 }
 
 void Screen_Object::Set_Image(char Image) {
 	if(Image<32 || Image>126)
-		Die("%s.Set_Image(%d)", M_Name, Image) ;
+		Die("%s.Set_Image(%d)", M_Name.c_str(), Image) ;
 	M_Image=Image ;
 }
 
 void Screen_Object::Set_Color(Color color) {
 	if(color<0 || color>15)
-		Warn("%s.Set_Color(%d)", M_Name, color) ;
+		Warn("%s.Set_Color(%d)", M_Name.c_str(), color) ;
 	M_Color=color ;
 }
 
 
 // Inspectors
-char* Screen_Object::Get_Name(void) const {
+std::string Screen_Object::Get_Name(void) const {
 	return M_Name ;
 }
 

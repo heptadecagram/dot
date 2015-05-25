@@ -30,7 +30,7 @@
 #define MINIMUM_SCREEN_HEIGHT 25
 #define MINIMUM_SCREEN_WIDTH 80
 
-#ifdef UNIX
+#ifdef unix
 #include <curses.h>
 #define SCREEN_HEIGHT LINES
 #define SCREEN_WIDTH COLS

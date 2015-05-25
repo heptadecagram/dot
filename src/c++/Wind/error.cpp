@@ -1,7 +1,7 @@
 // Description of use and declared constants.
 #include "error.h"
 
-void Die(char* Format, ...) {
+void Die(const char* Format, ...) {
 	// This is a temporary string for storing the error.
 	char Buffer[1023] ;
 
@@ -33,7 +33,7 @@ void Die(char* Format, ...) {
 	exit(EXIT_FAILURE) ;
 }
 
-void Warn(char* Format, ...) {
+void Warn(const char* Format, ...) {
 	// This is a temporary string for storing the warning.
 	char Buffer[1023] ;
 

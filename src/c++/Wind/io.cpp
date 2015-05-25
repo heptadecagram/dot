@@ -8,9 +8,8 @@ void Begin_Display(void) {
 	// The size of the screen must be at least standard VT100 size
 	if(SCREEN_HEIGHT<MINIMUM_SCREEN_HEIGHT ||
 			SCREEN_WIDTH<MINIMUM_SCREEN_WIDTH)
-		Die("Begin_Display(%d,%d) out of range of minimum accepted
-				values (%d, %d)", SCREEN_HEIGHT, SCREEN_WIDTH,
-				MINIMUM_SCREEN_HEIGHT, MINIMUM_SCREEN_WIDTH) ;
+		Die("Begin_Display(%d,%d) out of range of minimum accepted values (%d, %d)",
+				SCREEN_HEIGHT, SCREEN_WIDTH, MINIMUM_SCREEN_HEIGHT, MINIMUM_SCREEN_WIDTH) ;
 	// Initialize colors, if necessary
 	if(has_colors())
 		Begin_Color() ;
@@ -103,7 +102,7 @@ void Locate(int X_Coord, int Y_Coord) {
 }
 
 int Locate_X(void) {
-	int Return ;
+	int Return = -1;
 #ifdef UNIX
 	int Y ;
 	// curses(3) function
@@ -113,7 +112,7 @@ int Locate_X(void) {
 }
 
 int Locate_Y(void) {
-	int Return ;
+	int Return = -1;
 #ifdef UNIX
 	int X ;
 	// curses(3) function

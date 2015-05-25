@@ -10,7 +10,7 @@ class Terrain : public Screen_Object {
 public:
 	// Constructors
 	Terrain(void) ;
-	Terrain(char* Name, char Image, Color color, Density density) ;
+	Terrain(const char* Name, char Image, Color color, Density density) ;
 
 	Terrain &operator = (const Terrain &terrain) ;
 

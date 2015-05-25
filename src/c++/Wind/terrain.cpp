@@ -4,7 +4,7 @@
 Terrain::Terrain(void) {
 }
 
-Terrain::Terrain(char* Name, char Image, Color color, Density density) :
+Terrain::Terrain(const char* Name, char Image, Color color, Density density) :
 		Screen_Object(Name, Image, color) {
 	M_Density=density ;
 }

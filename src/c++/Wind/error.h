@@ -13,7 +13,7 @@
 #define LIAM_ERROR
 
 // These are the files that warnings and errors are written to.
-#ifdef UNIX
+#ifdef unix
 #define LIAM_WARNING_FILE "./.warning_log"
 #define LIAM_ERROR_FILE   "./.error_log"
 #endif // UNIX
@@ -31,8 +31,8 @@
 #include <cstdlib>
 using namespace std ;
 
-void Die(char* Format, ...) ;
+void Die(const char* Format, ...) ;
 
-void Warn(char* Format, ...) ;
+void Warn(const char* Format, ...) ;
 
 #endif // LIAM_ERROR

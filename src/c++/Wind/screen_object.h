@@ -5,6 +5,8 @@
 #ifndef LIAM_SCREEN_OBJECT
 #define LIAM_SCREEN_OBJECT
 
+#include <string>
+
 #include "error.h"
 #include "io.h"
 
@@ -12,9 +14,9 @@ class Screen_Object {
 public:
 	// Constructors
 	Screen_Object(void) ;
-	Screen_Object(char* Name, char Image, Color color) ;
+	Screen_Object(std::string Name, char Image, Color color) ;
 
-	virtual Screen_Object& operator=(const Screen_Object &Screen_Object)=0 ;
+	//virtual Screen_Object& operator=(const Screen_Object &Screen_Object)=0 ;
 
 	// Destructor
 	virtual ~Screen_Object(void) ;
@@ -23,18 +25,18 @@ public:
 	virtual void Put_Image(void) ;
 
 	// Mutators
-	void Set_Name(char* Name) ;
+	void Set_Name(std::string Name) ;
 	void Set_Image(char Image) ;
 	void Set_Color(Color color) ;
 
 	// Inspectors
-	char* Get_Name(void) const ;
+	std::string Get_Name(void) const ;
 	char Get_Image(void) const ;
 	Color Get_Color(void) const ;
 
 protected:
 	// Member Variables
-	char* M_Name ;
+	std::string M_Name ;
 	char M_Image ;
 	Color M_Color ;
 } ;
