@@ -1,25 +1,19 @@
 
 CPPFLAGS+=-O2 -Wall -Werror -pedantic
-LDLIBS+=-lncurses
-OBJECTS=error.o io.o random.o screen_object.o terrain.o monster.o main.o
+LDLIBS+=-lncurses -lstdc++
+OBJECTS=error.o io.o random.o screen_object.o terrain.o monster.o
 
 Eurus: $(OBJECTS)
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJECTS) -o $@
 
-main.o: main.cpp io.h terrain.h
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+Eurus.o: Eurus.cpp io.h terrain.h
 
 monster.o: monster.cpp monster.h screen_object.h
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 terrain.o: terrain.cpp terrain.h screen_object.h
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 screen_object.o: screen_object.cpp screen_object.h io.h
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 random.o: random.cpp random.h
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 io.o: io.cpp io.h error.h
 
