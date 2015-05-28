@@ -8,7 +8,8 @@ map! <S-Insert> <MiddleMouse>
 set guifont=Monaco:h19
 
 set antialias
-set lines=40
+set lines=45
+set columns=80
 colorscheme koehler
 
 if has("autocmd")
