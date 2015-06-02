@@ -6,18 +6,18 @@ let b:loaded_html = 1
 
 let maplocalleader='&'
 
-inoremap <buffer> <LocalLeader>& &amp;
-inoremap <buffer> <LocalLeader>. &hellip;
-inoremap <buffer> <LocalLeader>- &ndash;
-inoremap <buffer> <LocalLeader>/ &frasl;
-inoremap <buffer> <LocalLeader>< &lt;
-inoremap <buffer> <LocalLeader>> &gt;
-inoremap <buffer> <LocalLeader>c &copy;
-inoremap <buffer> <LocalLeader>r &reg;
-inoremap <buffer> <LocalLeader>x &times;
-inoremap <buffer> <LocalLeader><RIGHT> &rarr;
-inoremap <buffer> <LocalLeader><LEFT> &larr;
-inoremap <buffer> <LocalLeader><SPACE> &nbsp;
+iabbrev <buffer> <LocalLeader>& &amp;
+iabbrev <buffer> <LocalLeader>. &hellip;
+iabbrev <buffer> <LocalLeader>- &ndash;
+iabbrev <buffer> <LocalLeader>/ &frasl;
+iabbrev <buffer> <LocalLeader>< &lt;
+iabbrev <buffer> <LocalLeader>> &gt;
+iabbrev <buffer> <LocalLeader>c &copy;
+iabbrev <buffer> <LocalLeader>r &reg;
+iabbrev <buffer> <LocalLeader>x &times;
+iabbrev <buffer> <LocalLeader><RIGHT> &rarr;
+iabbrev <buffer> <LocalLeader><LEFT> &larr;
+iabbrev <buffer> <LocalLeader><SPACE> &nbsp;
 
 let mapleader='`'
 
