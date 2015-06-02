@@ -83,13 +83,13 @@ o () {
 				sudoedit "$@"
 				return
 			else
-				sudo vim "$@"
+				sudo ${VISUAL:-$EDITOR} "$@"
 				return
 			fi
 		fi
 	done
 
-	vim "$@"
+	${VISUAL:-$EDITOR} "$@"
 }
 
 # cd alias with directory substitution and directory-for-file shortcut
