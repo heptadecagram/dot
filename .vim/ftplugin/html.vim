@@ -15,8 +15,8 @@ inoremap <buffer> <LocalLeader>> &gt;
 inoremap <buffer> <LocalLeader>c &copy;
 inoremap <buffer> <LocalLeader>r &reg;
 inoremap <buffer> <LocalLeader>x &times;
-inoremap <buffer> <LocalLeader>→ &rarr;
-inoremap <buffer> <LocalLeader>← &larr;
+inoremap <buffer> <LocalLeader><RIGHT> &rarr;
+inoremap <buffer> <LocalLeader><LEFT> &larr;
 inoremap <buffer> <LocalLeader><SPACE> &nbsp;
 
 let mapleader='`'
