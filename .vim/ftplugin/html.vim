@@ -15,9 +15,9 @@ iabbrev <buffer> <LocalLeader>> &gt;
 iabbrev <buffer> <LocalLeader>c &copy;
 iabbrev <buffer> <LocalLeader>r &reg;
 iabbrev <buffer> <LocalLeader>x &times;
-iabbrev <buffer> <LocalLeader><RIGHT> &rarr;
-iabbrev <buffer> <LocalLeader><LEFT> &larr;
-iabbrev <buffer> <LocalLeader><SPACE> &nbsp;
+inoremap <buffer> <LocalLeader><RIGHT> &rarr;
+inoremap <buffer> <LocalLeader><LEFT> &larr;
+inoremap <buffer> <LocalLeader><SPACE> &nbsp;
 
 let mapleader='`'
 
