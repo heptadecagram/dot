@@ -44,3 +44,4 @@
 /.xsession-errors
 !src
 !thought_residue
+*.o
