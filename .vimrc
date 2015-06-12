@@ -248,3 +248,7 @@ inoremap <Tab> <C-R>=TabComplete()<CR>
 function! SyntaxItem()
 	return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
+
+" Shuffle a range of lines
+command -range Shuffle :<line1>,<line2>!perl -MList::Util=shuffle -e'print shuffle(<>)'
+
