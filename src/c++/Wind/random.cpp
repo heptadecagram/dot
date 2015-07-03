@@ -1,19 +1,19 @@
+#include <random>
+
 #include "random.h"
 
-void Start_Random(void) {
-	srandom(unsigned(time(NULL) ) ) ;
-}
+static std::mt19937 gen{};
 
 int Random(int Min, int Max) {
-	return random()%(Max-Min+1)+Min ;
+	return Random(Max - Min) + Min;
 }
 
 int Random(int Max) {
-	return random()%Max+1 ;
+	return gen() % Max;
 }
 
-float Random_Percent(void) {
-	return float(Random(0, 100) )/100 ;
+double Random_Percent(void) {
+	return Random(100)/100.0;
 }
 
 int Dice(int Number, int Type, int Modifier) {

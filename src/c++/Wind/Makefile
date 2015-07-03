@@ -1,5 +1,5 @@
 
-CPPFLAGS+=-O2 -Wall -Werror -pedantic
+CXXFLAGS+=-std=c++1y -Wall -Werror -pedantic
 LDLIBS+=-lncurses -lstdc++
 OBJECTS=error.o io.o random.o screen_object.o terrain.o monster.o
 

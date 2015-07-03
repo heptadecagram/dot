@@ -1,20 +1,15 @@
 
-#ifndef LIAM_RANDOM
-#define LIAM_RANDOM
-
-#include <ctime>
-#include <cstdlib>
-
-void Start_Random(void) ;
+#ifndef WIND_RANDOM
+#define WIND_RANDOM
 
 int Random(int Max) ;
 
 int Random(int Min, int Max) ;
 
-float Random_Percent(void) ;
+double Random_Percent(void) ;
 
 int Dice(int Number, int Size, int Modifier=0) ;
 
 int Dice(char *Roll) ;
 
-#endif // LIAM_RANDOM
+#endif // WIND_RANDOM
