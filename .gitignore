@@ -12,12 +12,14 @@
 /.Xauthority
 /.cache
 /.config
+/.cpan
 /.dmrc
 /.esd_auth
 /.evolution
 /.fontconfig
 /.gconf
 /.gconfd
+/.ghc/ghci_history
 /.gitk
 /.gksu.lock
 /.gnupg
@@ -31,6 +33,7 @@
 /.mozilla
 /.nautilus
 /.openoffice.org2
+/.pip
 /.pulse-cookie
 /.pulse
 /.purple
