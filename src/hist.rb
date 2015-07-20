@@ -4,7 +4,7 @@ command = {}
 execution = {}
 $total = 0
 
-IO.foreach('.bash_history') do |line|
+File.foreach(File.expand_path('~/.bash_history')) do |line|
 	line.chomp! =~ /^(\S+)/
 	execution[line] = 1 + execution[line].to_i
 	command[$1] = 1 + command[$1].to_i
