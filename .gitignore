@@ -45,6 +45,7 @@
 /.vmware
 /.wine
 /.xsession-errors
+!doc
 !src
 !thought_residue
 *.o
