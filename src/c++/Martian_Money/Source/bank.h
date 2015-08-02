@@ -1,6 +1,6 @@
 
-#ifndef LIAM_BANK
-# define LIAM_BANK
+#ifndef MMONEY_BANK
+# define MMONEY_BANK
 
 # include <cmath>
 # ifndef M_PI
@@ -38,4 +38,4 @@ protected:
 	double M_Normalizer;
 };
 
-#endif // LIAM_BANK
+#endif // MMONEY_BANK

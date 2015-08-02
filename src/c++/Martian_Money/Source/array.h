@@ -1,6 +1,6 @@
 
-#ifndef LIAM_ARRAY
-# define LIAM_ARRAY
+#ifndef MMONEY_ARRAY
+# define MMONEY_ARRAY
 
 # include <cstdlib>
 # include <vector>
@@ -31,8 +31,8 @@ protected:
 	std::vector<Type> M_Values;
 };
 
-# ifndef LIAM_ARRAY_IMPLEMENT
+# ifndef MMONEY_ARRAY_IMPLEMENT
 #  include "array.cpp"
-# endif // LIAM_ARRAY_IMPLEMENT
+# endif // MMONEY_ARRAY_IMPLEMENT
 
-#endif // LIAM_ARRAY
+#endif // MMONEY_ARRAY

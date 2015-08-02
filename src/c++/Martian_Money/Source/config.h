@@ -1,6 +1,6 @@
 
-#ifndef LIAM_CONFIG
-# define LIAM_CONFIG
+#ifndef MMONEY_CONFIG
+# define MMONEY_CONFIG
 
 # define DEFAULT_CONFIG "host.config"
 
@@ -37,4 +37,4 @@ private:
 	void Default_Variable(Config_Variable Variable);
 };
 
-#endif // LIAM_CONFIG
+#endif // MMONEY_CONFIG

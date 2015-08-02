@@ -1,11 +1,11 @@
 
-#ifndef LIAM_ARRAY_IMPLEMENT
-# define LIAM_ARRAY_IMPLEMENT
-#endif // LIAM_ARRAY_IMPLEMENT
+#ifndef MMONEY_ARRAY_IMPLEMENT
+# define MMONEY_ARRAY_IMPLEMENT
+#endif // MMONEY_ARRAY_IMPLEMENT
 
-#ifndef LIAM_ARRAY
+#ifndef MMONEY_ARRAY
 # include "array.h"
-#endif // LIAM_ARRAY
+#endif // MMONEY_ARRAY
 
 #include <iostream>
 
