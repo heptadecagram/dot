@@ -4,7 +4,6 @@
 
 #include "config.h"
 #include "array.h"
-#include "player.h"
 #include "bank.h"
 
 int main(int argc, char** argv) {
