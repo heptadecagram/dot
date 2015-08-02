@@ -9,27 +9,27 @@ template<typename Type>
 class Array {
 public:
 	// Constructors
-	Array(void) ;
-	Array(unsigned int Width, unsigned int Height) ;
+	Array(void);
+	Array(unsigned int Width, unsigned int Height);
 
 	// Facilitators
-	void Flood(Type Value) ;
+	void Flood(Type Value);
 
 	// Inspectors
-	Type operator () (unsigned int Column, unsigned int Row) const ;
-	unsigned int Get_Width(void) const ;
-	unsigned int Get_Height(void) const ;
+	Type operator () (unsigned int Column, unsigned int Row) const;
+	unsigned int Get_Width(void) const;
+	unsigned int Get_Height(void) const;
 
 	// Mutators
-	Type& operator () (unsigned int Column, unsigned int Row) ;
-	void Resize(unsigned int Width, unsigned int Height) ;
+	Type& operator () (unsigned int Column, unsigned int Row);
+	void Resize(unsigned int Width, unsigned int Height);
 
 protected:
 	// Variables
-	unsigned int M_Width ;
-	unsigned int M_Height ;
-	std::vector<Type> M_Values ;
-} ;
+	unsigned int M_Width;
+	unsigned int M_Height;
+	std::vector<Type> M_Values;
+};
 
 # ifndef LIAM_ARRAY_IMPLEMENT
 #  include "array.cpp"
