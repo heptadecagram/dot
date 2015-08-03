@@ -9,8 +9,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 // Constructors
 template<class Type>
 Array<Type>::Array(void) {
@@ -23,9 +21,9 @@ Array<Type>::Array(void) {
 template<class Type>
 Array<Type>::Array(unsigned int Width, unsigned int Height) {
 	if(Height==0 || Width==0) {
-		cerr << "Array(" << Height << ", " << Width <<
-			") cannot contain 0!" << endl;
-		exit(EXIT_FAILURE);
+		std::cerr << "Array(" << Height << ", " << Width <<
+			") cannot contain 0!" << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	M_Height=Height;
 	M_Width=Width;
@@ -47,10 +45,10 @@ void Array<Type>::Flood(Type Value) {
 template<typename Type>
 Type Array<Type>::operator () (unsigned int Column, unsigned int Row) const {
 	if(Row>=M_Height || Column>=M_Width) {
-		cerr << "Array(" << Row << ", " << Column <<
+		std::cerr << "Array(" << Row << ", " << Column <<
 			") out of range for size: " << M_Height << ", " <<
-			M_Width << endl;
-		exit(EXIT_FAILURE);
+			M_Width << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	else
 		return M_Values[Column+Row*M_Height];
@@ -71,10 +69,10 @@ unsigned int Array<Type>::Get_Height(void) const {
 template<typename Type>
 Type& Array<Type>::operator () (unsigned int Column, unsigned int Row) {
 	if(Row>=M_Height || Column>=M_Width) {
-		cerr << "&Array(" << Row << ", " << Column <<
+		std::cerr << "&Array(" << Row << ", " << Column <<
 			") out of range for size: " << M_Height << ", " <<
-			M_Width << endl;
-		exit(EXIT_FAILURE);
+			M_Width << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	else
 		return M_Values[Column+Row*M_Height];
@@ -83,9 +81,9 @@ Type& Array<Type>::operator () (unsigned int Column, unsigned int Row) {
 template<typename Type>
 void Array<Type>::Resize(unsigned int Width, unsigned int Height) {
 	if(Height==0 || Width==0) {
-		cerr << "Array.Resize(" << Height << ", " << Width <<
-			") cannot contain 0!" << endl;
-		exit(EXIT_FAILURE);
+		std::cerr << "Array.Resize(" << Height << ", " << Width <<
+			") cannot contain 0!" << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	M_Width=Width;
 	M_Height=Height;
