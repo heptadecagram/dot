@@ -1,6 +1,8 @@
 
 export TZ='America/New_York'
-export COPYRIGHT='Liam Echlin'
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less -X'
 
 shopt -s histappend
 
@@ -10,7 +12,6 @@ alias grep='grep --color'
 alias n='ls'
 alias nn='ls -lA'
 alias N='ls -la'
-alias s='svn'
 alias c='cvs'
 alias oo='vimdiff'
 
@@ -36,6 +37,8 @@ CODE_BLUE=$'\[\033[0;34m\]'
 CODE_NORM=$'\[\033[m\]'
 PS1='\h:\w/\n'
 
+PATH=$PATH:$HOME/bin
+
 prompt_command () {
 	if [ $? -ne 0 ]; then
 		PS1="[$CODE_RED\$?$CODE_NORM]"
@@ -60,12 +63,6 @@ _git_prompt () {
 		echo "$branch\n"
 	fi
 }
-
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less -X'
-
-PATH=$PATH:$HOME/bin
 
 mutt () {
 	if [ "$USER" = wechlin ]; then
@@ -134,10 +131,6 @@ _vc-diff () {
 }
 
 
-sd () {
-	_vc-diff 'svn diff' "$@"
-}
-
 cvs-diff () {
 	_vc-diff 'cvs diff' "$@"
 }
@@ -170,112 +163,6 @@ _cvs () {
 }
 complete -o filenames -F _cvs cvs c
 
-_svn () {
-	local current=$2
-	local prev=$3
-	local opts='add blame praise annotate ann cat checkout co cleanup commit ci
-	copy cp delete del remove rm diff di export help h \? import info list ls
-	lock log merge mkdir move mv rename ren propdel propedit propget proplist
-	propset resolved revert status stat st switch sw unlock update up'
-	COMPREPLY=()
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$opts" -- "$current"`)
-		return
-	fi
-
-	case "$prev" in
-	add)
-		# If the current directory is unversioned, nothing can be added
-		if [ ! -d "`dirname "$current"`/.svn" ] || [ -d "$current" -a ! -d "$current/.svn" ]; then
-			COMPREPLY=()
-			return
-		fi
-
-		if [ "$current" ]; then
-			opts=`svn status "$current"* | sed -ne's#^?\s*##p'`
-		else
-			opts=`svn status | sed -ne's#^?\s*##p'`
-		fi
-
-		# The goal here is to adjust the completion options to get directories
-		# to work properly.  Currently, only the basename of a path is displayed
-		# for completion, when it should be the next step in a directory tree.
-		#if [ "${opts#*/}" != "$opts" ]; then
-			#if [ "${current#*/}" != "$current" ]; then
-				#opts=`echo "$opts" | sed -e"s#${current%/*}##" -e's#/.*##' | uniq`
-			#else
-				#opts=`echo "$opts" | sed -e's#/.*##' | uniq`
-			#fi
-		#fi
-
-		# If the directory errors on svn status, it is unversioned, so
-		# display all its contents
-		# If nothing is returned, there is nothing to add.  Stop.
-		if [ -z "$opts" ]; then
-			COMPREPLY=()
-		# If something is returned, this is a repository, and show the new files
-		else
-			COMPREPLY=(`compgen -X '.svn' -W "$opts" -- "$current"`)
-		fi
-		return
-		;;
-	ci | commit)
-		if [ "$current" ]; then
-			opts=`svn status "$current"* 2>/dev/null | sed -ne's#^[AM]\s*##p'`
-		else
-			opts=`svn status 2>/dev/null | sed -ne's#^[AM]\s*##p'`
-		fi
-		# If nothing is returned, there is nothing to commit.  Stop.
-		if [ -z "$opts" ]; then
-			COMPREPLY=()
-		else
-			COMPREPLY=(`compgen -X '.svn' -W "$opts" -- "$current" `)
-		fi
-		return
-		;;
-	prop* | pd | pe | pg | pl | ps)
-		COMPREPLY=(`compgen -P 'svn:' -W 'executable externals ignore' -- "$current"`)
-		return
-		;;
-	resolved)
-		if [ "$current" ]; then
-			opts=`svn status "$current"* 2>/dev/null | grep ^C | cut -c 8-`
-		else
-			opts=`svn status 2>/dev/null | grep ^C | cut -c 8-`
-		fi
-		# If nothing is returned, there is nothing to commit.  Stop.
-		if [ -z "$opts" ]; then
-			COMPREPLY=()
-		else
-			COMPREPLY=(`compgen -X '.svn' -W "$opts"`)
-		fi
-		return
-		;;
-	'\?' | h | help)
-		COMPREPLY=(`compgen -W "$opts" -- "$current"`)
-		return
-		;;
-	esac
-
-	COMPREPLY=(`compgen -X '.svn' -f -- "$current"`)
-}
-complete -o filenames -F _svn svn s
-
-_svnadmin () {
-	local current=$2
-	local previous=$3
-	local ACTIONS='crashtest create deltify dump help hotcopy list-dblogs
-	list-unused-dblogs load lslocks lstxns recover rmlocks rmtxns setlog verify'
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
-		return
-	else
-		COMPREPLY=(`compgen -f -- "$current"`)
-	fi
-}
-complete -o filenames -F _svnadmin svnadmin
 
 _bzr () {
 	local current=$2
