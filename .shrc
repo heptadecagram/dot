@@ -1,0 +1,53 @@
+# file permissions: rwxr-xr-x
+#
+# umask	022
+
+# Enable the builtin emacs(1) command line editor in sh(1),
+# e.g. C-a -> beginning-of-line.
+set -o emacs
+
+#shopt -s histappend
+
+alias ls='ls -FG'
+alias grep='grep --color'
+
+alias n='ls'
+alias nn='ls -lA'
+alias N='ls -la'
+alias s='svn'
+alias c='cvs'
+alias g='git'
+alias oo='vimdiff'
+
+PATH=$PATH:$HOME/bin
+
+#CODE_RED=$'\[\033[0;31m\]'
+#CODE_GREEN=$'\[\033[0;32m\]'
+#CODE_YELL=$'\[\033[0;33m\]'
+#CODE_BLUE=$'\[\033[0;34m\]'
+#CODE_NORM=$'\[\033[m\]'
+
+# Vim alias with sudo built-ins
+o () {
+	for file in "$@"; do
+		if [ ! -e "$file" -a ! -w "`dirname "$file"`" ] || [ -e "$file" -a ! -w "$file" -a ! -O "$file" ]; then
+			if [ -x "`which sudoedit`" ]; then
+				sudoedit "$@"
+				return
+			else
+				sudo ${VISUAL:-$EDITOR} "$@"
+				return
+			fi
+		fi
+	done
+
+	${VISUAL:-$EDITOR} "$@"
+}
+
+# # set prompt: ``username@hostname$ ''
+# PS1="`whoami`@`hostname | sed 's/\..*//'`"
+# case `id -u` in
+# 	0) PS1="${PS1}# ";;
+# 	*) PS1="${PS1}$ ";;
+# esac
+PS1="\h:\w/ "
