@@ -121,11 +121,6 @@ _vc-diff () {
 }
 
 
-cvs-diff () {
-	_vc-diff 'cvs diff' "$@"
-}
-
-
 # Completion functions
 
 _ssh () {

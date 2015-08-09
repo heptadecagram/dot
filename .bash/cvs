@@ -33,3 +33,7 @@ _cvs () {
 }
 complete -o filenames -F _cvs cvs c
 
+cvs-diff () {
+	_vc-diff 'cvs diff' "$@"
+}
+
