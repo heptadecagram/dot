@@ -11,4 +11,4 @@ $(TARGET): $(OBJECTS)
 
 
 clean:
-	-rm *.o *~ $(TARGET) core
+	-rm -f *.o *~ $(TARGET) core
