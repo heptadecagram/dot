@@ -12,7 +12,6 @@ alias grep='grep --color'
 alias n='ls'
 alias nn='ls -lA'
 alias N='ls -la'
-alias c='cvs'
 alias oo='vimdiff'
 
 # Handle large bash completions and helpers based
@@ -137,51 +136,6 @@ cvs-diff () {
 
 
 # Completion functions
-
-_cvs () {
-	local current=$2
- 	local previous=$3
-
-	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
-	local ACTIONS='ad add new  admin annotate checkout ci co commit diff edit
-	editors export history import init log login logout pserver rannotate rdiff
-	release remove rlog rtag server status tag unedit update version watch
-	watchers'
-
-	COMPREPLY=()
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		if [ "${current#-}" != "$current" ]; then
-			COMPREPLY=(`compgen -W "$global_options" -- $current`)
-		else
-			COMPREPLY=(`compgen -W "$ACTIONS" -- $current`)
-		fi
-		return
-	fi
-
-	COMPREPLY=(`compgen -X 'CVS' -f -- $current`)
-}
-complete -o filenames -F _cvs cvs c
-
-
-_bzr () {
-	local current=$2
-	local previous=$3
-	local ACTIONS='add annotate bind branch break-lock cat check checkout commit
-	conflicts deleted diff export help ignore ignored info init init-repository
-	log ls merge missing mkdir mv nick pack plugins pull push reconcile
-	reconfigure remerge remove remove-tree renames resolve revert revno root send
-	serve sign-my-commits split status switch tag tags testament unbind uncommit
-	update upgrade version version-info whoami'
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
-	else
-		COMPREPLY=(`compgen -X '.bzr' -f -- "$current"`)
-	fi
-}
-complete -o filenames -F _bzr bzr
-
 
 _ssh () {
 	local current=$2

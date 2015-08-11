@@ -1,0 +1,20 @@
+
+_bzr () {
+	local current=$2
+	local previous=$3
+	local ACTIONS='add annotate bind branch break-lock cat check checkout commit
+	conflicts deleted diff export help ignore ignored info init init-repository
+	log ls merge missing mkdir mv nick pack plugins pull push reconcile
+	reconfigure remerge remove remove-tree renames resolve revert revno root send
+	serve sign-my-commits split status switch tag tags testament unbind uncommit
+	update upgrade version version-info whoami'
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+	else
+		COMPREPLY=(`compgen -X '.bzr' -f -- "$current"`)
+	fi
+}
+complete -o filenames -F _bzr bzr
+
+

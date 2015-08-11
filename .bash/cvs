@@ -1,0 +1,28 @@
+
+alias c='cvs'
+
+_cvs () {
+	local current=$2
+ 	local previous=$3
+
+	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
+	local ACTIONS='ad add new  admin annotate checkout ci co commit diff edit
+	editors export history import init log login logout pserver rannotate rdiff
+	release remove rlog rtag server status tag unedit update version watch
+	watchers'
+
+	COMPREPLY=()
+
+	if [ $COMP_CWORD -eq 1 ]; then
+		if [ "${current#-}" != "$current" ]; then
+			COMPREPLY=(`compgen -W "$global_options" -- $current`)
+		else
+			COMPREPLY=(`compgen -W "$ACTIONS" -- $current`)
+		fi
+		return
+	fi
+
+	COMPREPLY=(`compgen -X 'CVS' -f -- $current`)
+}
+complete -o filenames -F _cvs cvs c
+
