@@ -14,16 +14,6 @@ alias nn='ls -lA'
 alias N='ls -la'
 alias oo='vimdiff'
 
-# Handle large bash completions and helpers based
-# on what is available.
-if [ -d $HOME/.bash ]; then
-	for file in $HOME/.bash/*; do
-		if [ -x "`which ${file#*.bash/} 2>/dev/null`" ]; then
-			source $file
-		fi
-	done
-fi
-
 alias home='ssh home'
 
 alias perl="perl -I${HOME}/src"
@@ -49,19 +39,23 @@ prompt_command () {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi``_git_prompt`$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
+	PS1="$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
+
+	PS1="`if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$PS1"
+	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi`$PS1"
 }
 PROMPT_COMMAND="prompt_command"
 
-_git_prompt () {
-	if git rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
-		local branch=`git symbolic-ref HEAD 2>/dev/null`
-		branch="${branch#refs/heads/}:"`git rev-parse --show-prefix`
-		git diff --quiet || branch="$branch*"
+# Handle large bash completions and helpers based
+# on what is available.
+if [ -d $HOME/.bash ]; then
+	for file in $HOME/.bash/*; do
+		if [ -x "`which ${file#*.bash/} 2>/dev/null`" ]; then
+			source $file
+		fi
+	done
+fi
 
-		echo "$branch\n"
-	fi
-}
 
 mutt () {
 	if [ "$USER" = wechlin ]; then

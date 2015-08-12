@@ -1,6 +1,19 @@
 
 alias g='git'
 
+_git_saved_prompt="$PROMPT_COMMAND"
+PROMPT_COMMAND="_git_prompt"
+_git_prompt () {
+	$_git_saved_prompt
+	if git rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}:"`git rev-parse --show-prefix`
+		git diff --quiet || branch="$branch*"
+
+		PS1="\n$branch$PS1"
+	fi
+}
+
 _git () {
 	local current=$2
 	local ACTIONS='add am annotate apply archive bisect blame branch bundle
