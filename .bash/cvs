@@ -1,6 +1,13 @@
 
 alias c='cvs'
 
+_cvs_saved_prompt="$PROMPT_COMMAND"
+PROMPT_COMMAND="_cvs_prompt"
+_cvs_prompt () {
+	$_cvs_saved_prompt
+	PS1="`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi`$PS1"
+}
+
 _cvs () {
 	local current=$2
  	local previous=$3

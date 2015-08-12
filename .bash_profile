@@ -39,9 +39,7 @@ prompt_command () {
 	else
 		PS1="$PS1\h"
 	fi
-	PS1="$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
-
-	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi`$PS1"
+	PS1="\n$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
 }
 PROMPT_COMMAND="prompt_command"
 
