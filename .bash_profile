@@ -41,7 +41,6 @@ prompt_command () {
 	fi
 	PS1="$CODE_YELL\A$CODE_NORM $PS1:\w/\\n> "
 
-	PS1="`if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$PS1"
 	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi`$PS1"
 }
 PROMPT_COMMAND="prompt_command"

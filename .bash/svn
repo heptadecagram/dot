@@ -1,6 +1,13 @@
 
 alias s='svn'
 
+_svn_saved_prompt="$PROMPT_COMMAND"
+PROMPT_COMMAND="_svn_prompt"
+_svn_prompt () {
+	$_svn_saved_prompt
+	PS1="`if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi`$PS1"
+}
+
 _svn () {
 	local current=$2
 	local prev=$3
