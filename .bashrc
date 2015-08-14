@@ -48,11 +48,7 @@ fi
 
 
 mutt () {
-	if [ "$USER" = wechlin ]; then
-		command mutt -F ~/.mutt/sourcefire.com
-	else
-		command mutt -F ~/.mutt/heptadecagram.net
-	fi
+	command mutt -F ~/.mutt/heptadecagram.net
 }
 
 # Vim alias with sudo built-ins
