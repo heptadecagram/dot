@@ -133,10 +133,6 @@ macro index \cb |urlview\n # View URLs in message
 
 #send-hook mutt- 'set signature=~/.sigmutt; my_hdr From: Mutt User <user@example.com>'
 send-hook . unmy_hdr From
-send-hook origins@(lists\.)?(looneylabs|wunderland).com my_hdr From: Liam Echlin <origins@heptadecagram.net>
-send-hook besc@(lists\.)?(looneylabs|wunderland).com my_hdr From: Liam Echlin <liam@wunderland.com>
-
-send-hook tribearcane@yahoogroups.com my_hdr From: Liam Echlin <liam@wunderland.com>
 
 
 auto_view application/x-gunzip
