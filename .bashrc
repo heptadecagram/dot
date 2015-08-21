@@ -1,5 +1,10 @@
 
-alias ls='ls -FG'
+if [ `uname` = "Linux" ]; then
+	alias ls='ls -F --color'
+else
+	alias ls='ls -FG'
+fi
+
 alias grep='grep --color'
 
 alias n='ls'
@@ -286,6 +291,27 @@ _flag_option_action_complete() {
 	fi
 
 }
+
+# pyenv
+if [ -x "`which pyenv`" ]; then
+	eval "`pyenv init -`"
+fi
+
+# perlbrew
+if [ -e ~/perl5/perlbrew/etc/bashrc ]; then
+	. ~/perl5/perlbrew/etc/bashrc
+fi
+
+# rbenv
+if [ -x "`which rbenv`" ]; then
+	eval "`rbenv init -`"
+fi
+
+# jenv
+if [ -x "`which jenv`" ]; then
+	eval "`jenv init -`"
+fi
+
 
 fix_everything () {
 	i=1
