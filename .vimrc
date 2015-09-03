@@ -186,7 +186,6 @@ function NewProgramHeader()
 			normal yyp
 			4substitute'^'int main(int argc, char *argv[])'
 			5substitute'^'{'
-			7substitute'^'	return 0;'
 			8substitute'^'}'
 
 			if &syntax == 'cpp'
@@ -208,14 +207,12 @@ function NewProgramHeader()
 		1substitute'.*'#!/bin/sh'
 	endif
 	if &syntax == 'perl'
+		normal yy5p
 		1substitute'.*'#!/usr/bin/perl'
-		1append
+		3substitute'^'use strict;'
+		4substitute'^'use warnings;'
+		5substitute'^'use 5.20.0;'
 
-use strict;
-use warnings;
-use 5.20.0;
-
-.
 		" Modules get a package name automatically
 		if -1 < match(expand('%'), '\.pm$')
 			let s:module_name = substitute(
