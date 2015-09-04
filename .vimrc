@@ -62,8 +62,7 @@ if executable('lsusb')
 	if strlen(system('lsusb | grep Kinesis')) > 8
 		call Kinesis()
 	endif
-	endif
-if executable('system_profiler')
+elseif executable('system_profiler')
 	if strlen(system('system_profiler SPUSBDataType | grep Kinesis')) > 8
 		call Kinesis()
 	endif
@@ -126,34 +125,6 @@ set runtimepath+=$GOROOT/misc/vim
 
 highlight SignColumn ctermbg=NONE
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-	" Enable file type detection, load indent files.
-	filetype plugin indent on
-
-	" For all text files set 'textwidth' to 78 characters.
-	autocmd FileType text setlocal textwidth=78
-
-	" When editing a file, always jump to the last known cursor position.
-	" Don't do it when the position is invalid or when inside an event handler
-	" (happens when dropping a file on gvim).
-	autocmd BufReadPost *
-			\ if line("'\"") > 0 && line("'\"") <= line('$') |
-			\   execute 'normal g`"' |
-			\ endif
-
-endif " has("autocmd")
-
-autocmd BufEnter *.go set filetype=go
-
-autocmd BufEnter *.mkd set filetype=mkd
-
-autocmd BufEnter *.tt set filetype=html
-autocmd BufEnter *.tt set filetype=tt
-autocmd BufEnter *.tt source ~/.vim/syntax/tt2html.vim
-
-autocmd BufEnter /tmp/* set nobackup|set nowritebackup
-
 
 function NewProgramHeader()
 	if strlen(&syntax) < 1
@@ -169,7 +140,7 @@ function NewProgramHeader()
 		let s:comment = '#'
 	endif
 
-	if &syntax == 'html' || &syntax == 'tt'
+	if &syntax == 'html'
 		normal i`ht`ti
 		return
 	endif
@@ -227,11 +198,31 @@ function NewProgramHeader()
 	endif
 endfunction
 
-"autocmd BufWritePre,FileWritePre *  kl|silent! call UpdateFileLastModified()|'l
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+	" Enable file type detection, load indent files.
+	filetype plugin indent on
 
-autocmd BufRead *   silent! %s/[\r \t]\+$//
+	" For all text files set 'textwidth' to 78 characters.
+	autocmd FileType text setlocal textwidth=78
 
-autocmd BufNewFile *   call NewProgramHeader()
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	" (happens when dropping a file on gvim).
+	autocmd BufReadPost *
+			\ if line("'\"") > 0 && line("'\"") <= line('$') |
+			\   execute 'normal g`"' |
+			\ endif
+
+
+	autocmd BufEnter *.go set filetype=go
+
+	autocmd BufEnter /tmp/* set nobackup|set nowritebackup
+
+	autocmd BufRead *   silent! %s/[\r \t]\+$//
+
+	autocmd BufNewFile *   call NewProgramHeader()
+endif " has("autocmd")
 
 function! TabComplete()
 	if !strlen(&omnifunc) || strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$' || exists(&paste)
