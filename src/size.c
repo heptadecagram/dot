@@ -18,12 +18,16 @@ int main(void) {
 	printf("%zu\tsize_t\n", sizeof(size_t));
 
 	// Non-void pointers are NOT guaranteed to be the same size as void pointers
+	// But they to tend to be the same.  The most likely culprit are strings and
+	// floats.
 	printf("%zu\tvoid*\n", sizeof(void*));
 	printf("%zu\tchar*\n", sizeof(char*));
 	printf("%zu\tint*\n", sizeof(int*));
+	printf("%zu\tlong long int*\n", sizeof(long long int*));
+	printf("%zu\tfloat*\n", sizeof(float*));
 	printf("%zu\tlong double*\n", sizeof(long double*));
 	// Function pointers have conversion guaranteed
-	printf("%zu\tfunc*\n", sizeof(int(*)(int, int)));
+	printf("%zu\tfunc*\n", sizeof(void(*)()));
 
 	return 0;
 }
