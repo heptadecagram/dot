@@ -7,8 +7,9 @@ export PAGER='less -X'
 shopt -s histappend
 
 # go
-if [ -x "`which go`" ]; then
+if [ -x "`which go 2>/dev/null`" ]; then
 	export GOPATH="~/src/go"
+	export PATH="$PATH:$GOPATH/bin"
 fi
 # rbenv
 if [ -d "$HOME/.rbenv" ]; then

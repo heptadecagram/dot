@@ -292,26 +292,10 @@ _flag_option_action_complete() {
 
 }
 
-# pyenv
-if [ -x "`which pyenv`" ]; then
-	eval "`pyenv init -`"
-fi
-
 # perlbrew
 if [ -e ~/perl5/perlbrew/etc/bashrc ]; then
 	. ~/perl5/perlbrew/etc/bashrc
 fi
-
-# rbenv
-if [ -x "`which rbenv`" ]; then
-	eval "`rbenv init -`"
-fi
-
-# jenv
-if [ -x "`which jenv`" ]; then
-	eval "`jenv init -`"
-fi
-
 
 fix_everything () {
 	i=1
