@@ -1,5 +1,6 @@
 
-inoremap <buffer> #i #include <.h>hhi
+inoremap <buffer> #I #include <.h>hhi
+inoremap <buffer> #i #include ".h"hhi
 
 inoremap <buffer> #d #define<SPACE>
 inoremap <buffer> #f #ifdef<SPACE>
