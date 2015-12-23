@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: refde.pl
-# File Language: perl
-# First Created: 2006.11.16 09:04:45
-# Last Modified: 2006.11.16 09:16:23
 
 use strict;
 use warnings;

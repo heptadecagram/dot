@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: RG_ECOMMERCE
-# File / Folder: bench.pl
-# File Language: perl
-# First Created: 2005.02.14 15:35:58
-# Last Modified: 2005.04.19 09:29:08
 
 use strict;
 use warnings;

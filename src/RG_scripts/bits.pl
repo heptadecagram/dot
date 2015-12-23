@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: bits.pl
-# File Language: perl
-# First Created: 2007.08.09 08:39:25
-# Last Modified: 2007.08.09 08:48:17
 
 use strict;
 use warnings;

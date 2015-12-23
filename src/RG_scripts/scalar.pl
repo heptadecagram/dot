@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: scalar.pl
-# File Language: perl
-# First Created: 2006.11.16 08:47:06
-# Last Modified: 2006.11.16 09:29:46
 
 use strict;
 use warnings;

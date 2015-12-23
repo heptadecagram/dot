@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: stref.pl
-# File Language: perl
-# First Created: 2005.05.27 13:54:18
-# Last Modified: 2005.05.27 13:57:21
 
 use strict;
 use warnings;

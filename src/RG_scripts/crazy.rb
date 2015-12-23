@@ -1,9 +1,4 @@
 #!/usr/local/bin/ruby
-# Project  Name: None
-# File / Folder: crazy.rb
-# File Language: ruby
-# First Created: 2007.02.26 07:45:17
-# Last Modified: 2007.02.26 13:14:52
 
 class Alef
 	def self.SIUnit(abbreviation, name)

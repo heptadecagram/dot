@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: lval.pl
-# File Language: perl
-# First Created: 2004.11.11 14:10:52
-# Last Modified: 2005.01.31 15:57:49
 
 use strict;
 use warnings;

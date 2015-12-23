@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: life.pl
-# File Language: perl
-# First Created: 2005.01.13 12:22:49
-# Last Modified: 2005.01.13 13:22:43
 
 use strict;
 use warnings;

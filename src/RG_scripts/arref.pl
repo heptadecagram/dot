@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: arref.pl
-# File Language: perl
-# First Created: 2005.11.08 09:45:02
-# Last Modified: 2005.11.08 09:51:03
 
 use strict;
 use warnings;

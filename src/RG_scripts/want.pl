@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: want.pl
-# File Language: perl
-# First Created: 2005.03.30 09:52:03
-# Last Modified: 2005.03.30 09:58:43
 
 
 use strict;

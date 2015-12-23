@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: convert.pl
-# File Language: perl
-# First Created: 2007.02.17 06:27:49
-# Last Modified: 2007.02.19 08:24:22
 
 use strict;
 use warnings;

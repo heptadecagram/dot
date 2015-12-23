@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: stat.pl
-# File Language: perl
-# First Created: 2006.01.11 10:20:56
-# Last Modified: 2006.01.11 12:52:12
 
 use strict;
 use warnings;

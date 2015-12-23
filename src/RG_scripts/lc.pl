@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: lc.pl
-# File Language: perl
-# First Created: 2004.12.29 14:50:31
-# Last Modified: 2006.11.21 10:33:31
 
 use strict;
 use warnings;

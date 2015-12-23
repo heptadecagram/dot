@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: returnref.pl
-# File Language: perl
-# First Created: 2006.11.20 07:25:18
-# Last Modified: 2006.11.20 07:41:06
 
 use strict;
 use warnings;

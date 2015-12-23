@@ -1,11 +1,3 @@
-/*
- * Project  Name: None
- * File / Folder: kern.c
- * File Language: c
- * First Created: 2007.08.09 08:49:37
- * Last Modified: 2007.11.01 09:36:52
- */
-
 #include <stdio.h>
 
 int ke(v)

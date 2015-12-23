@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: format.pl
-# File Language: perl
-# First Created: 2005.11.18 15:15:41
-# Last Modified: 2007.04.17 15:00:11
 
 use strict;
 use warnings;

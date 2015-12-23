@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: nameref.pl
-# File Language: perl
-# First Created: 2006.01.27 08:06:36
-# Last Modified: 2006.01.27 08:09:55
 
 use strict;
 use warnings;

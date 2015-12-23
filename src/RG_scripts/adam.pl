@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: adam.pl
-# File Language: perl
-# First Created: 2006.11.21 08:03:10
-# Last Modified: 2006.11.21 08:06:02
 
 use strict;
 use warnings;

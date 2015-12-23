@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: collect.pl
-# File Language: perl
-# First Created: 2006.01.11 12:24:10
-# Last Modified: 2006.01.11 12:30:04
 
 use strict;
 use warnings;

@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: tEval.pl
-# File Language: perl
-# First Created: 2005.06.15 08:23:22
-# Last Modified: 2005.06.15 08:25:56
 
 use strict;
 use warnings;

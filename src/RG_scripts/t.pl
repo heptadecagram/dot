@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: t.pl
-# File Language: perl
-# First Created: 2004.11.12 11:59:34
-# Last Modified: 2004.11.12 14:28:56
 
 use strict;
 use warnings qw/all/;

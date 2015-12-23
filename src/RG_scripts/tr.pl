@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: tr.pl
-# File Language: perl
-# First Created: 2005.01.12 11:19:16
-# Last Modified: 2005.01.12 11:21:33
 
 use strict;
 use warnings;

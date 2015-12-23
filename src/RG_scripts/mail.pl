@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: mail.pl
-# File Language: perl
-# First Created: 2007.06.07 09:43:49
-# Last Modified: 2007.06.07 09:45:55
 
 use strict;
 use warnings;

@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: updatefield.pl
-# File Language: perl
-# First Created: 2005.10.05 07:56:39
-# Last Modified: 2006.08.09 15:25:40
 
 use strict;
 use warnings;

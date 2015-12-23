@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: tie.pl
-# File Language: perl
-# First Created: 2005.09.16 10:35:29
-# Last Modified: 2005.09.16 10:47:23
 
 use strict;
 use warnings;

@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: srt.pl
-# File Language: perl
-# First Created: 2007.08.29 13:35:14
-# Last Modified: 2007.08.29 13:37:36
 
 use strict;
 use warnings;

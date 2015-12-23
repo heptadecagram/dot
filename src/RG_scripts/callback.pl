@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: callback.pl
-# File Language: perl
-# First Created: 2005.02.25 10:12:18
-# Last Modified: 2005.02.25 10:23:11
 
 use strict;
 use warnings;

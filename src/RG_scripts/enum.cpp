@@ -1,9 +1,3 @@
-//
-// Project  Name: None
-// File / Folder: enum.cpp
-// File Language: cpp
-// First Created: 2006.08.16 07:48:48
-// Last Modified: 2006.08.16 13:00:36
 
 #include <iostream>
 

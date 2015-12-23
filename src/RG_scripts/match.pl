@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: match.pl
-# File Language: perl
-# First Created: 2005.10.13 07:54:01
-# Last Modified: 2005.10.19 07:46:38
 
 use strict;
 use warnings;

@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: uniq.pl
-# File Language: perl
-# First Created: 2005.03.29 13:49:14
-# Last Modified: 2006.10.13 08:59:48
 
 
 use strict;

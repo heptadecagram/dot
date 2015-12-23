@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: undef.pl
-# File Language: perl
-# First Created: 2004.12.16 15:27:29
-# Last Modified: 2004.12.16 15:29:45
 
 use strict;
 use warnings;

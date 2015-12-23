@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: crooss.pl
-# File Language: perl
-# First Created: 2005.02.17 09:06:55
-# Last Modified: 2005.02.17 09:11:47
 
 use strict;
 use warnings;

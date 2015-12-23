@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: rand.pl
-# File Language: perl
-# First Created: 2004.11.29 15:27:34
-# Last Modified: 2005.08.19 12:41:27
 
 use strict;
 use warnings;

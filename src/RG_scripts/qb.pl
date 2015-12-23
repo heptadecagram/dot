@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: qb.pl
-# File Language: perl
-# First Created: 2005.03.10 10:18:30
-# Last Modified: 2005.03.10 10:23:58
 
 use strict;
 use warnings;

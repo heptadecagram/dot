@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: concat.pl
-# File Language: perl
-# First Created: 2004.12.01 11:09:27
-# Last Modified: 2005.02.18 09:48:02
 
 use strict;
 use warnings;

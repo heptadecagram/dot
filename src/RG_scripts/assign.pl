@@ -1,9 +1,4 @@
 #!/usr/bin/perl
-# Project  Name: None
-# File / Folder: assign.pl
-# File Language: perl
-# First Created: 2006.11.15 10:33:20
-# Last Modified: 2006.11.15 15:02:52
 
 use strict;
 use warnings;
