@@ -1,0 +1,141 @@
+subleq
+
+C == 0 means next instruction
+C == 1 means ???
+
+Registers/constants for A and B
+-1
+0
+1
+
+X - callee-saved
+Y - caller-saved
+Z - callee-saved
+
+Internal instruction representation, assuming balanced ternary:
+
+aa bb m c_ccc_ccc_ccc
+
+aa is always a dest
+bb is src or constant
+
+aa,bb
+|x: register
+0x: constant
+-x: register lookup
+
+m
+|: branch absolute
+0: branch relative
+-: branch lookup
+
+
+mov a, 0x0
+a a 0
+
+mov a, b
+a a 0
+a b 0
+a 0 0
+
+xchng a, b
+X X 0 ; 0, A, B
+X a 0 ; -A, A, B
+a a 0 ; -A, 0, B
+a b 0 ; -A, -B, B
+a 0 0 ; -A, B, B
+b b 0 ; -A, B, 0
+b X 0 ; -A, B, A
+
+sla a
+X X 0 ; 0, A
+X a 0 ; -A, A
+X a 0 ; -2A, A
+a X 0 ; -2A, 3A
+
+sra a
+
+imul a, 2
+X X 0 ; 0, A
+X a 0 ; -A, A
+a X 0 ; -A, 2A
+
+
+O(N)
+idiv a, 2
+X X 0 ; 0, A
+A 1 0 ; 0, A-1
+A 1 +1 ; 0, A-2
+X 1 -3 ; -1, A-2
+A A 0 ; -A/2, 0
+A X 0 ; -A/2, A/2
+
+
+
+neg a
+a 0 0
+
+add a, b
+X X 0
+X b 0
+a X 0
+
+mod a, b
+X X 0
+a b +1
+X X -2
+X b 0
+a b 0
+
+jlt a, b, c ; if(a < b) goto c;
+X X 0 ; 0, A, B
+X a 0 ; -A, A, B
+X 1 0 ; -A-1, A, B
+X 0 0 ; A+1, A, B
+X b c ; A-B+1, A, B
+
+jeq a, b, c ; if(a == b) goto c;
+X X 0 ; 0, A, B
+X a 0 ; -A, A, B
+X 0 0 ; A, A, B
+X b +1 ; A-B, A, B
+X X +1 ; 0, A, B
+X 0 c ; B-A, A, B
+
+jz a, c ; if(a == 0) goto c;
+a 0 +1 ; -A
+a 0 +1 ; A
+a 0 c  ; A
+
+imul a, b ; a = a*b
+X X 0 ; 0, A, B
+X a 0 ; -A, A, B
+a a 0 ; -A, 0, B
+X 0 +2 ; A, 0, B
+a b 0 ; A, -B, B
+X 1 -2 ; A-1, -B, B
+a 0 0 ; 0, B*A, B
+
+imul a, b ; a = a*b (Peasant method)
+X X 0 ; 0, Y, A, B
+Y Y 0 ; 0, 0, A, B
+
+idiv a, b ; a = a/b
+X X 0 ; 0, A, B
+X a 0 ; -A, A, B
+X 0 0 ; A, A, B
+X a +1 ; A-B, A, B
+a a +1 ; A-B, 0, B
+a a +3 ; A-B, 0, B
+a 1 0 ; A-B, -1, B
+X b +1 ; A-B-B..., -1, B
+a 1 -2 ; A-B-B..., -1-1..., B
+a 0 0 ; A-B-B..., +1+1..., B
+
+sum_to_n a
+X X 0 ; 0, A
+X a 0 ; -A, A
+a 1 +1 ; -A, A-1
+X a -2 ; -A-(A-1)-..., A-1
+a X 0 ; -A..., A...
+
