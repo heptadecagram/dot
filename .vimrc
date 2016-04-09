@@ -141,7 +141,7 @@ function NewProgramHeader()
 	endif
 
 	if &syntax == 'html'
-		normal i`ht`ti
+		normal i`ht
 		return
 	endif
 

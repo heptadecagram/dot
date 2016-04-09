@@ -28,7 +28,7 @@ imap <buffer> <Leader>cm <!--  -->bhi
 vmap <buffer> <Leader>cm `>a -->`<i<!--
 
 
-imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title></head><body></body></html>3nO
+imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title></head><body></body></html>:6o
 
 
 " NOTE: Using <expr> when defining these mappings would, indeed, be
