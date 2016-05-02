@@ -786,3 +786,18 @@ who could follow a step-by-step argument would be Gauss."
 
 "Simplicity is the final achievement."
 	--Frédéric Chopin
+
+"Bad programmers worry about the code.  Good programmers worry about data
+structures and their relationships."
+	--Linus Torvalds
+
+"C is memory with syntactic sugar."
+	--Dennis Kubes
+
+"Should array indices start at 0 or 1?  My compromise of 0.5 was rejected
+without, I thought, proper consideration."
+	--Stan Kelly-Bootle
+
+"Dynamic Typing: The belief that you can't explain to a computer why your code
+works, but you can keep track of it all in your head."
+	--Chris Martin
