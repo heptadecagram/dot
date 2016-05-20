@@ -1,0 +1,123 @@
+quote
+atom
+eq
+cons
+cond
+car
+cdr
+
+atom can be eliminated if (car 'a) returns NIL.
+
+q
+is?
+.
+case
+hd
+tl
+
+hd
+tl
+ht
+htt
+
+; How to declare functions from primitives?
+(lambda (p1 p2 p3) e)
+(label f (lambda (p1 p2 p3) e))
+
+(label nil (q ()))
+(label t (q t))
+
+(func null? (x)
+  (is? x nil))
+
+(func list (x y)
+  (. x (. y nil)))
+
+(func or (x y)
+	(case x y))
+
+(func not (x)
+	(case (null? x)))
+
+; The Lisp defined in McCarthy's 1960 paper, translated into CL.
+; Assumes only quote, atom, eq, cons, car, cdr, cond.
+; Bug reports to lispcode@paulgraham.com.
+
+(defun null. (x)
+  (eq x '()))
+
+(defun and. (x y)
+  (cond (x (cond (y 't) ('t '())))
+        ('t '())))
+
+(defun not. (x)
+  (cond (x '())
+        ('t 't)))
+
+(defun append. (x y)
+  (cond ((null. x) y)
+        ('t (cons (car x) (append. (cdr x) y)))))
+
+(defun list. (x y)
+  (cons x (cons y '())))
+
+(defun pair. (x y)
+  (cond ((and. (null. x) (null. y)) '())
+        ((and. (not. (atom x)) (not. (atom y)))
+         (cons (list. (car x) (car y))
+               (pair. (cdr x) (cdr y))))))
+
+(defun assoc. (x y)
+  (cond ((eq (caar y) x) (cadar y))
+        ('t (assoc. x (cdr y)))))
+
+defun eval (first rest)
+	(case
+		(when (not (hd first)) (lookup first rest))
+		(when (not (hd (hd first)))
+			(case
+				(when (is? (hd first) (q q)) (tl (hd first)))
+				(when (is? (hd first) (q is?)) (is?
+					(eval (tl (hd first)) rest)
+					(eval (tl (tl (hd first))) rest)))
+				(when (is? (hd first) (q hd)) (hd (eval (tl (hd first)) rest)))
+				(when (is? (hd first) (q tl)) (tl (eval (tl (hd first)) rest)))
+
+				(when (is? (hd first) (q .)) (.
+					(eval (tl (hd first)) rest)
+					(eval (tl (tl (hd first))) rest)))
+
+(defun eval. (e a)
+  (cond
+    ((atom e) (assoc. e a))
+    ((atom (car e))
+     (cond
+       ((eq (car e) 'quote) (cadr e))
+       ((eq (car e) 'atom)  (atom   (eval. (cadr e) a)))
+       ((eq (car e) 'eq)    (eq     (eval. (cadr e) a)
+                                    (eval. (caddr e) a)))
+       ((eq (car e) 'car)   (car    (eval. (cadr e) a)))
+       ((eq (car e) 'cdr)   (cdr    (eval. (cadr e) a)))
+       ((eq (car e) 'cons)  (cons   (eval. (cadr e) a)
+                                    (eval. (caddr e) a)))
+       ((eq (car e) 'cond)  (evcon. (cdr e) a))
+       ('t (eval. (cons (assoc. (car e) a)
+                        (cdr e))
+                  a))))
+    ((eq (caar e) 'label)
+     (eval. (cons (caddar e) (cdr e))
+            (cons (list. (cadar e) (car e)) a)))
+    ((eq (caar e) 'lambda)
+     (eval. (caddar e)
+            (append. (pair. (cadar e) (evlis. (cdr e) a))
+                     a)))))
+
+(defun evcon. (c a)
+  (cond ((eval. (caar c) a)
+         (eval. (cadar c) a))
+        ('t (evcon. (cdr c) a))))
+
+(defun evlis. (m a)
+  (cond ((null. m) '())
+        ('t (cons (eval.  (car m) a)
+                  (evlis. (cdr m) a)))))
