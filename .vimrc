@@ -177,6 +177,10 @@ function NewProgramHeader()
 	if &syntax == 'sh'
 		1substitute'.*'#!/bin/sh'
 	endif
+	if &syntax == 'asm'
+		normal yy2p
+		1substitute'.*'.intel_syntax noprefix'
+	endif
 	if &syntax == 'perl'
 		normal yy5p
 		1substitute'.*'#!/usr/bin/perl'
