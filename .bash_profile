@@ -5,6 +5,7 @@ export VISUAL='vim'
 export PAGER='less -X'
 
 shopt -s histappend
+export HISTCONTROL=ignoredups
 
 # go
 if [ -x "`which go 2>/dev/null`" ]; then
