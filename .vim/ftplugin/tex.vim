@@ -1,4 +1,19 @@
 
+set sw=8
+set ts=8
+
+let mapleader='"'
+
+inoremap <buffer> <Leader>c	\chapter{}<LEFT>
+inoremap <buffer> <Leader>S	\section{}<LEFT>
+inoremap <buffer> <Leader>s	\subsection{}<LEFT>
+
+inoremap <buffer> <Leader>e	\begin{enumerate}\end{enumerate}<UP>
+inoremap <buffer> <Leader>i	\begin{itemize}\end{itemize}<UP>
+
+inoremap <buffer> <Leader>t	\begin{tabular}{}\end{tabular}<UP><UP><RIGHT><RIGHT><RIGHT>
+inoremap <buffer> <Leader>T	\begin{table}\end{table}<UP>
+
 nmap <silent> lf :call TexFunctionList()<CR>
 function! TexFunctionList()
 	normal mlgg
@@ -39,5 +54,5 @@ function! Tex_gd(section)
 endfunction
 
 "setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
-setlocal makeprg=xelatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
+setlocal makeprg=pdflatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
 
