@@ -7,6 +7,7 @@ car
 cdr
 
 atom can be eliminated if (car 'a) returns NIL.
+	But then what is difference between (car '(nil)) and (car 'a) ?
 
 q
 is?
