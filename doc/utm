@@ -1,0 +1,80 @@
+qi0 = 3i+1 1s
+qi1 = 3i+2 1s
+
+ops
+write 0  0
+write 1  00
+move  L  000
+move  R  0000
+
+ql = 3l 1s
+
+0+ separator
+
+
+1111100
+
+"A Simplified UTM", E.F. Moore
+
+0    0L
+00   1R
+000  1L
+0000 0R
+
+Halt is 1
+
+state 0-a 0-n 1-a 1-n
+11111 000 111 00  1111
+
+vs
+state-input write dir next-state
+
+110101
+11001101
+
+
+1101001 # Halt, without changing tape
+
+
+#Incrementer
+0 1 1 R 0
+0 B 1 S F
+110010011
+
+#Three-state BB
+a01Rb a11Lc
+b01La b11Rb
+c01Lb c11x0
+
+11001110001111
+1110001100111
+1111000111001
+
+states:
+find-state-desc
+
+A. I am in starting state X.
+
+B. I am in starting position Q.
+
+2. Read symbol S under tape.
+
+3. Reverse to description of state X
+M
+l. Read output T for S.
+
+5. Move to position Q.
+
+6. Write output T.
+
+7. Adjust position Q.
+
+8. Reverse to description of state X.
+
+9. Read next-state for 0.
+
+10. Adjust state X.
+
+11. Move to position Q
+
+REPEAT
