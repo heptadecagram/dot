@@ -21,9 +21,29 @@ tl
 ht
 htt
 
+(label sqrt (lambda (a x ε)
+		                (cond ((< (abs (- (* x x) a)) ε) x)
+		                      (t (sqrt a (* 0.5 (+ x (/ a x)) ε))))))
+
+
+(lambda (x) x)
+
+((lambda (x) x) (q z)) →
+(subst (car (x)) (q z) x)
+	(cond ((atom x) (cond ((eq (car (x)) x) (q z)) ('t x)))
+		    ('t (cons (subst (car (x)) (q z) (car x))
+	                (subst (car (x)) (q z) (cdr x))))))
+
+
 ; How to declare functions from primitives?
 (lambda (p1 p2 p3) e)
 (label f (lambda (p1 p2 p3) e))
+((lambda (p1 p2 p3) e) A B C) →
+	(subst p1 A (subst p2 B (subst p3 C e)))
+((lambda params expr) args...)
+(subst (car params) (car args) (
+
+(label defun (lambda 
 
 (label nil (q ()))
 (label t (q t))
@@ -88,6 +108,9 @@ defun eval (first rest)
 					(eval (tl (hd first)) rest)
 					(eval (tl (tl (hd first))) rest)))
 
+(defun apply. (f args)
+	(eval. (cons (
+
 (defun eval. (e a)
   (cond
     ((atom e) (assoc. e a))
@@ -112,6 +135,10 @@ defun eval (first rest)
      (eval. (caddar e)
             (append. (pair. (cadar e) (evlis. (cdr e) a))
                      a)))))
+
+(defun subst (x y z)
+	(cond ((atom z) (cond ((eq z y) x) ('t z)))
+		    ('t (cons (subst x y (car z)) (subst x y (cdr z))))))
 
 (defun evcon. (c a)
   (cond ((eval. (caar c) a)
