@@ -1,0 +1,7 @@
+Use signals to control your application while running.  If you need more signals than are portable, write a separate control program.  Don't depend on magic files on disk to control it.
+
+Executable programs should not have file extensions.
+
+Programs should respond to -h|--help
+
+Programs should log to syslog, not to files.
