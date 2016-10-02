@@ -20,6 +20,9 @@ set abort_unmodified=yes	# automatically abort replies if I don't save
 set alias_file=~/.mail_aliases	# where I keep my aliases
 source ~/.mail_aliases
 
+alternative_order text/plain
+auto_view text/html
+
 unhdr_order *
 hdr_order date to cc from subject
 
