@@ -4,15 +4,28 @@ servers = (
     chatnet = "Freenode";
     nick = "heptadecagram";
   },
+  {
+    address = "74.112.200.151";
+    chatnet = "toolbox";
+    nick = "wechlin";
+  },
   { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
-  { address = "irc.open-ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
+  {
+    address = "irc.open-ircnet.net";
+    chatnet = "IRCnet";
+    port = "6667";
+  },
   { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { address = "irc.undernet.org"; chatnet = "Undernet"; port = "6667"; },
+  {
+    address = "irc.undernet.org";
+    chatnet = "Undernet";
+    port = "6667";
+  },
   { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
+  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
 );
 
 chatnets = {
@@ -80,6 +93,7 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
+  toolbox = { type = "IRC"; };
 };
 
 channels = (
@@ -260,6 +274,10 @@ statusbar = {
   };
 };
 settings = {
-  core = { real_name = "Liam"; user_name = "wechlin"; nick = "heptadecagram"; };
+  core = {
+    real_name = "Liam";
+    user_name = "wechlin";
+    nick = "heptadecagram";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
 };
