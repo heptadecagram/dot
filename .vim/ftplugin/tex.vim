@@ -1,6 +1,6 @@
 
-set sw=8
-set ts=8
+set sw=3
+set ts=3
 
 let mapleader='"'
 
