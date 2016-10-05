@@ -8,27 +8,22 @@ servers = (
     address = "74.112.200.151";
     chatnet = "toolbox";
     nick = "wechlin";
+		password = "umbctctooldev";
   },
-  { address = "irc.ubuntu.com"; chatnet = "Ubuntu"; port = "8001"; },
   {
     address = "irc.open-ircnet.net";
     chatnet = "IRCnet";
     port = "6667";
   },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
   {
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
   },
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
-  { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
-  { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
 );
 
 chatnets = {
+  toolbox = { type = "IRC"; };
   Freenode = { type = "IRC"; };
   IRCnet = {
     type = "IRC";
@@ -37,91 +32,28 @@ chatnets = {
     max_whois = "4";
     max_query_chans = "5";
   };
-  EFNet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "1";
-  };
   Undernet = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "3";
     max_whois = "30";
   };
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  OFTC = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  GameSurge = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  WebChat = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  Rizon = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  LinkNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  SILC = { type = "SILC"; };
-  Ubuntu = { type = "IRC"; };
-  toolbox = { type = "IRC"; };
 };
 
 channels = (
-  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "silc"; chatnet = "silc"; autojoin = "No"; },
-
+  { name = "#toolbox"; chatnet = "toolbox"; autojoin = "Yes"; },
   { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#git"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#vim"; chatnet = "Freenode"; autojoin = "Yes"; },
-  { name = "#perl"; chatnet = "Freenode"; autojoin = "Yes"; },
+
+  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
+
+  { name = "#callahans"; chatnet = "Freenode"; autojoin = "No"; },
   { name = "#snort"; chatnet = "Freenode"; autojoin = "No"; },
-  {
-    name = "#redditmakesagame";
-    chatnet = "Freenode";
-    autojoin = "No";
-  }
 );
 
 aliases = {
-  J = "join";
-  WJOIN = "join -window";
-  WQUERY = "query -window";
   LEAVE = "part";
-  BYE = "quit";
-  EXIT = "quit";
-  SIGNOFF = "quit";
-  DESCRIBE = "action";
-  DATE = "time";
   HOST = "userhost";
   LAST = "lastlog";
   SAY = "msg *";
