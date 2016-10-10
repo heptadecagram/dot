@@ -27,11 +27,4 @@ function! LDAPCompleteFn(findstart, base)
 	endif
 endfun
 
-function! Integration()
-	0,$delete
-	0read ~/.mutt/integration-template
-	8
-	set omnifunc=
-endfunction
-
 set omnifunc=LDAPCompleteFn
