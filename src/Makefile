@@ -13,9 +13,10 @@ CXXFLAGS+=-std=c++14
 
 .PHONY: all install
 
-all: beeper diff-dir hist.rb
+all: beeper diff-dir hist
 
 install: all
+	@mkdir -p ~/bin
 	mv beeper $(HOME)/bin/
 	ln -s $(HOME)/src/diff-dir $(HOME)/bin/diff-dir
-	ln -s $(HOME)/src/hist.rb $(HOME)/bin/history_check.rb
+	ln -s $(HOME)/src/hist $(HOME)/bin/history_check
