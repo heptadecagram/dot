@@ -1,12 +1,21 @@
+# Sanity
+CPPFLAGS+=-Wall -Wextra -Wpedantic
+# On types
+CPPFLAGS+=-Wwrite-strings -Wfloat-equal -Wconversion
+# On assumptions
+CPPFLAGS+=-Waggregate-return -Winline -Wstack-usage=256
 
-all: beeper diff_tree history_check
+# For embedded platforms
+# CPPFLAGS+=-Wdouble-promotion
 
-beeper: beeper.c
-	$(CC) -O3 -o beeper beeper.c
+CFLAGS+=-std=c11
+CXXFLAGS+=-std=c++14
+
+.PHONY: all install
+
+all: beeper diff-dir hist.rb
+
+install: all
 	mv beeper $(HOME)/bin/
-
-diff_tree: diff-dir
 	ln -s $(HOME)/src/diff-dir $(HOME)/bin/diff-dir
-
-history_check: hist.rb
 	ln -s $(HOME)/src/hist.rb $(HOME)/bin/history_check.rb
