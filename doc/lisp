@@ -25,6 +25,10 @@ htt
 		                (cond ((< (abs (- (* x x) a)) ε) x)
 		                      (t (sqrt a (* 0.5 (+ x (/ a x)) ε))))))
 
+Can pattern-matching be added?
+(func sum (nil) 0)
+(func sum (x:xs) (+ x (sum xs)))
+
 
 (lambda (x) x)
 
@@ -43,7 +47,7 @@ htt
 ((lambda params expr) args...)
 (subst (car params) (car args) (
 
-(label defun (lambda 
+(label defun (lambda
 
 (label nil (q ()))
 (label t (q t))
