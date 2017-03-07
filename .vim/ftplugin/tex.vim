@@ -68,5 +68,5 @@ function! Tex_gd(section)
 endfunction
 
 "setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
-setlocal makeprg=pdflatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
+setlocal makeprg=xelatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
 
