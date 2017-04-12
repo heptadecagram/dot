@@ -1,4 +1,7 @@
 set disassembly-flavor intel
+set history save on
+
+# set disable-randomization off
 
 # C-X C-A
 #  layout asm
