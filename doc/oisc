@@ -143,3 +143,119 @@ a 1 +1 ; -A, A-1
 X a -2 ; -A-(A-1)-..., A-1
 a X 0 ; -A..., A...
 
+
+Two constants: 0, -1
+Registers: x
+instruction_pointer
+
+subleq dst, src, loc
+
+ADD a += b
+	subleq x x ; x = 0
+	subleq x b ; x = -b
+	subleq a x ; a -= -b
+
+SUB a -= b
+	subleq a b ; a = a-b
+
+MOV a = b
+	subleq x x ; x = 0
+	subleq x b ; x = -b
+	subleq a a ; a = 0
+	subleq a x ; a = b
+
+NEG a = -a
+	subleq x x ; x = 0
+	subleq x a ; x = -a
+	subleq a a ; a = 0
+	subleq a x ; a = -a
+
+JMP goto a
+	subleq . . a
+
+BEQZ if a == 0 goto c
+	subleq x x   ; x = 0
+	subleq a x +2; a -= 0; if a <= 0 GOTO TEST
+	subleq . . +2; goto END
+	subleq x a  c; TEST: x = -a; if x <= 0 GOTO c
+	             ; END:
+
+BNEZ if a != 0 goto c
+	subleq x x   ; x = 0
+	subleq a x +2; a -= 0; if a <= 0 GOTO TEST
+	subleq . .  c; goto C
+	subleq x a +2; TEST: x = -a; if x <= 0 GOTO END
+	subleq . .  c; goto C
+	             ; END:
+
+BGTZ if a > 0 goto c
+	subleq x  x   ; x = 0
+	subleq x  a   ; x = -A
+	subleq x -1  c; x = -A + 1; if -(A-1) <= 0 GOTO C
+
+BEQ if A == B goto C
+	subleq x x   ; x = 0
+	subleq x a   ; x = -A
+	subleq a b +2; a -= B; if (A-B) <= 0 GOTO TEST
+	subleq a a +8; a = 0; GOTO END
+	subleq a a   ; TEST: a = 0
+	subleq a x   ; a = A
+	subleq x x   ; x = 0
+	subleq x b   ; x = -B
+	subleq b a  c; b -= A; if (B-A) <= 0 GOTO C
+	subleq b b   ; b = 0
+	subleq b x   ; b = -(-B)
+	             ; END:
+
+	subleq a x   ; END: a = -(-A)
+
+	; This requires another register, for 8 instructions, and sets a=0 if A=B
+	subleq y y   ; y = 0
+	subleq x x   ; x = 0
+	subleq x a   ; x = -A
+	subleq a b +2; a -= B; if (A-B) <= 0 GOTO TEST
+	subleq a a +3; a = 0; GOTO END
+	subleq y a  c; TEST: y = -(A-B); if -(A-B) <= 0 GOTO C
+	subleq a a   ; a = 0
+	subleq a x   ; END: a = -(-A)
+
+MUL a *= b
+	BEQZ   a . +F; if a == 0 GOTO END
+	BNEZ   b . +2; if b != 0 GOTO CHKNEG
+	subleq a a +F; a = 0; GOTO END
+	BGTZ   b . +3; CHKNEG: if b > 0 GOTO MULT
+	NEG    a .   ;
+	NEG    b .   ;
+	subleq x x   ; MULT: x = 0
+	subleq x a   ; x = -A
+	subleq a a   ; a = 0
+	subleq y y   ; y = 0
+	subleq y b   ; y = -B
+	subleq a x   ; ADD: a -= -A
+	subleq b 1 +2; b -= 1; if b == 0 GOTO RESETB
+	subleq . . -2; GOTO ADD
+	subleq b y   ; RESETB: b = -(-B)
+	             ; END:
+
+DIV c = a / b
+
+NOT c = !a
+
+MOD a %= b
+	subleq x x   ; x = 0
+	subleq a b +2; LOOP: a -= b; if a <= 0 GOTO CHKZER
+	subleq x x -1; x = 0; goto LOOP
+	subleq x a +4; CHKZER: x = -a; if a == 0 GOTO END
+	subleq x x   ; x = 0
+	subleq x b   ; x = -b
+	subleq a b   ; a += b
+	             ; END:
+
+
+32-bit word
+
+1        11             111
+reg,mem  reg,mem,const  @reg,mem,offset,ignor,constant
+
+Need more registers?
+00000000 00000000 00000000 00000000
