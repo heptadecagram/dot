@@ -284,3 +284,341 @@ Balanced nonary?
 +BAD
 ----
  DCZ
+
++  ^  0  v
+^ ^v  ^  0
+0  ^  0  v
+v  0  v v^
+
+-  ^  0  v
+^  0  v v^
+0  ^  0  v
+v ^v  ^  0
+
+×  ^  0  v
+^  ^  0  v
+0  0  0  0
+v  v  0  ^
+
+What are the Sheffer functions to cover all truth functions?
+
+&  ^  0  v
+^  ^  0  v
+0  0  0  v
+v  v  v  v
+
+|  ^  0  v
+^  ^  ^  ^
+0  ^  0  0
+v  ^  0  v
+
+↑  ^  0  v
+^  v  0  ^
+0  0  0  ^
+v  ^  ^  ^
+
+^  ^  0  v
+^  v  0  ^
+0  0  0  0
+v  ^  0  v
+
+Ł3→ (requires ¬)
+   ^  0  v
+^  ^  0  v
+0  ^  ^  0
+v  ^  ^  ^
+
+→  ^  0  v
+^  ^  0  v
+0  ^  0  0
+v  ^  ^  ^
+
+-- cross-product (wtf)  Trying to treat the values as x,y,z vectors
+
+⊗  ^  0  v
+^  0  v  0
+0  ^  0  ^
+v  0  v  0
+
+
+-- contains-no-unknowns
+∷  ^  0  v
+^  0  v  0
+0  v  v  v
+v  0  v  ^
+
+not is a bad name.  This is really "pivot-unknown"
+¬ a
+^ v
+0 0
+v ^
+
+"if has-unknown, then true"
+"elif has-false, then unknown"
+"else false"
+non-associative, commutative operation
+?  ^  0  v
+^  v  ^  0
+0  ^  ^  ^
+v  0  ^  0
+
+There are 729 commutative ternary operators (3**(sum(1..3))) vs 8 binary ones (2**(sum(1..2)))
+
+There are 27 unary ternary operators (3**3) vs 4 binary ones (2**2)
+
+^^^ tru yields TRUe
+000 zer yields ZERo
+vvv fls yields FaLSe
+
+v^0 inc INCrement
+^0v sam SAMe as input
+0v^ dec DECrement
+
+^v0 tpv PiVot around True
+v0^ upv PIVot around unknown (not)
+0^v fpv PiVot around False (ofa)
+
+^vv ist IS True
+v^v isu IS Unknown (unk)
+vv^ isf IS False
+
+v^^ nit Not Is True
+^v^ niu Not Is Unknown (kno)
+^^v nif Not Is False
+
+^00 tor will be True when ORed with something else
+v00 uor will be Unknown when ORed with something else
+vv0 for will be False when ORed with something else
+
+0vv tan will be True when ANded with something else
+00v uan will be Unknown when ANded with something else
+00^ fan will be False when ANded with something else
+
+^^0 ofo
+^0^
+0^^ ota
+
+v0v
+0^0
+0v0
+
+
+0^0 tqp will be True when Qopped with something else
+0v0 uqp will be Unknown when Qopped with something else
+0vv --fqp will be False when Qopped with something else == tan
+
+--kno input is KNOwn == niu
+--unk input is UNKnown == isu
+
+0^^ ota will be something Other than True when Anded with something else
+00^ --oua will be something Other than Unknown when Anded with something else == fan
+00v --ofa will be something Other than False when Anded with something else == uan
+
+v00 --oto will be something Other than True when Ored with something else == uor
+^00 --ouo will be something Other than Unknown when Ored with something else == tor
+^^0 ofo will be something Other than False when Ored with something else
+
+   t   n   t s n t i     f f z u d   t n i i u u   i f f
+   r   i   o a i p s     p a e a e   a i n s p o   s o l
+   u   f   r m u v t     v n r n c   n t c u v r   f r s
+^  ^ ^ ^ ^ ^ ^ ^ ^ ^ 0 0 0 0 0 0 0 0 0 v v v v v v v v v
+0  ^ ^ ^ 0 0 0 v v v ^ ^ ^ 0 0 0 v v v ^ ^ ^ 0 0 0 v v v
+v  ^ 0 v ^ 0 v ^ 0 v ^ 0 v ^ 0 v ^ 0 v ^ 0 v ^ 0 v ^ 0 v
+                                         +
++++a = a
+
+  1 0 = !
+1 1 0 1 0
+0 1 0 0 1
+
+!!b = b
+
+
+↑ 1 0
+1 0 1
+0 1 1
+
+-4 -3 -2 -1  0  1  2  3  4
+vv v0 v^ 0v 00 0^ ^v ^0 ^^
+
+
+  N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+-13 -12 -11 -10  -9  -8  -7  -6  -5  -4  -3  -2  -1
+vvv vv0 vv^ v0v v00 v0^ v^v v^0 v^^ 0vv 0v0 0v^ 00v
+
+  A   B   C   D   E   F   G   H   I   J   K   L   M
+  1   2   3   4   5   6   7   8   9  10  11  12  13
+00^ 0^v 0^0 0^^ ^vv ^v0 ^v^ ^0v ^00 ^0^ ^^v ^^0 ^^^
+
+int8b
+256
+int3t
+27
+
+int16b
+65_536
+int9t
+19_683
+
+int32b
+4_294_967_296
+int27t
+7_625_597_484_987
+
+int64b
+18_446_744_073_709_551_616
+int41t
+36_472_996_377_170_786_403
+
+int128b
+340_282_366_920_938_463_463_374_607_431_768_211_456
+int81t
+443_426_488_243_037_769_948_249_630_619_149_892_803
+
+
+3
+9
+27
+81
+243
+729
+2187
+6561
+19_683
+59_049
+177_147
+531_441
+1_594_323
+4_782_969
+14_348_907
+43_046_721
+129_140_163
+387_420_489
+
+DPD
+abcdef0ghi
+abcdef100i
+abcghf101i
+ghcdef110i
+ghc00f111i
+dec01f111i
+abc10f111i
+__c11f111i
+
+decimal32
+s mmmmm xxxxxx cccccccccccccccccccc
+0.000000e-95 9.999999e96
+
+
+tecimal27
+xxxxxxx cccccccccccccccccccc
+
+0-99dec can naively take 5trits, 3**5 = 243
+
+-1000 to 1000 fit well in 7trits, 3**7 = 2187
+but note that the sign is not composable; a sign-trit may still be the best option
+
+v ab cd ef -xxx
+^ ab cd ef +xxx
+
+0 00 vx xx -999
+
+0 0v vx ef -99x
+0 0v 0x cd -9x9
+0 0v ^x ab -x99
+
+0 vv cd ef -9xx
+0 v0 ab ef -x9x
+0 v^ cd ab -xx9
+
+0 00 0x xx    0
+
+0 ^v cd ab +xx9
+0 ^0 ab ef +x9x
+0 ^^ cd ef +9xx
+
+0 0^ vx ab +x99
+0 0^ 0x cd +9x9
+0 0^ ^x ef +99x
+
+0 00 ^x xx +999
+
+
+0-9999dec easily fits into 9trits, 3**9 = 19_683
+
+ab cd 0 ef gh  xxxx
+
+ab cd v ef vv  xxx9
+ab cd v gh v0  xx9x
+ab gh v ef v^  x9xx
+gh cd v ef ^v  9xxx
+
+ab cd ^ xx vv  xx99
+ab ef ^ xx v0  x9x9
+cd ef ^ xx ^v  9xx9
+ab gh ^ xx v^  x99x
+cd gh ^ xx ^0  9x9x
+ef gh ^ xx ^^  99xx
+
+ab xx v xx 0v  x999
+cd xx v xx 00  9x99
+ef xx v xx 0^  99x9
+gh xx v xx ^0  999x
+
+xx xx ^ xx 0x  9999
+
+Downsides:
+No fast >0, <0 operations (1 gate in binary two's-complement, IEEE-floats)
+
+
+Floating-point
+
+No bias in exponent
+No hidden bit in mantissa
+Positive Inf
+Negative Inf
+NaN
+0
+
+^^^ ^^^^^^ 3.64 * 3**13 = 5_803_335.72
+
+000 000000
+
+vvv vvvvvv -3.64 * 3**-13 = -0.0000022831
+
+
+            2                     3
+            4                     9
+            8                    27
+           16                    81
+           32                   243
+           64                   729
+          128                 2_187
+          256                 6_561
+          512                19_683
+        1_024                59_049
+
+        2_048               177_147
+        4_096               531_441
+        8_192             1_594_323
+       16_384             4_782_969
+       32_768            14_348_907
+       65_536            43_046_721
+      131_072           129_140_163
+      262_144           387_420_489
+      524_288         1_162_261_467
+    1_048_576         3_486_784_401
+
+    2_097_152        10_460_353_203
+    4_194_304        31_381_059_609
+    8_388_608        94_143_178_827
+   16_777_216       282_429_536_481
+   33_554_432       847_288_609_443
+   67_108_864     2_541_865_828_329
+  134_217_728     7_625_597_484_987
+  268_435_456    22_876_792_454_961
+  536_870_912    68_630_377_364_883
+1_073_741_824   205_891_132_094_649
+
+2_147_483_648   617_673_396_283_947
+4_294_967_296 1_853_020_188_851_841
