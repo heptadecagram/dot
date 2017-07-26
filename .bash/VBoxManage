@@ -1,0 +1,89 @@
+
+_VBoxManage () {
+	local current=$2
+	local previous=$3
+	local ACTIONS='list showvminfo registervm unregistervm createvm modifyvm
+	clonevm import export startvm controlvm discardstate adoptstate snapshot
+	closemedium storageattach storagectl bandwidthctl showmediuminfo createmedium
+	modifymedium clonemedium mediumproperty encryptmedium checkmediumpwd
+	convertfromraw getextradata setextradata setproperty usbfilter sharedfolder
+	guestproperty guestcontrol debugvm metrics natnetwork hostonlyif dhcpserver'
+
+	local vmdir=~/VirtualBox\ VMs
+
+	local index=1
+	local current_action=
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			current_action="${COMP_WORDS[$index]}"
+			break
+		fi
+		index=$(($index + 1))
+	done
+
+	# Default to list of actions
+	COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+
+	# If a full command was not found, then complete on that command or option
+	if [ -z "$current_action" ]; then
+		if [ "${current##-*}" ]; then
+			COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+		elif [ "${current##--*}" ]; then
+			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		fi
+	fi
+
+	case "$current_action" in
+		list) _vbox-list "$@" ;;
+		startvm) _vbox-startvm "$@" ;;
+	esac
+}
+complete -o default -F _VBoxManage VBoxManage
+
+_vbox_vm_completion () {
+
+	local current
+	if [ "$2" ]; then
+		current=$2
+	else
+		current=${COMP_WORDS[COMP_CWORD]}
+	fi
+
+	COMPREPLY=(`compgen -W "$(VBoxManage list vms | sed -e's/"//' -e's/".*//')" -- "$current"`)
+}
+
+_vbox-list () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--long'
+	local FLAGS='-l'
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	-*)
+		COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+		;;
+	esac
+}
+
+_vbox-startvm () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--type='
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	*)
+		_vbox_vm_completion
+		;;
+	esac
+}
