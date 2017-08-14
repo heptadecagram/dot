@@ -5,12 +5,6 @@ servers = (
     nick = "heptadecagram";
   },
   {
-    address = "74.112.200.151";
-    chatnet = "toolbox";
-    nick = "wechlin";
-		password = "umbctctooldev";
-  },
-  {
     address = "irc.open-ircnet.net";
     chatnet = "IRCnet";
     port = "6667";
@@ -23,7 +17,6 @@ servers = (
 );
 
 chatnets = {
-  toolbox = { type = "IRC"; };
   Freenode = { type = "IRC"; };
   IRCnet = {
     type = "IRC";
@@ -41,7 +34,6 @@ chatnets = {
 };
 
 channels = (
-  { name = "#toolbox"; chatnet = "toolbox"; autojoin = "Yes"; },
   { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#git"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#vim"; chatnet = "Freenode"; autojoin = "Yes"; },
