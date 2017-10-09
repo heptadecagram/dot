@@ -1,0 +1,22 @@
+Time-traveling Programming Language
+
+Thought up when thinking about TeX not benefitting from increased parallelization: A problem is that an earlier chapter might override a subsequent chapter's commands and basic formatting.  So, what if instead this formatting was modeled as a series of closed timelike loops where a given command/variable can only be set once per loop, regardless of where in the loop it is:
+
+( font_size = 19
+	print"aoeu"@font_size % Will print at 19, the setting for this ()
+	( 
+		( font_size = 8 )
+		( font_size = 10 )
+		font_size = 12 % Applies to entire ()
+		(
+			print"aoeu"@font_size % Will print at 14, the setting for this ()
+			font_size = 14
+		)
+		font_size = 12 % ERROR, font_size is already set in this ()
+	)
+	print"aoeu"@font_size % Will print at 19, the setting for this ()
+)
+
+There does need to be a way to distinguish definitions that are defaults (and thus may be overridden) and constant values (= vs :=, etc).
+
+This is sounding very close to HTML.  How can this be turned into a Turing-Complete language?
