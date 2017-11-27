@@ -38,3 +38,6 @@ grep CREATE create.sql | tail -r | sed -e's/CREATE/DROP/' -e'/INDEX/d' -e's/).*/
 
 # Check out a number of repos all named the same by different authors
 while read user; do  git clone -qo github git@github.com:`echo $user | awk '{print $2}'`/timestable.git -- ${user%% *} || echo ${user%% *}; done <~/users
+
+# Extract answers from a book of tex files
+for file in `sed -n s/^.include{//p Assembly.tex | sed s/}//`; do sed -n -e/chapter/p -e '/section{Exercises/,$p' $file.tex; done > answers
