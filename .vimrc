@@ -28,7 +28,7 @@ set incsearch   " do incremental searching
 set background=light
 
 set nojoinspaces
-highlight MatchParen ctermbg=DarkBlue
+highlight NoMatchParen ctermbg=DarkBlue
 
 function Kinesis()
 	" Dvorak
