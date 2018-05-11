@@ -220,6 +220,7 @@ if has("autocmd")
 
 
 	autocmd BufEnter *.go set filetype=go
+	autocmd BufEnter *.rs set filetype=rust
 
 	autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
