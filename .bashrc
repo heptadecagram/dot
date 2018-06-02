@@ -17,6 +17,8 @@ alias home='ssh home'
 alias perl="perl -I${HOME}/src"
 alias ri='ri -Tf ansi'
 
+alias maketexclean="find . -name '*aux' -delete -or -name '*log' -delete -or -name '*pdf' -delete -or -name '*toc' -delete -or -name '*out' -delete"
+
 CODE_RED=$'\[\033[0;31m\]'
 CODE_GREEN=$'\[\033[0;32m\]'
 CODE_YELL=$'\[\033[0;33m\]'
