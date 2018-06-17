@@ -18,6 +18,8 @@
 	branch = true
 	interactive = true
 	status = true
+[pull]
+	ff = only
 [merge]
 	tool = vimdiffmeld
 [mergetool "vimdiffmeld"]
