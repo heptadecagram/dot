@@ -179,13 +179,13 @@ imap <buffer> <Leader>br <br/>
 
 imap <buffer> <Leader>ta :call TableMaker()<LEFT>
 imap <buffer> <Leader>ca <caption></caption>bhhi
-imap <buffer> <Leader>tb <tbody></tbody>no
-imap <buffer> <Leader>tf <tfoot></tfoot>no
-imap <buffer> <Leader>tr <tr></tr>no
+imap <buffer> <Leader>tb <tbody></tbody>O
+imap <buffer> <Leader>tf <tfoot></tfoot>O
+imap <buffer> <Leader>tr <tr></tr>O
 imap <buffer> <Leader>td <td></td>bhhi
 vmap <buffer> <Leader>td `>a</td>`<i<td>
 imap <buffer> <Leader>th <th></th>bhhi
-imap <buffer> <Leader>cg <colgroup></colgroup>no
+imap <buffer> <Leader>cg <colgroup></colgroup>O
 imap <buffer> <Leader>co <col/>
 
 function! FindCurrentTag()
