@@ -5,3 +5,6 @@ Executable programs should not have file extensions.
 Programs should respond to -h|--help
 
 Programs should log to syslog, not to files.
+
+Essential command binaries:
+	https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s04.html
