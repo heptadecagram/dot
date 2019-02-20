@@ -1,11 +1,18 @@
+#!/usr/bin/env bash
 
 CODE_RED=$'\[\033[0;31m\]'
 CODE_GREEN=$'\[\033[0;32m\]'
 CODE_YELL=$'\[\033[0;33m\]'
-CODE_BLUE=$'\[\033[0;34m\]'
 CODE_NORM=$'\[\033[m\]'
 
-BAT_LIFE=`sysctl -n hw.acpi.battery.life`
+if [ -e /sys/class/power_supply/BAT1/capacity ]; then
+	BAT_LIFE=`cat /sys/class/power_supply/BAT1/capacity`
+	CHARGING= [ "`cat /sys/class/power_supply/BAT1/status`" = "Charging" ]
+else
+	BAT_LIFE=`sysctl -n hw.acpi.battery.life`
+	CHARGING= [ `sysctl -n hw.acpi.battery.time` -lt 0 ]
+fi
+
 if [ $BAT_LIFE -gt 50 ]; then
 	echo -n $CODE_GREEN
 elif [ $BAT_LIFE -gt 25 ]; then
@@ -16,8 +23,8 @@ fi
 
 echo -n $BAT_LIFE$CODE_NORM
 
-if [ `sysctl -n hw.acpi.battery.time` -lt 0 ]; then
-	echo -n ${CODE_GREEN}ñ${CODE_NORM}
+if $CHARGING ; then
+	echo -n $CODE_GREEN+$CODE_NORM
 else
 	echo -n %
 fi
