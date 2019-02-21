@@ -5,7 +5,7 @@
 #include "config.h"
 #include "bank.h"
 
-int main(int argc, char** argv) {
+int main(void) {
 	std::cout << "Executing..." << std::endl;
 
 	// The game-wide configuration

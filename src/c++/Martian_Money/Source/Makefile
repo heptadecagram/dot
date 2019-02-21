@@ -1,5 +1,5 @@
 
-LDLIBS += -lm -lc++
+LDLIBS += -lm -lstdc++
 CXXFLAGS += -Wall -Wextra -Wpedantic -Wno-deprecated -std=c++17
 
 .PHONY: clean
