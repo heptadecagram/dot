@@ -168,10 +168,10 @@ function NewProgramHeader()
 	endif
 
 	if &syntax == 'python'
-		1substitute'.*'#!/usr/local/bin/python'
+		1substitute'.*'#!/usr/bin/env python'
 	endif
 	if &syntax == 'ruby'
-		1substitute'.*'#!/usr/local/bin/ruby'
+		1substitute'.*'#!/usr/bin/env ruby'
 	endif
 	if &syntax == 'sh'
 		1substitute'.*'#!/bin/sh'
@@ -182,7 +182,7 @@ function NewProgramHeader()
 	endif
 	if &syntax == 'perl'
 		normal yy5p
-		1substitute'.*'#!/usr/bin/perl'
+		1substitute'.*'#!/usr/bin/env perl'
 		3substitute'^'use strict;'
 		4substitute'^'use warnings;'
 		5substitute'^'use 5.20.0;'
