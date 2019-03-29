@@ -36,15 +36,15 @@ fi
 
 APP=md5
 
-DIR1=$1
-DIR2=$2
+DIR1="$1"
+DIR2="$2"
 
 exclude_pattern=
 set -o noglob
 for pattern in $EXCLUDES; do
 	exclude_pattern="$exclude_pattern -name $pattern -prune -o"
 done
-fileset=`find $DIR1 $exclude_pattern -type f -print`
+fileset=`find "$DIR1" $exclude_pattern -type f -print`
 set +o noglob
 
 for file in $fileset; do
