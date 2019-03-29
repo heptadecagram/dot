@@ -160,8 +160,7 @@ function NewProgramHeader()
 			8substitute'^'}'
 
 			if &syntax == 'cpp'
-				4substitute'$' {'
-				5delete
+				4normal J
 			endif
 
 			2
@@ -221,6 +220,7 @@ if has("autocmd")
 
 	autocmd BufEnter *.go set filetype=go
 	autocmd BufEnter *.rs set filetype=rust
+	autocmd BufEnter *.asc set filetype=asciidoc|set tw=80
 
 	autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
