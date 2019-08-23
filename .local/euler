@@ -1,14 +1,7 @@
-_euler_prompt () {
-	if [ $? -ne 0 ]; then
-		PS1="[$CODE_RED\$?$CODE_NORM]"
-	else
-		PS1=''
-	fi
-	if [ $UID -eq 0 ]; then
-		PS1="$PS1$CODE_RED\h$CODE_NORM"
-	else
-		PS1="$PS1\h"
-	fi
-	PS1="\n`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi``if [ -d .svn ]; then svn info 2>/dev/null | sed -ne's/$/\\/)\\\n/;s/URL: /(/p'; fi``_git_prompt`$CODE_YELL\A$CODE_NORM(`~/.local/battery`) $PS1:\w/\\n> "
-}
+_euler_saved_prompt="$PROMPT_COMMAND"
 PROMPT_COMMAND="_euler_prompt"
+
+_euler_prompt () {
+	$_euler_saved_prompt
+	PS1="\n(`~/.local/battery`) $PS1"
+}
