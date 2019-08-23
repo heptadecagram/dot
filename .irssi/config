@@ -4,16 +4,16 @@ servers = (
     chatnet = "Freenode";
     nick = "heptadecagram";
   },
-  {
+  { 
     address = "irc.open-ircnet.net";
     chatnet = "IRCnet";
     port = "6667";
   },
-  {
+  { 
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
-  },
+  }
 );
 
 chatnets = {
@@ -41,7 +41,7 @@ channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
 
   { name = "#callahans"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#snort"; chatnet = "Freenode"; autojoin = "No"; },
+  { name = "#snort"; chatnet = "Freenode"; autojoin = "No"; }
 );
 
 aliases = {
@@ -205,3 +205,10 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
+ignores = (
+  { mask = ",#latex"; level = "ALL"; channels = ( "#vim" ); },
+  {
+    level = "JOINS PARTS QUITS NICKS";
+    channels = ( "#vim", "#latex", "#git", "#freebsd" );
+  }
+);
