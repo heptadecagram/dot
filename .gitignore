@@ -4,7 +4,6 @@
 /.[a-z]*history*
 /.cache
 /.compiz
-/.config
 /.cpan
 /.dmrc
 /.esd_auth
