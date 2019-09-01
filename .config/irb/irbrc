@@ -5,7 +5,7 @@ IRB.conf[:USE_READLINE] ||= true
 
 #TODO Crashes on Ubuntu 18.04
 #IRB.conf[:SAVE_HISTORY] ||= 200
-IRB.conf[:HISTORY_FILE] ||= File.join(ENV['XDG_DATA_HOME'], 'irb', 'history')
+IRB.conf[:HISTORY_FILE] ||= File.join(ENV['XDG_CACHE_HOME'], 'irb', 'history')
 
 unless IRB.conf[:LOAD_MODULES].include?('irb/completion')
 	IRB.conf[:LOAD_MODULES] << 'irb/completion'
