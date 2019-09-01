@@ -21,6 +21,10 @@ fi
 if [ -d "$HOME/.rbenv" ]; then
 	export PATH="$HOME/.rbenv/bin:$PATH"
 fi
+if [ -x "`which irb 2>/dev/null`" ]; then
+	export IRBRC="$XDG_CONFIG_HOME/irb/irbrc"
+fi
+
 # jenv
 if [ -d "$HOME/.jenv" ]; then
 	export PATH="$HOME/.jenv/bin:$PATH"
@@ -31,9 +35,10 @@ if [ -d "$HOME/.pyenv" ]; then
 	export PATH="$PYENV_ROOT/bin:$PATH"
 fi
 
-if [ -x "`which irb 2>/dev/null`" ]; then
-	export IRBRC="$XDG_CONFIG_HOME/irb/irbrc"
+if [ -x "`which irssi 2>/dev/null`" ]; then
+	alias irssi=irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi
 fi
+
 
 if [ "$BASH" ]; then
 	. ~/.bashrc
