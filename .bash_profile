@@ -30,6 +30,11 @@ if [ "$BASH" ]; then
 	. ~/.bashrc
 fi
 
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+
 if [ -a "$HOME/.local/bash_profile" ]; then
 	. ~/.local/bash_profile
 fi

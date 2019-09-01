@@ -7,16 +7,7 @@ set spoolfile="imaps://heptadecagram.net/INBOX"
 set hostname="heptadecagram.net"
 set from="Liam Echlin <liam@heptadecagram.net>"
 
-lists origins besc tribearcane
-subscribe origins besc tribearcane
-
 set postponed==INBOX.Postponed
 set record==INBOX.Outbox
 
-save-hook '~t origins@'  =INBOX.Lists.Origins
-save-hook '~t besc@'  =INBOX.Lists.BESC
-save-hook 'Liana'  =INBOX.People.Liana
-
 save-hook '.' =INBOX.
-
-source ~/.muttrc

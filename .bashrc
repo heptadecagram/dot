@@ -26,7 +26,7 @@ CODE_BLUE=$'\[\033[0;34m\]'
 CODE_NORM=$'\[\033[m\]'
 PS1='\h:\w/\n'
 
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/bin:$HOME/.pyenv/bin:$HOME/.rbenv/bin
 
 prompt_command () {
 	if [ $? -ne 0 ]; then
@@ -53,10 +53,6 @@ if [ -d $HOME/.bash ]; then
 	done
 fi
 
-
-mutt () {
-	command mutt -F ~/.mutt/heptadecagram.net
-}
 
 # Vim alias with sudo built-ins
 o () {
