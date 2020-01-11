@@ -1,15 +1,15 @@
 # Sanity
-CPPFLAGS+=-Wall -Wextra -Wpedantic
+CPPFLAGS += -Wall -Wextra -Wpedantic
 # On types
-CPPFLAGS+=-Wwrite-strings -Wfloat-equal -Wconversion
+CPPFLAGS += -Wwrite-strings -Wfloat-equal -Wconversion
 # On assumptions
-CPPFLAGS+=-Waggregate-return -Winline -Wstack-usage=256
+CPPFLAGS += -Waggregate-return -Winline -Wstack-usage=256
 
 # For embedded platforms
 # CPPFLAGS+=-Wdouble-promotion
 
-CFLAGS+=-std=c11
-CXXFLAGS+=-std=c++14
+CFLAGS += -std=c17
+CXXFLAGS += -std=c++17
 
 .PHONY: all install
 
