@@ -1,4 +1,5 @@
 
+#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -22,7 +23,7 @@ int main(void) {
 	}
 	puts("size\ttype");
 	// Signed and unsigned are guaranteed to be the same size
-	printf("%zu\tchar\n", sizeof(char));
+	printf("%db\tchar\n", CHAR_BIT);
 	printf("%zu\tshort\n", sizeof(short));
 	printf("%zu\tint\n", sizeof(int));
 	printf("%zu\tlong\n", sizeof(long));
