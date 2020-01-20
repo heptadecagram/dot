@@ -570,6 +570,15 @@ xx xx ^ xx 0x  9999
 Downsides:
 No fast >0, <0 operations (1 gate in binary two's-complement, IEEE-floats)
 
+SUB
+AND
+OR
+NOP
+LD
+ST
+JMP
+JEQ
+HLT
 
 Floating-point
 
