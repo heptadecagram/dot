@@ -36,7 +36,7 @@ if [ -d "$HOME/.pyenv" ]; then
 fi
 
 if [ -x "`which irssi 2>/dev/null`" ]; then
-	alias irssi=irssi --config="$XDG_CONFIG_HOME/irssi/config" --home="$XDG_DATA_HOME/irssi"
+	alias irssi="irssi --config='$XDG_CONFIG_HOME/irssi/config' --home='$XDG_DATA_HOME/irssi'"
 fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
