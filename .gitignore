@@ -1,6 +1,4 @@
 /[^.]*
-.DS_Store
-*.sw[po]
 .mypy_cache
 /.[a-z]*history*
 /.cache
