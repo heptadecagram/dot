@@ -1,4 +1,3 @@
-
 #ifndef MMONEY_ARRAY
 # define MMONEY_ARRAY
 
@@ -9,7 +8,7 @@ template<typename Type>
 class Array {
 public:
 	// Constructors
-	Array(void);
+	Array();
 	Array(unsigned int Width, unsigned int Height);
 
 	// Facilitators
@@ -31,8 +30,7 @@ protected:
 	std::vector<Type> M_Values;
 };
 
-# ifndef MMONEY_ARRAY_IMPLEMENT
-#  include "array.cpp"
-# endif // MMONEY_ARRAY_IMPLEMENT
+extern template class Array<double>;
+extern template class Array<long>;
 
 #endif // MMONEY_ARRAY

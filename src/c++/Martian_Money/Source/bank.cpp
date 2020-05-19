@@ -1,10 +1,9 @@
+#include "bank.h"
 
-# include <cmath>
+#include <cmath>
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846264338
 # endif // M_PI
-
-#include "bank.h"
 
 // Constructors
 Bank::Bank() {
@@ -48,8 +47,8 @@ unsigned int Bank::Trade(unsigned int Offer_Type, unsigned int Offer_Adjective,
 }
 
 void Bank::Make_Rates() {
-	for(auto n=0; n<M_Rate.Get_Width(); n++)
-		for(auto nn=0; nn<M_Rate.Get_Height(); nn++)
+	for(auto n=0u; n<M_Rate.Get_Width(); n++)
+		for(auto nn=0u; nn<M_Rate.Get_Height(); nn++)
 			M_Rate(n, nn) = 1.0 + 2*atan(M_Money(n, nn)/M_Normalizer)/M_PI;
 }
 

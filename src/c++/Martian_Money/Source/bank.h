@@ -1,4 +1,3 @@
-
 #ifndef MMONEY_BANK
 # define MMONEY_BANK
 

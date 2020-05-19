@@ -1,4 +1,3 @@
-
 #ifndef MMONEY_CONFIG
 # define MMONEY_CONFIG
 

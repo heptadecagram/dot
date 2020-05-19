@@ -1,8 +1,3 @@
-
-#ifndef MMONEY_ARRAY_IMPLEMENT
-# define MMONEY_ARRAY_IMPLEMENT
-#endif // MMONEY_ARRAY_IMPLEMENT
-
 #ifndef MMONEY_ARRAY
 # include "array.h"
 #endif // MMONEY_ARRAY
@@ -11,7 +6,7 @@
 
 // Constructors
 template<class Type>
-Array<Type>::Array(void) {
+Array<Type>::Array() {
 	M_Height=1;
 	M_Width=1;
 	Type Blank;
@@ -28,16 +23,15 @@ Array<Type>::Array(unsigned int Width, unsigned int Height) {
 	M_Height=Height;
 	M_Width=Width;
 	Type Blank;
-	for(unsigned int n=0; n<M_Height*M_Width; n++)
-		M_Values.push_back(Blank);
+	M_Values.resize(M_Height*M_Width, Blank);
 }
 
 
 // Facilitators
 template<typename Type>
 void Array<Type>::Flood(Type Value) {
-	for(unsigned int n=0; n<M_Height*M_Width; n++)
-		M_Values[n]=Value;
+	M_Values.resize(0);
+	M_Values.resize(M_Height*M_Width, Value);
 }
 
 
@@ -45,9 +39,8 @@ void Array<Type>::Flood(Type Value) {
 template<typename Type>
 Type Array<Type>::operator () (unsigned int Column, unsigned int Row) const {
 	if(Row>=M_Height || Column>=M_Width) {
-		std::cerr << "Array(" << Row << ", " << Column <<
-			") out of range for size: " << M_Height << ", " <<
-			M_Width << std::endl;
+		std::cerr << "Array(" << Row << ", " << Column << ") out of range for size: " <<
+			M_Height << ", " << M_Width << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
 	else
@@ -88,7 +81,8 @@ void Array<Type>::Resize(unsigned int Width, unsigned int Height) {
 	M_Width=Width;
 	M_Height=Height;
 	Type Blank;
-	M_Values.empty();
-	for(unsigned int n=0; n<M_Height*M_Width; n++)
-		M_Values.push_back(Blank);
+	M_Values.resize(Height*Width, Blank);
 }
+
+template class Array<double>;
+template class Array<long>;
