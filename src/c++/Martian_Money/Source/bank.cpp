@@ -35,7 +35,7 @@ unsigned int Bank::Trade(unsigned int Offer_Type, unsigned int Offer_Adjective,
 		std::cerr << "Bank.Trade(" << Offer_Type << ", " << Offer_Adjective<<
 			", " << Receive_Type << ", " << Receive_Adjective <<
 			") out of range for (" << M_Money.Get_Width() << ", " <<
-			 M_Money.Get_Height() << ")!" << std::endl;
+			 M_Money.Get_Height() << ")!\n";
 		return 0;
 	}
 	else {
@@ -60,7 +60,7 @@ double Bank::Get_Rate(unsigned int Type, unsigned int Adjective) const {
 	if(Adjective>=M_Rate.Get_Height() || Type>=M_Rate.Get_Width()) {
 		std::cerr << "Bank.Get_Rate(" << Type << ", " << Adjective <<
 			") out of range for (" << M_Rate.Get_Width() <<
-			", " << M_Rate.Get_Height() << ")!" << std::endl;
+			", " << M_Rate.Get_Height() << ")!\n";
 		return 1;
 	}
 	else
@@ -71,7 +71,7 @@ long Bank::Get_Money(unsigned int Type, unsigned int Adjective) const {
 	if(Adjective>=M_Money.Get_Height() || Type>=M_Money.Get_Width()) {
 		std::cerr << "Bank.Get_Money(" << Type << ", " << Adjective <<
 			") out of range for (" << M_Money.Get_Width() <<
-			", " << M_Money.Get_Height() << ")!" << std::endl;
+			", " << M_Money.Get_Height() << ")!\n";
 		return 0;
 	}
 	else
@@ -88,7 +88,7 @@ void Bank::Set_Money(unsigned int Type, unsigned int Adjective, long Amount) {
 		std::cerr << "Bank.Set_Money(" << Type << ", " << Adjective <<
 			", " << Amount << ") out of range for (" <<
 			M_Money.Get_Width() << ", " << M_Money.Get_Height() <<
-			", " << Amount << ")!" << std::endl;
+			", " << Amount << ")!\n";
 		return;
 	}
 	else

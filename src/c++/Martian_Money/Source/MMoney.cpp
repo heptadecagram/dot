@@ -4,11 +4,11 @@
 #include "bank.h"
 
 int main() {
-	std::cout << "Executing..." << std::endl;
+	std::cout << "Executing...\n";
 
 	// The game-wide configuration
 	Configuration Config;
 	Bank M_Bank(Config);
 
-	std::cout << "Done!" << std::endl;
+	std::cout << "Done!\n";
 }

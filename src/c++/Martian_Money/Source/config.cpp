@@ -29,8 +29,7 @@ Configuration::Configuration(std::string Config_Filename) {
 				M_Money_Types.push_back(Begin_Quote.substr(1,
 					Length-1) );
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for Money Types" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for Money Types\n";
 		}
 
 		if(Buffer.find("[Money-Adjective]=")!=std::string::npos) {
@@ -40,8 +39,7 @@ Configuration::Configuration(std::string Config_Filename) {
 				M_Money_Adjectives.push_back(
 					Begin_Quote.substr(1, Length-1) );
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for Money Adjectives" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for Money Adjectives\n";
 		}
 
 		if(Buffer.find("[Money-Start-Amount]=")!=std::string::npos &&
@@ -53,8 +51,7 @@ Configuration::Configuration(std::string Config_Filename) {
 					Length-1) );*/
 				M_Money_Start=100;
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for starting Money amount" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for starting Money amount\n";
 		}
 
 		if(Buffer.find("[Object-Base-Type]=")!=std::string::npos) {
@@ -64,8 +61,7 @@ Configuration::Configuration(std::string Config_Filename) {
 				M_Object_Base_Type=Begin_Quote.substr(1,
 					Length-1);
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for Object Base Type" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for Object Base Type\n";
 		}
 
 		if(Buffer.find("[Object-Type]=")!=std::string::npos) {
@@ -75,8 +71,7 @@ Configuration::Configuration(std::string Config_Filename) {
 				M_Object_Types.push_back(Begin_Quote.substr(1,
 					Length-1) );
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for Object Types" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for Object Types\n";
 		}
 
 		if(Buffer.find("[Object-Adjective]=")!=std::string::npos) {
@@ -86,8 +81,7 @@ Configuration::Configuration(std::string Config_Filename) {
 				M_Object_Adjectives.push_back(
 					Begin_Quote.substr(1, Length-1) );
 			else
-				std::cerr << "Error reading " << Config_Filename <<
-					" for Object Adjectives" << std::endl;
+				std::cerr << "Error reading " << Config_Filename << " for Object Adjectives\n";
 		}
 	}
 
@@ -104,8 +98,8 @@ Configuration::Configuration(std::string Config_Filename) {
 }
 
 
-// Inspectors
-int Configuration::Get_Variable_Count(Config_Variable Variable) const {
+// Inspector
+size_t Configuration::Get_Variable_Count(Config_Variable Variable) const {
 	switch(Variable) {
 		case Config_Variable::Money_Type:
 			return M_Money_Types.size();
@@ -116,8 +110,7 @@ int Configuration::Get_Variable_Count(Config_Variable Variable) const {
 		case Config_Variable::Object_Adjective:
 			return M_Object_Adjectives.size();
 		default:
-			std::cerr << "Get_Variable_Count(" << Variable << ") defaulted!" <<
-				std::endl;
+			std::cerr << "Get_Variable_Count(" << Variable << ") defaulted!\n";
 			return 0;
 	}
 }
@@ -149,12 +142,10 @@ std::string Configuration::Get_Variable(Config_Variable Variable, size_t Index) 
 			else
 				break;
 		default:
-			std::cerr << "Get_Variable(" << Variable << ", " << Index <<
-				") defaulted!" << std::endl;
+			std::cerr << "Get_Variable(" << Variable << ", " << Index << ") defaulted!\n";
 			return "";
 	}
-	std::cerr << "Get_Variable(" << Variable << ", " << Index <<
-		") out of range!" << std::endl;
+	std::cerr << "Get_Variable(" << Variable << ", " << Index << ") out of range!\n";
 	return "";
 }
 
@@ -182,8 +173,7 @@ void Configuration::Set_Variable(Config_Variable Variable, std::string Value, si
 				M_Object_Adjectives[Index]=Value;
 			break;
 		default:
-			std::cerr << "Set_Variable(" << Variable << ", " << Index << ", " <<
-				Value << ") defaulted!" << std::endl;
+			std::cerr << "Set_Variable(" << Variable << ", " << Index << ", " << Value << ") defaulted!\n";
 	}
 }
 
