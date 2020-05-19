@@ -1,7 +1,6 @@
 #ifndef MMONEY_ARRAY
 # define MMONEY_ARRAY
 
-# include <cstdlib>
 # include <vector>
 
 template<typename Type>
@@ -9,24 +8,24 @@ class Array {
 public:
 	// Constructors
 	Array();
-	Array(unsigned int Width, unsigned int Height);
+	Array(size_t Width, size_t Height);
 
 	// Facilitators
 	void Flood(Type Value);
 
 	// Inspectors
-	Type operator () (unsigned int Column, unsigned int Row) const;
-	unsigned int Get_Width(void) const;
-	unsigned int Get_Height(void) const;
+	Type operator () (size_t Column, size_t Row) const;
+	size_t Get_Width(void) const noexcept;
+	size_t Get_Height(void) const noexcept;
 
 	// Mutators
-	Type& operator () (unsigned int Column, unsigned int Row);
-	void Resize(unsigned int Width, unsigned int Height);
+	Type& operator () (size_t Column, size_t Row);
+	void Resize(size_t Width, size_t Height);
 
 protected:
 	// Variables
-	unsigned int M_Width;
-	unsigned int M_Height;
+	size_t M_Width;
+	size_t M_Height;
 	std::vector<Type> M_Values;
 };
 

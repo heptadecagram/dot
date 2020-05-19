@@ -4,6 +4,7 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846264338
 # endif // M_PI
+#include <stdexcept>
 
 // Constructors
 Bank::Bank() {
@@ -95,9 +96,7 @@ void Bank::Set_Money(unsigned int Type, unsigned int Adjective, long Amount) {
 
 void Bank::Set_Normalizer(double Normalizer) {
 	if(Normalizer==0.0) {
-		std::cerr << "Bank.Set_Normalizer(" << Normalizer <<
-			") cannot be 0!" << std::endl;
-		return;
+		throw std::out_of_range{"Normalizer may not be set to 0"};
 	}
 	else
 		M_Normalizer=Normalizer;

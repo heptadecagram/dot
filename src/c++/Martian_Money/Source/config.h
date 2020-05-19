@@ -1,12 +1,12 @@
 #ifndef MMONEY_CONFIG
 # define MMONEY_CONFIG
 
-# define DEFAULT_CONFIG "host.config"
-
 # include <iostream>
 # include <fstream>
 # include <string>
 # include <vector>
+
+const std::string DEFAULT_CONFIG{"host.config"};
 
 enum Config_Variable { Money_Type, Money_Adjective, Object_Base_Type,
 		Object_Type, Object_Adjective, Money_Start };
