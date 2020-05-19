@@ -1,8 +1,6 @@
 #ifndef MMONEY_CONFIG
 # define MMONEY_CONFIG
 
-# include <iostream>
-# include <fstream>
 # include <string>
 # include <vector>
 

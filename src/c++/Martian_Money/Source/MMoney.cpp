@@ -1,6 +1,4 @@
-
 #include <iostream>
-#include <string>
 
 #include "config.h"
 #include "bank.h"

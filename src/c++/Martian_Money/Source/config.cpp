@@ -1,5 +1,8 @@
 #include "config.h"
 
+#include <iostream>
+#include <fstream>
+
 // Constructors
 Configuration::Configuration(std::string Config_Filename) {
 	std::ifstream Config_File;
@@ -22,7 +25,7 @@ Configuration::Configuration(std::string Config_Filename) {
 		getline(Config_File, Buffer);
 		if(Buffer.find("[Money-Type]=")!=std::string::npos) {
 			auto Begin_Quote=Buffer.substr(Buffer.find('\'') );
-			int Length=Begin_Quote.find('\'', 1);
+			auto Length=Begin_Quote.find('\'', 1);
 			if(Length>0)
 				M_Money_Types.push_back(Begin_Quote.substr(1,
 					Length-1) );
