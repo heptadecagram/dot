@@ -193,36 +193,22 @@ void Configuration::Set_Variable(Config_Variable Variable, std::string Value, si
 void Configuration::Default_Variable(Config_Variable Variable) {
 	switch(Variable) {
 		case Config_Variable::Money_Type:
-			M_Money_Types.clear();
-			M_Money_Types.push_back("Singo");
-			M_Money_Types.push_back("Dingo");
-			M_Money_Types.push_back("Tringo");
+			M_Money_Types.assign({"Singo", "Dingo", "Tringo"});
 			break;
 		case Config_Variable::Money_Adjective:
-			M_Money_Adjectives.clear();
-			M_Money_Adjectives.push_back("Red");
-			M_Money_Adjectives.push_back("Yellow");
-			M_Money_Adjectives.push_back("Green");
-			M_Money_Adjectives.push_back("Blue");
+			M_Money_Adjectives.assign({"Red", "Yellow", "Green", "Blue"});
 			break;
 		case Config_Variable::Money_Start:
-			M_Money_Start=100;
+			M_Money_Start = 100;
 			break;
 		case Config_Variable::Object_Base_Type:
-			M_Object_Base_Type="Pyramid";
+			M_Object_Base_Type = "Pyramid";
 			break;
 		case Config_Variable::Object_Type:
-			M_Object_Types.clear();
-			M_Object_Types.push_back("Small");
-			M_Object_Types.push_back("Medium");
-			M_Object_Types.push_back("Large");
+			M_Object_Adjectives.assign({"Small", "Medium", "Large"});
 			break;
 		case Config_Variable::Object_Adjective:
-			M_Object_Adjectives.clear();
-			M_Object_Adjectives.push_back("Red");
-			M_Object_Adjectives.push_back("Yellow");
-			M_Object_Adjectives.push_back("Green");
-			M_Object_Adjectives.push_back("Blue");
+			M_Object_Adjectives.assign({"Red", "Yellow", "Green", "Blue"});
 			break;
 		default:
 			break;
