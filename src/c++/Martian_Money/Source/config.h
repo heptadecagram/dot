@@ -6,8 +6,9 @@
 
 const std::string DEFAULT_CONFIG{"host.config"};
 
-enum Config_Variable { Money_Type, Money_Adjective, Object_Base_Type,
+enum class Config_Variable { Money_Type, Money_Adjective, Object_Base_Type,
 		Object_Type, Object_Adjective, Money_Start };
+std::ostream& operator<<(std::ostream& os, Config_Variable& v);
 
 class Configuration {
 public:
@@ -16,10 +17,10 @@ public:
 
 	// Inspectors
 	int Get_Variable_Count(Config_Variable Variable) const;
-	std::string Get_Variable(Config_Variable Variable, unsigned int Index=0) const;
+	std::string Get_Variable(Config_Variable Variable, size_t Index=0) const;
 
 	// Mutators
-	void Set_Variable(Config_Variable Variable, std::string Value, unsigned int Index=0);
+	void Set_Variable(Config_Variable Variable, std::string Value, size_t Index=0);
 
 protected:
 	std::vector<std::string> M_Money_Types;

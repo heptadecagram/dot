@@ -15,11 +15,11 @@ Bank::Bank() {
 }
 
 Bank::Bank(Configuration Config) {
-	M_Money.Resize(Config.Get_Variable_Count(Money_Type),
-			Config.Get_Variable_Count(Money_Adjective) );
+	M_Money.Resize(Config.Get_Variable_Count(Config_Variable::Money_Type),
+			Config.Get_Variable_Count(Config_Variable::Money_Adjective) );
 	M_Money.Flood(0);
-	M_Rate.Resize(Config.Get_Variable_Count(Money_Type),
-			Config.Get_Variable_Count(Money_Adjective) );
+	M_Rate.Resize(Config.Get_Variable_Count(Config_Variable::Money_Type),
+			Config.Get_Variable_Count(Config_Variable::Money_Adjective) );
 	M_Rate.Flood(1.0);
 	M_Normalizer = 100.0;//Config.Get_Variable(Money_Start);
 }
