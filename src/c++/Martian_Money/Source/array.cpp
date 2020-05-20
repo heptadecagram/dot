@@ -5,9 +5,9 @@
 // Constructors
 template<class Type>
 Array<Type>::Array() {
-	M_Height = 1;
-	M_Width = 1;
-	M_Values.resize(1);
+	M_Height = 0;
+	M_Width = 0;
+	M_Values.resize(0);
 }
 
 template<class Type>
@@ -20,15 +20,43 @@ Array<Type>::Array(size_t Width, size_t Height) {
 
 	M_Height = Height;
 	M_Width = Width;
-	M_Values.resize(M_Height*M_Width);
+
+	M_Values.resize(M_Width);
+	for (auto& r: M_Values) {
+		r.resize(M_Height);
+	}
 }
 
+template<typename T>
+using ARow = typename Array<T>::Row;
+
+template<typename T>
+ARow<T> Array<T>::operator [](size_t Column) const {
+	if (Column >= M_Width) {
+		throw std::range_error{"Column out of range"};
+	}
+
+	return M_Values[Column];
+}
+
+template<typename T>
+ARow<T>& Array<T>::operator [](size_t Column) {
+	if (Column >= M_Width) {
+		throw std::range_error{"Column out of range"};
+	}
+
+	return M_Values[Column];
+}
 
 // Facilitators
 template<typename Type>
 void Array<Type>::Flood(Type Value) {
 	M_Values.resize(0);
-	M_Values.resize(M_Height * M_Width, Value);
+
+	M_Values.resize(M_Width);
+	for (auto& r: M_Values) {
+		r.resize(M_Height, Value);
+	}
 }
 
 
@@ -41,7 +69,7 @@ Type Array<Type>::operator () (size_t Column, size_t Row) const {
 		throw std::range_error{"Column out of range"};
 	}
 
-	return M_Values[Column+Row*M_Height];
+	return M_Values[Column][Row];
 }
 
 template<typename Type>
@@ -64,7 +92,7 @@ Type& Array<Type>::operator () (size_t Column, size_t Row) {
 		throw std::range_error{"Column out of range"};
 	}
 
-	return M_Values[Column+Row*M_Height];
+	return M_Values[Column][Row];
 }
 
 template<typename Type>
@@ -77,8 +105,12 @@ void Array<Type>::Resize(size_t Width, size_t Height) {
 
 	M_Width = Width;
 	M_Height = Height;
-	M_Values.resize(Height*Width);
+	M_Values.resize(M_Width);
+	for (auto& r: M_Values) {
+		r.resize(0);
+		r.resize(M_Height);
+	}
 }
 
 template class Array<double>;
-template class Array<long>;
+template class Array<int>;

@@ -5,31 +5,35 @@
 
 template<typename Type>
 class Array {
-public:
-	// Constructors
-	Array();
-	Array(size_t Width, size_t Height);
+	public:
+		class Row: public std::vector<Type>{};
+		// Constructors
+		Array();
+		Array(size_t Width, size_t Height);
 
-	// Facilitators
-	void Flood(Type Value);
+		// Facilitators
+		void Flood(Type Value);
 
-	// Inspectors
-	Type operator () (size_t Column, size_t Row) const;
-	size_t Get_Width(void) const noexcept;
-	size_t Get_Height(void) const noexcept;
+		// Inspectors
+		Row operator [](size_t Column) const;
+		Row& operator [](size_t Column);
 
-	// Mutators
-	Type& operator () (size_t Column, size_t Row);
-	void Resize(size_t Width, size_t Height);
+		Type operator () (size_t Column, size_t Row) const;
+		size_t Get_Width(void) const noexcept;
+		size_t Get_Height(void) const noexcept;
 
-protected:
-	// Variables
-	size_t M_Width;
-	size_t M_Height;
-	std::vector<Type> M_Values;
+		// Mutators
+		Type& operator () (size_t Column, size_t Row);
+		void Resize(size_t Width, size_t Height);
+
+	protected:
+		// Variables
+		size_t M_Width;
+		size_t M_Height;
+		std::vector<Row> M_Values;
 };
 
 extern template class Array<double>;
-extern template class Array<long>;
+extern template class Array<int>;
 
 #endif // MMONEY_ARRAY
