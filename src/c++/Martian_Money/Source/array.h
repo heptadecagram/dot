@@ -7,15 +7,12 @@ template<typename Type>
 class Array {
 	public:
 		class Row: protected std::vector<Type> {
+			friend class Array;
 			typedef std::vector<Type> Vector;
 
 			public:
 			using Vector::at;
 			using Vector::operator[];
-
-			protected:
-			using Vector::resize;
-			friend class Array;
 		};
 
 		// Constructors
