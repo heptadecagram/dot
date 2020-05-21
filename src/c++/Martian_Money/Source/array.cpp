@@ -60,18 +60,6 @@ void Array<Type>::Flood(Type Value) {
 }
 
 
-// Inspectors
-template<typename Type>
-Type Array<Type>::operator () (size_t Column, size_t Row) const {
-	if(Row >= M_Height) {
-		throw std::range_error{"Row out of range"};
-	} else if (Column >= M_Width) {
-		throw std::range_error{"Column out of range"};
-	}
-
-	return M_Values[Column][Row];
-}
-
 template<typename Type>
 size_t Array<Type>::Get_Width(void) const noexcept {
 	return M_Width;
@@ -80,19 +68,6 @@ size_t Array<Type>::Get_Width(void) const noexcept {
 template<typename Type>
 size_t Array<Type>::Get_Height(void) const noexcept {
 	return M_Height;
-}
-
-
-// Mutators
-template<typename Type>
-Type& Array<Type>::operator () (size_t Column, size_t Row) {
-	if(Row >= M_Height) {
-		throw std::range_error{"Row out of range"};
-	} else if (Column >= M_Width) {
-		throw std::range_error{"Column out of range"};
-	}
-
-	return M_Values[Column][Row];
 }
 
 template<typename Type>

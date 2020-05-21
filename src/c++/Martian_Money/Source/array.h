@@ -6,7 +6,18 @@
 template<typename Type>
 class Array {
 	public:
-		class Row: public std::vector<Type>{};
+		class Row: protected std::vector<Type> {
+			typedef std::vector<Type> Vector;
+
+			public:
+			using Vector::at;
+			using Vector::operator[];
+
+			protected:
+			using Vector::resize;
+			friend class Array;
+		};
+
 		// Constructors
 		Array();
 		Array(size_t Width, size_t Height);
@@ -15,15 +26,13 @@ class Array {
 		void Flood(Type Value);
 
 		// Inspectors
-		Row operator [](size_t Column) const;
-		Row& operator [](size_t Column);
+		Row operator[](size_t row) const;
+		Row& operator[](size_t row);
 
-		Type operator () (size_t Column, size_t Row) const;
 		size_t Get_Width(void) const noexcept;
 		size_t Get_Height(void) const noexcept;
 
 		// Mutators
-		Type& operator () (size_t Column, size_t Row);
 		void Resize(size_t Width, size_t Height);
 
 	protected:
