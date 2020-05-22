@@ -1,7 +1,16 @@
 #include <ncurses.h>
 #include <locale.h>
+#include <stdlib.h>
 
 #include "log.h"
+
+struct coord {
+	int y, x;
+};
+
+struct {
+	struct coord max;
+} config;
 
 void write_room(int y, int x, int width, int height)
 {
@@ -23,12 +32,14 @@ void write_room(int y, int x, int width, int height)
 	addwstr(L"┘");
 }
 
-struct coord {
-	int y, x;
-};
+void draw_map(void)
+{
+		write_room(1, 1, rand() % (config.max.x-2) + 2, rand() % (config.max.y-2) + 2);
+}
 
 int main(void)
 {
+	srand((unsigned)time(NULL));
 	setlocale(LC_ALL, "");
 	initscr();
 	cbreak();
@@ -42,10 +53,9 @@ int main(void)
 	int input = '\0';
 
 	while (input != 'q') {
+		getmaxyx(stdscr, config.max.y, config.max.x);
 		clear();
-		write_room(2, 4, 5, 10);
-
-		write_room(15, 20, 2, 2);
+		draw_map();
 
 		mvaddch(player.y, player.x, '@');
 		move(player.y, player.x);
