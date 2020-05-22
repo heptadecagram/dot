@@ -14,22 +14,22 @@ struct {
 
 void write_room(int y, int x, int width, int height)
 {
-	mvaddwstr(y, x, L"┌");
+	mvadd_wch(y, x, WACS_ULCORNER);
 	for (int n=1; n < width-1; ++n) {
-		addwstr(L"─");
+		add_wch(WACS_HLINE);
 	}
-	addwstr(L"┐");
+	add_wch(WACS_URCORNER);
 
 	for (int n=1; n < height-1; ++n) {
-		mvaddwstr(y+n, x, L"│");
-		mvaddwstr(y+n, x+width-1, L"│");
+		mvadd_wch(y+n, x, WACS_VLINE);
+		mvadd_wch(y+n, x+width-1, WACS_VLINE);
 	}
 
-	mvaddwstr(y+height-1, x, L"└");
+	mvadd_wch(y+height-1, x, WACS_LLCORNER);
 	for (int n=1; n < width-1; ++n) {
-		addwstr(L"─");
+		add_wch(WACS_HLINE);
 	}
-	addwstr(L"┘");
+	add_wch(WACS_LRCORNER);
 }
 
 void draw_map(void)
