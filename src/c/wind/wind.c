@@ -12,6 +12,24 @@ struct {
 	struct coord max;
 } config;
 
+struct {
+	cchar_t *glyphs[30][30];
+	size_t height;
+	size_t width;
+} map = { .height=30, .width=30};
+
+void draw_map(void)
+{
+	for (size_t x=0; x < map.width; ++x) {
+		move(0, x);
+		for (size_t y=0; y < map.height; ++y) {
+			if (map.glyphs[y][x]) {
+				add_wch(map.glyphs[y][x]);
+			}
+		}
+	}
+}
+
 void write_room(int y, int x, int width, int height)
 {
 	mvadd_wch(y, x, WACS_ULCORNER);
@@ -32,7 +50,7 @@ void write_room(int y, int x, int width, int height)
 	add_wch(WACS_LRCORNER);
 }
 
-void draw_map(void)
+void write_map(void)
 {
 		write_room(1, 1, rand() % (config.max.x-2) + 2, rand() % (config.max.y-2) + 2);
 }
