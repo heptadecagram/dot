@@ -63,16 +63,24 @@ int main(void)
 		input = getch();
 		switch (input) {
 			case KEY_UP:
-				player.y--;
+				if (player.y > 0) {
+					--player.y;
+				}
 				break;
 			case KEY_DOWN:
-				player.y++;
+				if (player.y < config.max.y-1) {
+					++player.y;
+				}
 				break;
 			case KEY_LEFT:
-				player.x--;
+				if (player.x > 0) {
+					--player.x;
+				}
 				break;
 			case KEY_RIGHT:
-				player.x++;
+				if (player.x < config.max.x-1) {
+					++player.x;
+				}
 				break;
 		}
 	}
