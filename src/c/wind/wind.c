@@ -20,11 +20,13 @@ struct {
 
 void draw_map(void)
 {
-	for (size_t x=0; x < map.width; ++x) {
-		move(0, x);
-		for (size_t y=0; y < map.height; ++y) {
+	for (size_t y=0; y < map.height; ++y) {
+		move(y, 0);
+		for (size_t x=0; x < map.width; ++x) {
 			if (map.glyphs[y][x]) {
 				add_wch(map.glyphs[y][x]);
+			} else {
+				addch(' ');
 			}
 		}
 	}
@@ -32,27 +34,27 @@ void draw_map(void)
 
 void write_room(int y, int x, int width, int height)
 {
-	mvadd_wch(y, x, WACS_ULCORNER);
+	map.glyphs[y][x] = WACS_ULCORNER;
 	for (int n=1; n < width-1; ++n) {
-		add_wch(WACS_HLINE);
+		map.glyphs[y][x+n] = WACS_HLINE;
 	}
-	add_wch(WACS_URCORNER);
+	map.glyphs[y][x+width-1] = WACS_URCORNER;
 
 	for (int n=1; n < height-1; ++n) {
-		mvadd_wch(y+n, x, WACS_VLINE);
-		mvadd_wch(y+n, x+width-1, WACS_VLINE);
+		map.glyphs[y+n][x] = WACS_VLINE;
+		map.glyphs[y+n][x+width-1] = WACS_VLINE;
 	}
 
-	mvadd_wch(y+height-1, x, WACS_LLCORNER);
+	map.glyphs[y+height-1][x] = WACS_LLCORNER;
 	for (int n=1; n < width-1; ++n) {
-		add_wch(WACS_HLINE);
+		map.glyphs[y+height-1][x+n] = WACS_HLINE;
 	}
-	add_wch(WACS_LRCORNER);
+	map.glyphs[y+height-1][x+width-1] = WACS_LRCORNER;
 }
 
 void write_map(void)
 {
-		write_room(1, 1, rand() % (config.max.x-2) + 2, rand() % (config.max.y-2) + 2);
+		write_room(1, 1, rand() % (30-2) + 2, rand() % (30-2) + 2);
 }
 
 int main(void)
@@ -69,6 +71,7 @@ int main(void)
 
 	struct coord player = { 15, 15 };
 	int input = '\0';
+	write_map();
 
 	while (input != 'q') {
 		getmaxyx(stdscr, config.max.y, config.max.x);
