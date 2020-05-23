@@ -37,7 +37,7 @@ void draw_map(void)
 			if (map.glyphs[y][x]) {
 				add_wch(map.glyphs[y][x]);
 			} else {
-				addch(' ');
+				addwstr(L"█");
 			}
 		}
 	}
@@ -65,7 +65,10 @@ void write_room(int y, int x, int height, int width)
 
 void write_map(void)
 {
+
 	for (int n=0; n < 3; ++n) {
+		// 3, from 2 walls separated by at least one walkable middle
+		// 10, max of 2 wall plus 8 middle tiles
 		int height = 3 + rand() % 10;
 		int width = 3 + rand() % 10;
 
@@ -77,9 +80,14 @@ void write_map(void)
 
 int main(int argc, char *argv[])
 {
-	time_t seed = time(NULL);
-	if (argc == 2) {
+	time_t seed;
+	if (argc == 1) {
+		seed = time(NULL);
+	} else if (argc == 2) {
 		seed = strtol(argv[1], NULL, 10);
+	} else {
+		fprintf(stderr, "Usage: %s [seed]\n", argv[0]);
+		return 1;
 	}
 
 	printf("%ld\n", seed);
