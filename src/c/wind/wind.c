@@ -118,26 +118,26 @@ int main(int argc, char *argv[])
 		if (map.glyphs[player.y][player.x]) {
 			add_wch(map.glyphs[player.y][player.x]);
 		} else {
-			addch(' ');
+			addwstr(L"█");
 		}
 		switch (input) {
 			case KEY_UP:
-				if (player.y > 0) {
+				if (player.y > 0 && !map.glyphs[player.y-1][player.x]) {
 					--player.y;
 				}
 				break;
 			case KEY_DOWN:
-				if (player.y < config.max.y-1) {
+				if (player.y < config.max.y-1 && !map.glyphs[player.y+1][player.x]) {
 					++player.y;
 				}
 				break;
 			case KEY_LEFT:
-				if (player.x > 0) {
+				if (player.x > 0 && !map.glyphs[player.y][player.x-1]) {
 					--player.x;
 				}
 				break;
 			case KEY_RIGHT:
-				if (player.x < config.max.x-1) {
+				if (player.x < config.max.x-1 && !map.glyphs[player.y][player.x+1]) {
 					++player.x;
 				}
 				break;
