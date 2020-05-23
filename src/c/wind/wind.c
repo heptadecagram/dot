@@ -75,11 +75,15 @@ void write_map(void)
 	}
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
-	unsigned seed = (unsigned)time(NULL);
-	printf("%u\n", seed);
-	srand(seed);
+	time_t seed = time(NULL);
+	if (argc == 2) {
+		seed = strtol(argv[1], NULL, 10);
+	}
+
+	printf("%ld\n", seed);
+	srand((unsigned)seed);
 	setlocale(LC_ALL, "");
 	initscr();
 	cbreak();
