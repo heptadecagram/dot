@@ -65,7 +65,13 @@ void write_room(int y, int x, int height, int width)
 
 void write_map(void)
 {
-		write_room(1, 1, rand() % ((int)map.height-2) + 2, rand() % ((int)map.width-2) + 2);
+	for (int n=0; n < 3; ++n) {
+		int y = rand() % ((int)map.height-10);
+		int x = rand() % ((int)map.width-10);
+		int height = 2 + rand() % ((int)map.height-y);
+		int width = 2 + rand() % ((int)map.width-x);
+		write_room(y, x, height, width);
+	}
 }
 
 int main(void)
