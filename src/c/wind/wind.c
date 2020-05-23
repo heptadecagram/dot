@@ -99,14 +99,19 @@ int main(int argc, char *argv[])
 	init_map();
 	write_map();
 
+	clear();
+	draw_map();
 	while (input != 'q') {
-		clear();
-		draw_map();
 
 		mvaddch(player.y, player.x, '@');
 		move(player.y, player.x);
 		refresh();
 		input = getch();
+		if (map.glyphs[player.y][player.x]) {
+			add_wch(map.glyphs[player.y][player.x]);
+		} else {
+			addch(' ');
+		}
 		switch (input) {
 			case KEY_UP:
 				if (player.y > 0) {
