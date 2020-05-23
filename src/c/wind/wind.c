@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <locale.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "log.h"
 
@@ -13,15 +14,25 @@ struct {
 } config;
 
 struct {
-	cchar_t *glyphs[30][30];
+	cchar_t ***glyphs;
 	size_t height;
 	size_t width;
-} map = { .height=30, .width=30};
+} map;
+
+void init_map(void)
+{
+	map.height = (unsigned)config.max.y;
+	map.width = (unsigned)config.max.x;
+	map.glyphs = malloc(map.height * sizeof(*map.glyphs));
+	for (size_t n=0; n < map.height; ++n) {
+		map.glyphs[n] = calloc(map.width, sizeof(map.glyphs[n]));
+	}
+}
 
 void draw_map(void)
 {
 	for (size_t y=0; y < map.height; ++y) {
-		move(y, 0);
+		move((int)y, 0);
 		for (size_t x=0; x < map.width; ++x) {
 			if (map.glyphs[y][x]) {
 				add_wch(map.glyphs[y][x]);
@@ -32,7 +43,7 @@ void draw_map(void)
 	}
 }
 
-void write_room(int y, int x, int width, int height)
+void write_room(int y, int x, int height, int width)
 {
 	map.glyphs[y][x] = WACS_ULCORNER;
 	for (int n=1; n < width-1; ++n) {
@@ -54,7 +65,7 @@ void write_room(int y, int x, int width, int height)
 
 void write_map(void)
 {
-		write_room(1, 1, rand() % (30-2) + 2, rand() % (30-2) + 2);
+		write_room(1, 1, rand() % ((int)map.height-2) + 2, rand() % ((int)map.width-2) + 2);
 }
 
 int main(void)
@@ -71,10 +82,11 @@ int main(void)
 
 	struct coord player = { 15, 15 };
 	int input = '\0';
+	getmaxyx(stdscr, config.max.y, config.max.x);
+	init_map();
 	write_map();
 
 	while (input != 'q') {
-		getmaxyx(stdscr, config.max.y, config.max.x);
 		clear();
 		draw_map();
 
