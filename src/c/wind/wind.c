@@ -76,7 +76,9 @@ void write_map(void)
 
 int main(void)
 {
-	srand((unsigned)time(NULL));
+	unsigned seed = (unsigned)time(NULL);
+	printf("%u\n", seed);
+	srand(seed);
 	setlocale(LC_ALL, "");
 	initscr();
 	cbreak();
