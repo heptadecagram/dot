@@ -78,6 +78,10 @@ void write_map(void)
 	}
 }
 
+// XXX To make a wide character understandable to curses, build a cchar_t structure.
+// Second element should be an array of ints that make up the code point.
+cchar_t wa = { WA_BOLD, {'.'}, A_NORMAL};
+
 int main(int argc, char *argv[])
 {
 	time_t seed;
@@ -110,17 +114,21 @@ int main(int argc, char *argv[])
 	clear();
 	draw_map();
 	while (input != 'q') {
-
 		mvaddch(player.y, player.x, '@');
 		move(player.y, player.x);
 		refresh();
+
 		input = getch();
 		if (map.glyphs[player.y][player.x]) {
 			add_wch(map.glyphs[player.y][player.x]);
 		} else {
-			addwstr(L"█");
+			add_wch(&wa);
 		}
+
 		switch (input) {
+			case 'b':
+				wa.attr ^= WA_BOLD;
+				break;
 			case KEY_UP:
 				if (player.y > 0 && !map.glyphs[player.y-1][player.x]) {
 					--player.y;
