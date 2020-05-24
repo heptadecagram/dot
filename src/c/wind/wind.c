@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
 	getmaxyx(stdscr, config.max.y, config.max.x);
 	init_map();
 	write_map();
+	size_t trail_index = 0;
 
 	clear();
 	draw_map();
@@ -119,12 +120,15 @@ int main(int argc, char *argv[])
 		if (map.glyphs[player.y][player.x]) {
 			add_wch(map.glyphs[player.y][player.x]);
 		} else {
-			add_wch(glyphs + 2);
+			add_wch(&glyphs[trail_index]);
 		}
 
 		switch (input) {
-			case 'b':
-				glyphs[2].chars[0] = 0x2550;
+			case KEY_SRIGHT:
+				++trail_index;
+				break;
+			case KEY_SLEFT:
+				--trail_index;
 				break;
 			case KEY_UP:
 				if (player.y > 0 && !map.glyphs[player.y-1][player.x]) {
@@ -146,6 +150,11 @@ int main(int argc, char *argv[])
 					++player.x;
 				}
 				break;
+				// Plenty big for formatting an int
+				char buf[16];
+			default:
+				snprintf(buf, sizeof(buf), "%d ", input);
+				mvaddstr(config.max.y-1, 0, buf);
 		}
 	}
 
