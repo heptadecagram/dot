@@ -10,5 +10,8 @@ enum {
 
 extern cchar_t glyphs[];
 
+int next_up(int code_point);
+int next_right(int code_point);
+
 
 #endif

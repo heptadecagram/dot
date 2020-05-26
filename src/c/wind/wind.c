@@ -108,11 +108,12 @@ int main(int argc, char *argv[])
 	init_map();
 	write_map();
 	size_t trail_index = 0;
+	cchar_t paintbrush = {0, {' '}, 0};
 
 	clear();
 	draw_map();
 	while (input != 'q') {
-		mvaddch(player.y, player.x, '@');
+		mvadd_wch(player.y, player.x, &paintbrush);
 		move(player.y, player.x);
 		refresh();
 
@@ -120,12 +121,15 @@ int main(int argc, char *argv[])
 		if (map.glyphs[player.y][player.x]) {
 			add_wch(map.glyphs[player.y][player.x]);
 		} else {
-			add_wch(&glyphs[trail_index]);
+			add_wch(&paintbrush);
 		}
 
 		switch (input) {
+			case 337: // KEY_SUP
+				paintbrush.chars[0] = next_up(paintbrush.chars[0]);
+				break;
 			case KEY_SRIGHT:
-				++trail_index;
+				paintbrush.chars[0] = next_right(paintbrush.chars[0]);
 				break;
 			case KEY_SLEFT:
 				--trail_index;
