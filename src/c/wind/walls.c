@@ -4,21 +4,178 @@
 int next_up(int code_point)
 {
   switch(code_point) {
+    case ' ':
+      return L'╵';
     case L'─':
       return L'┴';
-    case 0x2501:
-      return 0x2535;
-    case 0x2502:
-      return 0x257f;
-    case 0x2503:
-      return 0x257b;
-    case 0x250c:
-      return 0x251c;
-    case 0x250d:
-      return 0x251d;
+    case L'━':
+      return L'┷';
+    case L'│':
+      return L'╿';
+    case L'┃':
+      return L'╻';
+    case L'┌':
+      return L'├';
+    case L'┍':
+      return L'┝';
+    case L'┎':
+      return L'┟';
+    case L'┏':
+      return L'┢';
+    case L'┐':
+      return L'┤';
+    case L'┑':
+      return L'┥';
+    case L'┒':
+      return L'┧';
+    case L'┓':
+      return L'┪';
+    case L'└':
+      return L'┖';
+    case L'┕':
+      return L'┗';
+    case L'┖':
+      return L'╶';
+    case L'┗':
+      return L'╺';
+    case L'┘':
+      return L'┚';
+    case L'┙':
+      return L'┛';
+    case L'┚':
+      return L'╴';
+    case L'┛':
+      return L'╸';
+
+    case L'├':
+      return L'┞';
+    case L'┝':
+      return L'┡';
+    case L'┞':
+      return L'┌';
+    case L'┟':
+      return L'┠';
+    case L'┠':
+      return L'┎';
+    case L'┡':
+      return L'┍';
+    case L'┢':
+      return L'┣';
+    case L'┣':
+      return L'┏';
+
+    case L'┤':
+      return L'┦';
+    case L'┥':
+      return L'┩';
+    case L'┦':
+      return L'┐';
+    case L'┧':
+      return L'┨';
+    case L'┨':
+      return L'┒';
+    case L'┩':
+      return L'┑';
+    case L'┪':
+      return L'┫';
+    case L'┫':
+      return L'┓';
+
+    case L'┬':
+      return L'┼';
+    case L'┭':
+      return L'┽';
+    case L'┮':
+      return L'┾';
+    case L'┯':
+      return L'┿';
+    case L'┰':
+      return L'╁';
+    case L'┱':
+      return L'╅';
+    case L'┲':
+      return L'╆';
+    case L'┳':
+      return L'╈';
+
+    case L'┴':
+      return L'┸';
+    case L'┵':
+      return L'┹';
+    case L'┶':
+      return L'┺';
+    case L'┷':
+      return L'┻';
+    case L'┸':
+      return L'─';
+    case L'┹':
+      return L'╾';
+    case L'┺':
+      return L'╼';
+    case L'┻':
+      return L'━';
+
+    case L'┼':
+      return L'╀';
+    case L'┽':
+      return L'╃';
+    case L'┾':
+      return L'╄';
+    case L'┿':
+      return L'╇';
+    case L'╀':
+      return L'┬';
+    case L'╁':
+      return L'╂';
+    case L'╂':
+      return L'┰';
+    case L'╃':
+      return L'┭';
+    case L'╄':
+      return L'┮';
+    case L'╅':
+      return L'╉';
+    case L'╆':
+      return L'╊';
+    case L'╇':
+      return L'┯';
+    case L'╈':
+      return L'╋';
+    case L'╉':
+      return L'┱';
+    case L'╊':
+      return L'┲';
+    case L'╋':
+      return L'┳';
+
+    case L'╴':
+      return L'┘';
+    case L'╵':
+      return L'╹';
+    case L'╶':
+      return L'└';
+    case L'╷':
+      return L'│';
+    case L'╸':
+      return L'┙';
+    case L'╹':
+      return ' ';
+    case L'╺':
+      return L'┕';
+    case L'╻':
+      return L'╽';
+    case L'╼':
+      return L'┶';
+    case L'╽':
+      return L'┃';
+    case L'╾':
+      return L'┵';
+    case L'╿':
+      return L'╷';
+    default:
+      // Default to empty
+      return ' ';
   }
-  // Weird default
-  return 0x2500;
 }
 
 // XXX To make a wide character understandable to curses, build a cchar_t structure.
