@@ -134,6 +134,7 @@ int main(int argc, char *argv[])
 				paintbrush.chars[0] = next_down(paintbrush.chars[0]);
 				break;
 			case KEY_SLEFT:
+				paintbrush.chars[0] = next_left(paintbrush.chars[0]);
 				break;
 			case KEY_UP:
 				if (player.y > 0 && !map.glyphs[player.y-1][player.x]) {
