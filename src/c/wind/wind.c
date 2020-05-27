@@ -107,7 +107,6 @@ int main(int argc, char *argv[])
 	getmaxyx(stdscr, config.max.y, config.max.x);
 	init_map();
 	write_map();
-	size_t trail_index = 0;
 	cchar_t paintbrush = {0, {' '}, 0};
 
 	clear();
@@ -131,8 +130,10 @@ int main(int argc, char *argv[])
 			case KEY_SRIGHT:
 				paintbrush.chars[0] = next_right(paintbrush.chars[0]);
 				break;
+			case 336: // KEY_SDOWN
+				paintbrush.chars[0] = next_down(paintbrush.chars[0]);
+				break;
 			case KEY_SLEFT:
-				--trail_index;
 				break;
 			case KEY_UP:
 				if (player.y > 0 && !map.glyphs[player.y-1][player.x]) {
