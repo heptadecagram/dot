@@ -1,4 +1,3 @@
-
 alias c='cvs'
 
 _cvs_saved_prompt="$PROMPT_COMMAND"
@@ -8,30 +7,6 @@ _cvs_prompt () {
 	PS1="`if [ -d CVS ]; then sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository; fi`$PS1"
 }
 
-_cvs () {
-	local current=$2
- 	local previous=$3
-
-	local global_options='-a -d -e -f -H -l -n -q -Q -r -s -t -w -x -z'
-	local ACTIONS='ad add new  admin annotate checkout ci co commit diff edit
-	editors export history import init log login logout pserver rannotate rdiff
-	release remove rlog rtag server status tag unedit update version watch
-	watchers'
-
-	COMPREPLY=()
-
-	if [ $COMP_CWORD -eq 1 ]; then
-		if [ "${current#-}" != "$current" ]; then
-			COMPREPLY=(`compgen -W "$global_options" -- $current`)
-		else
-			COMPREPLY=(`compgen -W "$ACTIONS" -- $current`)
-		fi
-		return
-	fi
-
-	COMPREPLY=(`compgen -X 'CVS' -f -- $current`)
-}
-complete -o filenames -F _cvs cvs c
 
 cvs-diff () {
 	_vc-diff 'cvs diff' "$@"

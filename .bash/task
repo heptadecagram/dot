@@ -1,7 +1,0 @@
-#!/usr/local/bin/bash
-
-source /usr/local/share/taskwarrior/scripts/bash/task.sh
-
-alias t='task'
-
-complete -F _task t
