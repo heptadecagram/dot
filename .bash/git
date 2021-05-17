@@ -523,4 +523,5 @@ if complete -p git >/dev/null 2>/dev/null; then
 	complete -o default -F _git-remote git-remote
 fi
 
-__git_complete git __git_main
+_completion_loader git
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
