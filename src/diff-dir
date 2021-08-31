@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXCLUDES='CVS .* logs'
+EXCLUDES='CVS logs'
 
 USAGE="Usage: "`basename $0`" [-cd?] [-x <pattern> ...] <directory> [directory]"
 
@@ -16,6 +16,7 @@ while getopts cdx:? param; do
 		EXCLUDES="$EXCLUDES $OPTARG"
 		set +o noglob
 	;;
+	v) VERBOSE=1 ;;
 	?)
 		echo $USAGE
 		spaces=`echo $(basename $0) | sed -e's/./ /g'`
@@ -49,6 +50,7 @@ set +o noglob
 
 for file in $fileset; do
 	rel_file=`echo $file | sed "s#^$1##"`
+	if [ "$VERBOSE" ]; then echo $rel_file; fi
 	if [ -e "$DIR2/$rel_file" -a -z "$DELETE" ]; then
 		if [ "`$APP $DIR2/$rel_file | sed 's# .*##'`" != "`$APP $file | sed 's# .*##'`" ]; then
 			echo "C $rel_file"
