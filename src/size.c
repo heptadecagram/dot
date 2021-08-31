@@ -21,6 +21,7 @@ int main(void) {
 	} else {
 		puts("Endianess unknown");
 	}
+
 	puts("size\ttype");
 	// Signed and unsigned are guaranteed to be the same size
 	printf("%db\tchar\n", CHAR_BIT);
@@ -38,7 +39,7 @@ int main(void) {
 
 	// Non-void pointers are NOT guaranteed to be the same size as void pointers
 	// But they to tend to be the same.  The most likely culprit are strings and
-	// floats.
+	// non-double floats.
 	printf("%zu\tvoid*\n", sizeof(void*));
 	printf("%zu\tchar*\n", sizeof(char*));
 	printf("%zu\tint*\n", sizeof(int*));
