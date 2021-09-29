@@ -10,7 +10,8 @@
 	stashes = stash list
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
-	#obliterate = filter-branch -f --index-filter "git rm -r --cached FILE_PATTERN_GOES_HERE --ignore-unmatch" --prune-empty --tag-name-filter cat -- --all
+
+	obliterate = "!_f() { git filter-branch -f --index-filter \"git rm -r --cached $1 --ignore-unmatch\" --prune-empty --tag-name-filter cat -- --all; }; _f"
 [user]
 	email = wechlin@umbctraining.com
 	name = Liam Echlin
@@ -34,3 +35,5 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[init]
+	defaultBranch = main
