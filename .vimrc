@@ -149,8 +149,8 @@ function NewProgramHeader()
 		normal yy6p
 		if -1 < match(expand('%'), '\.h$')
 			let header = toupper(substitute(expand('%'), '\.', '_', ''))
-			2substitute'^'\="#ifndef " . header '
-			3substitute'^'\=" #define " . header '
+			1substitute'^'\="#ifndef " . header '
+			2substitute'^'\="#define " . header '
 			7substitute'^'#endif'
 			5
 		else
