@@ -26,8 +26,6 @@ CODE_BLUE=$'\[\033[0;34m\]'
 CODE_NORM=$'\[\033[m\]'
 PS1='\h:\w/\n'
 
-PATH=$PATH:$HOME/bin:$HOME/.pyenv/bin:$HOME/.rbenv/bin
-
 prompt_command () {
 	if [ $? -ne 0 ]; then
 		PS1="[$CODE_RED\$?$CODE_NORM]"
