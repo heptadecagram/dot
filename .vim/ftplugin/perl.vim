@@ -63,7 +63,7 @@ if !exists('*Prove')
 			let g:testfile = expand('',':p')
 		endif
 		if g:testfile =~ '/t/' || g:testfile =~ '\.t$'
-			set makeprg=prove\ -l
+			setlocal makeprg=prove\ -l
 			if a:Verbose
 				execute('make -v ' . g:testfile)
 			else
@@ -77,12 +77,12 @@ endif
 
 if !exists('*Compile')
 	function! Compile()
-		set makeprg=perl
+		setlocal makeprg=perl
 		make -wc %
 	endfunction
 endif
 
-set errorformat=
+setlocal errorformat=
 			\%m\ in\ @INC\ (%.%#at\ %f\ line\ %l.
 			\,%E%.%#\ \ \ \ \ Failed\ test\ (%f\ at\ line\ %l)
 			\,%C#\ %\\+got:\ %m

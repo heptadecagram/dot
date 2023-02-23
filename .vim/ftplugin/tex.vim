@@ -1,6 +1,7 @@
 
-set sw=3
-set ts=3
+setlocal sw=3
+setlocal ts=3
+setlocal noet
 
 let mapleader='"'
 

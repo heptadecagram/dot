@@ -1,5 +1,5 @@
 
-set spell
+setlocal spell
 
 function! LDAPCompleteFn(findstart, base)
 	if a:findstart
@@ -27,4 +27,4 @@ function! LDAPCompleteFn(findstart, base)
 	endif
 endfun
 
-set omnifunc=LDAPCompleteFn
+setlocal omnifunc=LDAPCompleteFn

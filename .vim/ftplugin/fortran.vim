@@ -1,4 +1,4 @@
 
-set sw=3
-set ts=3
-set expandtab
+setlocal sw=3
+setlocal ts=3
+setlocal expandtab

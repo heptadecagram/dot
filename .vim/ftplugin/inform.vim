@@ -1,9 +1,9 @@
 
-set smartindent
+setlocal smartindent
 
-set formatoptions+=ocr
+setlocal formatoptions+=ocr
 
-set matchpairs+=[:]
+setlocal matchpairs+=[:]
 
-set comments=:!
-set commentstring=!%s
+setlocal comments=:!
+setlocal commentstring=!%s

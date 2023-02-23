@@ -1,6 +1,7 @@
 
-set sw=4
-set ts=4
+setlocal sw=4
+setlocal ts=4
+setlocal noet
 
 setlocal makeprg=asciidoctor-pdf\ \"%\"
 

@@ -1,11 +1,11 @@
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set textwidth=80
-set smarttab
-set expandtab
-set smartindent
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal textwidth=80
+setlocal smarttab
+setlocal expandtab
+setlocal smartindent
 
 nmap <silent> gd "lyiw :call Python_gd(@l)<CR>
 

@@ -1,10 +1,10 @@
 
-set formatoptions+=or
+setlocal formatoptions+=or
 
-set comments=:--
-set commentstring=--%s
+setlocal comments=:--
+setlocal commentstring=--%s
 
-set foldmethod=marker
+setlocal foldmethod=marker
 
 nmap <silent> gd "lyiw:call SQL_gd(@l)<CR>
 
