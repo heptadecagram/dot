@@ -112,9 +112,6 @@ defun eval (first rest)
 					(eval (tl (hd first)) rest)
 					(eval (tl (tl (hd first))) rest)))
 
-(defun apply. (f args)
-	(eval. (cons (
-
 (defun eval. (e a)
   (cond
     ((atom e) (assoc. e a))

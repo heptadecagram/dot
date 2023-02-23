@@ -1,5 +1,5 @@
 \set HISTFILE ~/.psql_history- :DBNAME
 
-\set PROMPT1 '\n%[%033[0;33m%]%`date +%H:%M`%[%033[0m%] %n@%[%033[0;36m%]%m%[%033[0m%]/%~\n%x%# '
+\set PROMPT1 '%[%033[0;33m%]%`date +%H:%M`%[%033[0m%] %n@%[%033[0;36m%]%m%[%033[0m%]/%~%x%# '
 
 \set AUTOCOMMIT off

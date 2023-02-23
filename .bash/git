@@ -91,7 +91,11 @@ gd-all () {
 	_vc-diff 'git diff --cached' `git status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
 }
 
-if complete -p git >/dev/null 2>/dev/null; then
+if [[ $(type -t _completion_loader) == function ]]; then
+	_completion_loader git
+	complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+else
+#if complete -p git >/dev/null 2>/dev/null; then
 	_git () {
 		local current=$2
 		local ACTIONS='add am annotate apply archive bisect blame branch bundle
@@ -523,5 +527,3 @@ if complete -p git >/dev/null 2>/dev/null; then
 	complete -o default -F _git-remote git-remote
 fi
 
-_completion_loader git
-complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
