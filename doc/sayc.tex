@@ -1,4 +1,3 @@
-
 \documentclass[10pt]{article}
 
 \usepackage[legalpaper,noheadfoot,margin=0.8cm]{geometry}
@@ -14,7 +13,7 @@
 
 \definecolor{BlackSuit}{cmyk}{0, 0, 0, 1}
 \definecolor{RedSuit}{cmyk}{0.03, 1, 0.85, 0}
-\definecolor{OpponentBid}{cmyk}{1, 0.5, 0, 0}
+\definecolor{OpponentBid}{cmyk}{0, 1, 1, 0}
 
 
 \newcommand{\clubs}{{\color{BlackSuit}\ensuremath{\clubsuit}}}
@@ -50,8 +49,8 @@
 \newcommand{\bidblock}[1]{\\ [-1.75ex] #1 \hline}
 
 
-\newcommand{\response}{\hspace{1.0em}}
-\newcommand{\overcall}{\hspace{0.65em}}
+\newcommand{\response}{\hspace{1.5em}}
+\newcommand{\overcall}{\hspace{0.0em}}
 
 \newcommand{\ormore}{\ensuremath{^{\mbox{\tiny{+}}}}}
 \newcommand{\orless}{\ensuremath{^{\mbox{\small{-}}}}}
@@ -69,8 +68,6 @@
 
 
 \begin{table}[htbp]
-\caption{{\Large\textbf{Openings}}}
-
 \begin{tabular*}{\textwidth}{@{\extracolsep{-1cm}}ll}
 
 \vtop{\null\hbox{
@@ -79,17 +76,15 @@
 \begin{tabular}{llll}
 \key
 
-\bid{\pass}{12\orless}{5\orless$x$}{}
-
 \bidblock{\bid{1\clubs}{13-21}{4\orless\major,3\ormore\clubs}{}}
 \response\bid{\pass}{5\orless}{5\orless$x$}{}
 \response\bid{1$x$}{6-17}{4\ormore$x$}{}
-\response\bid{1\notrump}{6-10\hcp}{3\orless\major}{}
+\response\bid{1\notrump}{6-9\hcp}{3\orless\major}{}
 \response\bid{2\clubs}{6-11}{3\orless\major,4\ormore\clubs}{}
 \response\slambid{2$x$}{18\ormore}{4\ormore$x$}{}
-\response\gamebid{2\notrump}{13-15\hcp}{\balanced}{}
+\response\bid{2\notrump}{10-12\hcp}{\balanced}{}
 \response\bid{3\clubs}{12-14}{3\orless\major,4\ormore\clubs}{}
-\response\slambid{3\notrump}{16-18\hcp}{\balanced}{}
+\response\gamebid{3\notrump}{13-15\hcp}{\balanced}{}
 \response\bid{4\clubs}{9\orless}{6\ormore\clubs}{}
 \response\forcebid{4\notrump}{-}{-}{(Blackwood)}
 
@@ -97,15 +92,15 @@
 \response\bid{\pass}{5\orless}{5\orless$x$}{}
 \response\bid{1\hearts}{6-17}{4\ormore\hearts}{}
 \response\bid{1\spades}{6-17}{4\ormore\spades}{}
-\response\bid{1\notrump}{6-10\hcp}{3\orless\major}{}
+\response\bid{1\notrump}{6-9\hcp}{3\orless\major}{}
 \response\bid{2\clubs}{10-17}{3\orless\major,5\ormore\clubs}{}
 \response\bid{2\diamonds}{6-11}{3\orless\major,4\ormore\diamonds}{}
 \response\slambid{2\hearts}{18\ormore}{4\ormore\hearts}{}
 \response\slambid{2\spades}{18\ormore}{4\ormore\spades}{}
-\response\gamebid{2\notrump}{13-15\hcp}{\balanced}{}
+\response\bid{2\notrump}{10-12\hcp}{\balanced}{}
 \response\slambid{3\clubs}{18\ormore}{4\ormore\clubs}{}
 \response\bid{3\diamonds}{12-14}{3\orless\major,4\ormore\diamonds}{}
-\response\slambid{3\notrump}{16-18\hcp}{\balanced}{}
+\response\gamebid{3\notrump}{13-15\hcp}{\balanced}{}
 \response\bid{4\diamonds}{9\orless}{6\ormore\diamonds}{}
 \response\forcebid{4\notrump}{-}{-}{(Blackwood)}
 
@@ -140,7 +135,7 @@
 
 \bidblock{\bid{1\notrump}{15-17\hcp}{\balanced}{}}
 \response\bid{\pass}{7\orless}{5\orless$x$}{}
-\response\forcebid{2\clubs}{8\ormore}{4\ormore\major}{(Stayman)}
+\response\forcebid{2\clubs}{-}{4\ormore\major}{(Stayman)}
 \response\forcebid{2$x$}{8\ormore}{5\ormore$y$}{(Transfer)}
 \response\bid{2\notrump}{8-10\hcp}{3\orless\major}{}
 \response\slambid{3$x$}{-}{6\ormore$x$}{}
@@ -149,14 +144,21 @@
 \response\bid{6\notrump}{17-18\hcp}{-}{}
 \response\forcebid{4\clubs}{19\ormore\hcp}{-}{(Gerber)}
 
+\bidblock{\forcebid{2\clubs}{22\ormore}{5\ormore$x$}{}}
+\response\bid{2\diamonds}{7\orless}{5\orless$y$}{(relay)}
+\response\gamebid{2$y$}{8\ormore}{5\ormore$y$}{}
+\response\gamebid{2\notrump}{8\ormore\hcp}{4\orless$y$}{}
+
 \bidblock{\bid{2\notrump}{20-21\hcp}{\balanced}{}}
 \response\bid{\pass}{3\orless}{5\orless$x$}{}
-\response\forcebid{3\clubs}{6\ormore}{4\ormore\major}{(Stayman)}
+\response\forcebid{3\clubs}{-}{4\ormore\major}{(Stayman)}
 \response\forcebid{3$x$}{5\ormore}{5\ormore$y$}{(Transfer)}
 \response\bid{3\notrump}{6-9\hcp}{-}{}
 \response\slambid{4\notrump}{9\ormore\hcp}{-}{}
 \response\bid{6\notrump}{10-13\hcp}{-}{}
 \response\forcebid{4\clubs}{14\ormore\hcp}{-}{(Gerber)}
+
+\bid{3\notrump}{25-27\hcp}{\balanced}{}
 
 \end{tabular}
 \end{minipage}
@@ -167,119 +169,119 @@
 \vtop{\null\hbox{
 \begin{minipage}{0.5\textwidth}
 
+	{\setlength{\fboxsep}{1em}%
+	\framebox[\textwidth]{\begin{minipage}{3in}\Huge Standard American\\ Yellow Card\end{minipage}}}
+
 \begin{tabular}{llll}
 \key
 \\
 
+\bid{\pass}{12\orless}{5\orless$x$}{}
 
-\bidblock{\forcebid{2\clubs}{22\ormore}{5\ormore$x$}{}}
-\response\bid{2\diamonds}{7\orless}{5\orless$y$}{(relay)}
-\response\gamebid{2$y$}{8\ormore}{5\ormore$y$}{}
-\response\gamebid{2\notrump}{8\ormore\hcp}{4\orless$y$}{}
 
 \bidblock{\bid{2$x$}{5-11}{6$x$}{}}
 \response\bid{\pass}{14\orless}{2\orless$x$}{}
 \response\forcebid{\cheapest$y$}{15\ormore}{5\ormore$y$}{}
-\response\forcebid{2\notrump}{-}{-}{}
-\response\response\bid{3$x$}{8\orless}{-}{}
-\response\response\forcebid{3$y$}{9\ormore}{\feature}{}
-\response\response\bid{3\notrump}{9\ormore}{-}{}
+\response\forcebid{2\notrump}{15\ormore}{2\ormore$x$}{(Ogust)}
 \response\bid{3$x$}{-}{3$x$}{}
 \response\bid{4$x$}{-}{4\ormore$x$}{}
 
-\\ [-1.75ex] \bid{3$x$}{6-10}{7$x$}{}
-
-\bid{3\notrump}{25-27\hcp}{\balanced}{}
+\\  \bid{3$x$}{6-10}{7$x$}{}
 
 \bid{4$x$}{6-10}{8\ormore$x$}{}
 
+\end{tabular}
+
+	\vspace{1.6em}
 \\
 
-{\large\textbf{Overcalls}} \\
+\convention{Overcalls}
+	{The opponents opened before either of us did.
+	The opponents' opening bid is in {\color{OpponentBid}Red}.}
+{
 
-\bidblock{\opponent{1$x$}{13-21}{-}{}}
-\overcall\bid{\pass}{5\orless}{4\orless$y$}{}
+\bidblock{\opponent{1$z$}{13-21}{-}{}}
+\overcall\bid{\pass}{5\orless}{4\orless$x$}{}
 \overcall\bid{\double}{13\ormore}{Unbid suits}{}
-\overcall\bid{\cheapest$y$}{8-16}{5\ormore$y$}{}
+\overcall\bid{\cheapest$x$}{8-16}{5\ormore$x$}{}
 \overcall\bid{1\notrump}{15-18\hcp}{\balanced}{}
-\overcall\bid{\jump$y$}{7-10}{6$y$}{}
-\overcall\bid{2\notrump}{6-11}{5\ormore$y$,5\ormore$z$}{(Unusual NT)}
-\overcall\forcebid{2$x$}{8-16}{5\ormore$y$,5\ormore$z$}{(Michaels Cuebid)}
-\overcall\bid{3$y$}{6-10}{7$y$}{}
-\overcall\bid{4$y$}{6-10}{8\ormore$y$}{}
-\overcall\bid{4\notrump}{6-11}{6\ormore$y$,6\ormore$z$}{(Unusual NT)}
+\overcall\bid{\jump$x$}{7-10}{6$x$}{}
+\overcall\bid{2\notrump}{6-11}{5\ormore$x$,5\ormore$y$}{(Unusual NT)}
+\overcall\forcebid{2$z$}{8-16}{5\ormore$x$,5\ormore$y$}{(Michaels Cuebid)}
+\overcall\bid{3$x$}{6-10}{7$x$}{}
+\overcall\bid{4$x$}{6-10}{8\ormore$x$}{}
+\overcall\bid{4\notrump}{6-11}{6\ormore$x$,6\ormore$y$}{(Unusual NT)}
 
 \bidblock{\opponent{1\notrump}{15-17\hcp}{\balanced}{}}
 \overcall\bid{\pass}{5\orless}{5\orless$x$}{}
-\overcall\forcebid{\double}{10\ormore}{6\ormore$x$}{(DONT)}
-\overcall\bid{2$x$}{-}{5\ormore$x$,5\ormore$y$}{(DONT)}
+\overcall\forcebid{\double}{10\ormore}{6\ormore$x$}{(D.O.N.T.)}
+\overcall\bid{2$x$}{-}{5\ormore$x$,5\ormore$y$}{(D.O.N.T.)}
 \overcall\bid{3$x$}{6-10}{7$x$}{}
 \overcall\bid{4$x$}{6-10}{8\ormore$x$}{}
 
 % 2-level overcalls
-\bidblock{\opponent{2$x$}{5-11}{6$x$}{}}
+\bidblock{\opponent{2$z$}{5-11}{6$z$}{}}
 \overcall\bid{\pass}{9\orless}{-}{}
 
-\overcall\forcebid{\double}{12\ormore}{\balanced}{}
-\overcall\response\bid{\cheapest$y$}{7\orless}{4\ormore$y$}{}
-\overcall\response\bid{\jump$y$}{8-10}{5\ormore$y$}{}
+\overcall\forcebid{\double}{12\ormore}{\balanced,2\orless$z$}{}
+\overcall\response\bid{\cheapest$x$}{7\orless}{4\ormore$x$}{}
+\overcall\response\bid{\jump$x$}{8-10}{5\ormore$x$}{}
 \overcall\response\bid{4\major}{11\ormore}{5\ormore\major}{}
 \overcall\response\bid{5\minor}{11\ormore}{5\ormore\minor}{}
 
-\overcall\bid{\cheapest$y$}{11-17}{5\ormore$y$}{}
-\overcall\response\bid{\pass}{7\orless}{2\orless$y$}{} %TODO
-\overcall\response\bid{\cheapest$y$}{8\orless}{5\ormore$y$}{}% TODO
+\overcall\bid{\cheapest$x$}{11-17}{5\ormore$x$}{}
+\overcall\response\bid{\pass}{7\orless}{2\orless$x$}{} %TODO
+\overcall\response\bid{\cheapest$x$}{8\orless}{5\ormore$x$}{}% TODO
 \overcall\response\bid{\cheapest\notrump}{8\orless\hcp}{\balanced}{} %TODO
-\overcall\response\bid{\jump$y$}{9\ormore}{5\ormore$y$}{} %TODO
+\overcall\response\bid{\jump$x$}{9\ormore}{5\ormore$x$}{} %TODO
 
 \overcall\bid{2\notrump}{14-18\hcp}{\balanced}{}
-\overcall\response\bid{\pass}{3\orless}{5\orless$x$}{}
-\overcall\response\forcebid{3\clubs}{6\ormore}{4\ormore\major}{(Stayman)}
-\overcall\response\forcebid{3$x$}{5\ormore}{5\ormore$y$}{(Transfer)}
+\overcall\response\bid{\pass}{3\orless}{5\orless$z$}{}
+\overcall\response\forcebid{3\clubs}{6\ormore}{4\ormore\major}{(Staxman)}
+\overcall\response\forcebid{3$z$}{5\ormore}{5\ormore$x$}{(Transfer)}
 \overcall\response\bid{3\notrump}{6-9\hcp}{-}{}
 \overcall\response\slambid{4\notrump}{9\ormore\hcp}{-}{}
 \overcall\response\bid{6\notrump}{10-13\hcp}{-}{}
 \overcall\response\forcebid{4\clubs}{14\ormore\hcp}{-}{(Gerber)}
 
-\overcall\forcebid{3$x$}{15\ormore}{6\ormore$y$}{} % Asking for NT stopper in x
-\overcall\response\bid{3\notrump}{-}{Stopper in $x$}{}
-\overcall\response\bid{\cheapest$y$}{-}{3\ormore$y$}{}
+\overcall\forcebid{3$z$}{15\ormore}{6\ormore$x$}{} % Asking for NT stopper in z
+\overcall\response\bid{3\notrump}{-}{Stopper in $z$}{}
+\overcall\response\bid{\cheapest$x$}{-}{3\ormore$x$}{}
 
-\overcall\bid{\jump$y$}{14-17}{6\ormore$y$}{}
-\overcall\bid{3\notrump}{15\ormore\hcp}{7\ormore$y$, Stoppers}{}
-\overcall\bid{4\minor}{15\ormore}{5\ormore$y$,5\ormore$z$}{(Leaping Michaels)}
+\overcall\bid{\jump$x$}{14-17}{6\ormore$x$}{}
+\overcall\bid{3\notrump}{15\ormore\hcp}{7\ormore$x$, Stoppers}{}
+\overcall\bid{4\minor}{15\ormore}{5\ormore$x$,5\ormore$y$}{(Leaping Michaels)}
 \overcall\bid{4\major}{16\ormore}{6\ormore\major}{}
-\overcall\bid{4\notrump}{12-17}{5\ormore$y$, 5\ormore$z$}{(Unusual NT)}
+\overcall\bid{4\notrump}{12-17}{5\ormore$x$, 5\ormore$y$}{(Unusual NT)}
 
 % 3-level overcalls
-\bidblock{\opponent{3$x$}{6-10}{7$x$}{}}
+\bidblock{\opponent{3$z$}{6-10}{7$z$}{}}
 \overcall\bid{\pass}{12\orless}{-}{}
-\overcall\forcebid{\double}{14\ormore}{\balanced}{}
-\overcall\response\bid{\cheapest$y$}{9\orless}{4\ormore$y$}{}
-\overcall\response\bid{\jump$y$}{10\ormore}{5\ormore$y$}{}
+\overcall\forcebid{\double}{14\ormore}{\balanced,2\orless$z$}{}
+\overcall\response\bid{\cheapest$x$}{9\orless}{4\ormore$x$}{}
+\overcall\response\bid{\jump$x$}{10\ormore}{5\ormore$x$}{}
 
-\overcall\bid{\cheapest$y$}{12-17}{6\ormore$y$}{}
+\overcall\bid{\cheapest$x$}{12-17}{6\ormore$x$}{}
 
 \overcall\bid{3\notrump}{16-22\hcp}{\balanced}{}
 
-\overcall\bid{4\minor}{15\ormore}{5\ormore$y$,5\ormore$z$}{(Leaping Michaels)}
+\overcall\bid{4\minor}{15\ormore}{5\ormore$x$,5\ormore$y$}{(Leaping Michaels)}
 \overcall\bid{4\major}{16\ormore}{6\ormore\major}{}
-\\ \\ \\ \\
 
+}
 
-\end{tabular}
 
 \end{minipage}
 }}
-
 \end{tabular*}
 
 \end{table}
 
+
+
 \pagebreak
 
 \begin{table}[htbp]
-	\caption{{\Large\textbf{Conventions}}}
 
 	\begin{tabular*}{\textwidth}{@{\extracolsep{-0.7em}}lll}
 
@@ -294,7 +296,7 @@
 								\begin{tabular}{rl}
 									\textit{Italics}             & Forcing for one round \\
 									\textbf{Bold}                & Forcing to game \\
-									{\color{OpponentBid}Blue}    & Bid by opponents \\
+									{\color{OpponentBid}Red}     & Bid by opponents \\
 									\major                       & Majors (\spades, \hearts) \\
 									\minor                       & Minors (\diamonds, \clubs) \\
 									\notrump                     & No Trump \\
@@ -307,7 +309,7 @@
 
 						\fbox{
 							\begin{minipage}[t]{0.98\textwidth}
-								\caption{{\large\textbf{Hand Valuation}}}
+								\caption{{\large\textbf{Hand Valuation Points}}}
 
 								\begin{tabular}{rcl}
 									\\ [-5ex] Ace    & 4 points & \\
@@ -321,20 +323,6 @@
 							\end{minipage}
 						}
 
-						\fbox{
-							\begin{minipage}[t]{0.98\textwidth}
-								\caption{{\large\textbf{Scoring}}}
-
-								\begin{tabular}{rl}
-									\\ [-5ex] \clubs,\diamonds & 20 points each \\
-									\hearts,\spades  & 30 points each \\
-									\notrump         & 40 points for first \\
-									                 & 30 each additional \\
-									100 points       & Game (3\notrump, 4\major, 5\minor) \\
-									2 Games          & Rubber \\
-								\end{tabular}
-							\end{minipage}
-						}
 
 
 
@@ -356,7 +344,7 @@
 
 
 \convention{Blackwood}
-{Since we're looking for a slam in an agreed-upon suit, how many aces do you have, partner?  How many kings?}
+{Since we're looking for a slam in a specific suit, how many aces do you have, partner?  How many kings?}
 {
 \bid{4\notrump}{-}{-}{}
 \response\bid{5\clubs}{-}{0A OR 4A}{}
@@ -382,6 +370,18 @@
 \response\response\bid{4\major}{13-15}{-}{}
 }
 
+\convention{Ogust}
+{My partner pre-empted a suit, and I have a strong hand.}
+{
+\bid{2$x$}{5-11}{6$x$}{}
+\response\forcebid{2\notrump}{15\ormore}{2\ormore$x$}{}
+\response\response\bid{3\clubs}{5-7}{1 of AKQ$x$}{}
+\response\response\bid{3\diamonds}{5-7}{2 of AKQ$x$}{}
+\response\response\bid{3\hearts}{8-11}{1 of AKQ$x$}{}
+\response\response\bid{3\spades}{8-11}{2 of AKQ$x$}{}
+\response\response\bid{3\notrump}{8-11}{3 of AKQ$x$}{}
+}
+
 				\end{minipage}
 			}
 		}
@@ -392,6 +392,20 @@
 			\null\hbox{
 				\begin{minipage}{0.29\textwidth}
 
+						\fbox{
+							\begin{minipage}[t]{0.98\textwidth}
+								\caption{{\large\textbf{Scoring Points}}}
+
+								\begin{tabular}{rl}
+									\\ [-5ex] \clubs,\diamonds & 20 points each \\
+									\hearts,\spades  & 30 points each \\
+									\notrump         & 40 points for first \\
+									                 & 30 each additional \\
+									100 points       & Game (3\notrump, 4\major, 5\minor) \\
+									2 Games          & Rubber \\
+								\end{tabular}
+							\end{minipage}
+						}
 
 \convention{Unusual No Trump}
 {An opponent opened a suit, and I can overcall in two possible suits.}
@@ -410,8 +424,6 @@
 \overcall\bid{4\notrump}{6-11}{6\ormore\diamonds,6\ormore\clubs}{}
 }
 
-\vspace{1.5em}
-
 \convention{Michaels Cuebid}
 {An opponent opened a suit, and I can overcall in two possible suits, including the highest unbid suit.}
 {
@@ -424,8 +436,6 @@
 \opponent{1\spades}{-}{-}{}
 \overcall\forcebid{2\spades}{10-16}{5\ormore\hearts,5\ormore$x$}{}
 }
-
-\vspace{1.5em}
 
 \convention{Modified DONT: Disturb Opponents' No Trump}
 {Opponents opened strong No Trump, and I have a long suit (Double) or two (bid the lowest of my two suits).}
@@ -441,8 +451,6 @@
 \overcall\bid{2\spades}{9\orless}{6\ormore\spades}{}
 \overcall\bid{2\notrump}{-}{5\ormore\diamonds,5\ormore\clubs}{}
 }
-
-\vspace{1.5em}
 
 \convention{Leaping Michaels}
 {An opponent pre-empted, and I have a strong two-suited hand.  A cuebid implies both majors.  A non-cuebid implies the suit bid plus a major.}
@@ -493,7 +501,7 @@
 \convention{Jacoby Transfers}
 {I have a five-card major or six-card minor suit, and my partner opened No Trump.}
 {
-\bidblock{\bid{1\notrump}{15-17\hcp}{-}{}}
+\bidblock{\bid{1\notrump}{15-17}{-}{}}
 \response\forcebid{2\diamonds}{8\ormore}{5\ormore\hearts}{}
 \response\response\bid{2\hearts}{-}{-}{(relay)}
 \response\response\response\bid{\pass}{-}{-}{}
@@ -518,7 +526,7 @@
 \response\response\response\bid{3\diamonds}{-}{6\ormore\diamonds}{}
 \\
 
-\bidblock{\bid{2\notrump}{21-23\hcp}{-}{}}
+\bidblock{\bid{2\notrump}{21-23}{-}{}}
 \response\forcebid{3\diamonds}{4\ormore}{5\ormore\hearts}{}
 \response\response\bid{3\hearts}{-}{-}{(relay)}
 \response\response\response\bid{\pass}{4\orless}{-}{}
@@ -554,8 +562,6 @@
 	\end{tabular*}
 \end{table}
 
-
-\pagebreak
 
 \pagebreak
 
