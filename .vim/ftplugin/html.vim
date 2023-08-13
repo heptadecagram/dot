@@ -28,7 +28,7 @@ imap <buffer> <Leader>cm <!--  -->bhi
 vmap <buffer> <Leader>cm `>a -->`<i<!--
 
 
-imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title></head><body></body></html>:6o
+imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title><meta charset="utf-8"></head><body></body></html>:7o
 
 
 " NOTE: Using <expr> when defining these mappings would, indeed, be
@@ -39,7 +39,7 @@ imap <buffer> <Leader>sc <script type="text/javascript"><!----></script>nO
 
 imap <buffer> <Leader>sy <style type="text/css"><!----></style>nO
 
-imap <buffer> <Leader>ln <link href="" rel="" type=""/>BBhhi
+imap <buffer> <Leader>ln <link href="" rel="" type="">BBhhi
 
 
 " HTML5 elements
@@ -97,32 +97,32 @@ imap <buffer> <Leader>fe <select name=""></select>Bbsa
 imap <buffer> <Leader>oo <option value="">OPTION</option>Bwsa
 vmap <buffer> <Leader>oo `>a</option>`<i<option value="">Bwsa
 
-imap <buffer> <Leader>ft <input name="" value="" maxlength="255"/>B`n a
-vmap <buffer> <Leader>ft `>a" maxlength="255"/>`<i<input name="" value="`n a
+imap <buffer> <Leader>ft <input name="" value="" maxlength="255">B`n a
+vmap <buffer> <Leader>ft `>a" maxlength="255">`<i<input name="" value="`n a
 
 " placeholder="Placeholder text"
 " autofocus="autofocus"
 " novalidate="novalidate"
 " required="required"
-" <input type="email"/>
-" <input type="url"/>
-" <input type="number" min="0" max="10" step="2" value="6"/> Spinbox
-" <input type="range" min="0" max="10" step="2" value="6"/> Slider
-" <input type="date, datetime, datetime-local, month, week, time"/>
-" <input type="search"/>
-" <input type="color"/>
-imap <buffer> <Leader>fh <input type="hidden" name="" value=""/>B`n a
-imap <buffer> <Leader>fs <input type="submit" value=""/>hhi
-imap <buffer> <Leader>fr <input type="radio" name="" value=""/>B`n a
-imap <buffer> <Leader>fc <input type="checkbox" name="" value=""/>B`n a
-imap <buffer> <Leader>fb <input type="button" name="" value=""/>B`n a
+" <input type="email">
+" <input type="url">
+" <input type="number" min="0" max="10" step="2" value="6"> Spinbox
+" <input type="range" min="0" max="10" step="2" value="6"> Slider
+" <input type="date, datetime, datetime-local, month, week, time">
+" <input type="search">
+" <input type="color">
+imap <buffer> <Leader>fh <input type="hidden" name="" value="">B`n a
+imap <buffer> <Leader>fs <input type="submit" value="">hhi
+imap <buffer> <Leader>fr <input type="radio" name="" value="">B`n a
+imap <buffer> <Leader>fc <input type="checkbox" name="" value="">B`n a
+imap <buffer> <Leader>fb <input type="button" name="" value="">B`n a
 imap <buffer> <Leader>fx <textarea rows="6" cols="60"></textarea>bhhi
-imap <buffer> <Leader>fp <input type="password" name="" value="" maxlength="255"/>B`n a
+imap <buffer> <Leader>fp <input type="password" name="" value="" maxlength="255">B`n a
 
 imap <buffer> <Leader>bu <button></button>bba
 vmap <buffer> <Leader>bu `>a</button>`<i<button>
 
-imap <buffer> <Leader>im <img src="" alt=""/>Bhhi
+imap <buffer> <Leader>im <img src="" alt="">Bhhi
 
 imap <buffer> <Leader>ol <ol></ol>O
 imap <buffer> <Leader>ul <ul></ul>O
@@ -174,8 +174,8 @@ vmap <buffer> <Leader>ci `>a</cite>`<i<cite>
 imap <buffer> <Leader>df <dfn></dfn>bba
 vmap <buffer> <Leader>df `>a</dfn>`<i<dfn>
 
-imap <buffer> <Leader>hr <hr/>
-imap <buffer> <Leader>br <br/>
+imap <buffer> <Leader>hr <hr>
+imap <buffer> <Leader>br <br>
 
 imap <buffer> <Leader>ta :call TableMaker()<LEFT>
 imap <buffer> <Leader>ca <caption></caption>bhhi
@@ -186,7 +186,7 @@ imap <buffer> <Leader>td <td></td>bhhi
 vmap <buffer> <Leader>td `>a</td>`<i<td>
 imap <buffer> <Leader>th <th></th>bhhi
 imap <buffer> <Leader>cg <colgroup></colgroup>O
-imap <buffer> <Leader>co <col/>
+imap <buffer> <Leader>co <col>
 
 function! FindCurrentTag()
 	call search('<\|>', 'b')
