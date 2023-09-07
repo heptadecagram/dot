@@ -35,9 +35,9 @@ imap <buffer> <Leader>ht <!DOCTYPE html><html><head><title></title><meta ch
 " less buggy, error-prone, and expandable, but <expr> does not allow
 " cursor movement, which is part of what makes these so pleasant to use.
 "
-imap <buffer> <Leader>sc <script type="text/javascript"><!----></script>nO
+inoremap <buffer> <Leader>sc <script type="text/javascript"><!----></script>nO
 
-imap <buffer> <Leader>sy <style type="text/css"><!----></style>nO
+inoremap <buffer> <Leader>sy <style type="text/css"><!----></style>nO
 
 imap <buffer> <Leader>ln <link href="" rel="" type="">BBhhi
 
