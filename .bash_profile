@@ -1,4 +1,3 @@
-
 export TZ='America/New_York'
 export EDITOR='vim'
 export VISUAL='vim'
@@ -12,6 +11,8 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
 
+export PATH="$PATH:~/bin:/Libary/TeX/texbin"
+
 # go
 if [ -x "`which go 2>/dev/null`" ]; then
 	export GOPATH="~/src/go"
@@ -24,6 +25,12 @@ fi
 if [ -x "`which irb 2>/dev/null`" ]; then
 	export IRBRC="$XDG_CONFIG_HOME/irb/irbrc"
 fi
+
+# cargo
+if [ -d "$HOME/.cargo" ]; then
+	export PATH="$HOME/.cargo/bin:$PATH"
+fi
+# pyenv
 
 # jenv
 if [ -d "$HOME/.jenv" ]; then
@@ -57,3 +64,4 @@ fi
 if [ -a "$HOME/.local/`hostname`" ]; then
 	. ~/.local/`hostname`
 fi
+. "$HOME/.cargo/env"
