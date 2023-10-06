@@ -2,6 +2,10 @@ set disassembly-flavor intel
 set history save on
 
 
+define viewstack
+	gef config context.nb_lines_stack 100
+end
+
 define pgraph
 	set var $n = $arg0
 	while $n
