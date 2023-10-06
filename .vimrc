@@ -108,6 +108,11 @@ set title
 nnoremap do do]c
 nnoremap dp dp]c
 
+" Accidental C-U can now be undone, since C-G,u starts a new buffer modification
+inoremap <C-U> <C-G>u<C-U>
+" Alternatively, can recover a C-W or C-U in insert mode with (in command
+" mode) C-RC-R.
+
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
 vnoremap p "_dp
