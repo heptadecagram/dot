@@ -64,4 +64,3 @@ fi
 if [ -a "$HOME/.local/`hostname`" ]; then
 	. ~/.local/`hostname`
 fi
-. "$HOME/.cargo/env"
