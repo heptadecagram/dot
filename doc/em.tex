@@ -484,7 +484,9 @@
 \end{comment}
 
 \convention{CRASH}
-{Opponents have opened a strong 1\clubs. An non-major bid will show a two-suited hand of the same Color, RAnk, or SHape. Major overcalls show 5\ormore.}
+{Opponents have opened a strong 1\clubs.
+An non-major bid will show a two-suited hand of the same Color, RAnk, or SHape.
+Major overcalls show 5\ormore.}
 {
 \bidblock{\opponent{1\clubs}{16\ormore}{}{}}
 \response\bid{\double}{-}{4\ormore\clubs4\ormore\spades OR 4\ormore\diamonds4\ormore\hearts}{}
@@ -495,17 +497,27 @@
 }
 
 \convention{Modified DONT: Disturb Opponents' No Trump}
-{Opponents opened strong No Trump.}
+{Opponents opened strong (14\ormore\hcp) No Trump.
+Double with a six-card suit.
+With at least 5-4 in two suits, bid the lower suit.}
 {
 \bidblock{\opponent{1\notrump}{-}{-}{}}
 \overcall\bid{\double}{10\ormore}{6\ormore$x$}{}
 \response\overcall\bid{\pass}{15\ormore}{\balanced}{}
 \response\overcall\bid{2\clubs}{-}{-}{(relay)}
 \response\overcall\bid{2$y$}{8\ormore}{6\ormore$y$}{}
-\overcall\bid{2\clubs}{-}{5\ormore\major,5\ormore\clubs}{}
-\overcall\bid{2\diamonds}{-}{5\ormore\major,5\ormore\diamonds}{}
-\overcall\bid{2\hearts}{-}{5\ormore\spades,5\ormore\hearts}{}
+\overcall\bid{2\clubs}{-}{5\ormore\clubs,5\ormore\major}{}
+\response\overcall\bid{2\diamonds}{}{1\orless\clubs}{(relay)}
+\response\overcall\bid{2$y$}{}{6\ormore$y$}{}
+\response\overcall\forcebid{2\notrump}{}{}{}
+\overcall\bid{2\diamonds}{-}{5\ormore\diamonds,5\ormore\major}{}
+\response\overcall\bid{2\hearts}{}{1\orless\diamonds}{(relay)}
+\response\overcall\bid{2\spades}{}{6\ormore\spades}{}
+\response\overcall\forcebid{2\notrump}{}{}{}
+\overcall\bid{2\hearts}{-}{5\ormore\hearts,5\ormore\spades}{}
+\response\overcall\bid{2\spades}{}{1\orless\hearts}{}
 \overcall\bid{2\spades}{9\orless}{6\ormore\spades}{}
+\response\overcall\bid{3$y$}{}{1\orless\spades6\ormore$y$}{}
 \overcall\bid{2\notrump}{-}{5\ormore\diamonds,5\ormore\clubs}{}
 }
 
@@ -591,7 +603,7 @@
 \response\response\gamebid{3\spades}{-}{5\ormore\hearts4\spades}{(Smolen)}
 \response\response\forcebid{4\clubs}{}{}{(Gerber)}
 
-\response\bid{2\hearts}{-}{4\hearts,3\orless\spades}{}
+\response\bid{2\hearts}{-}{4\hearts}{}
 \response\response\bid{2\spades}{-}{5\ormore\clubs}{}
 \response\response\forcebid{3\clubs}{-}{5\ormore\diamonds}{}
 \response\response\forcebid{4\clubs}{}{}{(Gerber)}
