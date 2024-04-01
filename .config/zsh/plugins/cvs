@@ -1,0 +1,14 @@
+alias c='cvs'
+
+function _cvsprompt () {
+	if [ -d CVS ]; then
+		sed '$!N;s#\n#/#;s#$#\\\n#' CVS/Root CVS/Repository
+	fi
+}
+
+precmd_functions+=(_cvsprompt)
+
+function cvs-diff () {
+	_vc-diff 'cvs diff' "$@"
+}
+

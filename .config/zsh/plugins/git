@@ -1,0 +1,91 @@
+alias g='git'
+
+function _gitprompt() {
+	if git rev-parse --is-inside-work-dir >/dev/null 2>/dev/null; then
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}:"`git rev-parse --show-prefix`
+		git diff --quiet || branch="$branch*"
+
+		echo $branch
+	fi
+}
+
+precmd_functions+=(_gitprompt)
+
+function git-files-in-branch () {
+	if [ "$2" ]; then
+		git log --name-only --pretty=format: $1..$2 |  grep '.' | sort | uniq
+	elif [ "$1" ]; then
+		git log --name-only --pretty=format: master..$1 |  grep '.' | sort | uniq
+	else
+		git log --name-only --pretty=format: master.. |  grep '.' | sort | uniq
+	fi
+}
+
+function git-mark-branch-old () {
+	local branch
+	if [ "$1" ]; then
+		branch=$1
+	else
+		local branch=`git symbolic-ref HEAD 2>/dev/null`
+		branch="${branch#refs/heads/}"
+	fi
+
+	local first_letter=${branch:0:1}
+	git branch -m {$first_letter,`echo $first_letter | tr [:lower:] [:upper:]`}${branch#$first_letter};
+}
+
+
+function gd-branch () {
+	local from=$1
+	local branch=$2
+
+	if [ ! "$branch" ]; then
+		branch=$from
+		from=master
+	fi
+
+	for file in `git-files-in-branch $from $branch`; do
+		local_file=`git rev-parse --show-cdup`$file
+		if ! git rev-parse $branch:$file >/dev/null 2>/dev/null ; then
+			echo "Deleted File $file"
+		elif ! git rev-parse $from:$file >/dev/null 2>/dev/null ; then
+			echo "New File $file"
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git show $branch:$file > "$TEMP"
+			vim -g "$TEMP"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git show $from:$file > "$TEMP.original"
+			git diff $from..$branch -- "$local_file" | patch -so "$TEMP" "$TEMP.original"
+
+			vimdiff "$TEMP.original" "$TEMP"
+			rm -f "$TEMP" "$TEMP.original"
+		fi
+	done
+}
+
+function gd-choice () {
+	local branch=$1
+	shift
+
+	select file in `git-files-in-branch $branch`; do
+		file=`git rev-parse --show-cdup`$file
+		if [ ! -e "$file" ]; then
+			echo "File not found: $file"
+		else
+			TEMP=/tmp/tmp.$$.`basename $file`
+			git diff master..$branch "$file" | patch -so "$TEMP" "$file"
+			meld "$file" "$TEMP"
+			rm -f "$TEMP"
+		fi
+	done
+}
+
+function gd () {
+	_vc-diff 'git diff' "$@"
+}
+
+function gd-all () {
+	_vc-diff 'git diff --cached' `git status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
+}
