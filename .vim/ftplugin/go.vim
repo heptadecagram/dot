@@ -1,39 +1,36 @@
+vim9script
 
-if exists('b:loaded_golang')
-	finish
-endif
-let b:loaded_golang = 1
-
-function! Golang_gd(word)
-	call search('^func\( \+\| *([^()]*) *\)' . a:word, 'b')
-endfunction
-
-function! GolangFunctionList()
-	normal! mlgg
+def GolangFunctionList()
+	const saved = winsaveview()
+	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
 	setlocal buftype=nowrite
 	setlocal bufhidden=delete
 
-	call setline('.', '# Function List')
+	setline('.', '// Function List')
 	wincmd k
-	while search('^func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W')
-		normal! w"ryt{
+	while search('^func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W') > 0
+		normal! w"lyt{
 		wincmd j
-		call append('$', @r)
+		append('$', @l)
 		wincmd k
 	endwhile
-	normal 'l
+	winrestview(saved)
 
 	wincmd j
-	execute 'resize ' . line('$')
+	execute 'resize ' .. line('$')
 	setlocal nomodifiable
-	normal t
+	normal! j
 
-	map <silent> <buffer> <CR> ^f("lyb:q<CR>:call Golang_gd(@l)<CR>
-endfunction
+	map <silent> <buffer> <CR> ^f("lyb:q<CR>:silent call <SID>Golang_gd(@l)<CR>
+enddef
 
-nmap <silent> lf :call GolangFunctionList()<CR>
+nmap <silent> lf :silent call <SID>GolangFunctionList()<CR>
 
-"autocmd BufWritePost *.go :silent Fmt
+def Golang_gd(word: string)
+	search('^func\( \+\| *([^()]*) *\)' .. word, 'b')
+enddef
+
+#autocmd BufWritePost *.go :silent Fmt

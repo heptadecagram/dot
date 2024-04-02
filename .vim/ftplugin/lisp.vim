@@ -1,3 +1,4 @@
+vim9script
 
 setlocal showmatch
 setlocal expandtab

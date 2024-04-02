@@ -117,7 +117,7 @@ inoremap <C-U> <C-G>u<C-U>
 " text is lost and it only works for putting the current register.
 vnoremap p "_dp
 
-set rtp+=$GOROOT/misc/vim
+set runtimepath+=$GOROOT/misc/vim
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -125,8 +125,6 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
-
-set runtimepath+=$GOROOT/misc/vim
 
 highlight SignColumn ctermbg=NONE
 
@@ -137,13 +135,6 @@ function NewProgramHeader()
 	endif
 
 	setlocal formatoptions+=cr
-
-	let s:comment = matchstr(&comments, '\(\_^\|,\):\zs[^,]\+')
-	if &syntax == 'c' || &syntax == 'css'
-		let s:comment = '/*'
-	elseif &syntax == 'python'
-		let s:comment = '#'
-	endif
 
 	if &syntax == 'html'
 		normal i`ht
@@ -194,11 +185,7 @@ function NewProgramHeader()
 
 		" Modules get a package name automatically
 		if -1 < match(expand('%'), '\.pm$')
-			let s:module_name = substitute(
-						\ exists('g:Project_Path') ?
-							\ substitute(expand('%:p'), g:Project_Path, '', '') :
-							\ expand('%'),
-						\ '/', '::', 'g')
+			let s:module_name = substitute(expand('%'), '/', '::', 'g')
 			let s:module_name = strpart(s:module_name, 0, strlen(s:module_name) - 3)
 			execute 'normal :2ipackage ' . s:module_name . ';Go1;n'
 		endif
@@ -223,10 +210,6 @@ if has("autocmd")
 			\ endif
 
 
-	autocmd BufEnter *.go set filetype=go
-	autocmd BufEnter *.rs set filetype=rust
-	autocmd BufEnter *.asc set filetype=asciidoc|set tw=80
-
 	autocmd BufEnter /tmp/* set nobackup|set nowritebackup
 
 	autocmd BufRead *   silent! %s/[\r \t]\+$//
@@ -244,9 +227,8 @@ endfunction
 inoremap <Tab> <C-R>=TabComplete()<CR>
 
 function! SyntaxItem()
-	return synIDattr(synID(line("."),col("."),1),"name")
+	return synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
 
 " Shuffle a range of lines
-command -range Shuffle :<line1>,<line2>!perl -MList::Util=shuffle -e'print shuffle(<>)'
-
+command -range Shuffle :<line1>,<line2>!sort -R

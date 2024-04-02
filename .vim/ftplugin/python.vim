@@ -1,3 +1,4 @@
+vim9script
 
 setlocal tabstop=4
 setlocal softtabstop=4
@@ -7,36 +8,35 @@ setlocal smarttab
 setlocal expandtab
 setlocal smartindent
 
-nmap <silent> gd "lyiw :call Python_gd(@l)<CR>
+def Python_gd(word: string)
+	search('\<def\> ' .. word .. '\>', 'b')
+enddef
+nmap <silent> gd "lyiw :silent call <SID>Python_gd(@l)<CR>
 
-function! Python_gd(word)
-	call search('\<def\> ' . a:word . '\>', 'b')
-endfunction
-
-nmap <silent> lf :call PythonFunctionList()<CR>
-
-function! PythonFunctionList()
-	normal mlgg
+def PythonFunctionList()
+	const saved = winsaveview()
+	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
 	setlocal buftype=nowrite
 	setlocal bufhidden=delete
 
-	call setline('.', '# Function List')
+	setline('.', '# Function List')
 	wincmd k
-	while search('\<def\s\+\w\+', 'W')
-		normal w"rY
+	while search('\<def\s\+\w\+', 'W') > 0
+		normal w"lY
 		wincmd j
-		call append('$', @r)
+		append('$', @l)
 		wincmd k
 	endwhile
-	normal 'l
+	winrestview(saved)
 
 	wincmd j
-	execute 'resize ' . line('$')
+	execute 'resize ' .. line('$')
 	setlocal nomodifiable
-	normal t
+	normal! j
 
-	map <silent> <buffer> <CR> "lyiw:q<CR>:call Python_gd(@l)<CR>
-endfunction
+	map <silent> <buffer> <CR> "lyiw:q<CR>:silent call <SID>Python_gd(@l)<CR>
+enddef
+nmap <silent> lf :silent call <SID>PythonFunctionList()<CR>

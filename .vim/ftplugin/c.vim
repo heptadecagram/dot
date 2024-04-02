@@ -1,3 +1,4 @@
+vim9script
 
 inoremap <buffer> #I #include <.h>hhi
 inoremap <buffer> #i #include ".h"hhi
@@ -7,38 +8,39 @@ inoremap <buffer> #f #ifdef<SPACE>
 inoremap <buffer> #e #else<SPACE>
 inoremap <buffer> #n #endif<SPACE>
 
-nmap <silent> lf :call CFunctionList()<CR>
-nmap <silent> gd "lyiw :call C_gd(@l)<CR>
-
-function! C_gd(word)
-	call search('^\S.*\<' . a:word . '\>(.*)$', 'b')
-endfunction
-
-function! CFunctionList()
-	normal mlgg
+def CFunctionList()
+	const saved = winsaveview()
+	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
 	setlocal buftype=nowrite
 	setlocal bufhidden=delete
 
-	call setline('.', '// Function List')
+	setline('.', '// Function List')
 	wincmd k
-	while search('^\S.*\(\S*\)(.*)$', 'W')
-		normal $%b"ryiw
-		if @r == '{'
+	while search('^\S.*\(\S*\)(.*)$', 'W') > 0
+		normal $%b"lyiw
+		if @l == '{'
 			continue
 		endif
 		wincmd j
-		call append('$', @r)
+		append('$', @l)
 		wincmd k
 	endwhile
-	normal 'l
+	winrestview(saved)
 
 	wincmd j
-	execute 'resize ' . line('$')
+	execute 'resize ' .. line('$')
 	setlocal nomodifiable
-	normal t
+	normal! j
 
-	map <silent> <buffer> <CR> "lyiw:q<CR>:call C_gd(@l)<CR>
-endfunction
+	map <silent> <buffer> <CR> "lyiw:q<CR>:silent call <SID>C_gd(@l)<CR>
+enddef
+nmap <silent> lf :silent call <SID>CFunctionList()<CR>
+
+def C_gd(word: string)
+	search('^\S.*\<' .. word .. '\>(.*)$', 'b')
+enddef
+
+nmap <silent> gd "lyiw :silent call <SID>C_gd(@l)<CR>

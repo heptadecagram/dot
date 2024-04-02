@@ -1,9 +1,13 @@
+vim9script
 
 setlocal sw=3
 setlocal ts=3
 setlocal noet
 
-let mapleader='"'
+#setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
+setlocal makeprg=xelatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
+
+g:mapleader = '"'
 
 inoremap <buffer> <Leader>c	\chapter{}<LEFT>
 vnoremap <buffer> <Leader>c	<ESC>`>a}<ESC>`<i\chapter{<ESC>
@@ -15,13 +19,11 @@ inoremap <buffer> <Leader>s	\subsection{}<LEFT>
 vnoremap <buffer> <Leader>s	<ESC>`>a}<ESC>`<i\subsection{<ESC>
 
 inoremap <buffer> <Leader>e	\begin{enumerate}\end{enumerate}<UP>
-" TODO: Make each non-blank line that doesn't start with \item get prepended
-" with \item
+# TODO: Make each non-blank line that doesn't start with \item get prepended with \item
 vnoremap <buffer> <Leader>e	<ESC>`>o\end{enumerate}<ESC>`<O\begin{enumerate}<ESC>0
 
 inoremap <buffer> <Leader>i	\begin{itemize}\end{itemize}<UP>
-" TODO: Make each non-blank line that doesn't start with \item get prepended
-" with \item
+# TODO: Make each non-blank line that doesn't start with \item get prepended with \item
 vnoremap <buffer> <Leader>i	<ESC>`>o\end{itemize}<ESC>`<O\begin{itemize}<ESC>0
 
 inoremap <buffer> <Leader>d	\begin{description}\end{description}<UP>
@@ -29,9 +31,10 @@ inoremap <buffer> <Leader>d	\begin{description}\end{description}<UP>
 inoremap <buffer> <Leader>t	\begin{tabular}{}\end{tabular}<UP><UP><RIGHT><RIGHT><RIGHT>
 inoremap <buffer> <Leader>T	\begin{table}\end{table}<UP>
 
-nmap <silent> lf :call TexFunctionList()<CR>
-function! TexFunctionList()
-	normal mlgg
+nmap <buffer> <silent> lf :silent call <SID>TexFunctionList()<CR>
+def TexFunctionList()
+	const saved = winsaveview()
+	:0
 	leftabove vnew
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -39,35 +42,28 @@ function! TexFunctionList()
 	setlocal bufhidden=delete
 
 	call setline('.', '% Section List')
+	var max_length = strlen(getline('.'))
 	wincmd l
-	while search('\\\zs\%(sub\)*\%(section\|chapter\)\>', 'W')
-		normal "gywf{"ry%
+
+	while search('\\\zs\%(sub\)*\%(section\|chapter\)\>', 'W') > 0
+		normal! "lywf{"ry%
 		wincmd h
-		call append('$', substitute(substitute(substitute(@g, 'chapter', '', ''), 'section', "\t", ''), 'sub', "\t", 'g') . @r[1:-2])
+		append('$', substitute(substitute(substitute(@l, 'chapter', '', ''), 'section', ' ', ''), 'sub', ' ', 'g') .. @r[1 : -2])
+		max_length = max([max_length, strlen(getline('$'))])
 		wincmd l
 	endwhile
-	normal 'l
+	winrestview(saved)
 
 	wincmd h
 
-	silent %s/\t/  /g
-	silent %yank
-	silent %!awk '{x = (length > x ? length : x)}; END {print x+1}'
-	silent put
-	silent 1delete
-
-	execute 'vert resize ' . @"[:-2]
+	execute 'vert resize ' .. (1 + max_length)
 
 	setlocal nomodifiable
-	normal t
+	normal! j
 
-	map <silent> <buffer> <CR> ^"lY:q<CR>:call Tex_gd(@l)<CR>
-endfunction
+	map <silent> <buffer> <CR> ^"lY:q<CR>:silent call <SID>Tex_gd(@l)<CR>
+enddef
 
-function! Tex_gd(section)
-	call search('\\\%(sub\)*\%(section\|chapter\){' . escape(a:section, '\\') . '}', 'b')
-endfunction
-
-"setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
-setlocal makeprg=xelatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
-
+def Tex_gd(section: string)
+	search('\\\%(sub\)*\%(section\|chapter\){' .. escape(section, '\\') .. '}', 'b')
+enddef
