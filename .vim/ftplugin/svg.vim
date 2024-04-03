@@ -170,3 +170,29 @@ def g:BoundingRect()
 	put l
 	setreg('l', old_l)
 enddef
+
+function g:DeltaX(amt) range
+	let saved = winsaveview()
+	call cursor(a:firstline, 1)
+	while search('\<x.\?=', 'ecW', a:lastline) > 0
+		if a:amt > 0
+			execute 'normal ' .. a:amt .. ''
+		else
+			execute 'normal ' .. -a:amt .. ''
+		endif
+	endwhile
+	call winrestview(saved)
+endfunction
+
+function g:DeltaY(amt) range
+	let saved = winsaveview()
+	call cursor(a:firstline, 1)
+	while search('\<y.\?=', 'ecW', a:lastline) > 0
+		if a:amt > 0
+			execute 'normal ' .. a:amt .. ''
+		else
+			execute 'normal ' .. -a:amt .. ''
+		endif
+	endwhile
+	call winrestview(saved)
+endfunction
