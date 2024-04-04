@@ -10,7 +10,6 @@ inoremap <buffer> #n #endif<SPACE>
 
 def CFunctionList()
 	const saved = winsaveview()
-	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -19,6 +18,8 @@ def CFunctionList()
 
 	setline('.', '// Function List')
 	wincmd k
+
+	cursor(0, 0)
 	while search('^\S.*\(\S*\)(.*)$', 'W') > 0
 		normal $%b"lyiw
 		if @l == '{'

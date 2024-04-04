@@ -8,7 +8,6 @@ setlocal makeprg=asciidoctor-pdf\ \"%\"
 
 def AsciidocSectionList()
 	const saved = winsaveview()
-	:0
 	leftabove vnew
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -19,6 +18,7 @@ def AsciidocSectionList()
 	var max_length = strlen(getline('.'))
 	wincmd l
 
+	cursor(0, 0)
 	while search('^=', 'cW') > 0
 		normal! "ly$j
 		wincmd h

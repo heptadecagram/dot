@@ -15,7 +15,6 @@ nmap <silent> gd "lyiw :silent call <SID>Python_gd(@l)<CR>
 
 def PythonFunctionList()
 	const saved = winsaveview()
-	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -24,6 +23,8 @@ def PythonFunctionList()
 
 	setline('.', '# Function List')
 	wincmd k
+
+	cursor(0, 0)
 	while search('\<def\s\+\w\+', 'W') > 0
 		normal w"lY
 		wincmd j

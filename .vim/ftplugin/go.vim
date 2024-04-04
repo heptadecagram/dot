@@ -2,7 +2,6 @@ vim9script
 
 def GolangFunctionList()
 	const saved = winsaveview()
-	:0
 	belowright new
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -11,6 +10,8 @@ def GolangFunctionList()
 
 	setline('.', '// Function List')
 	wincmd k
+
+	cursor(0, 0)
 	while search('^func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W') > 0
 		normal! w"lyt{
 		wincmd j

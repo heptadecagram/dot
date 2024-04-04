@@ -34,7 +34,6 @@ inoremap <buffer> <Leader>T	\begin{table}\end{table}<UP>
 nmap <buffer> <silent> lf :silent call <SID>TexFunctionList()<CR>
 def TexFunctionList()
 	const saved = winsaveview()
-	:0
 	leftabove vnew
 
 	setlocal noreadonly modifiable noswapfile nowrap
@@ -45,6 +44,7 @@ def TexFunctionList()
 	var max_length = strlen(getline('.'))
 	wincmd l
 
+	cursor(0, 0)
 	while search('\\\zs\%(sub\)*\%(section\|chapter\)\>', 'W') > 0
 		normal! "lywf{"ry%
 		wincmd h

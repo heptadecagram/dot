@@ -41,7 +41,8 @@ vmap <buffer> <Leader>te `>a</text>`<i<text x="" y="">
 
 
 imap <buffer> <Leader>re <rect x="" y="" width="" height=""/>BBBBhhi
-imap <buffer> <Leader>ci <circle x="" y="" width="" height=""/>BBBhhi
+imap <buffer> <Leader>ci <circle x="" y="" r=""/>BBBhhi
+imap <buffer> <Leader>el <ellipse x="" y="" rx="" ry=""/>BBBBhhi
 imap <buffer> <Leader>li <line x1="" y1="" x2="" y2="" stroke="black"/>BBBBhhi
 imap <buffer> <Leader>us <use x="" y="" href=""/>BBhhi
 
@@ -120,12 +121,14 @@ enddef
 
 def SVGAttribute(attribute: string)
 	const optionValues = {
-		alignment-baseline: ['baseline', 'text-before-edge', 'middle', 'central', 'text-after-edge',
-			'ideographic', 'alphabetic', 'hanging', 'mathematical', 'top', 'center', 'bottom'],
+		alignment-baseline: ['auto', 'alphabetic', 'baseline', 'bottom', 'center', 'central', 'hanging',
+			'ideographic', 'middle', 'mathematical', 'text-after-edge', 'text-before-edge', 'top'], # 'after-edge', 'before-edge',
 		fill: ['none', 'black', 'silver', 'gray', 'white', 'maroon', 'red', 'purple', 'fuchsia',
 			'green', 'lime', 'olive', 'yellow', 'navy', 'blue', 'teal', 'aqua'], #, 'context-fill', 'context-stroke'],
 		stroke: ['none', 'black', 'silver', 'gray', 'white', 'maroon', 'red', 'purple', 'fuchsia',
 			'green', 'lime', 'olive', 'yellow', 'navy', 'blue', 'teal', 'aqua'], #, 'context-fill', 'context-stroke'],
+		stroke-linecap: ['butt', 'round', 'square'],
+		stroke-linejoin: ['miter', 'arcs', 'bevel', 'miter-clip', 'round'],
 		text-anchor: ['start', 'middle', 'end'],
 	}
 
@@ -160,14 +163,14 @@ enddef
 
 def g:BoundingRect()
 	const old_l = getreginfo('l')
-	normal! /svg/viewBox/e3WW"lyw
+	normal! /svg/viewBox/e3WW"lye
 	const width = @l
-	normal! W"lyw/>
+	normal! W"lye/>
 	const height = @l
-	@l = '<rect id="BoundingBox" x="0" y="0" width="' .. width .. '" height="' .. height ..
-		'" stroke="blue" fill="none"/>'
+	setreg('l', '<rect id="BoundingBox" x="0" y="0" width="' .. width .. '" height="' .. height ..
+		'" stroke="blue" fill="none"/>', 'l')
 
-	put l
+	normal! j"l]P
 	setreg('l', old_l)
 enddef
 
