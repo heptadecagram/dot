@@ -18,7 +18,7 @@ alias home='ssh home'
 
 alias maketexclean="find . -name '*aux' -delete -or -name '*log' -delete -or -name '*pdf' -delete -or -name '*toc' -delete -or -name '*out' -delete"
 
-HISTFILE="$ZDOTDIR/zsh_history"
+HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 function precmd() {
 	echo
