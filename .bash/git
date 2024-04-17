@@ -1,4 +1,3 @@
-
 alias g='git'
 
 _git_saved_prompt="$PROMPT_COMMAND"
@@ -91,11 +90,11 @@ gd-all () {
 	_vc-diff 'git diff --cached' `git status | sed -ne's/^#\s*\S*:\s*//p;/^# Changed/q'`
 }
 
-if [[ $(type -t _completion_loader) == function ]]; then
-	_completion_loader git
-	complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+if complete -p git >/dev/null 2>/dev/null; then
+	# Get this completion to be aliased to g
+	local completion="`complete -p git`"
+	${completion%it}
 else
-#if complete -p git >/dev/null 2>/dev/null; then
 	_git () {
 		local current=$2
 		local ACTIONS='add am annotate apply archive bisect blame branch bundle
@@ -113,10 +112,11 @@ else
 		pull push quiltimport read-tree rebase receive-pack reflog relink remote
 		repack repo-config request-pull rerere reset revent rev-list rev-parse rm
 		send-pack shell shortlog show show-branch show-index show-ref sh-setup stash
-		status stripspace submodule svn symbolic-ref tag tar-tree unpack-file
+		status stripspace submodule svn switch symbolic-ref tag tar-tree unpack-file
 		unpack-objects update-index update-ref update-server-info upload-archive
 		upload-pack var verify-pack verify-tag whatchanged write-tree'
 
+		local FLAGS='-v -h -C -c -p -P'
 		local OPTIONS='--bare --exec-path= --git-dir= --help --no-pager --paginate --work-tree= --version'
 
 		local index=1
@@ -133,18 +133,14 @@ else
 		# Default to the list of files available
 		COMPREPLY=(`compgen -o filenames -X '.git' -f -- "$current"`)
 
-		# If a full command was not found, then complete on that command or option
-		if [ -z "$current_action" ]; then
-			if [ "${current##-*}" ]; then
-				COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
-			elif [ "${current##--*}" ]; then
-				COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
-			else
-				COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
-			fi
-		fi
-
 		case "$current_action" in
+			'')
+				case "$current" in
+					--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+					-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+					*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+				esac
+				;;
 			branch) _git-branch "$@" ;;
 			checkout) _git-checkout "$@" ;;
 			commit) _git-commit "$@" ;;
@@ -155,9 +151,11 @@ else
 			rebase) _git-rebase "$@" ;;
 			remote) _git-remote "$@" ;;
 			submodule) _git-submodule "$@" ;;
+			switch) _git_branch_completion 1 ;;
 		esac
 	}
-	complete -o filenames -F _git git g
+	complete -o filenames -F _git git
+	complete -o filenames -F _git g
 
 	_git_branch_completion () {
 		local showall=$1
@@ -217,7 +215,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-checkout git-checkout git-merge
 
 	_git-commit () {
 		local command=$1
@@ -238,7 +235,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-commit git-commit
 
 	_git-branch () {
 		local current=$2
@@ -268,7 +264,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-branch git-branch
 
 	_git-diff () {
 		local current=$2
@@ -317,60 +312,43 @@ else
 			_git_branch_completion 1 "$actual_current"
 			COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
 			;;
-		--*)
-			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
-			;;
-		-*)
-			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
-			;;
-		esac
-
-	}
-	complete -o default -F _git-diff git-diff
-
-	_git-branch () {
-		local current="${COMP_WORDS[COMP_CWORD]}"
-		local previous=$3
-		local commands='add rm prune show update'
-
-		local FLAGS='-a -b -B -C -l -M -p -O -R -S: -u -U: -w -z'
-		local OPTIONS='--abbrev --abbrev= --binary --check --color --color-words --color-words= --decorate --diff-filter= --dirstat-by-file
-		--dirstat-by-file= --dirstat --dirstat= --dst-prefix= --exit-code --ext-diff --find-copies-harder --follow --full-diff --full-index
-		--ignore-all-space --ignore-space-at-eol --ignore-space-change --ignore-submodules --inter-hunk-context= --log-size --name-only
-		--name-status --no-color --no-ext-diff --no-prefix --no-renames --numstat --patch-with-raw --patch-with-stat --patience --pickaxe-all
-		--pickaxe-regex --quiet --raw --relative --relative= --shortstat --source --src-prefix= --stat --stat= --summary --text --unified='
-
-		for param in "${COMP_WORDS[@]}"; do
-			if [ "$param" = '-' ]; then
-				COMPREPLY=(`compgen -o filenames -- "$current"`)
-				return
-			elif [ "$param" = "$current" ]; then
-				break
-			fi
-		done
-
-		case "$current" in
-		*[^/]..)
-			# If this doesn't look like a filename, but rather a branch..branch format,
-			# complete with branch names
-			# TODO Allow for all specifiable revisions in git-rev-parse
-			_git_branch_completion 1 ""
-			COMPREPLY=(`compgen -P "$current" -W "${COMPREPLY[*]}" -- ""`)
-			;;
-		*..[[:alnum:]]*)
-			local actual_current=${current##*..}
-			_git_branch_completion 1 "$actual_current"
-			COMPREPLY=(`compgen -P "${current%..*}.." -W "${COMPREPLY[*]}" -- "$actual_current"`)
-			;;
 		--date=*)
 			COMPREPLY=(`compgen -W "relative iso8601 rfc2822 short local default" -- "${current##--date=}"`)
 			;;
 		--pretty=*)
 			COMPREPLY=(`compgen -W "oneline short medium full fuller email raw" -- "${current##--pretty=}"`)
 			;;
-		--diff-filter=*)
-			COMPREPLY=(`compgen -W "A B C D M R T U X" -- "${current##--diff-filter=*}"`)
+		--*)
+			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
 			;;
+		-*)
+			COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`)
+			;;
+		esac
+
+	}
+
+	_git-branch () {
+		local current="${COMP_WORDS[COMP_CWORD]}"
+		local previous=$3
+		local commands='add rm prune show update'
+
+		local FLAGS='-v -q -t -u -r'
+		local OPTIONS='--verbose --quiet --track= --set-upstream-to=
+		--unset-upstream --color --remotes --contains --no-contains --abbrev'
+
+		if [ "$current" != '-' ]; then
+			for param in "${COMP_WORDS[@]}"; do
+				if [ "$param" == '-' ]; then
+					COMPREPLY=(`compgen -o filenames -f -- "$current"`)
+					return
+				elif [ "$param" == "$current" ]; then
+					break
+				fi
+			done
+		fi
+
+		case "$current" in
 		--*)
 			COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
 			;;
@@ -379,7 +357,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-branch git-branch
 
 	_git-format-patch () {
 		local current=$2
@@ -419,7 +396,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-format-patch git-format-patch
 
 	_git-log () {
 		local current="${COMP_WORDS[COMP_CWORD]}"
@@ -468,7 +444,6 @@ else
 			# TODO Complete on files or branches?
 		esac
 	}
-	complete -o default -F _git-log git-log
 
 	_git-rebase () {
 		local current=$2
@@ -489,7 +464,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-rebase git-rebase
 
 	_git-submodule () {
 		local current=$2
@@ -508,7 +482,6 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-submodule git-submodule
 
 	_git-remote () {
 		local current=$2
@@ -524,6 +497,5 @@ else
 			;;
 		esac
 	}
-	complete -o default -F _git-remote git-remote
 fi
 

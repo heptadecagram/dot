@@ -1,0 +1,248 @@
+alias d='docker'
+
+if complete -p docker >/dev/null 2>/dev/null; then
+	# Get this completion to be aliased to d
+	local completion="`complete -p docker`"
+	${completion%ocker}
+else
+	_docker () {
+		local command=$1
+		local current=$2
+		local previous=$3
+
+		# COMP_WORDS array of individual words in command line
+		# COMP_CWORD index in ${COMP_WORDS} of current cursor position
+		#
+		# COMP_LINE current command line
+		# COMP_POINT index of cursor relative within COMP_LINE
+		#
+		# COMP_TYPE TAB, '?', '!', '@', or '%'
+		# COMP_KEY Key used to invoke completion
+		local ACTIONS='run exec ps build pull push images login logout search
+		version info
+		builder buildx compose container context debug dev extension feedback
+		image init manifest network plugin sbom scout system trust volume
+		swarm
+		attach commit cp create diff events export history import inspect kill
+		load logs pause port rename restart rm rmi save start stats stop tag top
+		unpause update wait'
+
+		local FLAGS='-c -D -H -l -v'
+		local OPTIONS='--config= --context= --debug --host= --log-level= --tls
+		--tlscacert= --tlscert= --tlskey= --tlsverify --version'
+
+		local index=1
+		local current_action=
+		# Find the current action being taken
+		while [ $index -lt $COMP_CWORD ]; do
+			if [ "${COMP_WORDS[$index]##-*}" ]; then
+				current_action="${COMP_WORDS[$index]}"
+				break
+			fi
+			index=$(($index + 1))
+		done
+
+		# Default to the list of files available
+		COMPREPLY=(`compgen -o filenames -f -- "$current"`)
+
+		case "$current_action" in
+			'')
+				case "$current" in
+					--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+					-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+					*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+				esac
+				;;
+			build) _docker-build "$@" ;;
+			compose) _docker-compose "$@" ;;
+			container) _docker-container "$@" ;;
+			context) _docker-context "$@" ;;
+			debug) _docker-debug "$@" ;;
+			image) _docker-image "$@" ;;
+			network) _docker-network "$@" ;;
+
+			restart | rm | start | stop)
+				_docker_container_list 1
+				;;
+			history | load | rmi | run | save | sbom)
+				_docker_image_list
+				;;
+
+			volume) _docker-volume "$@" ;;
+		esac
+	}
+	complete -o filenames -F _docker docker
+	complete -o filenames -F _docker d
+
+	_docker_image_list () {
+		local showall=$1
+
+		local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+
+		if [ "$showall" ]; then
+			COMPREPLY=(`compgen -W "$(docker image ls -a --format '{{.ID}}\n{{.Repository}}')" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -W "$(docker image ls --format '{{.ID}}\n{{.Repository}}')" -- "$current"`)
+		fi
+	}
+
+	_docker_container_list () {
+		local showall=$1
+		local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+
+		if [ "$showall" ]; then
+			COMPREPLY=(`compgen -W "$(docker container ls -a --format '{{.ID}}\n{{.Names}}')" -- "$current"`)
+		else
+			COMPREPLY=(`compgen -W "$(docker container ls --format '{{.ID}}\n{{.Names}}')" -- "$current"`)
+		fi
+	}
+
+	_docker_context_list () {
+		local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+
+		COMPREPLY=(`compgen -W "$(docker context ls -q)" -- "$current"`)
+	}
+
+	_docker_volume_list () {
+		local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+
+		COMPREPLY=(`compgen -W "$(docker volume ls -q)" -- "$current"`)
+	}
+
+	_docker-build () {
+		local current=$2
+		local previous=$3
+		local FLAGS='-f -o -q -t'
+		local OPTIONS='--add-host= --allow= --annotation= --attest= --build-arg=
+		--build-context= --builder= --cache-from= --cache-to= --cgroup-parent=
+		--file= --iidfile= --label= --load --metadata-file= --network= --no-cache
+		--no-cache-filter= --output= --platform= --progress= --provenance=
+		--pull --push --quiet --sbom= --secret= --shm-size= --ssh= --tag=
+		--target= --ulimit='
+
+		case "$current" in
+		--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+		-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o filenames -f -- "$current"`) ;;
+		esac
+	}
+
+	_docker-compose () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='attach build config cp create down events exec images kill
+		logs ls pause port ps pull push restart rm run scale start stats stop top
+		unpause up version wait watch'
+		local FLAGS='-f -p'
+		local OPTIONS='--ansi --compatibility --dry-run --env-file --file
+		--parallel --profile --progress --project-directory --project-name'
+
+		case "$current" in
+		--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+		-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+		esac
+	}
+
+	_docker-container () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='attach commit cp create diff exec export inspect kill logs
+		ls pause port prune rename restart rm run start stats stop top unpause
+		update wait'
+
+		case "$previous" in
+			attach | commit | cp | diff | exec | export | inspect | kill | \
+				logs | pause | rename | restart | rm | start | stats | stop | \
+				top | unpause | update | wait)
+							_docker_container_list
+							;;
+						create | run)
+							_docker_image_list
+							;;
+						ls | prune)
+							COMPREPLY=()
+							;;
+						*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+					esac
+				}
+
+	_docker-context () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='create export import inspect ls rm show update use'
+
+		case "$previous" in
+				export | import | inspect | rm | update | use)
+							_docker_context_list
+							;;
+						create | ls)
+							COMPREPLY=()
+							;;
+						*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+					esac
+				}
+
+	_docker-debug () {
+		local current=$2
+		local previous=$3
+		local FLAGS='-c'
+		local OPTIONS='--command= --host= --preserve-user --privileged --shell= --version'
+
+		case "$current" in
+		--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+		-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+		*)
+			_docker_image_list
+			local images=("${COMPREPLY[@]}")
+			_docker_container_list
+			COMPREPLY+=("${images[@]}")
+			;;
+		esac
+	}
+
+	_docker-image () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='build history import inspect load ls prune pull push rm
+		save tag'
+
+		case "$previous" in
+			build | import)
+				COMPREPLY=(`compgen -o filenames -f -- "$current"`)
+				;;
+			load | ls | prune)
+				COMPREPLY=()
+				;;
+			history | inspect | pull | push | rm | save | tag)
+				_docker_image_list
+				;;
+			*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+		esac
+	}
+
+	_docker-network () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='connect create disconnect inspect ls prune rm'
+
+		case "$previous" in
+			*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+		esac
+	}
+
+	_docker-volume () {
+		local current=$2
+		local previous=$3
+		local ACTIONS='create inspect ls prune rm'
+
+		case "$previous" in
+			inspect | rm)
+				_docker_volume_list
+				;;
+			*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+		esac
+	}
+
+fi
+
