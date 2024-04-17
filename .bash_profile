@@ -1,15 +1,20 @@
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+export XDG_STATE_HOME=~/.local/state
+
 export TZ='America/New_York'
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less -X'
 
+
 shopt -s histappend
 export HISTCONTROL=ignoredups
 
-# XDG Base Directory Specification
-export XDG_CONFIG_HOME=~/.config
-export XDG_CACHE_HOME=~/.cache
-export XDG_DATA_HOME=~/.local/share
+HISTFILE="$XDG_STATE_HOME/bash/history"
+mkdir -p "${HISTFILE%/*}"
 
 export PATH="$PATH:~/bin:/Libary/TeX/texbin"
 
