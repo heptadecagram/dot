@@ -5,7 +5,7 @@ setlocal ts=3
 setlocal noet
 
 #setlocal errorformat=%f:%l:\ %m,%f:%l-%\\d%\\+:\ %m
-setlocal makeprg=xelatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
+setlocal makeprg=pdflatex\ -shell-escape\ -interaction\ nonstopmode\ \"%\"
 
 g:mapleader = '"'
 
@@ -44,7 +44,7 @@ def TexFunctionList()
 	var max_length = strlen(getline('.'))
 	wincmd l
 
-	cursor(0, 0)
+	cursor(1, 1)
 	while search('\\\zs\%(sub\)*\%(section\|chapter\)\>', 'W') > 0
 		normal! "lywf{"ry%
 		wincmd h

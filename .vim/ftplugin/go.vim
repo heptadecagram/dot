@@ -11,7 +11,7 @@ def GolangFunctionList()
 	setline('.', '// Function List')
 	wincmd k
 
-	cursor(0, 0)
+	cursor(1, 1)
 	while search('^func\( \+\| *([^()]*) *\)\([^ ()]\+\)', 'W') > 0
 		normal! w"lyt{
 		wincmd j

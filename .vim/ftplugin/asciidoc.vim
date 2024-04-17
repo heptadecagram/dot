@@ -18,7 +18,7 @@ def AsciidocSectionList()
 	var max_length = strlen(getline('.'))
 	wincmd l
 
-	cursor(0, 0)
+	cursor(1, 1)
 	while search('^=', 'cW') > 0
 		normal! "ly$j
 		wincmd h

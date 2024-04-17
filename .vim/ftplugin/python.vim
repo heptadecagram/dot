@@ -24,7 +24,7 @@ def PythonFunctionList()
 	setline('.', '# Function List')
 	wincmd k
 
-	cursor(0, 0)
+	cursor(1, 1)
 	while search('\<def\s\+\w\+', 'W') > 0
 		normal w"lY
 		wincmd j

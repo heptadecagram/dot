@@ -19,7 +19,7 @@ def CFunctionList()
 	setline('.', '// Function List')
 	wincmd k
 
-	cursor(0, 0)
+	cursor(1, 1)
 	while search('^\S.*\(\S*\)(.*)$', 'W') > 0
 		normal $%b"lyiw
 		if @l == '{'
