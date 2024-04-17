@@ -1,0 +1,102 @@
+
+_VBoxManage () {
+	local command=$1
+	local current=$2
+	local previous=$3
+	local FLAGS='-V -q'
+	local OPTIONS='--version --dump-build-type --nologo --settingspw= --settingspwfile='
+	local ACTIONS='list showvminfo registervm unregistervm createvm modifyvm
+	clonevm import export startvm controlvm discardstate adoptstate snapshot
+	closemedium storageattach storagectl bandwidthctl showmediuminfo createmedium
+	modifymedium clonemedium mediumproperty encryptmedium checkmediumpwd
+	convertfromraw getextradata setextradata setproperty usbfilter sharedfolder
+	guestproperty guestcontrol debugvm metrics natnetwork hostonlyif dhcpserver'
+
+	local index=1
+	local current_action=
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			current_action="${COMP_WORDS[$index]}"
+			break
+		fi
+		index=$(($index + 1))
+	done
+
+	# Default to list of actions
+	COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+
+	case "$current_action" in
+		'')
+			case "$current" in
+				--*) COMPREPLY=(`compgen -W "$OPTIONS" -- "$current"`) ;;
+				-*) COMPREPLY=(`compgen -W "$FLAGS" -- "$current"`) ;;
+				*) COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+			esac
+			;;
+		list) _vbox-list "$@" ;;
+		startvm) _vbox-startvm "$@" ;;
+		controlvm) _vbox-controlvm "$@" ;;
+	esac
+}
+complete -o default -F _VBoxManage VBoxManage
+
+_vbox_vm_completion () {
+	local current
+	if [ "$2" ]; then
+		current=$2
+	else
+		current=${COMP_WORDS[COMP_CWORD]}
+	fi
+
+	COMPREPLY=(`compgen -W "$(VBoxManage list vms | sed -e's/"//' -e's/".*//')" -- "$current"`)
+}
+
+_vbox-controlvm () {
+	local current=$2
+	local previous=$3
+
+	local SUBCOMMANDS='pause resume reset poweroff savestate acpipowerbutton acpisleepbutton keyboardputscancode keyboardputstring keyboardputfile setlinkstate1 setlinkstate2 setlinkstate3 setlinkstate4 nic1 nic2 nic3 nic4 nictrace1 nictrace2 nictrace3 nictrace4 nictracefile1 nictracefile2 nictracefile3 nictracefile4 nicproperty1 nicproperty2 nicproperty3 nicproperty4 nicpromisc1 nicpromisc2 nicpromisc3 nicpromisc4 natpf1 natpf2 natpf3 natpf4 natpf1 natpf2 natpf3 natpf4 guestmemoryballoon usbattach usbdetach audioin audioout clipboard draganddrop vrde vrdeport vrdeproperty vrdevideochannelquality setvideomodehint screenshotpng videocap videocapscreens videocapfile videocapres videocaprate videocapfps videocapmaxtime videocapmaxsize setcredentials teleport plugcpu unplugcpu cpuexecutioncap webcam addencpassword removeencpassword removeallencpasswords'
+
+	if [ "$previous" = "controlvm" ]; then
+		_vbox_vm_completion "$@"
+		return
+	fi
+
+	case "$current" in
+	*)
+		COMPREPLY=(`compgen -o default -W "$SUBCOMMANDS" -- "$current"`)
+		;;
+	esac
+}
+
+_vbox-list () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--long --sorted'
+	local FLAGS='-l -s'
+	local SUBCOMMANDS='vms runningvms ostypes hostdvds hostfloppies intnets bridgedifs hostonlyifs natnets dhcpservers hostinfo hostcpuids hddbackends hdds dvds floppies usbhost usbfilters systemproperties extpacks groups webcams screenshotformats'
+
+	case "$current" in
+		--*) COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`) ;;
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o default -W "$SUBCOMMANDS" -- "$current"`) ;;
+	esac
+}
+
+_vbox-startvm () {
+	local current=$2
+	local previous=$3
+
+	local OPTIONS='--type='
+
+	case "$current" in
+	--*)
+		COMPREPLY=(`compgen -o default -W "$OPTIONS" -- "$current"`)
+		;;
+	*)
+		_vbox_vm_completion
+		;;
+	esac
+}
