@@ -186,7 +186,7 @@
 \response\forcebid{2\clubs}{11\ormore\hcp}{}{(G. Stayman)}
 \response\forcebid{2\diamonds}{-}{5\ormore\hearts}{(Transfer)}
 \response\forcebid{2\hearts}{-}{5\ormore\spades}{(Transfer)}
-\response\gamebid{2\spades}{11\ormore}{4\ormore\clubs4\ormore\diamonds}{(M. Stayman)}
+\response\gamebid{2\spades}{11\ormore}{3\orless\hearts3\orless\spades}{(M. Stayman)}
 \response\bid{2\notrump}{}{6\ormore\clubs}{}
 \response\forcebid{3$x$}{-}{-}{(Blackwood)}
 \response\forcebid{4$x$}{-}{-}{(X Blackwood)}
@@ -221,7 +221,7 @@
 \begin{tabular}{llll}
 \key
 
-\bidblock{\bid{2\diamonds}{5-10\hcp}{6\diamonds}{}}
+\bidblock{\bid{2\diamonds}{5-10\hcp}{5-6\diamonds}{}}
 \response\forcebid{2\notrump}{-}{-}{Feature Req.}
 \response\response\bid{3\diamonds}{-}{-}{}
 \response\response\bid{3$x$}{8-10\hcp}{A$x$}{}
@@ -229,12 +229,12 @@
 \response\forcebid{4\clubs}{-}{-}{(Blackwood)}
 \response\bid{4\diamonds}{-}{4\ormore\diamonds}{}
 
-\bidblock{\bid{2\hearts}{5-10\hcp}{6\hearts}{}}
+\bidblock{\bid{2\hearts}{5-10\hcp}{5-6\hearts}{}}
 \response\forcebid{2\notrump}{15\ormore}{2\ormore\hearts}{(Ogust)}
 \response\bid{3\hearts}{-}{3\hearts}{}
 \response\forcebid{4\clubs}{-}{-}{(Blackwood)}
 
-\bidblock{\bid{2\spades}{5-10\hcp}{6\spades}{}}
+\bidblock{\bid{2\spades}{5-10\hcp}{5-6\spades}{}}
 \response\forcebid{2\notrump}{15\ormore}{2\ormore\spades}{(Ogust)}
 \response\bid{3\spades}{-}{3\spades}{}
 \response\forcebid{4\clubs}{-}{-}{(Blackwood)}
@@ -433,6 +433,131 @@
 			}
 		}
 
+
+		&
+
+		\vtop{
+			\null\hbox{
+				\begin{minipage}{0.24\textwidth}
+
+\convention{Extended Garbage Stayman}
+{I have at least one 4-card major, and my partner bid No Trump.  Do we have a fit? I start by bidding the next club.}
+{
+\bidblock{\bid{2\clubs}{11\ormore\hcp}{4\ormore\major/5\ormore\diamonds}{}}
+\response\bid{2\diamonds}{-}{3\orless\hearts,3\orless\spades}{}
+\response\response\bid{\pass}{-}{5\ormore\diamonds}{}
+\response\response\bid{2\major}{weak}{5\ormore\major}{}
+\response\response\bid{2\notrump}{11-13}{}{}
+\response\response\forcebid{3\clubs}{-}{5\ormore\major}{}
+\response\response\response\bid{3\diamonds}{-}{3\hearts3\spades}{}
+\response\response\response\bid{3\hearts}{-}{2\hearts3\spades}{}
+\response\response\response\bid{3\spades}{-}{3\hearts2\spades}{}
+\response\response\gamebid{3\hearts}{-}{4\hearts5\ormore\spades}{(Smolen)}
+\response\response\gamebid{3\spades}{-}{5\ormore\hearts4\spades}{(Smolen)}
+\response\response\forcebid{4\clubs}{}{}{(Gerber)}
+
+\response\bid{2\hearts}{-}{4\hearts}{}
+\response\response\bid{2\spades}{-}{5\ormore\clubs}{}
+\response\response\forcebid{3\clubs}{-}{5\ormore\diamonds}{}
+\response\response\forcebid{4\clubs}{}{}{(Gerber)}
+\response\bid{2\spades}{-}{4\spades,3\orless\hearts}{}
+\response\response\forcebid{3\clubs}{-}{5\ormore\diamonds}{}
+\response\response\bid{3\diamonds}{-}{5\ormore\clubs}{}
+\response\response\forcebid{4\clubs}{}{}{(Gerber)}
+}
+
+\convention{Minor Suit Stayman}
+{I don't have a 4\ormore-card major, and my partner bid No Trump.  Do we have a minor fit? I start by bidding the next spade.}
+{
+\bidblock{\gamebid{2\spades}{11\ormore}{3\orless\hearts3\orless\spades}{}}
+\response\bid{2\notrump}{strong}{3\orless\clubs3\orless\diamonds}{\major stoppers}
+\response\bid{3\clubs}{-}{4\ormore\clubs}{}
+\response\bid{3\diamonds}{-}{3\orless\clubs4\ormore\diamonds}{}
+\response\bid{3\hearts}{-}{}{\hearts stopper}
+\response\bid{3\spades}{-}{}{\spades stopper}
+\response\bid{3\notrump}{weak}{3\orless\clubs3\orless\diamonds}{\major stoppers}
+\response\bid{4\clubs}{strong}{4\ormore\clubs}{}
+\response\bid{4\diamonds}{strong}{3\orless\clubs4\ormore\diamonds}{}
+}
+
+\convention{Ogust}
+{My partner pre-empted a suit, and I have a strong hand.}
+{
+\bid{2$x$}{5-10\hcp}{6$x$}{}
+\response\forcebid{2\notrump}{15\ormore}{2\ormore$x$}{}
+\response\response\bid{3\clubs}{5-7}{1 of AKQ$x$}{}
+\response\response\bid{3\diamonds}{5-7}{2 of AKQ$x$}{}
+\response\response\bid{3\hearts}{8-10}{1 of AKQ$x$}{}
+\response\response\bid{3\spades}{8-10}{2 of AKQ$x$}{}
+\response\response\bid{3\notrump}{8-10}{3 of AKQ$x$}{}
+}
+
+				\end{minipage}
+			}
+		}
+
+		&
+
+		\vtop{
+			\null\hbox{
+				\begin{minipage}{0.24\textwidth}
+
+\convention{Drury}
+{I passed, then my partner opened a major $x$. Is their opening strong or weak? I bid 2\clubs{} to find out more.}
+{
+\bid{1$x$}{11-15\hcp}{5\ormore$x$}{}
+\response\bid{2\clubs}{8-10\hcp}{}{}
+\response\response\bid{2\diamonds}{11-12}{}{}
+\response\response\response\bid{2$x$}{}{3$x$,\balanced}{}
+\response\response\response\bid{2\major}{}{3$x$,singleton}{}
+\response\response\response\bid{2\notrump}{}{4$x$,\balanced}{}
+\response\response\response\bid{3$y$}{}{4$x$,singleton $y$}{}
+\response\response\response\bid{3\notrump}{}{3-4$x$,void\spades}{}
+\response\response\response\bid{4$y$}{}{3-4$x$,void $y$}{}
+\response\response\bid{2$x$}{11-12}{}{Signoff}
+\response\response\bid{3$x$}{}{}{Invite}
+\response\response\bid{4$x$}{}{}{Signoff}
+}
+
+
+\convention{Gambling 3\notrump}
+{I have a solid minor suit, but no other aces and at most one other king.  We can make game in \notrump{} if we can gain control and run that suit.}
+{
+\bid{3\notrump}{-}{AKxxxxxx}{}
+\bid{3\notrump}{-}{AKQxxxx}{}
+\response\bid{\pass}{-}{Others stopped}{}
+\response\bid{4\clubs}{-}{(relay)}{}
+\response\gamebid{4\diamonds}{-}{}{}
+\response\response\bid{4\major}{-}{\feature}{}
+\response\response\bid{4\notrump}{-}{\balanced}{}
+\response\response\bid{5\clubs}{-}{\feature\diamonds}{}
+\response\response\bid{5\diamonds}{-}{\feature\clubs}{}
+\response\bid{4\major}{18+}{5\ormore\major}{}
+\response\gamebid{4\notrump}{-}{AAAK}{}
+\response\bid{5\clubs}{-}{(relay)}{}
+\response\bid{6\clubs}{-}{4 sure tricks}{}
+}
+
+\convention{Jacoby No Trump}
+{I have opening strength and a 4-card major, and my partner opened that major.  We are definitely going to bid game, but can we get to a slam?}
+{
+\bid{1\major}{11-15}{5\ormore\major}{}
+\response\bid{2\notrump}{11\ormore}{4\ormore\major}{}
+\response\response\forcebid{3\clubs}{11-12}{singleton}{}
+\response\response\forcebid{3\diamonds}{13-15}{singleton}{}
+\response\response\bid{3\major}{11-13}{\balanced}{}
+\response\response\gamebid{3O\major}{}{void}{}
+\response\response\bid{3\notrump}{13-15}{\balanced}{}
+\response\response\gamebid{4\clubs}{13-15}{4\ormore$y$}{}
+\response\response\gamebid{4\diamonds}{13-15}{6\ormore\major}{}
+\response\response\bid{4\major}{11-13}{6\ormore\major}{}
+
+}
+
+			\end{minipage}
+					}
+				}
+
 		&
 
 		\vtop{
@@ -485,15 +610,15 @@
 
 \convention{CRASH}
 {Opponents have opened a strong 1\clubs.
-An non-major bid will show a two-suited hand of the same Color, RAnk, or SHape.
+					An non-major bid will show a two-suited hand (5-4) of the same Color, RAnk, or SHape.
 Major overcalls show 5\ormore.}
 {
 \bidblock{\opponent{1\clubs}{16\ormore}{}{}}
-\response\bid{\double}{-}{4\ormore\clubs4\ormore\spades OR 4\ormore\diamonds4\ormore\hearts}{}
-\response\bid{1\diamonds}{-}{4\ormore\clubs4\ormore\diamonds OR 4\ormore\hearts\ormore\spades}{}
+\response\bid{\double}{-}{\clubs\spades OR \diamonds\hearts}{}
+\response\bid{1\diamonds}{-}{\clubs\diamonds OR \hearts\spades}{}
 \response\bid{1\hearts}{-}{5\ormore\hearts}{}
 \response\bid{1\spades}{-}{5\ormore\spades}{}
-\response\bid{1\notrump}{-}{4\ormore\clubs4\ormore\hearts OR 4\ormore\diamonds4\ormore\spades}{}
+\response\bid{1\notrump}{-}{\clubs\hearts OR \diamonds\spades}{}
 }
 
 \convention{Modified DONT: Disturb Opponents' No Trump}
@@ -566,129 +691,6 @@ With at least 5-4 in two suits, bid the lower suit.}
 				\end{minipage}
 			}
 		}
-
-		&
-
-		\vtop{
-			\null\hbox{
-				\begin{minipage}{0.24\textwidth}
-
-\convention{Minor Suit Stayman}
-{I don't have a 4\ormore-card major, and my partner bid No Trump.  Do we have a fit? I start by bidding the next spade.}
-{
-\bidblock{\gamebid{2\spades}{11\ormore}{4\ormore\clubs/4\ormore\diamonds}{}}
-\response\bid{2\notrump}{strong}{3\orless\clubs3\orless\diamonds}{\major stoppers}
-\response\bid{3\clubs}{-}{4\ormore\clubs}{}
-\response\bid{3\diamonds}{-}{3\orless\clubs4\ormore\diamonds}{}
-\response\bid{3\hearts}{-}{}{\hearts stopper}
-\response\bid{3\spades}{-}{}{\spades stopper}
-\response\bid{3\notrump}{weak}{3\orless\clubs3\orless\diamonds}{\major stoppers}
-\response\bid{4\clubs}{strong}{4\ormore\clubs}{}
-\response\bid{4\diamonds}{strong}{3\orless\clubs4\ormore\diamonds}{}
-}
-
-\convention{Extended Garbage Stayman}
-{I have at least one 4-card major, and my partner bid No Trump.  Do we have a fit? I start by bidding the next club.}
-{
-\bidblock{\bid{2\clubs}{11\ormore\hcp}{4\ormore\major/5\ormore\diamonds}{}}
-\response\bid{2\diamonds}{-}{3\orless\hearts,3\orless\spades}{}
-\response\response\bid{\pass}{-}{5\ormore\diamonds}{}
-\response\response\bid{2\major}{weak}{5\ormore\major}{}
-\response\response\bid{2\notrump}{}{}{}
-\response\response\forcebid{3\clubs}{-}{5\ormore\major}{}
-\response\response\response\bid{3\diamonds}{-}{3\hearts3\spades}{}
-\response\response\response\bid{3\hearts}{-}{2\hearts3\spades}{}
-\response\response\response\bid{3\spades}{-}{3\hearts2\spades}{}
-\response\response\gamebid{3\hearts}{-}{4\hearts5\ormore\spades}{(Smolen)}
-\response\response\gamebid{3\spades}{-}{5\ormore\hearts4\spades}{(Smolen)}
-\response\response\forcebid{4\clubs}{}{}{(Gerber)}
-
-\response\bid{2\hearts}{-}{4\hearts}{}
-\response\response\bid{2\spades}{-}{5\ormore\clubs}{}
-\response\response\forcebid{3\clubs}{-}{5\ormore\diamonds}{}
-\response\response\forcebid{4\clubs}{}{}{(Gerber)}
-\response\bid{2\spades}{-}{4\spades,3\orless\hearts}{}
-\response\response\forcebid{3\clubs}{-}{5\ormore\diamonds}{}
-\response\response\bid{3\diamonds}{-}{5\ormore\clubs}{}
-\response\response\forcebid{4\clubs}{}{}{(Gerber)}
-}
-
-				\end{minipage}
-			}
-		}
-
-		&
-
-		\vtop{
-			\null\hbox{
-				\begin{minipage}{0.24\textwidth}
-
-\convention{Drury}
-{I passed, then my partner opened a major $x$. Is their opening strong or weak? I bid 2\clubs{} to find out more.}
-{
-\bid{1$x$}{11-15\hcp}{5\ormore$x$}{}
-\response\bid{2\clubs}{8-10\hcp}{}{}
-\response\response\bid{2\diamonds}{11-12}{}{}
-\response\response\response\bid{2$x$}{}{3$x$,\balanced}{}
-\response\response\response\bid{2\major}{}{3$x$,singleton}{}
-\response\response\response\bid{2\notrump}{}{4$x$,\balanced}{}
-\response\response\response\bid{3$y$}{}{4$x$,singleton $y$}{}
-\response\response\response\bid{3\notrump}{}{3-4$x$,void\spades}{}
-\response\response\response\bid{4$y$}{}{3-4$x$,void $y$}{}
-\response\response\bid{2$x$}{11-12}{}{Signoff}
-\response\response\bid{3$x$}{}{}{Invite}
-\response\response\bid{4$x$}{}{}{Signoff}
-}
-
-
-\convention{Gambling 3\notrump}
-{I have a solid minor suit, but no other aces and at most one other king.  We can make game in \notrump{} if we can gain control and run that suit.}
-{
-\bid{3\notrump}{-}{AKxxxxxx}{}
-\bid{3\notrump}{-}{AKQxxxx}{}
-\response\bid{\pass}{-}{Others stopped}{}
-\response\bid{4\clubs}{-}{(relay)}{}
-\response\gamebid{4\diamonds}{-}{}{}
-\response\response\bid{4\major}{-}{\feature}{}
-\response\response\bid{4\notrump}{-}{\balanced}{}
-\response\response\bid{5\clubs}{-}{\feature\diamonds}{}
-\response\response\bid{5\diamonds}{-}{\feature\clubs}{}
-\response\bid{4\major}{18+}{5\ormore\major}{}
-\response\gamebid{4\notrump}{-}{AAAK}{}
-\response\bid{5\clubs}{-}{(relay)}{}
-\response\bid{6\clubs}{-}{4 sure tricks}{}
-}
-
-\convention{Ogust}
-{My partner pre-empted a suit, and I have a strong hand.}
-{
-\bid{2$x$}{5-10\hcp}{6$x$}{}
-\response\forcebid{2\notrump}{15\ormore}{2\ormore$x$}{}
-\response\response\bid{3\clubs}{5-7}{1 of AKQ$x$}{}
-\response\response\bid{3\diamonds}{5-7}{2 of AKQ$x$}{}
-\response\response\bid{3\hearts}{8-10}{1 of AKQ$x$}{}
-\response\response\bid{3\spades}{8-10}{2 of AKQ$x$}{}
-\response\response\bid{3\notrump}{8-10}{3 of AKQ$x$}{}
-}
-
-
-
-\convention{Jacoby No Trump}
-{I have opening strength and a 4-card major, and my partner opened that major.  We are definitely going to bid game, but can we get to a slam?}
-{
-\bid{1\major}{11-15}{5\ormore\major}{}
-\response\bid{2\notrump}{11\ormore}{4\ormore\major}{}
-\response\response\bid{3$x$}{-}{\feature}{}
-\response\response\bid{3\major}{11-13}{-}{}
-\response\response\gamebid{3O\major}{}{void}{}
-\response\response\bid{3\notrump}{13-15}{\balanced}{}
-\response\response\gamebid{4\clubs}{13-15}{-}{}
-}
-
-			\end{minipage}
-					}
-				}
-
 	\end{tabular*}
 \end{table}
 
