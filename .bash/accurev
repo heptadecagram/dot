@@ -1,0 +1,209 @@
+alias acr='accurev'
+
+_accurev () {
+	local command=$1
+	local current=$2
+	local previous=$3
+	local ACTIONS='
+	add addmember anc anchor annotate archive authmethod backup cat chdepot
+	chgroup chmod chpasswd chref chslice chstream chuser chws clear co cpkadd
+	cpkdepend cpkdescribe cpkremove defunct demote diag diff eacl excl files
+	getconfig getpref help hist hostinfo incl incldo info ismember issuediff
+	issuelist keep licenses ln lock login logout lsacl lsrules merge mergelist
+	mkdepot mkgroup mkref mkreplica mkrules mksnap mkstream mktrig mkuser mkws
+	move name patch patchlist pop promote purge putconfig reactivate rebase
+	reclaim remove replica revert rmmember rmproperty rmreplica rmtrig rmws
+	secinfo setacl setpref setproperty show start stat synctime touch translist
+	unarchive undefunct unlock update upgrade_client wip xml'
+
+	local index=1
+	local current_action=
+	# Find the current action being taken
+	while [ $index -lt $COMP_CWORD ]; do
+		if [ "${COMP_WORDS[$index]##-*}" ]; then
+			current_action="${COMP_WORDS[$index]}"
+			break
+		fi
+		index=$(($index + 1))
+	done
+
+	# Default to list of actions
+	COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`)
+
+	case "$current_action" in
+		'') COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
+		add) _accurev-add "$@" ;;
+		co) _accurev-co "$@" ;;
+		ln) _accurev-ln "$@" ;;
+		login) _accurev-login "$@" ;;
+		mkws) _accurev-mkws "$@" ;;
+		pop) _accurev-pop "$@" ;;
+		rmws) _accurev-rmws "$@" ;;
+		show) _accurev-show "$@" ;;
+		stat) _accurev-stat "$@" ;;
+		update) _accurev-update "$@" ;;
+	esac
+}
+complete -o default -F _accurev accurev
+complete -o default -F _accurev acr
+
+__accurev_depots() {
+	local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+	COMPREPLY=(`compgen -W "$(accurev show depots | cut -d' ' -f1 | tail -n+2)" -- "$current"`)
+}
+
+__accurev_streams() {
+	local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+	COMPREPLY=(`compgen -W "$(accurev show streams | cut -d' ' -f1 | tail -n+2)" -- "$current"`)
+}
+
+__accurev_workspaces() {
+	local current=${2:-${COMP_WORDS[$COMP_CWORD]}}
+	COMPREPLY=(`compgen -W "$(accurev show wspaces | sed -e'1,/^Workspace/d' | cut -d' ' -f1)" -- "$current"`)
+}
+
+
+
+_accurev-add() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-c -d -E -x -R -s -fi -fI --ignore'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o filenames -f -- "$current"`) ;;
+	esac
+}
+
+_accurev-co() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-c -n -O -9 -R -v -l -e -t'
+
+	case "$previous" in
+		-l) COMPREPLY=(`compgen -o filenames -f -- "$current"`) && return;;
+		-e) return;;
+		-t) return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o filenames -f -- "$current"`) ;;
+	esac
+}
+
+_accurev-ln() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-i -s -c -p'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o filenames -f -- "$current"`) ;;
+	esac
+}
+
+_accurev-login() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-n'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-mkws() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-w -b -l -k -e -i'
+
+	case "$previous" in
+		-b) __accurev_streams && return;;
+		-e) COMPREPLY=(e u w) && return;;
+		-l) COMPREPLY=(`compgen -o dirnames -d -- "$current"`) && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-pop() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-O -R -v -L -D --eol= -t -fx -l'
+
+	case "$previous" in
+		-v) __accurev_streams && return;;
+		-D) COMPREPLY=(`compgen -o dirnames -d -- "$current"`) && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-rmws() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-s'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) __accurev_workspaces ;;
+	esac
+}
+
+_accurev-show () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-f'
+	local SUBCOMMANDS='accuwork allowed denied depots groups locks members
+	properties refs sessions slices streams stream_rules triggers users wspaces'
+
+	case "$previous" in
+		-p) __accurev_depots && return;;
+		-s) __accurev_streams && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o default -W "$SUBCOMMANDS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-stat () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-f -B -L -R -t --use_time_basis_for_overlap -Fx -l -a -d -D -e -i -k -L -m -n -o -p -U -x -X --ignore --outgoing'
+
+	case "$previous" in
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+		*) COMPREPLY=(`compgen -o filenames -f -- "$current"`) ;;
+	esac
+}
+
+_accurev-update () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-r -i -m -fx -O -t -s'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
