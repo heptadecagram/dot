@@ -2,7 +2,7 @@ alias d='docker'
 
 if complete -p docker >/dev/null 2>/dev/null; then
 	# Get this completion to be aliased to d
-	local completion="`complete -p docker`"
+	completion="`complete -p docker`"
 	${completion%ocker}
 else
 	_docker () {
