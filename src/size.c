@@ -1,4 +1,3 @@
-
 #include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -11,12 +10,13 @@ union end_test {
 	};
 };
 
-int main(void) {
+int main(void)
+{
 	union end_test alfa;
 	alfa.num = 0x0102;
-	if(alfa.one == 0x01 && alfa.two == 0x02) {
+	if (alfa.one == 0x01 && alfa.two == 0x02) {
 		puts("Big-Endian");
-	} else if(alfa.one == 0x02 && alfa.two == 0x01) {
+	} else if (alfa.one == 0x02 && alfa.two == 0x01) {
 		puts("Little-Endian");
 	} else {
 		puts("Endianess unknown");
