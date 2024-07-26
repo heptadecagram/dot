@@ -92,7 +92,7 @@ gd-all () {
 
 if complete -p git >/dev/null 2>/dev/null; then
 	# Get this completion to be aliased to g
-	local completion="`complete -p git`"
+	completion="`complete -p git`"
 	${completion%it}
 else
 	_git () {
