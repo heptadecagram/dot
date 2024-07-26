@@ -121,9 +121,13 @@ if [ -e ~/perl5/perlbrew/etc/bashrc ]; then
 	. ~/perl5/perlbrew/etc/bashrc
 fi
 
+if [ -a "$HOME/.local/`hostname`" ]; then
+	. ~/.local/`hostname`
+fi
+
 fix_everything () {
-	i=1
-	s='/-\|'
+	local i=1
+	local s='/-\|'
 	echo -n ' '
 	while true; do
 		echo -en "\b${s:i++%${#s}:1}"

@@ -66,6 +66,3 @@ fi
 if [ -a "$HOME/.local/bash_profile" ]; then
 	. ~/.local/bash_profile
 fi
-if [ -a "$HOME/.local/`hostname`" ]; then
-	. ~/.local/`hostname`
-fi
