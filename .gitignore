@@ -1,6 +1,7 @@
 /[^.]*
 .mypy_cache
 /.[a-z]*history*
+/.accurev
 /.cache
 /.compiz
 /.cpan
