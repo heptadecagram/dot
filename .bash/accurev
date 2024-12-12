@@ -34,10 +34,14 @@ _accurev () {
 		'') COMPREPLY=(`compgen -W "$ACTIONS" -- "$current"`) ;;
 		add) _accurev-add "$@" ;;
 		co) _accurev-co "$@" ;;
+		hist) _accurev-hist "$@" ;;
+		issuelist) _accurev-issuelist "$@" ;;
 		ln) _accurev-ln "$@" ;;
 		login) _accurev-login "$@" ;;
+		mksnap) _accurev-mksnap "$@" ;;
 		mkws) _accurev-mkws "$@" ;;
 		pop) _accurev-pop "$@" ;;
+		promote) _accurev-promote "$@" ;;
 		rmws) _accurev-rmws "$@" ;;
 		show) _accurev-show "$@" ;;
 		stat) _accurev-stat "$@" ;;
@@ -94,6 +98,38 @@ _accurev-co() {
 	esac
 }
 
+_accurev-hist () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-t -s -c -u --exclude-users -k --exclude-kinds -f --show_historic_cpk -a -Fx -l -e -p -R'
+
+	case "$previous" in
+		-s) __accurev_streams && return;;
+		-p) __accurev_depots && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-issuelist () {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-s -p -a -i -I -d -3 -t -fx'
+
+	case "$previous" in
+		-s) __accurev_streams && return;;
+		-p) __accurev_depots && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
 _accurev-ln() {
 	local current=$2
 	local previous=$3
@@ -111,6 +147,21 @@ _accurev-login() {
 	local previous=$3
 
 	local FLAGS='-n'
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-mksnap() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-s -b -t'
+
+	case "$previous" in
+		-b) __accurev_streams && return;;
+	esac
 
 	case "$current" in
 		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
@@ -143,6 +194,22 @@ _accurev-pop() {
 	case "$previous" in
 		-v) __accurev_streams && return;;
 		-D) COMPREPLY=(`compgen -o dirnames -d -- "$current"`) && return;;
+	esac
+
+	case "$current" in
+		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
+	esac
+}
+
+_accurev-promote() {
+	local current=$2
+	local previous=$3
+
+	local FLAGS='-c -d -k -p -K -O -N -s -S -q -I -3 -l -t -e -Fx -l'
+
+	case "$previous" in
+		-s) __accurev_streams && return;;
+		-S) __accurev_streams && return;;
 	esac
 
 	case "$current" in
@@ -206,4 +273,3 @@ _accurev-update () {
 		-*) COMPREPLY=(`compgen -o default -W "$FLAGS" -- "$current"`) ;;
 	esac
 }
-
