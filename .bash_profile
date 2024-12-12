@@ -35,12 +35,12 @@ fi
 if [ -d "$HOME/.cargo" ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
 fi
-# pyenv
 
 # jenv
 if [ -d "$HOME/.jenv" ]; then
 	export PATH="$HOME/.jenv/bin:$PATH"
 fi
+
 # pyenv
 if [ -d "$HOME/.pyenv" ]; then
 	export PYENV_ROOT="$HOME/.pyenv"
