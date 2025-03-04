@@ -16,7 +16,7 @@
 	authors = shortlog -se --all
 	code-authors = shortlog -se --all --no-merges . ':!doc'
 [user]
-	email = wechlin@umbctraining.com
+	email = Liam.P.Echlin@collins.com
 	name = Liam Echlin
 [color]
 	diff = true

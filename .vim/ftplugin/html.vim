@@ -237,7 +237,7 @@ function! HTMLAttribute(attribute)
 		if Current_Tag == '!-- '
 			normal bh
 		endif
-		execute 'normal i ' . a:attribute . '=""'
+		execute 'normal i ' .. a:attribute .. '=""'
 		startinsert
 	else
 		normal wss
@@ -281,6 +281,6 @@ map <F3> ciw=ExpandColor('"')F#
 function! ExpandColor(word)
 	let numbers = substitute(a:word, '^#', '', '')
 	if(len(numbers) == 6)
-		return 'rgb(' . str2nr(numbers[0:1], 16) . ', ' . str2nr(numbers[2:3], 16) . ', ' . str2nr(numbers[4:5], 16) . ')'
+		return 'rgb(' .. str2nr(numbers[0:1], 16) .. ', ' .. str2nr(numbers[2:3], 16) .. ', ' .. str2nr(numbers[4:5], 16) .. ')'
 	endif
 endfunction
